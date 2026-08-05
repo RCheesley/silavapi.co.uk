@@ -16,14 +16,14 @@ export default [
   },
   js.configs.recommended,
   {
+    // Default environment: Node (build scripts, Eleventy config, lib, unit tests).
+    // Node 24 provides fetch/URL/etc. Browser-only globals are intentionally NOT
+    // enabled here, so accidental use of window/document in Node code is caught.
     files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        ...globals.node,
-        ...globals.browser,
-      },
+      globals: { ...globals.node },
     },
     rules: {
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
@@ -31,16 +31,18 @@ export default [
     },
   },
   {
-    // Front-end progressive-enhancement scripts run in the browser only.
+    // Client-side progressive-enhancement scripts run in the browser only.
     files: ['src/assets/js/**/*.js'],
     languageOptions: {
       globals: { ...globals.browser },
     },
   },
   {
-    files: ['tests/**/*.js'],
+    // Playwright specs run in Node but evaluate callbacks in the browser
+    // (document/window/location inside page.evaluate), so both are valid.
+    files: ['tests/e2e/**/*.js'],
     languageOptions: {
-      globals: { ...globals.node },
+      globals: { ...globals.node, ...globals.browser },
     },
   },
 ];

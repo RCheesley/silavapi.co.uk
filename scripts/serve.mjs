@@ -10,7 +10,8 @@ import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)), '..', '_site');
-const PORT = Number(process.env.PORT ?? 8080);
+// Port precedence: CLI arg (portable across shells) → $PORT → 8080 default.
+const PORT = Number(process.argv[2] ?? process.env.PORT ?? 8080);
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
