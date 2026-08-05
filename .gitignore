@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+_site/
+.cache/
+pagefind/
+
+# Test / tooling output
+coverage/
+test-results/
+playwright-report/
+.lighthouseci/
+*.log
+npm-debug.log*
+
+# Environment / secrets (repo will be public — never commit these)
+.env
+.env.*
+!.env.example
+.dev.vars
+.wrangler/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/styles.css">
+  <script src="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--surface-page); }
+    a { color: var(--rc-purple-light); } a:hover { color: var(--rc-pink); }
+    @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</helmet>
+<dc-import name="SiteHeader" active="none" hint-size="100%,73px"></dc-import>
+<main id="main">
+  <article style="max-width: 760px; margin: 0 auto; padding: var(--space-11) var(--gutter-lg) var(--space-13); display: grid; gap: var(--space-7);">
+    <div style="display: grid; gap: var(--space-5); justify-items: start;">
+      <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.SectionHeading" eyebrow="PRIVACY" title="How privacy works here" level="{{ 1 }}" standfirst="Written in plain English, in full, on one page. Last updated 05 August, 2026." hint-size="100%,170px"></x-import>
+    </div>
+    <section style="display: grid; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--text-heading);">What this site does not do</h2>
+      <ul style="margin: 0; padding: 0 0 0 1.2em; display: grid; gap: var(--space-3); font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body);">
+        <li>No cookies. Not even a "necessary" one, so there is no cookie banner.</li>
+        <li>No third-party requests. Fonts, images and code are all served from this domain — your visit is never disclosed to Google, a CDN, or anyone else.</li>
+        <li>No advertising, no fingerprinting, no social media embeds or share-button trackers.</li>
+        <li>No accounts, no comments platform, no data sold or shared — there is nothing to sell.</li>
+      </ul>
+    </section>
+    <section style="display: grid; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--text-heading);">Analytics</h2>
+      <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body);">I like to know which posts people find useful, so this site runs a self-hosted copy of an open source analytics tool on my own server. It counts page views in aggregate — no cookies, no personal identifiers, no cross-site tracking — and the numbers never leave my infrastructure. If your browser sends a "do not track" signal, it is honoured.</p>
+    </section>
+    <section style="display: grid; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--text-heading);">The contact form</h2>
+      <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body);">The <a href="Contact.dc.html" style="color: var(--rc-purple-light); text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--rc-pink);" style-focus="outline: 2px solid var(--rc-purple-light); outline-offset: 2px;">contact form</a> sends one email, to me, through a form handler running on my own server. Your name, email address and message exist in my inbox and nowhere else. I use them only to reply to you, and I delete the thread when the conversation is done. Nothing is added to a mailing list — if I ever start a newsletter it will be strictly opt-in.</p>
+    </section>
+    <section style="display: grid; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--text-heading);">Server logs</h2>
+      <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body);">Like every web server, mine keeps short-lived technical logs to detect abuse and keep the site running. IP addresses in those logs are anonymised, and logs are deleted automatically after 14 days.</p>
+    </section>
+    <section style="display: grid; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--text-heading);">Links elsewhere</h2>
+      <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body);">When a post links to another site, that site's own privacy practices apply from the moment you click. I link to privacy-respecting places where a choice exists.</p>
+    </section>
+    <section style="display: grid; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--text-heading);">Your rights, and questions</h2>
+      <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body);">Under UK GDPR you can ask me what I hold about you (almost certainly: at most, an email you sent me), ask me to correct it, or ask me to delete it. Just <a href="Contact.dc.html" style="color: var(--rc-purple-light); text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--rc-pink);" style-focus="outline: 2px solid var(--rc-purple-light); outline-offset: 2px;">drop me a line</a> — no form, no process, I'll just do it.</p>
+    </section>
+  </article>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,460px"></dc-import>
+</x-dc>
+</body>
+</html>

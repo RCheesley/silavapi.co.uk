@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/styles.css">
+  <script src="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--surface-page); }
+    a { color: var(--rc-purple-light); } a:hover { color: var(--rc-pink); }
+    @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</helmet>
+<dc-import name="SiteHeader" active="blog" hint-size="100%,73px"></dc-import>
+<main id="main">
+  <section style="background: var(--surface-page); border-bottom: 1px solid var(--border-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--space-10) var(--gutter-lg); display: grid; gap: var(--space-6);">
+      <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.SectionHeading" eyebrow="THE BLOG" title="Writing on open source, dharma and life" level="{{ 1 }}" standfirst="Everything from marketing automation and digital sovereignty to Buddhist practice and running very long distances." hint-size="100%,170px"></x-import>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap;">
+        <div role="group" aria-label="Filter posts by category" style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+            <button onClick="{{ c.pick }}" aria-pressed="{{ c.pressed }}" style="cursor: pointer; padding: 8px 16px; border-radius: var(--radius-full); border: 1px solid {{ c.borderColor }}; background: {{ c.bg }}; color: {{ c.color }}; font-family: var(--font-text); font-size: var(--text-2xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-wide); text-transform: uppercase; transition: var(--transition-colors);" style-hover="border-color: var(--rc-purple-light); color: var(--rc-purple-light);" style-focus="outline: 2px solid var(--rc-purple-light); outline-offset: 2px;">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="width: 280px;">
+          <label for="blog-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Search posts</label>
+          <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Input" id="blog-search" placeholder="Search posts…" value="{{ q }}" onChange="{{ onSearch }}" hint-size="100%,44px"></x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="background: var(--surface-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--section-y-sm) var(--gutter-lg); display: grid; gap: var(--space-6);">
+      <p aria-live="polite" style="margin: 0; font-family: var(--font-text); font-size: var(--text-sm); color: var(--text-muted);">{{ countLabel }}</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);">
+        <sc-for list="{{ filtered }}" as="p" hint-placeholder-count="6">
+          <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.ArticleCard" title="{{ p.title }}" excerpt="{{ p.excerpt }}" image="{{ p.image }}" date="{{ p.date }}" category="{{ p.category }}" category-tone="{{ p.tone }}" href="Article.dc.html" hint-size="100%,430px"></x-import>
+        </sc-for>
+      </div>
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Alert" tone="info" title="Nothing found" hint-size="100%,80px">No posts match that search — try a different word, or clear the category filter.</x-import>
+      </sc-if>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,460px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cat: 'All', q: '' };
+  posts = [
+    { title: 'A new name: becoming Sīlavāpi', excerpt: "After four months in the mountains of Spain, I came home with a new name and a very full heart…", image: 'assets/photography/portrait-04.jpg', date: '20 July, 2026', category: 'Buddhism', tone: 'brand' },
+    { title: 'Who really owns your customer data?', excerpt: 'A look at how your marketing stack is quietly surrendering your business sovereignty…', image: 'assets/photography/portrait-mautic-13.jpg', date: '18 May, 2026', category: 'Digital Sovereignty', tone: 'accent' },
+    { title: 'What dāna teaches us about open source sustainability', excerpt: 'Generosity is the first of the perfections, and it turns out to be surprisingly good economics too…', image: 'assets/photography/speaking-mic-01.jpg', date: '12 January, 2026', category: 'Community', tone: 'warm' },
+    { title: 'Is truthful speech the most critical infrastructure in community management?', excerpt: 'The Buddha had rather a lot to say about speech, and most of it applies directly to your community forum…', image: 'assets/photography/speaking-stage-01.jpg', date: '03 March, 2025', category: 'Community', tone: 'warm' },
+    { title: 'Four ancient principles every open source leader can benefit from implementing', excerpt: 'The saṅgrahavastus are a 2,500-year-old framework for holding communities together…', image: 'assets/photography/portrait-mautic-16.jpg', date: '09 February, 2025', category: 'Mautic', tone: 'neutral' },
+    { title: 'Training for an ultramarathon with Ehlers-Danlos Syndrome', excerpt: 'Fifty kilometres on joints that dislocate if you look at them wrong — here is how the year of training actually went…', image: 'assets/photography/portrait-07.jpg', date: '21 November, 2025', category: 'Being bendy', tone: 'neutral' }
+  ];
+  renderVals() {
+    const { cat, q } = this.state;
+    const cats = ['All', 'Buddhism', 'Community', 'Digital Sovereignty', 'Mautic', 'Being bendy'].map((label) => {
+      const on = label === cat;
+      return {
+        label,
+        pressed: on,
+        bg: on ? 'var(--rc-purple-dark)' : 'var(--surface-card)',
+        color: on ? '#fff' : 'var(--text-heading)',
+        borderColor: on ? 'var(--rc-purple-dark)' : 'var(--border-strong)',
+        pick: () => this.setState({ cat: label })
+      };
+    });
+    const needle = q.trim().toLowerCase();
+    const filtered = this.posts.filter((p) => (cat === 'All' || p.category === cat) && (!needle || (p.title + ' ' + p.excerpt).toLowerCase().includes(needle)));
+    return {
+      cats, q, filtered,
+      empty: filtered.length === 0,
+      countLabel: filtered.length + (filtered.length === 1 ? ' post' : ' posts') + (cat === 'All' ? '' : ' in ' + cat) + (needle ? ' matching “' + q.trim() + '”' : ''),
+      onSearch: (e) => this.setState({ q: e.target.value })
+    };
+  }
+}
+</script>
+</body>
+</html>

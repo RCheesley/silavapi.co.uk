@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/styles.css">
+  <script src="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/_ds_bundle.js"></script>
+  <style>a { color: var(--rc-purple-light); } a:hover { color: var(--rc-pink); }</style>
+</helmet>
+<a href="#main" style="position: absolute; left: -9999px; top: 12px; z-index: 100; background: var(--rc-purple-dark); color: #fff; padding: 10px 18px; border-radius: var(--radius-md); font-family: var(--font-text); font-size: var(--text-sm); font-weight: 700; text-decoration: none;" style-focus="left: 16px; outline: 2px solid var(--rc-pink); outline-offset: 2px;">Skip to main content</a>
+<header style="position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.92); backdrop-filter: var(--blur-glass); border-bottom: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--space-4) var(--gutter-lg); display: flex; align-items: center; justify-content: space-between; gap: var(--space-8);">
+    <a href="Home.dc.html" style="display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none;" style-focus="outline: 2px solid var(--rc-purple-light); outline-offset: 4px; border-radius: 4px;">
+      <img src="assets/logo-symbol.png" alt="" style="height: 40px; width: auto; display: block;">
+      <span style="font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl); color: var(--rc-purple-dark);">Sīlavāpi</span>
+    </a>
+    <nav aria-label="Main" style="display: flex; align-items: center; gap: var(--space-7);">
+      <sc-for list="{{ items }}" as="item" hint-placeholder-count="5">
+        <a href="{{ item.href }}" aria-current="{{ item.current }}" style="padding: var(--space-2) 0; font-family: var(--font-text); font-size: var(--text-2xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none; color: {{ item.color }}; border-bottom: 2px solid {{ item.border }}; transition: var(--transition-colors);" style-hover="color: var(--rc-pink);" style-focus="outline: 2px solid var(--rc-purple-light); outline-offset: 4px; border-radius: 2px;">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+  </div>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 80}, &quot;active&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;home&quot;, &quot;options&quot;: [&quot;home&quot;, &quot;about&quot;, &quot;dharma&quot;, &quot;blog&quot;, &quot;contact&quot;, &quot;none&quot;], &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const active = this.props.active ?? 'home';
+    const items = [
+      { label: 'Home', href: 'Home.dc.html', key: 'home' },
+      { label: 'About', href: 'Home.dc.html#about', key: 'about' },
+      { label: 'Dharma', href: 'Dharma.dc.html', key: 'dharma' },
+      { label: 'Blog', href: 'Blog.dc.html', key: 'blog' },
+      { label: 'Contact', href: 'Contact.dc.html', key: 'contact' }
+    ].map((i) => ({
+      ...i,
+      color: i.key === active ? 'var(--rc-pink)' : 'var(--text-heading)',
+      border: i.key === active ? 'var(--rc-pink)' : 'transparent',
+      current: i.key === active ? 'page' : undefined
+    }));
+    return { items };
+  }
+}
+</script>
+</body>
+</html>

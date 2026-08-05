@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/styles.css">
+  <script src="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--surface-page); }
+    a { color: var(--rc-purple-light); } a:hover { color: var(--rc-pink); }
+    @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</helmet>
+<dc-import name="SiteHeader" active="dharma" hint-size="100%,73px"></dc-import>
+<main id="main">
+  <section style="background: var(--surface-page);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--section-y) var(--gutter-lg); display: grid; grid-template-columns: 1fr 380px; gap: var(--space-11); align-items: start;">
+      <div style="display: grid; gap: var(--space-6); justify-items: start;">
+        <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.SectionHeading" eyebrow="DHARMA" title="A practice, not a hobby" level="{{ 1 }}" standfirst="I was ordained into the Triratna Buddhist Order in 2026 after more than twelve years of practice. This page gathers everything on the site about that life." hint-size="100%,180px"></x-import>
+        <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body); max-width: 62ch;">Sīlavāpi is the name I was given at ordination. It is rooted in <em>sīla</em> — ethical practice — which feels right: for me the dharma has never been separate from work, community, or how a piece of software treats the people who use it.</p>
+        <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-md); line-height: var(--leading-loose); color: var(--text-body); max-width: 62ch;">Away from the cushion I'm a trustee of <strong>Breathworks</strong>, a charity teaching mindfulness-based approaches to living with pain and illness — work that sits very close to my own experience of living with Ehlers-Danlos Syndrome.</p>
+        <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+          <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Button" as="a" href="Article.dc.html" hint-size="220px,44px">The story of my name</x-import>
+          <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Button" as="a" variant="secondary" href="Blog.dc.html" hint-size="200px,44px">Buddhism on the blog</x-import>
+        </div>
+      </div>
+      <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 2 / 3; background: var(--rc-grey-100);">
+        <img src="assets/photography/portrait-04.jpg" alt="Black-and-white portrait of Sīlavāpi, gaze lifted away from the camera" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+    </div>
+  </section>
+  <section style="background: var(--gradient-inverse-surface); color: var(--text-on-dark);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--section-y-sm) var(--gutter-lg); display: grid; place-items: center; text-align: center;">
+      <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Quote" tone="dark" attribution="Sīlavāpi" hint-size="700px,160px">A name is not a costume. It is a direction of travel.</x-import>
+    </div>
+  </section>
+  <section style="background: var(--surface-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--section-y-sm) var(--gutter-lg); display: grid; gap: var(--space-8);">
+      <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.SectionHeading" eyebrow="WRITING" title="Dharma on the blog" level="{{ 2 }}" hint-size="420px,100px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);">
+        <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.ArticleCard" title="A new name: becoming Sīlavāpi" excerpt="After four months in the mountains of Spain, I came home with a new name and a very full heart…" image="assets/photography/portrait-04.jpg" date="20 July, 2026" category="Buddhism" category-tone="brand" href="Article.dc.html" hint-size="100%,430px"></x-import>
+        <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.ArticleCard" title="What dāna teaches us about open source sustainability" excerpt="Generosity is the first of the perfections, and it turns out to be surprisingly good economics too…" image="assets/photography/speaking-mic-01.jpg" date="12 January, 2026" category="Community" category-tone="warm" href="Article.dc.html" hint-size="100%,430px"></x-import>
+        <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.ArticleCard" title="Is truthful speech the most critical infrastructure in community management?" excerpt="The Buddha had rather a lot to say about speech, and most of it applies directly to your community forum…" image="assets/photography/speaking-stage-01.jpg" date="03 March, 2025" category="Community" category-tone="warm" href="Article.dc.html" hint-size="100%,430px"></x-import>
+      </div>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,460px"></dc-import>
+</x-dc>
+</body>
+</html>

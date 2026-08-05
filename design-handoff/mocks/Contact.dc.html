@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/styles.css">
+  <script src="_ds/ruth-cheesley-design-system-672a1632-a13e-48b6-befc-b3f658adf6a9/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--surface-page); }
+    a { color: var(--rc-purple-light); } a:hover { color: var(--rc-pink); }
+    @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</helmet>
+<dc-import name="SiteHeader" active="contact" hint-size="100%,73px"></dc-import>
+<main id="main">
+  <section style="background: var(--surface-page);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: var(--section-y) var(--gutter-lg); display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-11); align-items: start;">
+      <div style="display: grid; gap: var(--space-7);">
+        <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.SectionHeading" eyebrow="CONTACT" title="Fancy a coffee? Drop me a line!" level="{{ 1 }}" standfirst="A quick note before you write: I'm not currently taking on any freelance work, and I'm not interested in articles, link sharing or guest posts." hint-size="100%,180px"></x-import>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Alert" tone="success" title="Message sent" hint-size="100%,80px">Thank you — your message is on its way. I reply to everything, though sometimes slowly when I'm on retreat or running somewhere remote.</x-import>
+        </sc-if>
+        <form onSubmit="{{ onSubmit }}" style="display: grid; gap: var(--space-6);" novalidate="{{ true }}">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+            <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Field" label="Your name" html-for="c-name" required="{{ true }}" error="{{ nameError }}" hint-size="100%,90px">
+              <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Input" id="c-name" value="{{ name }}" onChange="{{ onName }}" invalid="{{ nameInvalid }}" hint-size="100%,44px"></x-import>
+            </x-import>
+            <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Field" label="Email address" html-for="c-email" required="{{ true }}" error="{{ emailError }}" hint="Only used to reply to you — never stored anywhere else." hint-size="100%,90px">
+              <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Input" id="c-email" type="email" value="{{ email }}" onChange="{{ onEmail }}" invalid="{{ emailInvalid }}" hint-size="100%,44px"></x-import>
+            </x-import>
+          </div>
+          <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Field" label="Your message" html-for="c-msg" required="{{ true }}" error="{{ msgError }}" hint-size="100%,190px">
+            <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Textarea" id="c-msg" rows="{{ 6 }}" value="{{ msg }}" onChange="{{ onMsg }}" invalid="{{ msgInvalid }}" hint-size="100%,140px"></x-import>
+          </x-import>
+          <div style="display: grid; gap: var(--space-4); justify-items: start;">
+            <x-import component-from-global-scope="RuthCheesleyDesignSystem_672a16.Button" onClick="{{ onSubmit }}" hint-size="180px,44px">Send an email</x-import>
+            <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-xs); line-height: var(--leading-relaxed); color: var(--text-muted); max-width: 58ch;">This form sends one email, to me, via a form handler running on my own server. Nothing is stored in a database, nothing goes to a third party, and there is no CAPTCHA watching you. Read more on the <a href="Privacy.dc.html" style="color: var(--rc-purple-light); text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--rc-pink);" style-focus="outline: 2px solid var(--rc-purple-light); outline-offset: 2px;">privacy page</a>.</p>
+          </div>
+        </form>
+      </div>
+      <aside aria-label="Other ways to reach me" style="background: var(--gradient-inverse-surface); color: var(--text-on-dark); border-radius: var(--radius-lg); padding: var(--space-8); display: grid; gap: var(--space-6); align-content: start;">
+        <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-xl);">Other ways to reach me</h2>
+        <div style="display: grid; gap: var(--space-5);">
+          <div style="display: grid; gap: 4px;">
+            <span style="font-family: var(--font-text); font-size: var(--text-2xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--rc-pink-60);">Email</span>
+            <a href="#" style="font-family: var(--font-text); font-size: var(--text-md); color: #fff; text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--rc-orange-light);" style-focus="outline: 2px solid var(--rc-orange-light); outline-offset: 2px;">hello@silavapi.co.uk</a>
+          </div>
+          <div style="display: grid; gap: 4px;">
+            <span style="font-family: var(--font-text); font-size: var(--text-2xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--rc-pink-60);">Mastodon</span>
+            <a href="#" style="font-family: var(--font-text); font-size: var(--text-md); color: #fff; text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--rc-orange-light);" style-focus="outline: 2px solid var(--rc-orange-light); outline-offset: 2px;">@silavapi</a>
+          </div>
+          <div style="display: grid; gap: 4px;">
+            <span style="font-family: var(--font-text); font-size: var(--text-2xs); font-weight: var(--weight-bold); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--rc-pink-60);">Speaking enquiries</span>
+            <p style="margin: 0; font-family: var(--font-text); font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--text-on-dark-muted);">Event organiser? The speaker bio, rider and headshots live on the speaking page.</p>
+            <a href="#" style="font-family: var(--font-text); font-size: var(--text-md); color: #fff; text-decoration: underline; text-underline-offset: 3px;" style-hover="color: var(--rc-orange-light);" style-focus="outline: 2px solid var(--rc-orange-light); outline-offset: 2px;">Speaking page</a>
+          </div>
+        </div>
+        <p style="margin: 0; padding-top: var(--space-4); border-top: 1px solid var(--border-on-dark); font-family: var(--font-text); font-size: var(--text-xs); line-height: var(--leading-relaxed); color: var(--text-on-dark-muted);">No phone number here any more — email is kinder to both of us.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,460px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { name: '', email: '', msg: '', tried: false, sent: false };
+  renderVals() {
+    const { name, email, msg, tried, sent } = this.state;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const nameBad = tried && !name.trim();
+    const emailBad = tried && !emailOk;
+    const msgBad = tried && !msg.trim();
+    return {
+      name, email, msg, sent,
+      nameInvalid: nameBad, emailInvalid: emailBad, msgInvalid: msgBad,
+      nameError: nameBad ? 'Please tell me your name.' : undefined,
+      emailError: emailBad ? 'That email address doesn\u2019t look quite right.' : undefined,
+      msgError: msgBad ? 'The message is the important bit!' : undefined,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onEmail: (e) => this.setState({ email: e.target.value }),
+      onMsg: (e) => this.setState({ msg: e.target.value }),
+      onSubmit: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const ok = this.state.name.trim() && emailOk && this.state.msg.trim();
+        this.setState({ tried: true, sent: !!ok });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
