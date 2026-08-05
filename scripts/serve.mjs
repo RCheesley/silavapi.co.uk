@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * serve.mjs — a tiny, dependency-free static file server for the built `_site`.
+ * serve.mjs - a tiny, dependency-free static file server for the built `_site`.
  * Used by the a11y (pa11y-ci), link-check (linkinator) and Lighthouse (lhci)
  * test scripts, which need the site served over HTTP. Not used in production.
  */

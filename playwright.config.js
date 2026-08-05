@@ -13,7 +13,7 @@ export default defineConfig({
     baseURL,
     trace: 'on-first-retry',
   },
-  // Exercise both colour schemes — dark mode is a spec requirement, so a11y
+  // Exercise both colour schemes - dark mode is a spec requirement, so a11y
   // and privacy must hold in light and dark.
   projects: [
     {

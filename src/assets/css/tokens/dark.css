@@ -1,22 +1,22 @@
-/* Dark mode — overrides the *semantic* colour tokens only, so every component
+/* Dark mode - overrides the *semantic* colour tokens only, so every component
    that uses semantic tokens themes automatically (BUILD_SPEC "Dark mode" spec).
    Brand hues are unchanged; photos stay un-filtered. Links use orange-light.
    Body text keeps AAA contrast on the near-black aubergine-derived surface. */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Surfaces — near-black derived from aubergine #120035 */
+    /* Surfaces - near-black derived from aubergine #120035 */
     --surface-page: #161122;
     --surface-subtle: #1E1730;
     --surface-card: rgba(255, 255, 255, 0.04);
     --surface-card-alt: rgba(255, 255, 255, 0.06);
 
-    /* Text — warm off-white, AAA on the dark surface */
+    /* Text - warm off-white, AAA on the dark surface */
     --text-heading: #F6F2FB;
     --text-body: #E9E3F2;
     --text-muted: #B7AFC7;
     --text-eyebrow: var(--rc-purple-light-40);
 
-    /* Links — orange-light on dark, hover to a lighter tint */
+    /* Links - orange-light on dark, hover to a lighter tint */
     --text-link: var(--rc-orange-light);
     --text-link-hover: var(--rc-orange-light-40);
 
@@ -31,10 +31,6 @@
     --header-bg: rgba(22, 17, 34, 0.85); /* near-black, translucent */
     --text-eyebrow: var(--rc-purple-light-40); /* light eyebrow on dark */
     --nav-link-accent: var(--rc-pink-60); /* #F177AB ≈ 6.7:1 on dark */
-  }
-
-  /* Base focus ring switches to orange-light in dark mode. */
-  :focus-visible {
-    outline-color: var(--rc-orange-light);
+    --focus-outline: var(--rc-orange-light); /* focus ring on dark */
   }
 }

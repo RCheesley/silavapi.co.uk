@@ -1,7 +1,7 @@
 # Cookie register
 
 **Target: zero cookies.** The site is built so that no cookies are set at all,
-which is why there is **no consent banner** — there is nothing to consent to.
+which is why there is **no consent banner** - there is nothing to consent to.
 
 This file is the running record of every cookie the site sets, why, and its
 lifetime. It is kept accurate as the site grows; a change that introduces a
@@ -11,14 +11,14 @@ cookie must add a row here and explain the justification in its pull request.
 
 | Cookie   | Set by | Purpose | Type | Lifetime |
 | -------- | ------ | ------- | ---- | -------- |
-| _(none)_ | —      | —       | —    | —        |
+| _(none)_ | -      | -       | -    | -        |
 
 **Current count: 0.**
 
 ## How this is enforced
 
 - **No analytics cookies.** Analytics run at Cloudflare's edge (aggregate, no
-  client script, no identifiers) — see [`OPEN_SOURCE.md`](OPEN_SOURCE.md).
+  client script, no identifiers) - see [`OPEN_SOURCE.md`](OPEN_SOURCE.md).
 - **No third-party embeds.** A strict `Content-Security-Policy`
   (`default-src 'self'`) blocks anything that could set a third-party cookie.
 - **Automated check.** The Playwright privacy suite

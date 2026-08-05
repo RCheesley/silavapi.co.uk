@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Static site for silavapi.co.uk (Sīlavāpi / Ruth Cheesley) — accessible, privacy-first, built in the open.",
+  "description": "Static site for silavapi.co.uk (Sīlavāpi / Ruth Cheesley) - accessible, privacy-first, built in the open.",
   "license": "UNLICENSED",
   "engines": {
     "node": ">=20"

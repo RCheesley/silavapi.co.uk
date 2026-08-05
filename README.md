@@ -1,6 +1,6 @@
 # silavapi.co.uk
 
-The personal site of **Sīlavāpi** (formerly Ruth Cheesley) — a privacy-first, accessible
+The personal site of **Sīlavāpi** (formerly Ruth Cheesley) - a privacy-first, accessible
 static site, migrated from the old Joomla site at ruthcheesley.co.uk.
 
 > Built in the open, with free software. This site sets **no cookies**, runs **no trackers**,
@@ -9,7 +9,7 @@ static site, migrated from the old Joomla site at ruthcheesley.co.uk.
 ## Status
 
 🚧 **In active migration.** This repository is private for now and will be made **public**
-later — transparency is the default. Nothing secret is ever committed here.
+later - transparency is the default. Nothing secret is ever committed here.
 
 ## Tech stack
 
@@ -19,7 +19,7 @@ later — transparency is the default. Nothing secret is ever committed here.
 | Search                | [Pagefind](https://pagefind.app/) (build-time index, 100% client-side)             |
 | Hosting               | Cloudflare Pages (`silavapi.co.uk`, proxied)                                       |
 | Contact form          | Cloudflare Pages Function → server-side email (works without JavaScript)           |
-| Analytics             | Cloudflare edge/server-side — no client script, no cookies, no third-party request |
+| Analytics             | Cloudflare edge/server-side - no client script, no cookies, no third-party request |
 | Fonts                 | Libre Bodoni + Lato, self-hosted as subset woff2                                   |
 
 A full manifest of every open-source project used lives in
@@ -48,10 +48,10 @@ Full contributor and deployment docs will land in [`docs/`](docs/) as the build 
 ## Design source of truth
 
 The design handoff (spec + high-fidelity mockups + design tokens) lives in
-[`design-handoff/`](design-handoff/) — see `design-handoff/BUILD_SPEC.md` and
+[`design-handoff/`](design-handoff/) - see `design-handoff/BUILD_SPEC.md` and
 `design-handoff/README.md`.
 
 ## Licence
 
-To be confirmed. (Code and written content will likely carry separate licences —
+To be confirmed. (Code and written content will likely carry separate licences -
 a permissive licence for the site code, and a Creative Commons licence for the writing.)

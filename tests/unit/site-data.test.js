@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import site from '../../src/_data/site.js';
 import nav from '../../src/_data/nav.js';
 
-describe('site data — identity rules', () => {
+describe('site data - identity rules', () => {
   it('spells the name with correct diacritics', () => {
     expect(site.name).toBe('Sīlavāpi');
   });

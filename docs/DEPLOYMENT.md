@@ -11,7 +11,7 @@ Pages**, served from **silavapi.co.uk** proxied through Cloudflare.
 | Framework preset       | None                                                 |
 | Build command          | `npm run build`                                      |
 | Build output directory | `_site`                                              |
-| Node version           | from `.nvmrc` (24) — set `NODE_VERSION=24` if needed |
+| Node version           | from `.nvmrc` (24) - set `NODE_VERSION=24` if needed |
 
 `npm run build` runs Eleventy and then Pagefind, producing the full static site
 including the client-side search index.
@@ -36,7 +36,7 @@ Cloudflare dashboard; nothing is added to the pages.)
 
 A Cloudflare Pages Function receives the POST, sends one email server-side, and
 303-redirects to a thank-you page. Honeypot + time-trap instead of a CAPTCHA.
-Works with JavaScript disabled. No secrets live in the repo — the mail
+Works with JavaScript disabled. No secrets live in the repo - the mail
 credential is a Cloudflare environment variable.
 
 ## The old domain

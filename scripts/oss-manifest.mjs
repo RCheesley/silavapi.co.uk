@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * oss-manifest.mjs — regenerates docs/OPEN_SOURCE.md, a manifest of every
+ * oss-manifest.mjs - regenerates docs/OPEN_SOURCE.md, a manifest of every
  * open-source project this site depends on. Reads the installed package
  * metadata so versions + licences are accurate. Run after changing deps:
  *
@@ -20,7 +20,7 @@ const PURPOSE = {
   '@11ty/eleventy-plugin-syntaxhighlight': 'Code-block highlighting (build)',
   '@axe-core/playwright': 'axe accessibility engine for e2e (test)',
   '@eslint/js': 'ESLint recommended ruleset (lint)',
-  '@lhci/cli': 'Lighthouse CI — accessibility score gate (test)',
+  '@lhci/cli': 'Lighthouse CI - accessibility score gate (test)',
   '@playwright/test': 'Functional + accessibility e2e runner (test)',
   '@vitest/coverage-v8': 'Unit-test coverage (test)',
   browserslist: 'Target-browser resolution for CSS (build)',
@@ -51,7 +51,7 @@ async function pkgMeta(name) {
     if (home && !/^https?:\/\//.test(home)) home = `https://github.com/${home}`;
     return { version: p.version, license: p.license || 'see project', home };
   } catch {
-    return { version: '—', license: '—', home: '' };
+    return { version: '-', license: '-', home: '' };
   }
 }
 
@@ -71,7 +71,7 @@ async function main() {
 Every open-source project this site is built with. Regenerate with
 \`node scripts/oss-manifest.mjs\` (reads installed package metadata). The site
 ships **no third-party code to the browser** except the self-hosted Pagefind
-search bundle and self-hosted fonts — all served from our own origin.
+search bundle and self-hosted fonts - all served from our own origin.
 
 ## Build, test & tooling (npm)
 

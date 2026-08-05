@@ -1,5 +1,5 @@
 /**
- * Primary navigation — flat, no dropdowns (BUILD_SPEC change #1).
+ * Primary navigation - flat, no dropdowns (BUILD_SPEC change #1).
  * `key` matches the `navActive` value a page sets in its front matter, so the
  * active item gets aria-current="page". Pages not listed here (e.g. Privacy)
  * mark no item active.

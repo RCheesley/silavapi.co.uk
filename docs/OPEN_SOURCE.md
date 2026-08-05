@@ -3,7 +3,7 @@
 Every open-source project this site is built with. Regenerate with
 `node scripts/oss-manifest.mjs` (reads installed package metadata). The site
 ships **no third-party code to the browser** except the self-hosted Pagefind
-search bundle and self-hosted fonts — all served from our own origin.
+search bundle and self-hosted fonts - all served from our own origin.
 
 ## Build, test & tooling (npm)
 
@@ -16,7 +16,7 @@ search bundle and self-hosted fonts — all served from our own origin.
 | [@11ty/eleventy-plugin-syntaxhighlight](https://www.11ty.dev/docs/plugins/syntaxhighlight/) | 5.0.2   | MIT           | Code-block highlighting (build)                  |
 | [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm)                           | 4.12.1  | MPL-2.0       | axe accessibility engine for e2e (test)          |
 | [@eslint/js](https://eslint.org)                                                            | 10.0.1  | MIT           | ESLint recommended ruleset (lint)                |
-| [@lhci/cli](https://github.com/GoogleChrome/lighthouse-ci)                                  | 0.15.1  | Apache-2.0    | Lighthouse CI — accessibility score gate (test)  |
+| [@lhci/cli](https://github.com/GoogleChrome/lighthouse-ci)                                  | 0.15.1  | Apache-2.0    | Lighthouse CI - accessibility score gate (test)  |
 | [@playwright/test](https://playwright.dev)                                                  | 1.62.1  | Apache-2.0    | Functional + accessibility e2e runner (test)     |
 | [@vitest/coverage-v8](https://vitest.dev/guide/coverage)                                    | 4.1.10  | MIT           | Unit-test coverage (test)                        |
 | [browserslist](https://github.com/browserslist/browserslist)                                | 4.28.7  | MIT           | Target-browser resolution for CSS (build)        |

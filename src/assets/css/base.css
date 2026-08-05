@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   base.css — reset + base element styles + a11y primitives.
+   base.css - reset + base element styles + a11y primitives.
    Component styles live alongside their partials/macros (Phase 1+).
    All values reference the ported design tokens; no hard-coded brand values.
    --------------------------------------------------------------------------- */
@@ -43,7 +43,7 @@ video {
   height: auto;
 }
 
-/* Headings — Libre Bodoni, never all-caps, pretty wrapping. */
+/* Headings - Libre Bodoni, never all-caps, pretty wrapping. */
 h1,
 h2,
 h3,
@@ -66,7 +66,7 @@ p {
   margin: 0 0 var(--space-5);
 }
 
-/* Links — always underlined in prose; purple-light → pink on hover. */
+/* Links - always underlined in prose; purple-light → pink on hover. */
 a {
   color: var(--text-link);
   text-decoration: underline;
@@ -110,14 +110,14 @@ select {
   color: inherit;
 }
 
-/* Focus — visible everywhere, never removed. 2px purple-light, offset. --------
+/* Focus - visible everywhere, never removed. 2px purple-light, offset. --------
    Components may override the ring colour (e.g. orange-light on dark bands). */
 :focus-visible {
-  outline: var(--border-width-strong) solid var(--rc-purple-light);
+  outline: var(--border-width-strong) solid var(--focus-outline);
   outline-offset: 2px;
 }
 
-/* Skip link — visually hidden until focused, then top-left. */
+/* Skip link - visually hidden until focused, then top-left. */
 .skip-link {
   position: absolute;
   left: -9999px;
