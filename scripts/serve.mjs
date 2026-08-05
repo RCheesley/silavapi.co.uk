@@ -30,10 +30,18 @@ const TYPES = {
 };
 
 async function resolvePath(urlPath) {
+  // Malformed percent-encoding (e.g. "/%E0%") makes decodeURIComponent throw;
+  // reject such requests rather than crashing the handler.
+  let decoded;
+  try {
+    decoded = decodeURIComponent(urlPath.split('?')[0]);
+  } catch {
+    return null;
+  }
   // Prevent path traversal; map "/" and "/foo/" to their index.html. Strip the
   // leading "/" so the request path is treated as relative to ROOT (explicit,
   // and avoids any platform ambiguity around joining absolute segments).
-  const clean = normalize(decodeURIComponent(urlPath.split('?')[0]))
+  const clean = normalize(decoded)
     .replace(/^(\.\.[/\\])+/, '')
     .replace(/^[/\\]+/, '');
   let filePath = join(ROOT, clean);
