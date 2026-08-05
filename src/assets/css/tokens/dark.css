@@ -27,9 +27,9 @@
     /* Focus ring on dark bands is orange-light */
     --focus-ring: var(--rc-orange-light);
 
-    /* Chrome + accessible-alias overrides for dark mode. */
+    /* Chrome + accessible-alias overrides for dark mode.
+       (--text-eyebrow is set once, in the Text section above.) */
     --header-bg: rgba(22, 17, 34, 0.85); /* near-black, translucent */
-    --text-eyebrow: var(--rc-purple-light-40); /* light eyebrow on dark */
     --nav-link-accent: var(--rc-pink-60); /* #F177AB ≈ 6.7:1 on dark */
     --focus-outline: var(--rc-orange-light); /* focus ring on dark */
   }
