@@ -1,4 +1,5 @@
-import { dirname } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bundle, browserslistToTargets } from 'lightningcss';
 import browserslist from 'browserslist';
@@ -11,6 +12,9 @@ import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
+const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
+const ICON_DIR = resolve(ROOT_DIR, 'src/assets/icons');
+const ICON_CACHE = new Map(); // processed SVG per `${name}:${px}`
 
 export default function (eleventyConfig) {
   // --- Plugins ------------------------------------------------------------
@@ -50,6 +54,7 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add('src/assets/css/tokens/**');
   eleventyConfig.ignores.add('src/assets/css/fonts.css');
   eleventyConfig.ignores.add('src/assets/css/base.css');
+  eleventyConfig.ignores.add('src/assets/css/components.css');
 
   eleventyConfig.addExtension('css', {
     outputFileExtension: 'css',
@@ -86,6 +91,33 @@ export default function (eleventyConfig) {
   // British date rendering ("03 March, 2025") + ISO for <time>/sitemap.
   eleventyConfig.addFilter('readableDate', readableDate);
   eleventyConfig.addFilter('isoDate', isoDate);
+
+  // --- Shortcodes ---------------------------------------------------------
+  // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
+  // `name` is validated (no path traversal) and `size` coerced to a number, so
+  // the shortcode can never read outside ICON_DIR or inject attributes.
+  eleventyConfig.addShortcode('icon', (name, size = 24) => {
+    if (typeof name !== 'string' || !/^[a-z][a-z0-9-]*$/.test(name)) {
+      throw new Error(`icon: invalid name "${name}"`);
+    }
+    const n = Number(size);
+    const px = Number.isFinite(n) && n > 0 ? Math.round(n) : 24;
+    const key = `${name}:${px}`;
+    let out = ICON_CACHE.get(key);
+    if (out === undefined) {
+      const file = resolve(ICON_DIR, `${name}.svg`);
+      if (!file.startsWith(ICON_DIR + sep)) {
+        throw new Error(`icon: path escapes ICON_DIR for "${name}"`);
+      }
+      out = readFileSync(file, 'utf8')
+        .replace('<svg', '<svg aria-hidden="true" focusable="false" class="icon"')
+        .replace(/\swidth="[^"]*"/, ` width="${px}"`)
+        .replace(/\sheight="[^"]*"/, ` height="${px}"`)
+        .replace(/stroke-width="[^"]*"/, 'stroke-width="1.5"');
+      ICON_CACHE.set(key, out);
+    }
+    return out;
+  });
 
   // --- Collections --------------------------------------------------------
   eleventyConfig.addCollection('posts', (collectionApi) =>

@@ -29,6 +29,7 @@ const PURPOSE = {
   'html-validate': 'HTML validation of the built output (test)',
   lightningcss: 'CSS bundling + minification (build)',
   linkinator: 'Broken-link checker (test)',
+  'lucide-static': 'Source SVGs for the interface icons (build-time only)',
   'markdown-it': 'Markdown → HTML renderer (build)',
   'markdown-it-anchor': 'Heading anchors for Markdown (build)',
   'markdown-it-attrs': 'Attribute syntax for Markdown (build)',

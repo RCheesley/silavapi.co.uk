@@ -9,6 +9,7 @@
     <meta name="description" content="{{ description or site.description }}" />
     <meta name="color-scheme" content="light dark" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    {% if noindex %}<meta name="robots" content="noindex, follow" />{% endif %}
 
     <!-- Open Graph - keep the former name discoverable during the transition. -->
     <meta property="og:type" content="website" />

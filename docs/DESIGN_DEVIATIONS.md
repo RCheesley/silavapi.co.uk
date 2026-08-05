@@ -23,6 +23,9 @@ keeps within the existing brand palette (no new hues).
 - **Change:** `--text-eyebrow` → `--rc-purple-dark-80 #565182` (~7:1, clears AAA).
 - **Where:** `semantic-overrides.css` (light) + `tokens/dark.css` (dark uses a
   light tint on the dark surface).
+- **Related:** `--text-muted` (grey-500 `#79748A`, 4.48:1 on white - a hair
+  under AA, used for excerpts/attributions) is likewise stepped one darker to
+  `--rc-grey-600` in `semantic-overrides.css`.
 
 ## 3. Gradient bands carry a solid background-color fallback
 
@@ -34,6 +37,18 @@ keeps within the existing brand palette (no new hues).
   visible change; it just gives a definite background to fall back to.
 - **Guarded by:** a Playwright test that fails if any text-bearing gradient
   element lacks a solid fallback (`tests/e2e/structure.spec.js`).
+
+## 4. Alerts are a fixed light surface; success title darkened
+
+- **Mock:** info/success alerts on tinted backgrounds.
+- **Problem:** the status background tokens don't flip in dark mode, so body
+  text using `--text-body` (which does flip to light) became light-on-light in
+  dark mode. Separately, the success title green `#1E7A5A` is 4.41:1 on its
+  tint - just under AA.
+- **Change:** alert text uses fixed dark ink (`--rc-grey-700`) so it stays AA in
+  both schemes, and the success title uses a darker shade of the same green
+  (`#14684c`, ~5.6:1). Info title (`--rc-purple-dark`) already passed.
+- **Where:** `.alert*` in `src/assets/css/components.css`.
 
 ## Accessibility tooling note
 

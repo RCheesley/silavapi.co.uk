@@ -194,6 +194,34 @@ select {
   margin-block: var(--space-6);
 }
 
+/* Reusable layout helpers (used by pages + the component gallery). */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+.stack {
+  display: grid;
+  gap: var(--space-4);
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+}
+
+/* Section-background bands. Gradient bands carry a solid fallback (contrast
+   tooling can't read gradients - see docs/DESIGN_DEVIATIONS.md). */
+.surface-subtle-band {
+  background: var(--surface-subtle);
+}
+.quote-band {
+  background-color: var(--rc-bg-aubergine);
+  background-image: var(--gradient-inverse-surface);
+  color: var(--text-on-dark);
+}
+
 /* ===========================================================================
    Scaffold chrome (Phase 1 replaces this with the pixel-faithful components).
    Semantic markup is final; only the styling here is provisional.

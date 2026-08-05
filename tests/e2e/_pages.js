@@ -7,4 +7,5 @@ export const PAGES = [
   { path: '/privacy/', name: 'Privacy', h1: /Privacy/ },
   { path: '/accessibility/', name: 'Accessibility', h1: /Accessibility statement/ },
   { path: '/404.html', name: '404', h1: /Page not found/ },
+  { path: '/dev/components/', name: 'Components', h1: /Component gallery/ },
 ];
