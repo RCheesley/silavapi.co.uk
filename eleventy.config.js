@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bundle, browserslistToTargets } from 'lightningcss';
 import browserslist from 'browserslist';
@@ -92,12 +92,22 @@ export default function (eleventyConfig) {
 
   // --- Shortcodes ---------------------------------------------------------
   // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
+  // `name` is validated (no path traversal) and `size` coerced to a number, so
+  // the shortcode can never read outside ICON_DIR or inject attributes.
   eleventyConfig.addShortcode('icon', (name, size = 24) => {
-    const svg = readFileSync(resolve(ICON_DIR, `${name}.svg`), 'utf8');
+    if (typeof name !== 'string' || !/^[a-z][a-z0-9-]*$/.test(name)) {
+      throw new Error(`icon: invalid name "${name}"`);
+    }
+    const file = resolve(ICON_DIR, `${name}.svg`);
+    if (!file.startsWith(ICON_DIR + sep)) {
+      throw new Error(`icon: path escapes ICON_DIR for "${name}"`);
+    }
+    const px = Number(size) || 24;
+    const svg = readFileSync(file, 'utf8');
     return svg
       .replace('<svg', '<svg aria-hidden="true" focusable="false" class="icon"')
-      .replace(/\swidth="[^"]*"/, ` width="${size}"`)
-      .replace(/\sheight="[^"]*"/, ` height="${size}"`)
+      .replace(/\swidth="[^"]*"/, ` width="${px}"`)
+      .replace(/\sheight="[^"]*"/, ` height="${px}"`)
       .replace(/stroke-width="[^"]*"/, 'stroke-width="1.5"');
   });
 

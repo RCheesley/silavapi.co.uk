@@ -17,8 +17,9 @@ test('buttons render all three variants', async ({ page }) => {
 
 test('category badges render each tone', async ({ page }) => {
   // Each tone appears at least once (badges also sit inside article cards).
+  // Assert visibility of the first of each tone so Playwright auto-waits.
   for (const tone of ['brand', 'accent', 'warm', 'neutral']) {
-    expect(await page.locator(`.badge--${tone}`).count()).toBeGreaterThan(0);
+    await expect(page.locator(`.badge--${tone}`).first()).toBeVisible();
   }
 });
 
