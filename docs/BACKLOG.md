@@ -1,0 +1,19 @@
+# Backlog — Ruth's refinements
+
+A living list of refinements Ruth has asked for. She adds to this over time.
+Items are checked off as they land (with the PR that did it).
+
+## Copy & house style
+
+- [x] Never hyphenate **"open source"** (two words, even as a modifier) — homepage hero. _(Phase 0)_
+- [x] Replace em dashes `—` with hyphens `-` in site copy. _(Phase 0; adopted as an ongoing convention)_
+- [ ] **Birth-name format:** when the birth name is used in copy, write **"Sīlavāpi (ex Ruth) Cheesley"**. Keep `alternateName` = "Ruth Cheesley" in structured data for findability. _Open question: does this replace the hero's "formerly Ruth Cheesley" bridge (from the design spec)?_
+
+## UI / design
+
+- [x] Don't underline the name in the footer (brand lockup, not a text link). _(Phase 0)_
+- [ ] **Theme toggle:** add a light / dark / **system** control (today the site only follows `prefers-color-scheme`). Persist without cookies (localStorage), apply pre-paint to avoid a flash. _(Targeting Phase 1/2 with the reader controls.)_
+
+## How to add to this list
+
+Tell Claude the change; it gets recorded here and, if durable, in project memory.

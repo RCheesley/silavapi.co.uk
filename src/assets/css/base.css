@@ -305,6 +305,10 @@ select {
 .site-footer a:hover {
   color: var(--rc-white);
 }
+/* The brand lockup (logo + name) reads as a mark, not a text link - no underline. */
+.site-footer a.site-footer__brand {
+  text-decoration: none;
+}
 .site-footer__heading {
   font-size: var(--text-2xs);
   font-family: var(--font-text);

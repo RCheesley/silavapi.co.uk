@@ -11,7 +11,7 @@ export default {
   lang: 'en-GB',
   locale: 'en_GB',
   description:
-    'The personal site of Sīlavāpi (formerly Ruth Cheesley) — Buddhism and dharma life, open source, digital sovereignty, and living actively with EDS.',
+    'The personal site of Sīlavāpi (formerly Ruth Cheesley) - Buddhism and dharma life, open source, digital sovereignty, and living actively with EDS.',
   tagline: 'Open source is where I found a home for that drive to connect.',
   author: {
     name: 'Sīlavāpi (Ruth Cheesley)',
