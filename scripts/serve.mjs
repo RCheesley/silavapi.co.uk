@@ -6,7 +6,7 @@
  */
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
-import { extname, join, normalize, resolve } from 'node:path';
+import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)), '..', '_site');
@@ -30,10 +30,14 @@ const TYPES = {
 };
 
 async function resolvePath(urlPath) {
-  // Prevent path traversal; map "/" and "/foo/" to their index.html.
-  const clean = normalize(decodeURIComponent(urlPath.split('?')[0])).replace(/^(\.\.[/\\])+/, '');
+  // Prevent path traversal; map "/" and "/foo/" to their index.html. Strip the
+  // leading "/" so the request path is treated as relative to ROOT (explicit,
+  // and avoids any platform ambiguity around joining absolute segments).
+  const clean = normalize(decodeURIComponent(urlPath.split('?')[0]))
+    .replace(/^(\.\.[/\\])+/, '')
+    .replace(/^[/\\]+/, '');
   let filePath = join(ROOT, clean);
-  if (!filePath.startsWith(ROOT)) return null;
+  if (filePath !== ROOT && !filePath.startsWith(ROOT + sep)) return null;
   try {
     const s = await stat(filePath);
     if (s.isDirectory()) filePath = join(filePath, 'index.html');

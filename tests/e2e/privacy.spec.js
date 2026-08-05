@@ -23,23 +23,18 @@ test.describe('privacy guarantees', () => {
       expect(await page.context().cookies()).toEqual([]);
       expect(await page.evaluate(() => document.cookie)).toBe('');
 
-      // No external-host resource references leaked into the DOM.
-      const externalHosts = await page.evaluate(() => {
-        const urls = [];
-        for (const el of document.querySelectorAll('[src],[href]')) {
-          const val = el.getAttribute('src') || el.getAttribute('href') || '';
-          if (/^https?:\/\//i.test(val) && !val.startsWith(location.origin)) urls.push(val);
-        }
-        return urls;
-      });
-      // Only deliberate outbound links (social/old site) are allowed, and only
-      // in the footer/prose — never as loaded sub-resources (src).
+      // No external-host resource references loaded into the DOM. Deliberate
+      // outbound links (social/old site) are allowed as `href`s in the
+      // footer/prose, but nothing may be *loaded* from off-origin (any `src`).
       const loadedExternally = await page.evaluate(() =>
         [...document.querySelectorAll('[src]')]
-          .map((el) => el.getAttribute('src'))
+          .map((el) => el.getAttribute('src') || '')
           .filter((v) => /^https?:\/\//i.test(v) && !v.startsWith(location.origin))
       );
-      expect(loadedExternally, `externally loaded sub-resources: ${externalHosts}`).toEqual([]);
+      expect(
+        loadedExternally,
+        `externally loaded sub-resources: ${loadedExternally.join(', ')}`
+      ).toEqual([]);
     });
   }
 });

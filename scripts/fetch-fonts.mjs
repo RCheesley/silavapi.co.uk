@@ -17,7 +17,7 @@
  * Usage:  node scripts/fetch-fonts.mjs
  */
 import { mkdir, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -118,9 +118,9 @@ async function main() {
 }
 
 // Only run the network-touching main() when invoked directly (not when a test
-// imports parseBlocks).
-const invokedDirectly =
-  process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href;
+// imports parseBlocks). pathToFileURL handles absolute paths, spaces and
+// Windows drive letters correctly — unlike string-concatenating "file://".
+const invokedDirectly = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
 if (invokedDirectly) {
   main().catch((err) => {
     console.error(err);
