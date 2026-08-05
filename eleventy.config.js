@@ -14,6 +14,7 @@ import { readableDate, isoDate } from './lib/dates.js';
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
 const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
 const ICON_DIR = resolve(ROOT_DIR, 'src/assets/icons');
+const ICON_CACHE = new Map(); // processed SVG per `${name}:${px}`
 
 export default function (eleventyConfig) {
   // --- Plugins ------------------------------------------------------------
@@ -53,6 +54,7 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add('src/assets/css/tokens/**');
   eleventyConfig.ignores.add('src/assets/css/fonts.css');
   eleventyConfig.ignores.add('src/assets/css/base.css');
+  eleventyConfig.ignores.add('src/assets/css/components.css');
 
   eleventyConfig.addExtension('css', {
     outputFileExtension: 'css',
@@ -98,17 +100,23 @@ export default function (eleventyConfig) {
     if (typeof name !== 'string' || !/^[a-z][a-z0-9-]*$/.test(name)) {
       throw new Error(`icon: invalid name "${name}"`);
     }
-    const file = resolve(ICON_DIR, `${name}.svg`);
-    if (!file.startsWith(ICON_DIR + sep)) {
-      throw new Error(`icon: path escapes ICON_DIR for "${name}"`);
+    const n = Number(size);
+    const px = Number.isFinite(n) && n > 0 ? Math.round(n) : 24;
+    const key = `${name}:${px}`;
+    let out = ICON_CACHE.get(key);
+    if (out === undefined) {
+      const file = resolve(ICON_DIR, `${name}.svg`);
+      if (!file.startsWith(ICON_DIR + sep)) {
+        throw new Error(`icon: path escapes ICON_DIR for "${name}"`);
+      }
+      out = readFileSync(file, 'utf8')
+        .replace('<svg', '<svg aria-hidden="true" focusable="false" class="icon"')
+        .replace(/\swidth="[^"]*"/, ` width="${px}"`)
+        .replace(/\sheight="[^"]*"/, ` height="${px}"`)
+        .replace(/stroke-width="[^"]*"/, 'stroke-width="1.5"');
+      ICON_CACHE.set(key, out);
     }
-    const px = Number(size) || 24;
-    const svg = readFileSync(file, 'utf8');
-    return svg
-      .replace('<svg', '<svg aria-hidden="true" focusable="false" class="icon"')
-      .replace(/\swidth="[^"]*"/, ` width="${px}"`)
-      .replace(/\sheight="[^"]*"/, ` height="${px}"`)
-      .replace(/stroke-width="[^"]*"/, 'stroke-width="1.5"');
+    return out;
   });
 
   // --- Collections --------------------------------------------------------
