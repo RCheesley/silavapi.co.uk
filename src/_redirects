@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects.
+# The full 301 map from old ruthcheesley.co.uk URLs is generated in Phase 3
+# (content migration) and appended here. This file is intentionally minimal
+# for the scaffold.
+
+# Old Joomla feed → canonical feed URL.
+/index.php?format=feed*  /feed.xml  301

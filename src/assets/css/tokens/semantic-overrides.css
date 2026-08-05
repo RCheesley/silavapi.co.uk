@@ -1,0 +1,18 @@
+/* Accessible semantic overrides (light mode) --------------------------------
+   These sit on top of the verbatim design tokens to satisfy WCAG AA, and are
+   imported BEFORE tokens/dark.css so the dark-mode media block can override
+   them in turn. No new hues are introduced — every value is an existing
+   palette step. */
+:root {
+  /* Brand pink (#E71D73) is only 4.35:1 on white → fails AA for small/normal
+     text (the design system flags this). Use the palette's deeper pink for
+     pink TEXT at UI sizes (5.3:1); bright pink stays for non-text underlines. */
+  --nav-link-accent: var(--action-accent-hover); /* #CF1665 */
+
+  /* Eyebrow labels are small uppercase text; --text-eyebrow (purple-dark-60
+     #807CA1) is only 3.95:1 on white. Step one tint darker (#565182 ≈ 7:1). */
+  --text-eyebrow: var(--rc-purple-dark-80);
+
+  /* Sticky-header background — a token so it can flip in dark mode. */
+  --header-bg: rgba(255, 255, 255, 0.92);
+}

@@ -1,0 +1,352 @@
+/* ---------------------------------------------------------------------------
+   base.css — reset + base element styles + a11y primitives.
+   Component styles live alongside their partials/macros (Phase 1+).
+   All values reference the ported design tokens; no hard-coded brand values.
+   --------------------------------------------------------------------------- */
+
+/* Semantic accessibility overrides live in tokens/semantic-overrides.css so
+   the dark-mode block (tokens/dark.css, imported last) can override them. */
+
+/* Reset ------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Theme the root canvas so translucent elements (sticky header) always
+     composite over the correct surface, in both colour schemes. */
+  background: var(--surface-page);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: var(--text-base); /* 17px */
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed); /* 1.65 */
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Headings — Libre Bodoni, never all-caps, pretty wrapping. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+  text-wrap: pretty;
+  text-transform: none;
+}
+h1 {
+  line-height: var(--leading-tight);
+}
+
+p {
+  margin: 0 0 var(--space-5);
+}
+
+/* Links — always underlined in prose; purple-light → pink on hover. */
+a {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: var(--transition-colors);
+}
+a:hover {
+  color: var(--text-link-hover);
+}
+
+/* Lists / quotes / code baseline */
+ul,
+ol {
+  margin: 0 0 var(--space-5);
+  padding-inline-start: var(--space-6);
+}
+li {
+  margin-bottom: var(--space-2);
+}
+blockquote {
+  margin: 0 0 var(--space-5);
+}
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-8) 0;
+}
+
+/* Forms inherit type */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Focus — visible everywhere, never removed. 2px purple-light, offset. --------
+   Components may override the ring colour (e.g. orange-light on dark bands). */
+:focus-visible {
+  outline: var(--border-width-strong) solid var(--rc-purple-light);
+  outline-offset: 2px;
+}
+
+/* Skip link — visually hidden until focused, then top-left. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: var(--space-3);
+  z-index: 100;
+  background: var(--rc-purple-dark);
+  color: var(--rc-white);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: var(--space-4);
+  outline: var(--border-width-strong) solid var(--rc-pink);
+  outline-offset: 2px;
+  color: var(--rc-white);
+}
+
+/* Screen-reader-only utility. */
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Layout helpers */
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter-lg);
+}
+.prose {
+  max-width: var(--measure-prose);
+}
+
+/* Small utilities (avoid inline styles so the CSP can stay style-src 'self'). */
+.section {
+  padding-block: var(--section-y);
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  color: var(--text-eyebrow);
+  margin-bottom: var(--space-3);
+}
+.hero-title {
+  font-size: var(--text-4xl);
+  letter-spacing: var(--tracking-tight);
+  max-width: 20ch;
+}
+.page-title {
+  font-size: var(--text-3xl);
+}
+.lead {
+  font-size: var(--text-md);
+}
+.rule {
+  height: var(--border-width-rule);
+  width: 72px;
+  background: var(--gradient-rule);
+  border: 0;
+  margin-block: var(--space-6);
+}
+
+/* ===========================================================================
+   Scaffold chrome (Phase 1 replaces this with the pixel-faithful components).
+   Semantic markup is final; only the styling here is provisional.
+   =========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--header-bg);
+  backdrop-filter: var(--blur-glass);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding-block: var(--space-4);
+}
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+}
+.site-header__name {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-xl);
+  color: var(--text-heading);
+}
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-7);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-nav__list li {
+  margin: 0;
+}
+.site-nav__link {
+  display: inline-block;
+  padding: var(--space-2) 0;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-heading);
+  border-bottom: var(--border-width-strong) solid transparent;
+}
+.site-nav__link:hover {
+  color: var(--nav-link-accent);
+}
+.site-nav__link.is-active {
+  color: var(--nav-link-accent);
+  border-bottom-color: var(--rc-pink); /* bright underline: non-text, 3:1 ok */
+}
+
+.site-footer {
+  margin-top: var(--section-y);
+  /* Solid fallback under the gradient: it is what contrast tooling evaluates
+     (gradients are "can't tell"), and a graceful degradation if gradients are
+     unsupported. Both gradient stops are dark, so this matches the tone. */
+  background-color: var(--rc-bg-aubergine);
+  background-image: var(--gradient-inverse-surface);
+  color: var(--text-on-dark);
+}
+.site-footer__inner {
+  padding-block: var(--section-y-sm);
+}
+.site-footer__cols {
+  display: grid;
+  gap: var(--space-9);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .site-footer__cols {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+.site-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--text-on-dark);
+}
+.site-footer__name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--text-on-dark);
+}
+.site-footer__desc {
+  color: var(--rc-purple-dark-20);
+}
+.site-footer__pledge {
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  color: var(--rc-purple-dark-20);
+}
+.site-footer a {
+  color: var(--rc-purple-dark-20);
+  text-decoration: underline;
+}
+.site-footer a:hover {
+  color: var(--rc-white);
+}
+.site-footer__heading {
+  font-size: var(--text-2xs);
+  font-family: var(--font-text);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--rc-pink-60);
+}
+.site-footer__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-footer__nav li {
+  margin-bottom: var(--space-2);
+}
+.site-footer__bottom {
+  margin-top: var(--space-9);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-on-dark);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--rc-purple-dark-20);
+}
+.site-footer__bottom p {
+  margin: 0;
+}
+.site-footer :focus-visible {
+  outline-color: var(--rc-orange-light);
+}
+
+/* Global reduced-motion kill switch. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

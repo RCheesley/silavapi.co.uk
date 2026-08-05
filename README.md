@@ -13,14 +13,14 @@ later — transparency is the default. Nothing secret is ever committed here.
 
 ## Tech stack
 
-| Concern | Choice |
-| --- | --- |
-| Static site generator | [Eleventy](https://www.11ty.dev/) v3 + Nunjucks |
-| Search | [Pagefind](https://pagefind.app/) (build-time index, 100% client-side) |
-| Hosting | Cloudflare Pages (`silavapi.co.uk`, proxied) |
-| Contact form | Cloudflare Pages Function → server-side email (works without JavaScript) |
-| Analytics | Cloudflare edge/server-side — no client script, no cookies, no third-party request |
-| Fonts | Libre Bodoni + Lato, self-hosted as subset woff2 |
+| Concern               | Choice                                                                             |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| Static site generator | [Eleventy](https://www.11ty.dev/) v3 + Nunjucks                                    |
+| Search                | [Pagefind](https://pagefind.app/) (build-time index, 100% client-side)             |
+| Hosting               | Cloudflare Pages (`silavapi.co.uk`, proxied)                                       |
+| Contact form          | Cloudflare Pages Function → server-side email (works without JavaScript)           |
+| Analytics             | Cloudflare edge/server-side — no client script, no cookies, no third-party request |
+| Fonts                 | Libre Bodoni + Lato, self-hosted as subset woff2                                   |
 
 A full manifest of every open-source project used lives in
 [`docs/OPEN_SOURCE.md`](docs/OPEN_SOURCE.md), and the cookie register (target: zero) in

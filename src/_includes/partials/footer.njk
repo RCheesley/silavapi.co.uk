@@ -1,0 +1,49 @@
+{#- Site footer — privacy pledge box, trimmed socials, no phone number.
+    Phase 1 refines the visual treatment; the semantics/content here are final. -#}
+<footer class="site-footer">
+  <div class="site-footer__inner container">
+    <div class="site-footer__cols">
+      <div class="site-footer__brand-col">
+        <a class="site-footer__brand" href="/">
+          <img src="/assets/img/logo-symbol.png" alt="" width="44" height="44" />
+          <span class="site-footer__name">Sīlavāpi</span>
+        </a>
+        <p class="site-footer__desc">
+          Buddhism and dharma life, open source, and living actively with EDS.
+        </p>
+        <p class="site-footer__pledge" role="note">
+          {{ site.privacyPledge }}
+          <a href="/privacy/">Read the privacy page</a>.
+        </p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Explore">
+        <h2 class="site-footer__heading">Explore</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/dharma/">Dharma</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/accessibility/">Accessibility statement</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__nav" aria-label="Elsewhere">
+        <h2 class="site-footer__heading">Elsewhere</h2>
+        <ul>
+          <li><a rel="me" href="{{ site.social.mastodon.url }}">Mastodon</a></li>
+          <li><a href="{{ site.social.linkedin.url }}">LinkedIn</a></li>
+          <li><a href="{{ site.social.rss.url }}">RSS feed</a></li>
+          <li><a href="/contact/">Send an email</a></li>
+          <li><a href="{{ site.social.speaking.url }}">Speaking</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>© {{ year }} Sīlavāpi (Ruth Cheesley) · silavapi.co.uk</p>
+      <p>A static site, built in the open with free software.</p>
+    </div>
+  </div>
+</footer>
