@@ -51,7 +51,6 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add('src/assets/css/fonts.css');
   eleventyConfig.ignores.add('src/assets/css/base.css');
 
-  eleventyConfig.addTemplateFormats('css');
   eleventyConfig.addExtension('css', {
     outputFileExtension: 'css',
     compile: async (_inputContent, inputPath) => {
@@ -104,7 +103,9 @@ export default function (eleventyConfig) {
       includes: '_includes',
       data: '_data',
     },
-    templateFormats: ['njk', 'md', 'html'],
+    // `css` is explicit here (not only via addExtension) so app.css is always
+    // recognised and emitted, independent of addTemplateFormats merge order.
+    templateFormats: ['njk', 'md', 'html', 'css'],
     markdownTemplateEngine: 'njk',
     htmlTemplateEngine: 'njk',
     pathPrefix: '/',
