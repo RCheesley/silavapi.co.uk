@@ -90,9 +90,16 @@ async function main() {
 
     for (const b of blocks) {
       const filename = `${slug}-${b.weight}-${b.style}-${b.subset}.woff2`;
-      const bin = Buffer.from(
-        await (await fetch(b.url, { headers: { 'User-Agent': UA } })).arrayBuffer()
-      );
+      const fontRes = await fetch(b.url, { headers: { 'User-Agent': UA } });
+      if (!fontRes.ok) {
+        throw new Error(`font download failed (${fontRes.status}) for ${b.url}`);
+      }
+      const bin = Buffer.from(await fontRes.arrayBuffer());
+      // Sanity-check the payload: a real woff2 starts with the "wOF2" signature.
+      // Guards against writing a rate-limit/error HTML page to a .woff2 file.
+      if (bin.length < 4 || bin.toString('latin1', 0, 4) !== 'wOF2') {
+        throw new Error(`downloaded file is not woff2 (bad signature) for ${b.url}`);
+      }
       await writeFile(resolve(FONT_DIR, filename), bin);
       faceRules.push(
         `@font-face{\n` +
