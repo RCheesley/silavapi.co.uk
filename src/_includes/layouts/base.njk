@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {%- set fullTitle = (title + " · " + site.name) if (title and navActive != "home") else site.name -%}
+    <title>{{ fullTitle }}</title>
+    <meta name="description" content="{{ description or site.description }}" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+
+    <!-- Open Graph - keep the former name discoverable during the transition. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta property="og:title" content="{{ fullTitle }}" />
+    <meta property="og:description" content="{{ description or site.description }}" />
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+    <meta property="og:locale" content="{{ site.locale }}" />
+    <meta property="og:see_also" content="https://ruthcheesley.co.uk/" />
+
+    <link rel="stylesheet" href="/assets/css/app.css" />
+    <link rel="icon" href="/assets/img/logo-symbol.png" type="image/png" />
+
+    <!-- Person structured data with alternateName for findability. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": {{ site.name | dump | safe }},
+        "alternateName": {{ site.alternateName | dump | safe }},
+        "url": {{ site.url | dump | safe }},
+        "sameAs": ["https://ruthcheesley.co.uk/"]
+      }
+    </script>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    {% include "partials/header.njk" %}
+    <main id="main">
+      {% block content %}{{ content | safe }}{% endblock %}
+    </main>
+    {% include "partials/footer.njk" %}
+  </body>
+</html>

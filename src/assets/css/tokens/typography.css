@@ -1,0 +1,32 @@
+:root{
+/* Sizes — 1.25 major-third-ish ramp, 16px base */
+--text-3xs:11px;--text-2xs:12px;--text-xs:13px;--text-sm:15px;--text-base:17px;--text-md:19px;
+--text-lg:22px;--text-xl:26px;--text-2xl:32px;--text-3xl:40px;--text-4xl:52px;--text-5xl:66px;--text-6xl:84px;
+
+/* Weights */
+--weight-hairline:100;--weight-light:300;--weight-regular:400;--weight-medium:500;
+--weight-semibold:600;--weight-bold:700;--weight-black:900;
+
+/* Line heights */
+--leading-tight:1.08;--leading-snug:1.22;--leading-normal:1.5;--leading-relaxed:1.65;--leading-loose:1.8;
+
+/* Tracking — the guide sets brand labels in wide-tracked uppercase Lato */
+--tracking-tight:-0.02em;--tracking-normal:0;--tracking-wide:0.06em;--tracking-wider:0.14em;--tracking-widest:0.2em;
+
+/* Semantic roles */
+--type-display-family:var(--font-display);
+--type-display-weight:var(--weight-bold);
+--type-display-leading:var(--leading-tight);
+--type-heading-family:var(--font-display);
+--type-heading-weight:var(--weight-medium);
+--type-body-family:var(--font-text);
+--type-body-weight:var(--weight-regular);
+--type-body-leading:var(--leading-relaxed);
+--type-eyebrow-family:var(--font-text);
+--type-eyebrow-weight:var(--weight-regular);
+--type-eyebrow-tracking:var(--tracking-widest);
+--type-ui-family:var(--font-text);
+--type-ui-weight:var(--weight-bold);
+--type-ui-tracking:var(--tracking-wide);
+--measure-prose:64ch;--measure-narrow:44ch;
+}

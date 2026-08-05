@@ -1,0 +1,21 @@
+{
+  "_comment": "pa11y runs the HTML CodeSniffer (htmlcs) engine here. axe-core is run separately and more rigorously by the Playwright suite (tests/e2e/a11y.spec.js) in BOTH colour schemes, so the two engines together cover every page. pa11y's own axe runner is intentionally not used: it cannot read gradient backgrounds (marking them contrast-incomplete) and offers no colour-scheme control, producing false positives on the design's gradient bands.",
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["htmlcs"],
+    "timeout": 60000,
+    "concurrency": 1,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-dev-shm-usage"]
+    }
+  },
+  "urls": [
+    "http://localhost:8080/",
+    "http://localhost:8080/dharma/",
+    "http://localhost:8080/blog/",
+    "http://localhost:8080/contact/",
+    "http://localhost:8080/privacy/",
+    "http://localhost:8080/accessibility/",
+    "http://localhost:8080/404.html"
+  ]
+}

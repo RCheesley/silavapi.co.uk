@@ -1,0 +1,22 @@
+# Build + tooling output
+_site/
+node_modules/
+coverage/
+.lighthouseci/
+playwright-report/
+test-results/
+pagefind/
+
+# Design handoff — reference material, kept verbatim
+design-handoff/
+
+# Generated / binary
+src/assets/fonts/
+src/assets/css/fonts.css
+package-lock.json
+
+# Design tokens — ported verbatim from the design system; keep original formatting
+src/assets/css/tokens/
+
+# Nunjucks templates (no stable Prettier parser)
+*.njk

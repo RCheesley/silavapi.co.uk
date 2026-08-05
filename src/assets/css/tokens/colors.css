@@ -1,0 +1,89 @@
+/* Palette straight from "Ruth Cheesley — Basic Identity", 09 June 2022 (Until Sunday).
+   HEX is authoritative on screen; CMYK/Pantone kept for print reference. */
+:root{
+/* --- Brand base --------------------------------------------------------- */
+--rc-purple-dark:#2C2662;   /* CMYK 100 100 28 15 · PANTONE 2685 C */
+--rc-purple-light:#533D90;  /* CMYK 82 85 0 0    · PANTONE 267 C  */
+--rc-pink:#E71D73;          /* CMYK 0 95 19 0    · PANTONE 213 C  */
+--rc-orange-dark:#F39207;   /* CMYK 0 50 97 0    · PANTONE 1375 C */
+--rc-orange-light:#F9B233;  /* CMYK 0 35 85 0    · PANTONE 1235 C */
+--rc-bg-aubergine:#120035;  /* CMYK 100 99 41 62 · PANTONE 275 C  */
+--rc-bg-plum:#600F3E;       /* CMYK 50 100 33 48 · PANTONE 222 C  */
+
+/* --- Tints (the guide's 80/60/40/20 % steps) ----------------------------- */
+--rc-purple-dark-80:#565182;--rc-purple-dark-60:#807CA1;--rc-purple-dark-40:#ABA8C1;--rc-purple-dark-20:#D5D4E0;
+--rc-purple-light-80:#7564A6;--rc-purple-light-60:#988BBC;--rc-purple-light-40:#BAB1D3;--rc-purple-light-20:#DDD8E9;
+--rc-pink-80:#EC4A8F;--rc-pink-60:#F177AB;--rc-pink-40:#F5A5C7;--rc-pink-20:#FAD2E3;
+--rc-orange-dark-80:#F5A839;--rc-orange-dark-60:#F8BE6B;--rc-orange-dark-40:#FAD49C;--rc-orange-dark-20:#FDE9CE;
+--rc-orange-light-80:#FAC15C;--rc-orange-light-60:#FBD185;--rc-orange-light-40:#FDE0AE;--rc-orange-light-20:#FEF0D6;
+--rc-bg-aubergine-80:#41335D;--rc-bg-aubergine-60:#716686;--rc-bg-aubergine-40:#A099AE;--rc-bg-aubergine-20:#D0CCD7;
+--rc-bg-plum-80:#803F65;--rc-bg-plum-60:#A06F8B;--rc-bg-plum-40:#BF9FB2;--rc-bg-plum-20:#DFCFD8;
+
+/* --- Neutrals ----------------------------------------------------------- */
+--rc-white:#FFFFFF;
+--rc-paper:#FBFAFC;
+--rc-grey-100:#F2F1F5;
+--rc-grey-200:#E4E2EA;
+--rc-grey-300:#CFCCD8;
+--rc-grey-400:#A5A1B2;
+--rc-grey-500:#79748A;
+--rc-grey-600:#565064;
+--rc-grey-700:#3B3646;
+--rc-ink:#221E2C;
+
+/* --- Semantic: text ----------------------------------------------------- */
+--text-heading:var(--rc-purple-dark);
+--text-body:var(--rc-grey-700);
+--text-muted:var(--rc-grey-500);
+--text-eyebrow:var(--rc-purple-dark-60);
+--text-link:var(--rc-purple-light);
+--text-link-hover:var(--rc-pink);
+--text-on-dark:var(--rc-white);
+--text-on-dark-muted:var(--rc-purple-dark-20);
+--text-on-accent:var(--rc-white);
+
+/* --- Semantic: surfaces ------------------------------------------------- */
+--surface-page:var(--rc-white);
+--surface-subtle:var(--rc-paper);
+--surface-card:var(--rc-white);
+--surface-card-alt:var(--rc-grey-100);
+--surface-inverse:var(--rc-bg-aubergine);
+--surface-inverse-alt:var(--rc-bg-plum);
+--surface-accent:var(--rc-pink);
+--surface-highlight:var(--rc-orange-light-20);
+
+/* --- Semantic: lines ---------------------------------------------------- */
+--border-subtle:var(--rc-grey-200);
+--border-strong:var(--rc-grey-300);
+--border-accent:var(--rc-pink);
+--border-on-dark:rgba(255,255,255,.18);
+--focus-ring:var(--rc-pink);
+
+/* --- Semantic: interactive --------------------------------------------- */
+--action-primary:var(--rc-purple-dark);
+--action-primary-hover:var(--rc-purple-light);
+--action-primary-active:#221C52;
+--action-accent:var(--rc-pink);
+--action-accent-hover:#CF1665;
+--action-accent-active:#B41258;
+--action-disabled-bg:var(--rc-grey-200);
+--action-disabled-fg:var(--rc-grey-400);
+
+/* --- Semantic: status --------------------------------------------------- */
+--status-info:var(--rc-purple-light);
+--status-info-bg:var(--rc-purple-light-20);
+--status-success:#1E7A5A;
+--status-success-bg:#DDEFE8;
+--status-warning:var(--rc-orange-dark);
+--status-warning-bg:var(--rc-orange-dark-20);
+--status-danger:var(--rc-pink);
+--status-danger-bg:var(--rc-pink-20);
+
+/* --- Brand gradients (as used in the lotus mark) ------------------------ */
+--gradient-lotus:linear-gradient(135deg,var(--rc-orange-light) 0%,var(--rc-orange-dark) 22%,var(--rc-pink) 55%,var(--rc-purple-light) 80%,var(--rc-purple-dark) 100%);
+--gradient-warm:linear-gradient(90deg,var(--rc-orange-light) 0%,var(--rc-pink) 100%);
+--gradient-cool:linear-gradient(90deg,var(--rc-pink) 0%,var(--rc-purple-dark) 100%);
+--gradient-inverse-surface:linear-gradient(160deg,var(--rc-bg-aubergine) 0%,var(--rc-bg-plum) 100%);
+--gradient-protection:linear-gradient(180deg,rgba(18,0,53,0) 0%,rgba(18,0,53,.72) 60%,rgba(18,0,53,.9) 100%); /* @kind color */
+--gradient-rule:linear-gradient(90deg,var(--rc-pink) 0%,var(--rc-orange-light) 100%);
+}
