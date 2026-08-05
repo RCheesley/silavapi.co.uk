@@ -1,4 +1,5 @@
-import { dirname } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bundle, browserslistToTargets } from 'lightningcss';
 import browserslist from 'browserslist';
@@ -11,6 +12,8 @@ import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
+const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
+const ICON_DIR = resolve(ROOT_DIR, 'src/assets/icons');
 
 export default function (eleventyConfig) {
   // --- Plugins ------------------------------------------------------------
@@ -86,6 +89,17 @@ export default function (eleventyConfig) {
   // British date rendering ("03 March, 2025") + ISO for <time>/sitemap.
   eleventyConfig.addFilter('readableDate', readableDate);
   eleventyConfig.addFilter('isoDate', isoDate);
+
+  // --- Shortcodes ---------------------------------------------------------
+  // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
+  eleventyConfig.addShortcode('icon', (name, size = 24) => {
+    const svg = readFileSync(resolve(ICON_DIR, `${name}.svg`), 'utf8');
+    return svg
+      .replace('<svg', '<svg aria-hidden="true" focusable="false" class="icon"')
+      .replace(/\swidth="[^"]*"/, ` width="${size}"`)
+      .replace(/\sheight="[^"]*"/, ` height="${size}"`)
+      .replace(/stroke-width="[^"]*"/, 'stroke-width="1.5"');
+  });
 
   // --- Collections --------------------------------------------------------
   eleventyConfig.addCollection('posts', (collectionApi) =>

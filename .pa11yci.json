@@ -16,6 +16,7 @@
     "http://localhost:8080/contact/",
     "http://localhost:8080/privacy/",
     "http://localhost:8080/accessibility/",
-    "http://localhost:8080/404.html"
+    "http://localhost:8080/404.html",
+    "http://localhost:8080/dev/components/"
   ]
 }

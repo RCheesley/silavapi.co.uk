@@ -13,6 +13,10 @@
      #807CA1) is only 3.95:1 on white. Step one tint darker (#565182 ≈ 7:1). */
   --text-eyebrow: var(--rc-purple-dark-80);
 
+  /* Muted text (excerpts, meta, attributions): --text-muted (grey-500 #79748A)
+     is 4.48:1 on white - a hair under AA. Step one step darker to grey-600. */
+  --text-muted: var(--rc-grey-600);
+
   /* Sticky-header background - a token so it can flip in dark mode. */
   --header-bg: rgba(255, 255, 255, 0.92);
 

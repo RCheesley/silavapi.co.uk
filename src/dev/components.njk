@@ -1,0 +1,99 @@
+---
+layout: layouts/base.njk
+title: Component gallery
+permalink: /dev/components/index.html
+noindex: true
+eleventyExcludeFromCollections: true
+description: A gallery of the silavapi.co.uk design-system components, for QA and documentation.
+---
+{% from "macros/ui.njk" import button, sectionHeading, badge, tag, topicCard, articleCard, factRow, quote, alert, chip %}
+
+<section class="container section">
+  {{ sectionHeading("Design system", "Component gallery", 1, "Every reusable component, on light and dark surfaces. Not linked from the site; used for QA and as living documentation.") }}
+</section>
+
+<section class="container section">
+  <h2 class="page-title">Buttons</h2>
+  <div class="cluster">
+    {{ button("Read the blog", "/blog/", "primary") }}
+    {{ button("Get in touch", "/contact/", "secondary") }}
+    {{ button("All posts", "/blog/", "ghost") }}
+    {{ button("Send an email", "", "primary", "submit") }}
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="page-title">Badges &amp; tags</h2>
+  <div class="cluster">
+    {{ badge("Buddhism", "brand") }}
+    {{ badge("Digital Sovereignty", "accent") }}
+    {{ badge("Community", "warm") }}
+    {{ badge("Mautic", "neutral") }}
+  </div>
+  <div class="cluster">
+    {{ tag("Buddhism") }}
+    {{ tag("Triratna") }}
+    {{ tag("Ordination") }}
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="page-title">Category chips</h2>
+  <div class="cluster" role="group" aria-label="Example category filter">
+    {{ chip("All", true) }}
+    {{ chip("Buddhism") }}
+    {{ chip("Community") }}
+    {{ chip("Being bendy") }}
+  </div>
+</section>
+
+<section class="surface-subtle-band">
+  <div class="container section">
+    <h2 class="page-title">Topic cards</h2>
+    <div class="card-grid">
+      {{ topicCard("users", "Community & open source", "Bringing people together and building community - open source is where I found a home for that drive to connect.", "Community blog", "/blog/") }}
+      {{ topicCard("accessibility", "Living with a disability", "Diagnosed at 23 with Ehlers-Danlos Syndrome, I've spent most of my life working with chronic pain and joint instability.", "Being bendy", "/blog/") }}
+      {{ topicCard("flower", "Buddhism and dharma life", "A practising Buddhist for over a decade, ordained into the Triratna Buddhist Order in 2026.", "Dharma", "/dharma/") }}
+      {{ topicCard("activity", "Fitness and health", "Learning to train with a physical disability - I just completed my first ultramarathon.", "Health blog", "/blog/") }}
+    </div>
+  </div>
+</section>
+
+<section class="surface-subtle-band">
+  <div class="container section">
+    <h2 class="page-title">Article cards</h2>
+    <div class="card-grid">
+      {{ articleCard({ title: "A new name: becoming Sīlavāpi", excerpt: "After four months in the mountains of Spain, I came home with a new name and a very full heart.", image: "/assets/img/photography/portrait-04.jpg", imageAlt: "", date: "20 July, 2026", category: "Buddhism", tone: "brand", href: "/blog/" }) }}
+      {{ articleCard({ title: "Who really owns your customer data?", excerpt: "How your marketing stack is quietly surrendering your business sovereignty, and what an open source alternative buys you.", image: "/assets/img/photography/portrait-mautic-13.jpg", imageAlt: "", date: "18 May, 2026", category: "Digital Sovereignty", tone: "accent", href: "/blog/" }) }}
+      {{ articleCard({ title: "What dāna teaches us about open source sustainability", excerpt: "Generosity is the first of the perfections, and it turns out to be surprisingly good economics too.", image: "/assets/img/photography/speaking-mic-01.jpg", imageAlt: "", date: "12 January, 2026", category: "Community", tone: "warm", href: "/blog/" }) }}
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="page-title">Fact rows</h2>
+  <div>
+    {% call factRow("Open source advocate") %}Long-term contributor to open source projects, currently Project Lead for Mautic.{% endcall %}
+    {% call factRow("Public speaker") %}Speaking regularly at events around the world.{% endcall %}
+    {% call factRow("Ordained Buddhist") %}Ordained into the Triratna Buddhist Order in 2026.{% endcall %}
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="page-title">Quotes</h2>
+  {{ quote("A name is not a costume. It is a direction of travel.", "From the ordination retreat", "light", true) }}
+</section>
+
+<section class="quote-band">
+  <div class="container section">
+    {{ quote("Open source is where I found a home for that drive to connect.", "Sīlavāpi", "dark") }}
+  </div>
+</section>
+
+<section class="container section">
+  <h2 class="page-title">Alerts</h2>
+  <div class="stack">
+    {{ alert("info", "Nothing found", "No posts match that search - try a different word, or clear the category filter.") }}
+    {{ alert("success", "Message sent", "Thank you - your message is on its way.") }}
+  </div>
+</section>

@@ -1,0 +1,107 @@
+{#- ==========================================================================
+    ui.njk - design-system component macros. Styles live in
+    src/assets/css/components.css. Import with:
+      {% from "macros/ui.njk" import button, sectionHeading, badge, tag,
+         topicCard, articleCard, factRow, quote, alert, chip %}
+    ========================================================================== -#}
+
+{# Button - renders an <a> when href is given, else a <button>. #}
+{% macro button(label, href="", variant="primary", type="button") %}
+  {%- if href -%}
+    <a class="btn btn--{{ variant }}" href="{{ href }}">{{ label }}</a>
+  {%- else -%}
+    <button class="btn btn--{{ variant }}" type="{{ type }}">{{ label }}</button>
+  {%- endif -%}
+{% endmacro %}
+
+{# Section heading - eyebrow + title (h1/h2 by level) + optional standfirst. #}
+{% macro sectionHeading(eyebrow, title, level=2, standfirst="", tone="light") %}
+  <div class="section-heading section-heading--l{{ level }} section-heading--{{ tone }}">
+    {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+    {% if level == 1 %}
+      <h1 class="section-heading__title">{{ title }}</h1>
+    {% else %}
+      <h2 class="section-heading__title">{{ title }}</h2>
+    {% endif %}
+    {% if standfirst %}<p class="section-heading__standfirst">{{ standfirst }}</p>{% endif %}
+  </div>
+{% endmacro %}
+
+{# Category badge - tone: brand | accent | warm | neutral. #}
+{% macro badge(label, tone="neutral") %}
+  <span class="badge badge--{{ tone }}">{{ label }}</span>
+{% endmacro %}
+
+{# Tag - a small pill; a link when href is given. #}
+{% macro tag(label, href="") %}
+  {%- if href -%}
+    <a class="tag" href="{{ href }}">{{ label }}</a>
+  {%- else -%}
+    <span class="tag">{{ label }}</span>
+  {%- endif -%}
+{% endmacro %}
+
+{# Topic card - lotus-gradient icon plate + title + body + text link. #}
+{% macro topicCard(iconName, title, body, linkLabel, href) %}
+  <article class="topic-card">
+    <span class="topic-card__icon">{% icon iconName, 28 %}</span>
+    <h3 class="topic-card__title">{{ title }}</h3>
+    <p class="topic-card__body">{{ body }}</p>
+    <a class="topic-card__link" href="{{ href }}">
+      {{ linkLabel }} {% icon "arrow-right", 16 %}
+    </a>
+  </article>
+{% endmacro %}
+
+{# Article card - post = { title, excerpt, image, imageAlt, date, category,
+   tone, href }. The title is the link (whole-card affordance via the title). #}
+{% macro articleCard(post) %}
+  <article class="article-card">
+    {% if post.image %}
+      <div class="article-card__media">
+        <img src="{{ post.image }}" alt="{{ post.imageAlt or '' }}" loading="lazy" />
+      </div>
+    {% endif %}
+    <div class="article-card__body">
+      <div class="article-card__meta">
+        <span class="article-card__date">{{ post.date }}</span>
+        {% if post.category %}{{ badge(post.category, post.tone or "neutral") }}{% endif %}
+      </div>
+      <h3 class="article-card__title"><a href="{{ post.href }}">{{ post.title }}</a></h3>
+      <p class="article-card__excerpt">{{ post.excerpt }}</p>
+    </div>
+  </article>
+{% endmacro %}
+
+{# Fact row - label column + prose body (body passed as caller content). #}
+{% macro factRow(label) %}
+  <div class="fact-row">
+    <div class="fact-row__label">{{ label }}</div>
+    <p class="fact-row__body">{{ caller() }}</p>
+  </div>
+{% endmacro %}
+
+{# Quote - tone: light | dark; accent adds the mid-article left rule. #}
+{% macro quote(text, attribution="", tone="light", accent=false) %}
+  <figure class="quote quote--{{ tone }}{{ ' quote--accent' if accent }}">
+    <blockquote class="quote__text">{{ text }}</blockquote>
+    {% if attribution %}
+      <figcaption class="quote__attribution">{{ attribution }}</figcaption>
+    {% endif %}
+  </figure>
+{% endmacro %}
+
+{# Alert - tone: info | success. role=status announces success politely. #}
+{% macro alert(tone, title, body) %}
+  <div class="alert alert--{{ tone }}" role="{{ 'status' if tone == 'success' else 'note' }}">
+    {% if title %}<p class="alert__title">{{ title }}</p>{% endif %}
+    <p class="alert__body">{{ body }}</p>
+  </div>
+{% endmacro %}
+
+{# Category filter chip (progressive enhancement adds the JS behaviour). #}
+{% macro chip(label, pressed=false) %}
+  <button class="chip" type="button" aria-pressed="{{ 'true' if pressed else 'false' }}">
+    {{ label }}
+  </button>
+{% endmacro %}

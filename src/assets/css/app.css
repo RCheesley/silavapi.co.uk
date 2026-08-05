@@ -22,7 +22,8 @@
 /* Base element styles + a11y primitives + scaffold chrome. */
 @import './base.css';
 
-/* Component layers are added in Phase 1 (header, footer, cards, buttons, …). */
+/* Design-system components (buttons, cards, badges, quotes, alerts, …). */
+@import './components.css';
 
 /* Dark-mode overrides LAST so the @media block wins over light-mode tokens. */
 @import './tokens/dark.css';

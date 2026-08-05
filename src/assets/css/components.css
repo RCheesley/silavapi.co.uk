@@ -1,0 +1,434 @@
+/* ---------------------------------------------------------------------------
+   components.css - the design-system components recreated from the mockups.
+   Every value references a design token; colours are chosen to clear WCAG AA
+   (see docs/DESIGN_DEVIATIONS.md for the pink/eyebrow rules reused here).
+   Paired with the Nunjucks macros in _includes/macros/ui.njk.
+   --------------------------------------------------------------------------- */
+
+/* Inline icon (Lucide) ---------------------------------------------------- */
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex: none;
+}
+
+/* Buttons ----------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-height); /* 44px hit target */
+  padding: 0 var(--control-padding-x);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-text);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    var(--transition-colors),
+    transform var(--duration-fast) var(--ease-standard);
+}
+.btn:active {
+  transform: var(--press-scale);
+}
+.btn--primary {
+  background: var(--action-primary);
+  color: var(--text-on-accent);
+}
+.btn--primary:hover {
+  background: var(--action-primary-hover);
+  color: var(--text-on-accent);
+}
+.btn--secondary {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--text-heading);
+}
+.btn--secondary:hover {
+  border-color: var(--rc-purple-light);
+  color: var(--rc-purple-light);
+}
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border-subtle);
+  color: var(--text-heading);
+}
+.btn--ghost:hover {
+  background: var(--surface-subtle);
+  color: var(--rc-purple-light);
+}
+
+/* Section heading --------------------------------------------------------- */
+.section-heading {
+  display: grid;
+  gap: var(--space-3);
+}
+.section-heading__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+  text-wrap: pretty;
+}
+.section-heading--l1 .section-heading__title {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+}
+.section-heading--l2 .section-heading__title {
+  font-size: var(--text-2xl);
+}
+.section-heading__standfirst {
+  margin: 0;
+  max-width: var(--measure-prose);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-body);
+}
+/* Dark tone (on inverse/photo bands). */
+.section-heading--dark .section-heading__title {
+  color: var(--text-on-dark);
+}
+.section-heading--dark .eyebrow {
+  color: var(--rc-pink-60);
+}
+.section-heading--dark .section-heading__standfirst {
+  color: var(--rc-bg-aubergine-20);
+}
+
+/* Category badge (tone by hue; dark ink text = AAA on the light tints) ----- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-family: var(--font-text);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--rc-ink);
+  white-space: nowrap;
+}
+.badge--brand {
+  background: var(--rc-purple-light-20);
+}
+.badge--accent {
+  background: var(--rc-pink-20);
+}
+.badge--warm {
+  background: var(--rc-orange-light-20);
+}
+.badge--neutral {
+  background: var(--rc-grey-200);
+}
+
+/* Tag (article tags) ------------------------------------------------------ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: var(--surface-subtle);
+  font-family: var(--font-text);
+  font-size: var(--text-2xs);
+  color: var(--text-body);
+  text-decoration: none;
+}
+a.tag:hover {
+  border-color: var(--rc-purple-light);
+  color: var(--rc-purple-light);
+}
+
+/* Topic card -------------------------------------------------------------- */
+.topic-card {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding: var(--card-padding);
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-lift);
+}
+.topic-card:hover {
+  transform: var(--lift-hover);
+  box-shadow: var(--shadow-md);
+}
+.topic-card__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-lotus);
+  color: var(--rc-white);
+}
+.topic-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-lg);
+  color: var(--text-heading);
+}
+.topic-card__body {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-body);
+}
+.topic-card__link {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-link);
+  text-decoration: none;
+}
+.topic-card__link:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Article card ------------------------------------------------------------ */
+.article-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-lift);
+}
+.article-card:hover {
+  transform: var(--lift-hover);
+  box-shadow: var(--shadow-md);
+}
+.article-card__media {
+  aspect-ratio: 16 / 10;
+  background: var(--surface-card-alt);
+}
+.article-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.article-card__body {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  padding: var(--card-padding);
+}
+.article-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.article-card__date {
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-eyebrow);
+}
+.article-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+.article-card__title a {
+  color: var(--text-heading);
+  text-decoration: none;
+}
+.article-card__title a:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.article-card__excerpt {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Fact row ---------------------------------------------------------------- */
+.fact-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-5);
+  padding-block: var(--space-4);
+  border-top: var(--border-width) solid var(--border-subtle);
+}
+.fact-row:last-child {
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+.fact-row__label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+}
+.fact-row__body {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-body);
+}
+@media (max-width: 600px) {
+  .fact-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+/* Quote ------------------------------------------------------------------- */
+.quote {
+  margin: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+.quote__text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--weight-regular);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+  text-wrap: pretty;
+}
+.quote__attribution {
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+/* Mid-article accent. */
+.quote--accent {
+  padding-left: var(--space-5);
+  border-left: var(--border-width-rule) solid var(--rc-pink);
+}
+/* Dark, centred (on inverse gradient bands). */
+.quote--dark {
+  justify-items: center;
+  text-align: center;
+}
+.quote--dark .quote__text {
+  font-size: var(--text-2xl);
+  color: var(--text-on-dark);
+}
+.quote--dark .quote__attribution {
+  color: var(--rc-pink-60);
+}
+
+/* Alert -------------------------------------------------------------------
+   Alerts are a fixed light-tint surface in BOTH colour schemes (the status
+   bg tokens don't flip), so their text uses fixed dark colours - not the
+   scheme-flipping --text-body - to stay AA in dark mode too. */
+.alert {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  border-left: var(--border-width-rule) solid transparent;
+}
+.alert__title {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+.alert__body {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--rc-grey-700); /* fixed dark ink on the light tint */
+}
+.alert--info {
+  background: var(--status-info-bg);
+  border-left-color: var(--status-info);
+}
+.alert--info .alert__title {
+  color: var(--rc-purple-dark);
+}
+.alert--success {
+  background: var(--status-success-bg);
+  border-left-color: var(--status-success);
+}
+.alert--success .alert__title {
+  /* --status-success (#1E7A5A) is 4.41:1 on the success tint - a hair under
+     AA; a darker shade of the same green clears it (see DESIGN_DEVIATIONS). */
+  color: #14684c;
+}
+
+/* Category filter chip ---------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-height-sm);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: var(--surface-card);
+  color: var(--text-heading);
+  font-family: var(--font-text);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+.chip:hover {
+  border-color: var(--rc-purple-light);
+  color: var(--rc-purple-light);
+}
+.chip[aria-pressed='true'] {
+  background: var(--action-primary);
+  border-color: var(--action-primary);
+  color: var(--text-on-accent);
+}
+
+/* Event list (home events band) ------------------------------------------- */
+.event-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+.event-list__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  font-size: var(--text-md);
+  flex-wrap: wrap;
+}
+.event-list__date {
+  font-weight: var(--weight-bold);
+  min-width: 190px;
+  color: var(--text-on-dark);
+}
+.event-list__desc {
+  color: var(--rc-bg-aubergine-20);
+}
