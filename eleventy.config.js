@@ -55,7 +55,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addExtension('css', {
     outputFileExtension: 'css',
     compile: async (_inputContent, inputPath) => {
-      if (!inputPath.endsWith('/assets/css/app.css')) return; // skip partials
+      // Normalise separators so the check holds on Windows (where Eleventy may
+      // pass backslash paths) as well as POSIX.
+      if (!inputPath.replace(/\\/g, '/').endsWith('/assets/css/app.css')) return; // skip partials
       return async () => {
         // bundle() resolves @import from disk, so the whole stylesheet ships as
         // one same-origin request (no leftover @import, no extra round-trips).

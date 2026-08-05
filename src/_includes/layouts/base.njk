@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    {%- set pageTitle = title or site.name -%}
     {%- set fullTitle = (title + " · " + site.name) if (title and navActive != "home") else site.name -%}
     <title>{{ fullTitle }}</title>
     <meta name="description" content="{{ description or site.description }}" />
