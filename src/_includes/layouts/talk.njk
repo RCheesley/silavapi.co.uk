@@ -18,7 +18,7 @@ navActive: speaking
     {% if format and kind != "podcast" %}{{ badge(format, fmtTone[format] or "neutral") }}{% endif %}
     {% if kind == "podcast" %}{{ badge("Podcast / interview", "neutral") }}{% endif %}
     <span class="talk-detail__event">
-      {{ (primary.date or date) | readableDate }}{% if primary.event %} · {{ primary.event }}{% endif %}{% if primaryPlace %} · {{ primaryPlace }}{% endif %}
+      {{ (primary.date or date) | readableDate }}{% if primary.event %} · {{ primary.event }}{% endif %}{% if primaryPlace | length %} · {{ primaryPlace }}{% endif %}
     </span>
   </div>
 
@@ -32,7 +32,7 @@ navActive: speaking
         {% for e in events %}
           <li>
             <span class="talk-events__date">{{ e.date | readableDate }}</span>
-            <span class="talk-events__where">{{ e.event }}{% set ep = placeOf(e.location) | trim %}{% if ep %} · {{ ep }}{% endif %}</span>
+            <span class="talk-events__where">{{ e.event }}{% set ep = placeOf(e.location) | trim %}{% if ep | length %} · {{ ep }}{% endif %}</span>
           </li>
         {% endfor %}
       </ul>
