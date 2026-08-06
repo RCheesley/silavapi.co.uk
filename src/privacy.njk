@@ -1,9 +1,79 @@
 ---
 layout: layouts/base.njk
-navActive: 
 title: Privacy
+updated: 2026-08-06
+description: How privacy works on silavapi.co.uk - written in plain English, in full, on one page. No cookies, no trackers, no third-party requests.
 ---
-<section class="container section">
-  <h1 class="page-title">Privacy</h1>
-  <p class="prose">This site sets no cookies, runs no trackers, and loads nothing from third parties. The full plain-English privacy page is being ported.</p>
-</section>
+{% from "macros/ui.njk" import sectionHeading %}
+
+<article class="prose-page">
+    <div class="stack">
+      {{ sectionHeading("Privacy", "How privacy works here", 1, "Written in plain English, in full, on one page. Last updated " + (updated | readableDate) + ".") }}
+    </div>
+
+    <section>
+      <h2>What this site does not do</h2>
+      <ul>
+        <li>No cookies. Not even a "necessary" one, so there is no cookie banner.</li>
+        <li>No third-party requests. Fonts, images and code are all served from this domain - your visit is never disclosed to Google, a CDN, or anyone else.</li>
+        <li>No advertising, no fingerprinting, no social media embeds or share-button trackers.</li>
+        <li>No accounts, no comments platform, no data sold or shared - there is nothing to sell.</li>
+      </ul>
+    </section>
+
+    {# TODO(ruth): confirm this Analytics wording. It describes the chosen setup
+       (Cloudflare edge analytics), which differs from the mock's "self-hosted on
+       my own server". #}
+    <section>
+      <h2>Analytics</h2>
+      <p>
+        I like to know which posts people find useful, so this site uses
+        privacy-preserving analytics measured at the network edge by the host
+        (Cloudflare). It counts page views in aggregate - no cookies, no
+        client-side tracking script, no personal identifiers, and no cross-site
+        tracking - and it never builds a profile of you.
+      </p>
+    </section>
+
+    <section>
+      <h2>The contact form</h2>
+      <p>
+        The <a href="/contact/">contact form</a> sends one email, to me, through
+        a form handler running on my own infrastructure. Your name, email
+        address and message exist in my inbox and nowhere else. I use them only
+        to reply to you, and I delete the thread when the conversation is done.
+        Nothing is added to a mailing list - if I ever start a newsletter it
+        will be strictly opt-in.
+      </p>
+    </section>
+
+    {# TODO(ruth): confirm server-log retention with the host (Cloudflare). #}
+    <section>
+      <h2>Server logs</h2>
+      <p>
+        Like every web host, mine keeps short-lived technical logs to detect
+        abuse and keep the site running. These are handled by the hosting
+        provider; IP addresses are not retained long-term, and the logs are not
+        used to track or profile visitors.
+      </p>
+    </section>
+
+    <section>
+      <h2>Links elsewhere</h2>
+      <p>
+        When a post links to another site, that site's own privacy practices
+        apply from the moment you click. I link to privacy-respecting places
+        where a choice exists.
+      </p>
+    </section>
+
+    <section>
+      <h2>Your rights, and questions</h2>
+      <p>
+        Under UK GDPR you can ask me what I hold about you (almost certainly: at
+        most, an email you sent me), ask me to correct it, or ask me to delete
+        it. Just <a href="/contact/">drop me a line</a> - no form, no process,
+        I'll just do it.
+      </p>
+    </section>
+  </article>

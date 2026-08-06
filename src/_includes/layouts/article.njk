@@ -1,0 +1,70 @@
+---
+layout: layouts/base.njk
+navActive: blog
+readerControl: true
+---
+{% from "macros/ui.njk" import badge, tag, articleCard, sectionHeading %}
+{%- set tone = categories.tones[category] or "neutral" -%}
+{%- set related = collections.posts | rejectattr("url", "equalto", page.url) | limit(3) -%}
+
+<article>
+  <div class="article__head">
+    <div class="article__meta">
+      {{ badge(category, tone) }}
+      <span class="article__metatext"
+        >{{ date | readableDate }} · {{ content | readingTime }}</span
+      >
+    </div>
+    <h1 class="article__title">{{ title }}</h1>
+    {% if excerpt %}<p class="article__standfirst">{{ excerpt }}</p>{% endif %}
+    <hr class="rule" />
+    <div class="text-size" role="group" aria-label="Text size">
+      <span class="text-size__label">Text size</span>
+      <button class="text-size__btn" type="button" data-reader-size="1" aria-pressed="true" aria-label="Default text size">A</button>
+      <button class="text-size__btn" type="button" data-reader-size="1.125" aria-pressed="false" aria-label="Larger text">A</button>
+      <button class="text-size__btn" type="button" data-reader-size="1.25" aria-pressed="false" aria-label="Largest text">A</button>
+    </div>
+  </div>
+
+  {% if image %}
+    <div class="article__figure">
+      <figure>
+        <img src="{{ image }}" alt="{{ imageAlt or '' }}" />
+        {% if imageCaption %}<figcaption>{{ imageCaption }}</figcaption>{% endif %}
+      </figure>
+    </div>
+  {% endif %}
+
+  <div class="article__body">
+    {{ content | safe }}
+
+    {% if tags %}
+      <div class="article__tags">
+        <span class="article__metatext">Tagged</span>
+        {% for t in tags %}{{ tag(t) }}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</article>
+
+{% if related | length %}
+  <section class="surface-subtle-band" aria-label="Related posts">
+    <div class="container section-y-sm stack">
+      {{ sectionHeading("Keep reading", "More writing", 2) }}
+      <div class="card-grid">
+        {% for post in related %}
+          {{ articleCard({
+            title: post.data.title,
+            excerpt: post.data.excerpt,
+            image: post.data.image,
+            imageAlt: post.data.imageAlt,
+            date: post.date | readableDate,
+            category: post.data.category,
+            tone: categories.tones[post.data.category] or "neutral",
+            href: post.url
+          }) }}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

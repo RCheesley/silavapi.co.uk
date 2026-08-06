@@ -25,5 +25,8 @@
 /* Design-system components (buttons, cards, badges, quotes, alerts, …). */
 @import './components.css';
 
+/* Page-level section layouts. */
+@import './pages.css';
+
 /* Dark-mode overrides LAST so the @media block wins over light-mode tokens. */
 @import './tokens/dark.css';

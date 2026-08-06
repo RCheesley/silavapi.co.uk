@@ -2,8 +2,119 @@
 layout: layouts/base.njk
 navActive: contact
 title: Contact
+description: Fancy a coffee? Drop Sīlavāpi a line. A contact form that sets no cookies, uses no CAPTCHA, and works without JavaScript.
 ---
-<section class="container section">
-  <h1 class="page-title">Contact</h1>
-  <p class="prose">Fancy a coffee? Drop me a line. The contact form is being built - it will work without JavaScript and set no cookies.</p>
+{% from "macros/ui.njk" import sectionHeading %}
+
+<section>
+  <div class="container contact">
+    <div class="stack">
+      {{ sectionHeading("Contact", "Fancy a coffee? Drop me a line!", 1, "A quick note before you write: I'm not currently taking on any freelance work, and I'm not interested in articles, link sharing or guest posts.") }}
+
+      <div data-contact-status aria-live="polite"></div>
+
+      <form
+        class="contact__form"
+        method="post"
+        action="/api/contact"
+        novalidate
+        data-contact-form
+      >
+        {# Honeypot + time-trap: cheap spam defence, no CAPTCHA. #}
+        <div class="field--trap" aria-hidden="true">
+          <label for="c-website">Leave this field empty</label>
+          <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="_started" data-time-trap value="" />
+
+        <div class="contact__row">
+          <div class="field">
+            <label class="field__label" for="c-name">
+              Your name <span class="field__req" aria-hidden="true">*</span>
+            </label>
+            <input
+              class="input"
+              id="c-name"
+              name="name"
+              type="text"
+              required
+              aria-required="true"
+              autocomplete="name"
+              aria-describedby="c-name-error"
+            />
+            <p class="field__error" id="c-name-error" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="c-email">
+              Email address <span class="field__req" aria-hidden="true">*</span>
+            </label>
+            <input
+              class="input"
+              id="c-email"
+              name="email"
+              type="email"
+              required
+              aria-required="true"
+              autocomplete="email"
+              aria-describedby="c-email-hint c-email-error"
+            />
+            <p class="field__hint" id="c-email-hint">
+              Only used to reply to you - never stored anywhere else.
+            </p>
+            <p class="field__error" id="c-email-error" hidden></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="c-msg">
+            Your message <span class="field__req" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            class="textarea"
+            id="c-msg"
+            name="message"
+            rows="6"
+            required
+            aria-required="true"
+            aria-describedby="c-msg-error"
+          ></textarea>
+          <p class="field__error" id="c-msg-error" hidden></p>
+        </div>
+
+        <div class="stack">
+          <button class="btn btn--primary" type="submit">Send an email</button>
+          <p class="contact__note">
+            This form sends one email, to me, via a form handler running on my
+            own server. Nothing is stored in a database, nothing goes to a third
+            party, and there is no CAPTCHA watching you. Read more on the
+            <a href="/privacy/">privacy page</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <aside class="contact__aside" aria-label="Other ways to reach me">
+      <h2>Other ways to reach me</h2>
+      <div class="stack">
+        <div class="contact__channel">
+          <span class="contact__channel-label">Email</span>
+          <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+        </div>
+        <div class="contact__channel">
+          <span class="contact__channel-label">Mastodon</span>
+          <a rel="me" href="{{ site.social.mastodon.url }}">{{ site.social.mastodon.handle }}</a>
+        </div>
+        <div class="contact__channel">
+          <span class="contact__channel-label">Speaking enquiries</span>
+          <p>Event organiser? The speaker bio, rider and headshots live on the speaking page.</p>
+          <a href="{{ site.social.speaking.url }}">Speaking page</a>
+        </div>
+      </div>
+      <p class="contact__closing">
+        No phone number here any more - email is kinder to both of us.
+      </p>
+    </aside>
+  </div>
 </section>
+
+<script src="/assets/js/contact.js" defer></script>

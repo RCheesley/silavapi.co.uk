@@ -55,6 +55,7 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add('src/assets/css/fonts.css');
   eleventyConfig.ignores.add('src/assets/css/base.css');
   eleventyConfig.ignores.add('src/assets/css/components.css');
+  eleventyConfig.ignores.add('src/assets/css/pages.css');
 
   eleventyConfig.addExtension('css', {
     outputFileExtension: 'css',
@@ -92,6 +93,18 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('readableDate', readableDate);
   eleventyConfig.addFilter('isoDate', isoDate);
 
+  // Estimated reading time from rendered content (~200 wpm, min 1).
+  eleventyConfig.addFilter('readingTime', (content) => {
+    const words = (
+      String(content)
+        .replace(/<[^>]+>/g, ' ')
+        .match(/\S+/g) || []
+    ).length;
+    return `${Math.max(1, Math.round(words / 200))} min read`;
+  });
+  // Take the first n items.
+  eleventyConfig.addFilter('limit', (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : arr));
+
   // --- Shortcodes ---------------------------------------------------------
   // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
   // `name` is validated (no path traversal) and `size` coerced to a number, so
@@ -117,6 +130,14 @@ export default function (eleventyConfig) {
       ICON_CACHE.set(key, out);
     }
     return out;
+  });
+
+  // Mid-article pull quote (usable from Markdown post bodies).
+  eleventyConfig.addShortcode('pullquote', (text, attribution = '') => {
+    const attr = attribution
+      ? `<figcaption class="quote__attribution">${attribution}</figcaption>`
+      : '';
+    return `<figure class="quote quote--light quote--accent"><blockquote class="quote__text">${text}</blockquote>${attr}</figure>`;
   });
 
   // --- Collections --------------------------------------------------------

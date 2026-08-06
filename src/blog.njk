@@ -2,8 +2,62 @@
 layout: layouts/base.njk
 navActive: blog
 title: Blog
+description: Writing on open source, dharma and life - from marketing automation and digital sovereignty to Buddhist practice and running very long distances.
 ---
-<section class="container section">
-  <h1 class="page-title">Blog</h1>
-  <p class="prose">Writing on Buddhism, community, digital sovereignty, marketing, Mautic and being bendy. The full archive is being migrated.</p>
+{% from "macros/ui.njk" import sectionHeading, articleCard, alert %}
+{%- set posts = collections.posts -%}
+
+<section class="band">
+  <div class="container section-y-sm stack">
+    {{ sectionHeading("The blog", "Writing on open source, dharma and life", 1, "Everything from marketing automation and digital sovereignty to Buddhist practice and running very long distances.") }}
+    <div class="blog-controls">
+      <div class="cluster" role="group" aria-label="Filter posts by category" data-blog-chips>
+        <button class="chip" type="button" data-category="All" aria-pressed="true">All</button>
+        {% for cat in categories.order %}
+          <button class="chip" type="button" data-category="{{ cat }}" aria-pressed="false">
+            {{ cat }}
+          </button>
+        {% endfor %}
+      </div>
+      <div class="search">
+        <label class="visually-hidden" for="blog-search">Search posts</label>
+        <input
+          class="search__input"
+          id="blog-search"
+          type="search"
+          placeholder="Search posts…"
+          autocomplete="off"
+          data-blog-search
+        />
+      </div>
+    </div>
+  </div>
 </section>
+
+<section class="surface-subtle-band">
+  <div class="container section-y-sm stack">
+    <h2 class="visually-hidden">All posts</h2>
+    <p class="result-count" aria-live="polite" data-blog-count>
+      {{ posts | length }} {{ "post" if posts | length == 1 else "posts" }}
+    </p>
+    <div class="card-grid" data-blog-grid>
+      {% for post in posts %}
+        {{ articleCard({
+          title: post.data.title,
+          excerpt: post.data.excerpt,
+          image: post.data.image,
+          imageAlt: post.data.imageAlt,
+          date: post.date | readableDate,
+          category: post.data.category,
+          tone: categories.tones[post.data.category] or "neutral",
+          href: post.url
+        }) }}
+      {% endfor %}
+    </div>
+    <div data-blog-empty hidden>
+      {{ alert("info", "Nothing found", "No posts match that search - try a different word, or clear the category filter.") }}
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/blog-filter.js" defer></script>
