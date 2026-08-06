@@ -1,0 +1,139 @@
+---
+layout: layouts/base.njk
+navActive: speaking
+---
+{% from "macros/ui.njk" import badge, tag, button, sectionHeading, articleCard %}
+{%- set fmtTone = { Keynote: "brand", Workshop: "accent", Panel: "warm", Talk: "neutral" } -%}
+{%- macro placeOf(loc) -%}
+  {%- if loc -%}{{ [loc.venue, loc.city, loc.region] | reject("undefined") | join(", ") }}{%- endif -%}
+{%- endmacro -%}
+{%- set primary = events[0] if events | length else { event: event, date: date, location: location } -%}
+{%- set primaryPlace = placeOf(primary.location) | trim -%}
+{%- set relatedTalkPosts = collections.posts | byTags(tags) | limit(3) -%}
+
+<article class="talk-detail">
+  {%- set backHref = "/speaking/#podcasts" if kind == "podcast" else "/speaking/" -%}
+  {%- set backLabel = "All podcasts & interviews" if kind == "podcast" else "All talks" -%}
+  <p class="talk-detail__back"><a href="{{ backHref }}">{% icon "arrow-left", 16 %} {{ backLabel }}</a></p>
+
+  <div class="talk-detail__meta">
+    {% if format and kind != "podcast" %}{{ badge(format, fmtTone[format] or "neutral") }}{% endif %}
+    {% if kind == "podcast" %}{{ badge("Podcast / interview", "neutral") }}{% endif %}
+    <span class="talk-detail__event">
+      {{ (primary.date or date) | readableDate }}{% if primary.event %} · {{ primary.event }}{% endif %}{% if primaryPlace | length %} · {{ primaryPlace }}{% endif %}
+    </span>
+  </div>
+
+  <h1 class="article__title">{{ title }}</h1>
+  {% if abstract %}<p class="talk-detail__abstract">{{ abstract }}</p>{% endif %}
+
+  {% if events | length > 1 %}
+    <div class="stack talk-detail__block">
+      <p class="eyebrow">Presented at</p>
+      <ul class="talk-events">
+        {% for e in events %}
+          <li>
+            <span class="talk-events__date">{{ e.date | readableDate }}</span>
+            <span class="talk-events__where">{{ e.event }}{% set ep = placeOf(e.location) | trim %}{% if ep | length %} · {{ ep }}{% endif %}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if video %}
+    {% if cover %}
+      <a class="video-poster" href="{{ video }}" rel="noopener noreferrer" target="_blank"
+         aria-label="Watch the recording of “{{ title }}” (opens the video in a new tab)">
+        <img src="{{ cover }}" alt="" />
+        <span class="video-poster__play"><span>{% icon "play", 18 %} Watch the recording</span></span>
+      </a>
+    {% endif %}
+  {% endif %}
+
+  <div class="cluster talk-detail__actions">
+    {% if slides %}{{ button("Download slides (PDF)", slides, "primary") }}{% endif %}
+    {% if video and not cover %}{{ button("Watch the recording", video, "secondary") }}{% endif %}
+    {{ button("Book me for your event", "/contact/", "ghost") }}
+  </div>
+
+  {% if content and content | trim | length %}
+    <div class="talk-detail__body article__body">{{ content | safe }}</div>
+  {% endif %}
+
+  {% if resources | length %}
+    <div class="stack talk-detail__block">
+      <p class="eyebrow">Resources</p>
+      <ul class="resource-list">
+        {% for r in resources %}
+          <li><a href="{{ r.url }}" rel="noopener noreferrer" target="_blank">{{ r.label or r.url }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if tags | length %}
+    <div class="cluster talk-detail__block">
+      <span class="eyebrow">Tagged</span>
+      {% for t in tags %}{{ tag(t) }}{% endfor %}
+    </div>
+  {% endif %}
+</article>
+
+{% if buzz | length %}
+  <section class="surface-subtle-band" aria-labelledby="buzz-title">
+    <div class="talk-detail stack">
+      <div class="stack talk-detail__block">
+        <p class="eyebrow">The buzz</p>
+        <h2 id="buzz-title" class="page-title">What people said</h2>
+        <p class="talk-detail__note">
+          Posts about this talk, quoted here and linked to the original - no third-party
+          embeds, no trackers loaded on your visit.
+        </p>
+      </div>
+      <div class="mentions">
+        {% for m in buzz %}
+          {%- set platform = (m.platform or "web") | lower -%}
+          <article class="mention mention--{{ platform }}">
+            <div class="mention__head">
+              {% if m.author %}<span class="mention__author">{{ m.author }}</span>{% endif %}
+              {% if m.handle %}<span class="mention__handle">{{ m.handle }}</span>{% endif %}
+              <span class="mention__platform">{{ m.platformLabel or m.platform or "Web" }}</span>
+            </div>
+            <p class="mention__text">{{ m.text }}</p>
+            {% if m.url %}
+              <a class="mention__link" href="{{ m.url }}" rel="noopener noreferrer" target="_blank">
+                View on {{ m.platformLabel or m.platform or "the web" }} {% icon "arrow-up-right", 14 %}
+              </a>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% if relatedTalkPosts | length %}
+  <section aria-label="Related writing">
+    <div class="container section-y stack">
+      <div class="recent-head">
+        {{ sectionHeading("Go deeper", "On this topic, from the blog", 2) }}
+        {{ button("All posts", "/blog/", "ghost") }}
+      </div>
+      <div class="card-grid">
+        {% for post in relatedTalkPosts %}
+          {{ articleCard({
+            title: post.data.title,
+            excerpt: post.data.excerpt,
+            image: post.data.image,
+            imageAlt: post.data.imageAlt,
+            date: post.date | readableDate,
+            category: post.data.category,
+            tone: categories.tones[post.data.category] or "neutral",
+            href: post.url
+          }) }}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

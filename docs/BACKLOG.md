@@ -16,7 +16,8 @@ Items are checked off as they land (with the PR that did it).
 
 ## Snags
 
-- [x] **Contact form:** the "Your name" input rendered far too tall at mid-to-large widths (~820px+, before the two-column row collapses). The email column carries a helper note beneath its input, so the stretched grid pulled the name input to match. Fixed with `align-items: start` on `.contact__row`.
+- [x] **Contact form:** the "Your name" input rendered far too tall at mid-to-large widths (~820px+, before the two-column row collapses). The email column carries a helper note beneath its input, so the stretched grid pulled the name input to match. Fixed with `align-items: start` on `.contact__row` (#8).
+- [ ] **Header nav overflows on narrow screens.** At ~375px the primary nav ran off the right edge (HOME / ABOUT / DHARMA… clipped). Fixed on the responsive/theme branch (touch-friendly disclosure menu); pending its own PR.
 
 ## How to add to this list
 

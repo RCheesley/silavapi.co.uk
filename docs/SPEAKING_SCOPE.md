@@ -94,3 +94,24 @@ Effort: roughly one build phase (section + templates + SVG map + scheduled
 rebuild) + one migration pass (78 talks), comparable to Phases 2-3. Everything
 Notist Pro does here has a privacy-clean first-party equivalent **except** the
 speaker-discovery directory - that's the one thing you'd trade away.
+
+## Migration result (Phase 5, built 2026-08-06)
+
+Scraped all **78 Notist presentations** into first-party content:
+
+- **47 talks** (58 presentations) at `/speaking/<slug>/`, and **18 podcasts /
+  interviews** at `/speaking/podcasts/<slug>/`. Repeat talks are merged into one
+  page carrying an `events[]` array; the archive lists each presentation
+  separately and the map lights up all **16 countries**.
+- **Slides**: rebuilt from Notist's slide images into lean self-hosted PDFs -
+  **~1.3GB of original decks became ~62MB** (30 PDFs) plus 35 covers (~2.7MB),
+  fully owned, no Notist dependency. (Ruth chose "rebuild lean PDFs, self-host".)
+- Curated topic tags (matching the blog's), resources, and self-hosted covers
+  captured per talk. Social "buzz" is left for Ruth to add per talk.
+- Tooling: `scripts/migrate/scrape-notist.mjs` (metadata, resumable/paced) +
+  `scripts/migrate/build-slide-assets.mjs` (slide PDFs + covers, resumable, with
+  a reconcile/prune pass). Talk URLs live in gitignored `migration/talk-urls.txt`.
+
+Decisions taken with Ruth (2026-08-06): rebuild lean self-hosted PDFs; separate
+podcasts/interviews from stage talks; merge repeat talks but list every
+presentation in the archive.

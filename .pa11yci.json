@@ -19,6 +19,9 @@
     "http://localhost:8080/404.html",
     "http://localhost:8080/dev/components/",
     "http://localhost:8080/blog/a-new-name-becoming-silavapi/",
-    "http://localhost:8080/thank-you/"
+    "http://localhost:8080/thank-you/",
+    "http://localhost:8080/speaking/",
+    "http://localhost:8080/speaking/who-owns-your-data-open-source-digital-sovereignty-and-your-marketing-stack/",
+    "http://localhost:8080/speaking/podcasts/project-lead-office-hours-maintainer-month-how-mautic-is-maintained/"
   ]
 }

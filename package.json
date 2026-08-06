@@ -50,6 +50,7 @@
     "node-html-parser": "^9.0.1",
     "pa11y-ci": "^4.1.1",
     "pagefind": "^1.5.2",
+    "pdf-lib": "^1.17.1",
     "prettier": "^3.9.6",
     "start-server-and-test": "^2.0.0",
     "turndown": "^7.2.4",
@@ -59,5 +60,8 @@
     ">= 0.5%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "dependencies": {
+    "@svg-maps/world": "^2.0.0"
+  }
 }

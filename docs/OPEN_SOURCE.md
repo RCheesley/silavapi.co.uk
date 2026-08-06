@@ -18,6 +18,7 @@ search bundle and self-hosted fonts - all served from our own origin.
 | [@eslint/js](https://eslint.org)                                                            | 10.0.1  | MIT           | ESLint recommended ruleset (lint)                     |
 | [@lhci/cli](https://github.com/GoogleChrome/lighthouse-ci)                                  | 0.15.1  | Apache-2.0    | Lighthouse CI - accessibility score gate (test)       |
 | [@playwright/test](https://playwright.dev)                                                  | 1.62.1  | Apache-2.0    | Functional + accessibility e2e runner (test)          |
+| [@svg-maps/world](https://github.com/VictorCazanave/svg-maps)                               | 2.0.0   | CC-BY-4.0     | World map paths for the self-hosted talks map (build) |
 | [@vitest/coverage-v8](https://vitest.dev/guide/coverage)                                    | 4.1.10  | MIT           | Unit-test coverage (test)                             |
 | [browserslist](https://github.com/browserslist/browserslist)                                | 4.28.7  | MIT           | Target-browser resolution for CSS (build)             |
 | [eslint](https://eslint.org)                                                                | 10.8.0  | MIT           | JavaScript linter (lint)                              |
@@ -32,7 +33,9 @@ search bundle and self-hosted fonts - all served from our own origin.
 | [node-html-parser](https://github.com/taoqf/node-fast-html-parser)                          | 9.0.1   | MIT           | HTML parsing for content migration (dev)              |
 | [pa11y-ci](https://github.com/pa11y/pa11y-ci)                                               | 4.1.1   | LGPL-3.0-only | HTML CodeSniffer accessibility checks (test)          |
 | [pagefind](https://github.com/Pagefind/pagefind#readme)                                     | 1.5.2   | MIT           | Client-side site search index (build + runtime)       |
+| [pdf-lib](https://github.com/Hopding/pdf-lib)                                               | 1.17.1  | MIT           | Rebuilds lean self-hosted slide PDFs (dev migration)  |
 | [prettier](https://prettier.io)                                                             | 3.9.6   | MIT           | Code formatter (lint)                                 |
+| [sharp](https://github.com/lovell/sharp)                                                    | 0.35.3  | Apache-2.0    | Image optimisation for migrated media (dev migration) |
 | [start-server-and-test](https://github.com/bahmutov/start-server-and-test#readme)           | 2.1.5   | MIT           | Serves the build for a11y/link tests (test)           |
 | [turndown](https://github.com/mixmark-io/turndown)                                          | 7.2.4   | MIT           | HTML → Markdown for content migration (dev)           |
 | [vitest](https://vitest.dev)                                                                | 4.1.10  | MIT           | Unit-test runner (test)                               |
