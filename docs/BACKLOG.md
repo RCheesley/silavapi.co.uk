@@ -14,6 +14,22 @@ Items are checked off as they land (with the PR that did it).
 - [x] Don't underline the name in the footer (brand lockup, not a text link). _(Phase 0)_
 - [ ] **Theme toggle:** add a light / dark / **system** control (today the site only follows `prefers-color-scheme`). Persist without cookies (localStorage), apply pre-paint to avoid a flash. _(Targeting Phase 1/2 with the reader controls.)_
 
+## Snags (bugs to fix)
+
+- [ ] **Contact form: "Your name" input balloons tall at mid widths.** On the
+      two-column form row (roughly 820px and up, before the field stack
+      collapses), the "Your name" input renders far too tall and looks dropped
+      down next to "Email address". Cause: `.contact__row` is a `1fr 1fr` grid
+      with the default `align-items: stretch`; the email column is taller (it
+      carries the "Only used to reply to you" helper note), so the name column
+      stretches to match and its input fills the extra height. Fix: set
+      `align-items: start` on `.contact__row` (in `src/assets/css/pages.css`).
+      _(Reported by Ruth, 2026-08-06; verified at 900px.)_
+- [ ] **Header nav overflows on narrow screens.** At ~375px the primary nav
+      runs off the right edge (HOME / ABOUT / DHARMA… clipped). Needs a
+      small-screen nav treatment (wrap, scroll, or a menu). _(Observed while
+      checking the contact snag, 2026-08-06.)_
+
 ## How to add to this list
 
 Tell Claude the change; it gets recorded here and, if durable, in project memory.
