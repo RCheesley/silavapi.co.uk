@@ -11,6 +11,13 @@ import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
 import { renderTalksMap } from './lib/world-map.js';
+import {
+  byCategories,
+  byTags,
+  groupByYear,
+  presentationsOf,
+  presentationCountries,
+} from './lib/talks.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
 const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -110,19 +117,10 @@ export default function (eleventyConfig) {
   // Take the first n items.
   eleventyConfig.addFilter('limit', (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : arr));
   // Posts whose category is in the given list (e.g. speaking-topic categories).
-  eleventyConfig.addFilter('byCategories', (posts, cats) => {
-    const set = new Set(cats || []);
-    return (posts || []).filter((p) => set.has(p.data.category));
-  });
-  // Posts sharing at least one tag with the given list, most recent first. Used
-  // to surface writing relevant to a specific talk (matched on the talk's tags).
-  eleventyConfig.addFilter('byTags', (posts, tags) => {
-    const want = new Set((tags || []).map((t) => String(t).toLowerCase()));
-    if (!want.size) return [];
-    return (posts || []).filter((p) =>
-      (p.data.tags || []).some((t) => want.has(String(t).toLowerCase()))
-    );
-  });
+  eleventyConfig.addFilter('byCategories', byCategories);
+  // Posts sharing at least one tag with the given list. Used to surface writing
+  // relevant to a specific talk (matched on the talk's tags).
+  eleventyConfig.addFilter('byTags', byTags);
 
   // --- Shortcodes ---------------------------------------------------------
   // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
@@ -221,30 +219,7 @@ export default function (eleventyConfig) {
   );
 
   // A talk given at several events is one page; the archive and map treat each
-  // event as its own "presentation" row. Flatten talks -> presentations here.
-  const presentationsOf = (talks) => {
-    const rows = [];
-    for (const t of talks) {
-      const events =
-        t.data.events && t.data.events.length
-          ? t.data.events
-          : [{ event: t.data.event, date: t.data.date, location: t.data.location }];
-      for (const e of events) {
-        rows.push({
-          talk: t,
-          url: t.url,
-          title: t.data.title,
-          event: e.event,
-          date: e.date ? new Date(e.date) : t.date,
-          location: e.location || null,
-          cover: t.data.cover,
-          slides: t.data.slides,
-          video: t.data.video,
-        });
-      }
-    }
-    return rows;
-  };
+  // event as its own "presentation" row (presentationsOf lives in lib/talks.js).
   eleventyConfig.addCollection('talkPresentations', (api) =>
     presentationsOf(announcedTalks(api)).sort((a, b) => b.date - a.date)
   );
@@ -261,29 +236,10 @@ export default function (eleventyConfig) {
       .sort((a, b) => b.date - a.date); // most recent first
   });
 
-  // Group talks (or any dated items) by calendar year, newest year first, for
-  // a scannable archive. Returns [{ year, items }].
-  eleventyConfig.addFilter('groupByYear', (items) => {
-    const groups = new Map();
-    for (const it of items || []) {
-      const y = it.date.getFullYear();
-      if (!groups.has(y)) groups.set(y, []);
-      groups.get(y).push(it);
-    }
-    return [...groups.entries()]
-      .sort((a, b) => b[0] - a[0])
-      .map(([year, items]) => ({ year, items }));
-  });
-
+  // Group dated items by calendar year (newest first) for a scannable archive.
+  eleventyConfig.addFilter('groupByYear', groupByYear);
   // Unique ISO alpha-2 country codes across a set of presentation rows (map).
-  eleventyConfig.addFilter('presentationCountries', (presentations) => {
-    const seen = new Set();
-    for (const p of presentations || []) {
-      const iso = p.location && p.location.country;
-      if (iso) seen.add(String(iso).toLowerCase());
-    }
-    return [...seen];
-  });
+  eleventyConfig.addFilter('presentationCountries', presentationCountries);
 
   // --- Global build metadata ---------------------------------------------
   eleventyConfig.addGlobalData('buildTime', () => new Date());

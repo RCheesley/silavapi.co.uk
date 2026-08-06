@@ -12,6 +12,12 @@ events:
       country: gb
   - event: 'Online'
     date: 2025-05-21
+  - event: 'State of Open Con'
+    date: 2025-02-04
+    location:
+      city: 'London'
+      region: 'UK'
+      country: gb
 abstract: >-
   In an era where data privacy and control are becoming the buzz words among decision makers, the question ‘Who owns your data?’ becomes increasingly significant. Come and learn about digital sovereignty, digital governance and data sovereignty and why these are important when it comes to your marketing stack.
 excerpt: 'In an era where data privacy and control are becoming the buzz words among decision makers, the question ‘Who owns your data?’ becomes increasingly significant.'

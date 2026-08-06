@@ -233,7 +233,18 @@ async function scrapeOne(path) {
     ].map((m) => m[0])[0] || null;
 
   const deckId = html.match(/on\.notist\.cloud\/slides\/deck(\d+)\//)?.[1] || null;
-  const slideCount = Number(html.match(/slide-count-total[^>]*>\s*(\d+)/)?.[1]) || 0;
+  // Slide count: the header's total when present, else the highest large-N index
+  // referenced on the page (podcast/video pages often omit the count element).
+  const countEl = Number(html.match(/slide-count-total[^>]*>\s*(\d+)/)?.[1]) || 0;
+  const maxRef = deckId
+    ? Math.max(
+        0,
+        ...[...html.matchAll(new RegExp(`slides/deck${deckId}/large-(\\d+)\\.jpg`, 'g'))].map(
+          (m) => Number(m[1]) + 1
+        )
+      )
+    : 0;
+  const slideCount = Math.max(countEl, maxRef);
 
   const text = `${slug} ${title} ${abstract}`;
   const isPodcast = PODCAST_RE.test(text) || (!deckId && !header.country);
@@ -330,10 +341,11 @@ function frontMatter(t) {
   }
   if (t.abstract) L.push(`abstract: >-\n  ${t.abstract.replace(/\n/g, ' ')}`);
   if (t.excerpt) L.push(`excerpt: ${yamlStr(t.excerpt)}`);
-  if (t.deckId) {
-    L.push(`cover: /assets/img/talks/${t.slug}.jpg`);
+  // A cover comes from any deck's first slide; a slides PDF only from a real
+  // multi-slide talk deck (podcasts are audio/video - no slides).
+  if (t.deckId) L.push(`cover: /assets/img/talks/${t.slug}.jpg`);
+  if (t.deckId && t.kind === 'talk' && t.slideCount > 1)
     L.push(`slides: /assets/slides/${t.slug}.pdf`);
-  }
   if (t.video) L.push(`video: ${t.video}`);
   if (t.tags.length) {
     L.push('tags:');
