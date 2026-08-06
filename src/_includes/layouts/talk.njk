@@ -12,7 +12,9 @@ navActive: speaking
 {%- set relatedTalkPosts = collections.posts | byTags(tags) | limit(3) -%}
 
 <article class="talk-detail">
-  <p class="talk-detail__back"><a href="/speaking/">{% icon "arrow-left", 16 %} {{ "All podcasts &amp; talks" if kind == "podcast" else "All talks" | safe }}</a></p>
+  {%- set backHref = "/speaking/#podcasts" if kind == "podcast" else "/speaking/" -%}
+  {%- set backLabel = "All podcasts & interviews" if kind == "podcast" else "All talks" -%}
+  <p class="talk-detail__back"><a href="{{ backHref }}">{% icon "arrow-left", 16 %} {{ backLabel }}</a></p>
 
   <div class="talk-detail__meta">
     {% if format and kind != "podcast" %}{{ badge(format, fmtTone[format] or "neutral") }}{% endif %}

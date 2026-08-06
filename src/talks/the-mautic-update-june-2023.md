@@ -1,7 +1,8 @@
 ---
 title: 'The Mautic Update - June 2023'
 date: 2023-06-21
-kind: podcast
+kind: talk
+format: Keynote
 events:
   - event: 'Online'
     date: 2023-06-21
@@ -9,6 +10,7 @@ abstract: >-
   An update from the Project Lead on the state of Mautic, where we are now, and where we’re going in the future.
 excerpt: 'An update from the Project Lead on the state of Mautic, where we are now, and where we’re going in the future.'
 cover: /assets/img/talks/the-mautic-update-june-2023.jpg
+slides: /assets/slides/the-mautic-update-june-2023.pdf
 tags:
   - 'Mautic'
 resources:

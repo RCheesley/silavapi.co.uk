@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   byCategories,
   byTags,
+  byFormat,
   groupByYear,
   presentationsOf,
   presentationCountries,
@@ -96,6 +97,22 @@ describe('presentationsOf', () => {
   });
   it('is safe with null input', () => {
     expect(presentationsOf(null)).toEqual([]);
+  });
+});
+
+describe('byFormat', () => {
+  const rows = [
+    { talk: { data: { format: 'Keynote' } } },
+    { talk: { data: { format: 'Talk' } } },
+    { talk: { data: { format: 'Keynote' } } },
+    {},
+  ];
+  it('keeps only rows whose talk has the given format', () => {
+    expect(byFormat(rows, 'Keynote')).toHaveLength(2);
+    expect(byFormat(rows, 'Talk')).toHaveLength(1);
+  });
+  it('is safe with null input', () => {
+    expect(byFormat(null, 'Keynote')).toEqual([]);
   });
 });
 

@@ -1,7 +1,8 @@
 ---
 title: 'Mautic の最新事情'
 date: 2020-11-17
-kind: podcast
+kind: talk
+format: Talk
 events:
   - event: 'Online'
     date: 2020-11-17

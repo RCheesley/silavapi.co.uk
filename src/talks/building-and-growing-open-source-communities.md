@@ -1,7 +1,8 @@
 ---
 title: 'Building and Growing Open Source Communities'
 date: 2022-09-16
-kind: podcast
+kind: talk
+format: Talk
 events:
   - event: 'Online'
     date: 2022-09-16

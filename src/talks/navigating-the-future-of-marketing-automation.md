@@ -1,7 +1,8 @@
 ---
 title: 'Navigating the Future of Marketing Automation'
 date: 2024-02-15
-kind: podcast
+kind: talk
+format: Talk
 events:
   - event: 'Online'
     date: 2024-02-15

@@ -1,7 +1,8 @@
 ---
 title: 'The Mautic Update - February 2024'
 date: 2024-02-17
-kind: podcast
+kind: talk
+format: Keynote
 events:
   - event: 'Mautic Conference India 2024'
     date: 2024-02-17
@@ -13,6 +14,7 @@ abstract: >-
   Anticipate a dynamic, engaging keynote session as Ruth Cheesley, Mautic Project Lead takes the stage for the traditional keynote, The Mautic Update. This session aims to provide an intimate look into Mautic’s current state, the transformative changes since we branched out as an independent open source project, and the exciting plans in our future roadmap. Beyond just sharing recent milestones, it’ll be a deep dive into our new governance model, detailing how it’s enhancing project coordination, fostering community involvement, and shaping Mautic’s progressive identity. Not stopping there, attendees will also be privy to exclusive insights about the way forward - our strategic plans, imminent developments and inspiring vision for the future.
 excerpt: 'Anticipate a dynamic, engaging keynote session as Ruth Cheesley, Mautic Project Lead takes the stage for the traditional keynote, The Mautic Update.'
 cover: /assets/img/talks/the-mautic-update-february-2024.jpg
+slides: /assets/slides/the-mautic-update-february-2024.pdf
 tags:
   - 'Mautic'
   - 'Open source'

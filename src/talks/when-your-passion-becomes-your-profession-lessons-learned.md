@@ -1,7 +1,8 @@
 ---
 title: 'When your passion becomes your profession: Lessons learned'
 date: 2021-05-20
-kind: podcast
+kind: talk
+format: Talk
 events:
   - event: 'Online'
     date: 2021-05-20

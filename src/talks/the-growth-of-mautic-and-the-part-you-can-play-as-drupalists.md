@@ -2,7 +2,7 @@
 title: 'The Growth of Mautic (and the part you can play as Drupalists)'
 date: 2021-10-07
 kind: talk
-format: Keynote
+format: Talk
 events:
   - event: 'DrupalCamp Belgium'
     date: 2021-10-07

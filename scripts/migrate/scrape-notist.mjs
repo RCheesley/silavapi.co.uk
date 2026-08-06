@@ -119,10 +119,22 @@ const TAG_RULES = [
   [/\b(seo|search engine|microdata|schema|rich snippet)\b/i, 'SEO'],
 ];
 
-// A presentation is a podcast/interview/community-update rather than a stage
-// talk when its slug/title matches these. Logged so Ruth can eyeball/flip any.
+// A presentation is a podcast/interview (not a stage talk) when its slug/title
+// carries an explicit signal below. NB: no "has no slides => podcast" fallback -
+// that wrongly caught online talks. Note "... with Ruth Cheesley" / "feat." are
+// interview signals (a talk is titled by its topic, an interview names her).
 const PODCAST_RE =
-  /podcast|episode|\bep-?\d|mauticast|chaosscast|sustainoss|developers?-bakery|presents|s\d+e\d+|the-mautic-update|webinar|\binterview\b|office-hours|\bama\b|fireside|deconstructed/i;
+  /podcast|episode|\bep-?\d|mauticast|chaosscast|sustainoss|developers?-bakery|presents|s\d+e\d+|webinar|\binterview\b|office-hours|\bama\b|fireside|deconstructed|with[- ]ruth[- ]cheesley|\bfeat\b/i;
+
+// Manual classification overrides (win over the heuristic) for the handful of
+// edge cases Ruth has corrected. Keyed by slug.
+const FORCE_TALK = new Set([]);
+const FORCE_PODCAST = new Set([]);
+
+// A talk is a keynote when the title says so, or it is a "Mautic Update"
+// (Ruth's recurring project-lead keynote). Keynotes are badged in the archive.
+const isKeynoteTalk = (slug, title) =>
+  /keynote/i.test(title || '') || /the[- ]mautic[- ]update/i.test(slug);
 
 const MONTHS = {
   january: '01',
@@ -247,11 +259,15 @@ async function scrapeOne(path) {
   const slideCount = Math.max(countEl, maxRef);
 
   const text = `${slug} ${title} ${abstract}`;
-  const isPodcast = PODCAST_RE.test(text) || (!deckId && !header.country);
+  // Classify by explicit signal only; manual overrides win.
+  let isPodcast;
+  if (FORCE_TALK.has(slug)) isPodcast = false;
+  else if (FORCE_PODCAST.has(slug)) isPodcast = true;
+  else isPodcast = PODCAST_RE.test(`${slug} ${title}`);
 
   let format = 'Talk';
   if (/workshop/i.test(text)) format = 'Workshop';
-  else if (/keynote/i.test(text)) format = 'Keynote';
+  else if (isKeynoteTalk(slug, title)) format = 'Keynote';
   else if (/\bpanel\b/i.test(text)) format = 'Panel';
 
   return {

@@ -1,7 +1,8 @@
 ---
 title: 'Taking Mautic to the next level'
 date: 2020-01-16
-kind: podcast
+kind: talk
+format: Talk
 events:
   - event: 'Online'
     date: 2020-01-16

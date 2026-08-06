@@ -1,7 +1,8 @@
 ---
 title: 'Mautic Conference Global Keynote'
 date: 2021-06-17
-kind: podcast
+kind: talk
+format: Keynote
 events:
   - event: 'Online'
     date: 2021-06-17

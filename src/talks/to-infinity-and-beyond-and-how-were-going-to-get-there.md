@@ -2,7 +2,7 @@
 title: 'To infinity and beyond! (and how we’re going to get there)'
 date: 2020-11-17
 kind: talk
-format: Keynote
+format: Talk
 events:
   - event: 'Online'
     date: 2020-11-17

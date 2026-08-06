@@ -1,7 +1,8 @@
 ---
 title: 'Marketing Automation with Mautic'
 date: 2022-04-18
-kind: podcast
+kind: talk
+format: Talk
 events:
   - event: 'Online'
     date: 2022-04-18

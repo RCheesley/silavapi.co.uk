@@ -50,10 +50,13 @@ speakingReadCategories:
 </section>
 
 {% if presentations | length %}
+  {%- set keynoteCount = presentations | byFormat("Keynote") | length -%}
   <section class="band">
     <div class="container section-y-sm">
       <dl class="stat-row">
         <div><dd class="stat__num">{{ presentations | length }}</dd><dt class="stat__label">Talks given</dt></div>
+        {% if keynoteCount %}<div><dd class="stat__num">{{ keynoteCount }}</dd><dt class="stat__label">Keynotes</dt></div>{% endif %}
+        {% if podcasts | length %}<div><dd class="stat__num">{{ podcasts | length }}</dd><dt class="stat__label">Podcasts &amp; interviews</dt></div>{% endif %}
         <div><dd class="stat__num">{{ countries | length }}</dd><dt class="stat__label">Countries</dt></div>
         <div><dd class="stat__num">{{ firstYear }}</dd><dt class="stat__label">Speaking since</dt></div>
       </dl>
@@ -111,6 +114,7 @@ speakingReadCategories:
                 <span class="talk-list__date">{{ p.date | readableDate }}</span>
                 <span class="talk-list__title">
                   <a href="{{ p.url }}">{{ p.title }}</a>
+                  {% if p.talk.data.format == "Keynote" %}<span class="badge badge--brand talk-list__flag">Keynote</span>{% endif %}
                   {% if p.event %}<span class="talk-list__event">{{ p.event }}{% if p.location.city %} · {{ p.location.city }}{% endif %}</span>{% endif %}
                 </span>
                 <span class="talk-card__actions">
@@ -127,9 +131,9 @@ speakingReadCategories:
 {% endif %}
 
 {% if podcasts | length %}
-  <section>
+  <section id="podcasts">
     <div class="container section-y stack">
-      {{ sectionHeading("Off the stage", "Podcasts &amp; interviews", 2, "Conversations, community calls and interviews - the more informal side of talking about this work.") }}
+      {{ sectionHeading("Off the stage", "Podcasts & interviews", 2, "Conversations, community calls and interviews - the more informal side of talking about this work.") }}
       <ul class="talk-list">
         {% for pod in podcasts %}
           <li class="talk-list__item">

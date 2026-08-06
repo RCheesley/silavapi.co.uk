@@ -14,6 +14,7 @@ import { renderTalksMap } from './lib/world-map.js';
 import {
   byCategories,
   byTags,
+  byFormat,
   groupByYear,
   presentationsOf,
   presentationCountries,
@@ -236,6 +237,8 @@ export default function (eleventyConfig) {
       .sort((a, b) => b.date - a.date); // most recent first
   });
 
+  // Presentation rows whose talk has a given format (e.g. Keynote), for stats.
+  eleventyConfig.addFilter('byFormat', byFormat);
   // Group dated items by calendar year (newest first) for a scannable archive.
   eleventyConfig.addFilter('groupByYear', groupByYear);
   // Unique ISO alpha-2 country codes across a set of presentation rows (map).
