@@ -250,6 +250,7 @@
 .contact__row {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: start;
   gap: var(--space-6);
 }
 .contact__note {
