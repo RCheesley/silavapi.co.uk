@@ -25,10 +25,10 @@ Items are checked off as they land (with the PR that did it).
       stretches to match and its input fills the extra height. Fix: set
       `align-items: start` on `.contact__row` (in `src/assets/css/pages.css`).
       _(Reported by Ruth, 2026-08-06; verified at 900px.)_
-- [ ] **Header nav overflows on narrow screens.** At ~375px the primary nav
-      runs off the right edge (HOME / ABOUT / DHARMA… clipped). Needs a
-      small-screen nav treatment (wrap, scroll, or a menu). _(Observed while
-      checking the contact snag, 2026-08-06.)_
+- [x] **Header nav overflows on narrow screens.** At ~375px the primary nav
+      ran off the right edge (HOME / ABOUT / DHARMA… clipped). Fixed by wrapping
+      the header + nav below 820px so every item stays visible. _(Observed while
+      checking the contact snag, 2026-08-06; fixed on `responsive-mobile-pass`.)_
 
 ## How to add to this list
 
