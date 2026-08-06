@@ -32,17 +32,42 @@ Cloudflare **Web Analytics** in the zone's server-side/edge mode: no client-side
 script, no cookies, no third-party request. Aggregate only. (Configured in the
 Cloudflare dashboard; nothing is added to the pages.)
 
-## Contact form (Phase 4)
+## Contact form
 
-A Cloudflare Pages Function receives the POST, sends one email server-side, and
-303-redirects to a thank-you page. Honeypot + time-trap instead of a CAPTCHA.
-Works with JavaScript disabled. No secrets live in the repo - the mail
-credential is a Cloudflare environment variable.
+`functions/api/contact.js` (a Cloudflare Pages Function) receives the POST,
+screens it (honeypot + time-trap, no CAPTCHA - `lib/contact.js`), validates it,
+sends **one** email server-side, and 303-redirects to `/thank-you/`. With
+JavaScript the form posts via `fetch` and the result is announced inline; without
+JavaScript the native POST + redirect does the same job. Spam is silently
+accepted (redirected like a success) so bots get no signal.
+
+**Email delivery is a deployment decision - it is not wired until you set these
+Cloudflare environment variables** (the handler returns a 503 until then, and
+there is no traffic before go-live):
+
+| Variable         | Example                                             | Notes                           |
+| ---------------- | --------------------------------------------------- | ------------------------------- |
+| `CONTACT_TO`     | `hello@silavapi.co.uk`                              | where messages land             |
+| `CONTACT_FROM`   | `silavapi.co.uk contact form <form@silavapi.co.uk>` | a verified sender on the domain |
+| `RESEND_API_KEY` | _(secret)_                                          | the provider API key            |
+
+The default targets **[Resend](https://resend.com)** (simple API, EU region, DPA
+available). **Choosing the provider is Ruth's call**: whoever sends the mail
+becomes a **data processor** for contact messages, so pick one with an EU region
+and a Data Processing Agreement, and note it on the privacy page. To use a
+different provider, swap the `deliverEmail` function in
+`functions/api/contact.js` - everything else is provider-agnostic. Keep the
+credential in Cloudflare only; never in the repo.
 
 ## The old domain
 
 `ruthcheesley.co.uk` is kept serving **301 redirects indefinitely** to the new
 home of each URL, and `/feed.xml` stays stable with a redirect from the old feed.
+Set this up in Cloudflare with a **Bulk Redirect** (or a redirect rule)
+`https://ruthcheesley.co.uk/* -> https://silavapi.co.uk/$1 (301)`; the per-URL
+path map already lives in `src/_redirects` on the new zone. The Notist speaking
+subdomain (`speaking.ruthcheesley.co.uk`) should 301 to `https://silavapi.co.uk/speaking/`
+once the in-house Speaking section is live.
 
 ## CI → deploy
 

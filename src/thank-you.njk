@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+title: Thank you
+permalink: /thank-you/
+noindex: true
+description: Your message is on its way.
+---
+{% from "macros/ui.njk" import button %}
+
+<section>
+  <div class="prose-page">
+    <div class="stack">
+      <p class="eyebrow">Contact</p>
+      <h1 class="article__title">Thank you - your message is on its way.</h1>
+      <p class="lead">
+        I reply to everything, though sometimes slowly when I'm on retreat or running
+        somewhere remote. If it's urgent, an email direct to
+        <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a> reaches me too.
+      </p>
+      <div class="cluster">
+        {{ button("Back to the blog", "/blog/", "primary") }}
+        {{ button("Return home", "/", "secondary") }}
+      </div>
+    </div>
+  </div>
+</section>

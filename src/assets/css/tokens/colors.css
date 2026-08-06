@@ -66,6 +66,7 @@
 --action-accent:var(--rc-pink);
 --action-accent-hover:#CF1665;
 --action-accent-active:#B41258;
+--field-req-color:var(--action-accent-active); /* required-field marker; dark override in dark.css */
 --action-disabled-bg:var(--rc-grey-200);
 --action-disabled-fg:var(--rc-grey-400);
 

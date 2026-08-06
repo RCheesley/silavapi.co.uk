@@ -497,7 +497,9 @@ a.tag:hover {
   color: var(--text-heading);
 }
 .field__req {
-  color: var(--action-accent-active); /* deeper pink: AA for small text */
+  /* AA on both surfaces: deep pink on light, lighter pink on dark. The token
+     follows the active theme (data-theme) as well as the OS, set in dark.css. */
+  color: var(--field-req-color);
 }
 .field__hint {
   font-size: var(--text-xs);
@@ -513,7 +515,8 @@ a.tag:hover {
   display: none;
 }
 .input,
-.textarea {
+.textarea,
+.select {
   width: 100%;
   min-height: var(--control-height);
   padding: var(--space-2) var(--space-4);
@@ -525,13 +528,18 @@ a.tag:hover {
   font-size: var(--text-base);
   transition: var(--transition-colors);
 }
+.select {
+  appearance: none;
+  cursor: pointer;
+}
 .textarea {
   min-height: 140px;
   resize: vertical;
   line-height: var(--leading-relaxed);
 }
 .input:hover,
-.textarea:hover {
+.textarea:hover,
+.select:hover {
   border-color: var(--rc-purple-light);
 }
 .input[aria-invalid='true'],

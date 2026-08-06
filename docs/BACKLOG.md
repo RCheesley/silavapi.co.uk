@@ -12,12 +12,12 @@ Items are checked off as they land (with the PR that did it).
 ## UI / design
 
 - [x] Don't underline the name in the footer (brand lockup, not a text link). _(Phase 0)_
-- [ ] **Theme toggle:** add a light / dark / **system** control (today the site only follows `prefers-color-scheme`). Persist without cookies (localStorage), apply pre-paint to avoid a flash. _(Targeting Phase 1/2 with the reader controls.)_
+- [x] **Theme toggle:** a light / dark / **system** control in the header, persisted in `localStorage` (no cookies), applied pre-paint to avoid a flash; falls back to `prefers-color-scheme` without JS. _(Done on `theme-toggle`.)_
 
 ## Snags
 
 - [x] **Contact form:** the "Your name" input rendered far too tall at mid-to-large widths (~820px+, before the two-column row collapses). The email column carries a helper note beneath its input, so the stretched grid pulled the name input to match. Fixed with `align-items: start` on `.contact__row` (#8).
-- [ ] **Header nav overflows on narrow screens.** At ~375px the primary nav ran off the right edge (HOME / ABOUT / DHARMA… clipped). Fixed on the responsive/theme branch (touch-friendly disclosure menu); pending its own PR.
+- [x] **Header nav overflows on narrow screens.** At ~375px the primary nav ran off the right edge (HOME / ABOUT / DHARMA… clipped). Fixed with a touch-friendly disclosure menu (collapses below 820px, all items shown, works without JS).
 
 ## How to add to this list
 

@@ -1,9 +1,9 @@
 /**
  * contact.js - progressive enhancement for the contact form.
- * Adds warm inline validation announced via aria-live and stamps the time-trap.
- * Without JS the form still submits natively to the server handler (Phase 4),
- * which performs the same checks. NOTE: until the Phase 4 handler exists, this
- * confirms client-side so the preview doesn't 404 on submit.
+ * Adds warm inline validation (announced via aria-live), stamps the time-trap,
+ * and submits via fetch so the result is announced inline. Without JS the form
+ * submits natively to /api/contact, which performs the same checks server-side
+ * and 303-redirects to /thank-you/.
  */
 (function () {
   var form = document.querySelector('[data-contact-form]');
@@ -67,24 +67,69 @@
       return;
     }
 
-    // TODO(phase 4): let the native submit reach the server handler. For now,
-    // confirm client-side so preview submissions don't hit a missing endpoint.
+    // Enhanced submit: POST via fetch and announce the result inline, so the
+    // reader stays on the page. Without JS the form submits natively and the
+    // server 303-redirects to /thank-you/.
     e.preventDefault();
-    if (status) {
+
+    function showAlert(tone, role, titleText, bodyText) {
+      if (!status) return;
       var alert = document.createElement('div');
-      alert.className = 'alert alert--success';
-      alert.setAttribute('role', 'status');
+      alert.className = 'alert alert--' + tone;
+      alert.setAttribute('role', role);
       var title = document.createElement('p');
       title.className = 'alert__title';
-      title.textContent = 'Message sent';
+      title.textContent = titleText;
       var body = document.createElement('p');
       body.className = 'alert__body';
-      body.textContent =
-        'Thank you - your message is on its way. I reply to everything, though sometimes slowly when I’m on retreat or running somewhere remote.';
+      body.textContent = bodyText;
       alert.appendChild(title);
       alert.appendChild(body);
       status.replaceChildren(alert);
     }
-    form.reset();
+    // Derive the fallback address from the page's own mailto link (the contact
+    // aside), so it never drifts from site.author.email.
+    var mailLink = document.querySelector('a[href^="mailto:"]');
+    var email = mailLink
+      ? mailLink
+          .getAttribute('href')
+          .replace(/^mailto:/, '')
+          .split('?')[0]
+      : 'hello@silavapi.co.uk';
+    var failMsg =
+      'Something went wrong sending your message. Please email me directly at ' + email + '.';
+
+    var submitBtn = form.querySelector('[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: { accept: 'application/json' },
+      body: new FormData(form),
+    })
+      .then(function (res) {
+        return res.json().catch(function () {
+          return { ok: res.ok };
+        });
+      })
+      .then(function (data) {
+        if (data && data.ok) {
+          showAlert(
+            'success',
+            'status',
+            'Message sent',
+            'Thank you - your message is on its way. I reply to everything, though sometimes slowly when I’m on retreat or running somewhere remote.'
+          );
+          form.reset();
+        } else {
+          showAlert('info', 'alert', 'That didn’t send', failMsg);
+        }
+      })
+      .catch(function () {
+        showAlert('info', 'alert', 'That didn’t send', failMsg);
+      })
+      .finally(function () {
+        if (submitBtn) submitBtn.disabled = false;
+      });
   });
 })();
