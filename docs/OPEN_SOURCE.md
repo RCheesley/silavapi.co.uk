@@ -29,10 +29,12 @@ search bundle and self-hosted fonts - all served from our own origin.
 | [markdown-it](https://github.com/markdown-it/markdown-it)                                   | 15.0.0  | MIT           | Markdown → HTML renderer (build)                      |
 | [markdown-it-anchor](https://github.com/valeriangalliat/markdown-it-anchor)                 | 9.2.1   | Unlicense     | Heading anchors for Markdown (build)                  |
 | [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs)                             | 5.0.1   | MIT           | Attribute syntax for Markdown (build)                 |
+| [node-html-parser](https://github.com/taoqf/node-fast-html-parser)                          | 9.0.1   | MIT           | HTML parsing for content migration (dev)              |
 | [pa11y-ci](https://github.com/pa11y/pa11y-ci)                                               | 4.1.1   | LGPL-3.0-only | HTML CodeSniffer accessibility checks (test)          |
 | [pagefind](https://github.com/Pagefind/pagefind#readme)                                     | 1.5.2   | MIT           | Client-side site search index (build + runtime)       |
 | [prettier](https://prettier.io)                                                             | 3.9.6   | MIT           | Code formatter (lint)                                 |
 | [start-server-and-test](https://github.com/bahmutov/start-server-and-test#readme)           | 2.1.5   | MIT           | Serves the build for a11y/link tests (test)           |
+| [turndown](https://github.com/mixmark-io/turndown)                                          | 7.2.4   | MIT           | HTML → Markdown for content migration (dev)           |
 | [vitest](https://vitest.dev)                                                                | 4.1.10  | MIT           | Unit-test runner (test)                               |
 
 ## Fonts & assets (self-hosted)

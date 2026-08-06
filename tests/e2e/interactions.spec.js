@@ -30,7 +30,7 @@ test.describe('blog filter (progressive enhancement)', () => {
 
 test.describe('article reader text-size', () => {
   test('changing size updates aria-pressed and enlarges the body', async ({ page }) => {
-    await page.goto('/blog/a-new-name-becoming-silavapi/');
+    await page.goto('/blog/introducing-silavapi/');
     const body = page.locator('.article__body');
     const before = await body.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
 

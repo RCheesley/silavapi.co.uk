@@ -38,12 +38,16 @@ export default function (eleventyConfig) {
     .use(markdownItAnchor, {
       permalink: markdownItAnchor.permalink.headerLink({ safariReaderFix: true }),
       level: [2, 3],
-      slugify: (s) =>
-        s
+      slugify: (s) => {
+        const slug = s
           .trim()
           .toLowerCase()
           .replace(/[^\p{L}\p{N}\s-]/gu, '')
-          .replace(/\s+/g, '-'),
+          .replace(/\s+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        if (!slug) return 'section';
+        return /^[a-z]/.test(slug) ? slug : `s-${slug}`; // ids must start with a letter
+      },
     })
     .use(markdownItAttrs);
   eleventyConfig.setLibrary('md', md);
@@ -130,6 +134,31 @@ export default function (eleventyConfig) {
       ICON_CACHE.set(key, out);
     }
     return out;
+  });
+
+  // Tweetable: a shareable quote + a "Share on X" link (an outbound intent URL
+  // built at build time - no third-party script, no cookies). Migrated from the
+  // Joomla {tweetme} shortcodes.
+  eleventyConfig.addShortcode('tweetable', function (quote, hashtags = '', via = '') {
+    const esc = (s) =>
+      String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    const pageUrl = 'https://silavapi.co.uk' + (this.page && this.page.url ? this.page.url : '/');
+    const params = new URLSearchParams();
+    params.set('text', quote || '');
+    params.set('url', pageUrl);
+    if (hashtags) params.set('hashtags', hashtags);
+    if (via) params.set('via', via);
+    const intent = 'https://twitter.com/intent/tweet?' + params.toString();
+    return (
+      `<figure class="tweetable">` +
+      `<blockquote class="tweetable__quote">${esc(quote)}</blockquote>` +
+      `<a class="tweetable__share" href="${esc(intent)}" rel="noopener noreferrer" target="_blank">Share on X</a>` +
+      `</figure>`
+    );
   });
 
   // Mid-article pull quote (usable from Markdown post bodies).
