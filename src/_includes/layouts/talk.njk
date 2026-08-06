@@ -4,24 +4,40 @@ navActive: speaking
 ---
 {% from "macros/ui.njk" import badge, tag, button, sectionHeading, articleCard %}
 {%- set fmtTone = { Keynote: "brand", Workshop: "accent", Panel: "warm", Talk: "neutral" } -%}
-{%- set place = [] -%}
-{%- if location.venue %}{% set place = (place.push(location.venue), place) %}{% endif -%}
-{%- if location.city %}{% set place = (place.push(location.city), place) %}{% endif -%}
-{%- if location.region %}{% set place = (place.push(location.region), place) %}{% endif -%}
+{%- macro placeOf(loc) -%}
+  {%- if loc -%}{{ [loc.venue, loc.city, loc.region] | reject("undefined") | join(", ") }}{%- endif -%}
+{%- endmacro -%}
+{%- set primary = events[0] if events | length else { event: event, date: date, location: location } -%}
+{%- set primaryPlace = placeOf(primary.location) | trim -%}
 {%- set relatedTalkPosts = collections.posts | byTags(tags) | limit(3) -%}
 
 <article class="talk-detail">
-  <p class="talk-detail__back"><a href="/speaking/">{% icon "arrow-left", 16 %} All talks</a></p>
+  <p class="talk-detail__back"><a href="/speaking/">{% icon "arrow-left", 16 %} {{ "All podcasts &amp; talks" if kind == "podcast" else "All talks" | safe }}</a></p>
 
   <div class="talk-detail__meta">
-    {% if format %}{{ badge(format, fmtTone[format] or "neutral") }}{% endif %}
+    {% if format and kind != "podcast" %}{{ badge(format, fmtTone[format] or "neutral") }}{% endif %}
+    {% if kind == "podcast" %}{{ badge("Podcast / interview", "neutral") }}{% endif %}
     <span class="talk-detail__event">
-      {{ date | readableDate }}{% if event %} · {{ event }}{% endif %}{% if place | length %} · {{ place | join(", ") }}{% endif %}
+      {{ (primary.date or date) | readableDate }}{% if primary.event %} · {{ primary.event }}{% endif %}{% if primaryPlace %} · {{ primaryPlace }}{% endif %}
     </span>
   </div>
 
   <h1 class="article__title">{{ title }}</h1>
   {% if abstract %}<p class="talk-detail__abstract">{{ abstract }}</p>{% endif %}
+
+  {% if events | length > 1 %}
+    <div class="stack talk-detail__block">
+      <p class="eyebrow">Presented at</p>
+      <ul class="talk-events">
+        {% for e in events %}
+          <li>
+            <span class="talk-events__date">{{ e.date | readableDate }}</span>
+            <span class="talk-events__where">{{ e.event }}{% set ep = placeOf(e.location) | trim %}{% if ep %} · {{ ep }}{% endif %}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
   {% if video %}
     {% if cover %}

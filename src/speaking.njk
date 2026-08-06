@@ -23,10 +23,12 @@ speakingReadCategories:
 ---
 {% from "macros/ui.njk" import sectionHeading, button, badge, tag, articleCard %}
 {%- set talks = collections.talks -%}
-{%- set upcoming = collections.upcomingTalks -%}
-{%- set past = collections.pastTalks -%}
-{%- set countries = talks | talkCountries -%}
-{%- set firstYear = (past | last).date.getFullYear() if past | length else buildTime().getFullYear() -%}
+{%- set presentations = collections.talkPresentations -%}
+{%- set upcoming = collections.upcomingPresentations -%}
+{%- set past = collections.pastPresentations -%}
+{%- set podcasts = collections.podcasts -%}
+{%- set countries = presentations | presentationCountries -%}
+{%- set firstYear = (presentations | last).date.getFullYear() if presentations | length else buildTime().getFullYear() -%}
 {%- set speakingReads = collections.posts | byCategories(speakingReadCategories) | limit(3) -%}
 
 <section>
@@ -47,11 +49,11 @@ speakingReadCategories:
   </div>
 </section>
 
-{% if talks | length %}
+{% if presentations | length %}
   <section class="band">
     <div class="container section-y-sm">
       <dl class="stat-row">
-        <div><dd class="stat__num">{{ talks | length }}</dd><dt class="stat__label">Talks given</dt></div>
+        <div><dd class="stat__num">{{ presentations | length }}</dd><dt class="stat__label">Talks given</dt></div>
         <div><dd class="stat__num">{{ countries | length }}</dd><dt class="stat__label">Countries</dt></div>
         <div><dd class="stat__num">{{ firstYear }}</dd><dt class="stat__label">Speaking since</dt></div>
       </dl>
@@ -76,20 +78,18 @@ speakingReadCategories:
     <div class="container section-y stack">
       {{ sectionHeading("Coming up", "Upcoming talks", 2) }}
       <div class="card-grid">
-        {% for t in upcoming %}
+        {% for p in upcoming %}
           <article class="talk-card">
-            {% if t.data.cover %}
+            {% if p.cover %}
               <div class="talk-card__media">
-                <img src="{{ t.data.cover }}" alt="" loading="lazy" />
+                <img src="{{ p.cover }}" alt="" loading="lazy" />
                 <span class="talk-card__badge">{{ badge("Upcoming", "accent") }}</span>
               </div>
             {% endif %}
             <div class="talk-card__body">
-              <span class="talk-card__meta">{{ t.date | readableDate }}{% if t.data.event %} · {{ t.data.event }}{% endif %}{% if t.data.location.city %} · {{ t.data.location.city }}{% endif %}</span>
-              <h3 class="talk-card__title"><a href="{{ t.url }}">{{ t.data.title }}</a></h3>
-              {% if t.data.excerpt or t.data.abstract %}
-                <p class="article-card__excerpt">{{ t.data.excerpt or t.data.abstract }}</p>
-              {% endif %}
+              <span class="talk-card__meta">{{ p.date | readableDate }}{% if p.event %} · {{ p.event }}{% endif %}{% if p.location.city %} · {{ p.location.city }}{% endif %}</span>
+              <h3 class="talk-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
+              {% if p.talk.data.excerpt %}<p class="article-card__excerpt">{{ p.talk.data.excerpt }}</p>{% endif %}
             </div>
           </article>
         {% endfor %}
@@ -106,22 +106,44 @@ speakingReadCategories:
         <div class="talk-year">
           <h3 class="talk-year__label">{{ group.year }}</h3>
           <ul class="talk-list">
-            {% for t in group.items %}
+            {% for p in group.items %}
               <li class="talk-list__item">
-                <span class="talk-list__date">{{ t.date | readableDate }}</span>
+                <span class="talk-list__date">{{ p.date | readableDate }}</span>
                 <span class="talk-list__title">
-                  <a href="{{ t.url }}">{{ t.data.title }}</a>
-                  {% if t.data.event %}<span class="talk-list__event">{{ t.data.event }}{% if t.data.location.city %} · {{ t.data.location.city }}{% endif %}</span>{% endif %}
+                  <a href="{{ p.url }}">{{ p.title }}</a>
+                  {% if p.event %}<span class="talk-list__event">{{ p.event }}{% if p.location.city %} · {{ p.location.city }}{% endif %}</span>{% endif %}
                 </span>
                 <span class="talk-card__actions">
-                  {% if t.data.slides %}<a href="{{ t.data.slides }}">Slides (PDF)</a>{% endif %}
-                  {% if t.data.video %}<a href="{{ t.data.video }}" rel="noopener noreferrer" target="_blank">Watch</a>{% endif %}
+                  {% if p.slides %}<a href="{{ p.slides }}">Slides (PDF)</a>{% endif %}
+                  {% if p.video %}<a href="{{ p.video }}" rel="noopener noreferrer" target="_blank">Watch</a>{% endif %}
                 </span>
               </li>
             {% endfor %}
           </ul>
         </div>
       {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% if podcasts | length %}
+  <section>
+    <div class="container section-y stack">
+      {{ sectionHeading("Off the stage", "Podcasts &amp; interviews", 2, "Conversations, community calls and interviews - the more informal side of talking about this work.") }}
+      <ul class="talk-list">
+        {% for pod in podcasts %}
+          <li class="talk-list__item">
+            <span class="talk-list__date">{{ pod.date | readableDate }}</span>
+            <span class="talk-list__title">
+              <a href="{{ pod.url }}">{{ pod.data.title }}</a>
+              {% if pod.data.events[0].event and pod.data.events[0].event != "Online" %}<span class="talk-list__event">{{ pod.data.events[0].event }}</span>{% endif %}
+            </span>
+            <span class="talk-card__actions">
+              {% if pod.data.video %}<a href="{{ pod.data.video }}" rel="noopener noreferrer" target="_blank">Watch</a>{% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   </section>
 {% endif %}

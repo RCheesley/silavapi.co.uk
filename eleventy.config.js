@@ -205,7 +205,7 @@ export default function (eleventyConfig) {
   // Talks. A talk may carry an `announce` date: until that date passes it is
   // withheld from every listing (the "publish on a date" feature - a daily
   // scheduled rebuild re-runs this so an announced talk appears on its date
-  // without a manual deploy). `date` is when the talk happens.
+  // without a manual deploy). `date` is the primary (most recent) presentation.
   const announcedTalks = (api) => {
     const now = new Date();
     return api.getFilteredByGlob('src/talks/*.md').filter((t) => {
@@ -216,16 +216,48 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('talks', (api) =>
     announcedTalks(api).sort((a, b) => b.date - a.date)
   );
-  eleventyConfig.addCollection('upcomingTalks', (api) => {
+  eleventyConfig.addCollection('podcasts', (api) =>
+    api.getFilteredByGlob('src/podcasts/*.md').sort((a, b) => b.date - a.date)
+  );
+
+  // A talk given at several events is one page; the archive and map treat each
+  // event as its own "presentation" row. Flatten talks -> presentations here.
+  const presentationsOf = (talks) => {
+    const rows = [];
+    for (const t of talks) {
+      const events =
+        t.data.events && t.data.events.length
+          ? t.data.events
+          : [{ event: t.data.event, date: t.data.date, location: t.data.location }];
+      for (const e of events) {
+        rows.push({
+          talk: t,
+          url: t.url,
+          title: t.data.title,
+          event: e.event,
+          date: e.date ? new Date(e.date) : t.date,
+          location: e.location || null,
+          cover: t.data.cover,
+          slides: t.data.slides,
+          video: t.data.video,
+        });
+      }
+    }
+    return rows;
+  };
+  eleventyConfig.addCollection('talkPresentations', (api) =>
+    presentationsOf(announcedTalks(api)).sort((a, b) => b.date - a.date)
+  );
+  eleventyConfig.addCollection('upcomingPresentations', (api) => {
     const now = new Date();
-    return announcedTalks(api)
-      .filter((t) => t.date >= now)
+    return presentationsOf(announcedTalks(api))
+      .filter((p) => p.date >= now)
       .sort((a, b) => a.date - b.date); // soonest first
   });
-  eleventyConfig.addCollection('pastTalks', (api) => {
+  eleventyConfig.addCollection('pastPresentations', (api) => {
     const now = new Date();
-    return announcedTalks(api)
-      .filter((t) => t.date < now)
+    return presentationsOf(announcedTalks(api))
+      .filter((p) => p.date < now)
       .sort((a, b) => b.date - a.date); // most recent first
   });
 
@@ -243,11 +275,11 @@ export default function (eleventyConfig) {
       .map(([year, items]) => ({ year, items }));
   });
 
-  // Unique ISO alpha-2 country codes across a set of talks (for the map).
-  eleventyConfig.addFilter('talkCountries', (talks) => {
+  // Unique ISO alpha-2 country codes across a set of presentation rows (map).
+  eleventyConfig.addFilter('presentationCountries', (presentations) => {
     const seen = new Set();
-    for (const t of talks || []) {
-      const iso = t.data && t.data.location && t.data.location.country;
+    for (const p of presentations || []) {
+      const iso = p.location && p.location.country;
       if (iso) seen.add(String(iso).toLowerCase());
     }
     return [...seen];
