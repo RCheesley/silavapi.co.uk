@@ -14,6 +14,10 @@ Items are checked off as they land (with the PR that did it).
 - [x] Don't underline the name in the footer (brand lockup, not a text link). _(Phase 0)_
 - [ ] **Theme toggle:** add a light / dark / **system** control (today the site only follows `prefers-color-scheme`). Persist without cookies (localStorage), apply pre-paint to avoid a flash. _(Targeting Phase 1/2 with the reader controls.)_
 
+## Snags
+
+- [x] **Contact form:** the "Your name" input rendered far too tall at mid-to-large widths (~820px+, before the two-column row collapses). The email column carries a helper note beneath its input, so the stretched grid pulled the name input to match. Fixed with `align-items: start` on `.contact__row`.
+
 ## How to add to this list
 
 Tell Claude the change; it gets recorded here and, if durable, in project memory.
