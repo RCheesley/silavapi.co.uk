@@ -18,6 +18,7 @@
     "http://localhost:8080/accessibility/",
     "http://localhost:8080/404.html",
     "http://localhost:8080/dev/components/",
-    "http://localhost:8080/blog/a-new-name-becoming-silavapi/"
+    "http://localhost:8080/blog/a-new-name-becoming-silavapi/",
+    "http://localhost:8080/thank-you/"
   ]
 }
