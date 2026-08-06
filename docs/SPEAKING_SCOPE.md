@@ -9,9 +9,15 @@ scopes replacing it with a first-party `/speaking/` section on silavapi.co.uk.
 - **78 talks**, each a page with: title, event, date, abstract, **slides**
   (slide images hosted on `on.notist.cloud`), **resources** (links), and
   sometimes a **video** link.
+- An **interactive map** of where Ruth has spoken.
+- **Scheduled talk announcements** (Pro): announce an upcoming talk with a cover
+  image + title, set to publish automatically on a chosen date.
 - Nice-to-haves: automatic per-talk share images, a private CFP/submission
   tracker, frictionless slide upload, and a **speaker-discovery directory**
   (event organisers browse Notist to find speakers).
+
+_(Ruth has a Notist **Pro** account; docs: https://docs.noti.st/guide/)_
+
 - Downsides today: the pages load **Google Tag Manager** and third-party assets
   from `on.notist.cloud` - i.e. trackers + third-party requests, the exact
   things this new site is built to avoid.
@@ -27,6 +33,16 @@ scopes replacing it with a first-party `/speaking/` section on silavapi.co.uk.
 - Privacy-respecting media (per the site's rules):
   - **Video** → a click-to-load poster or a plain outbound link (no embeds).
   - **Slides** → see the decision below.
+- **Map of talks** → a **self-hosted inline SVG world map** with a plotted point
+  per talk location (from each talk's `location`/coords in front matter), hover/
+  focus tooltips. This is the privacy-clean equivalent of Notist's map: most map
+  widgets (Google Maps, Mapbox, Leaflet + OSM tiles) make third-party requests
+  and often set cookies - a static SVG makes none. Fully on-brand.
+- **Upcoming talks + scheduled announcements** → talks carry a `date` (and
+  optional `cover` image); a template lists **Upcoming** vs **Past**. "Publish on
+  a date" is handled by a **daily scheduled rebuild** (a GitHub Actions cron, or
+  Cloudflare Pages scheduled deploy) plus Eleventy date-filtering, so an
+  announced talk appears on its date without a manual deploy.
 
 ## The one real decision: slides
 
@@ -64,11 +80,17 @@ high-maintenance. Three options:
 **Yes, it's a viable and very on-brand option** - best done as its own phase
 **after go-live** (call it Phase 5). Suggested shape:
 
-1. Build the `/speaking/` profile + talks section (talk content type + templates).
-2. Migrate the 78 Notist talks (title/event/date/abstract/resources/video link).
+1. Build the `/speaking/` profile + talks section (talk content type + templates),
+   incl. the **self-hosted SVG talks map** and the **Upcoming/Past** split.
+2. Migrate the 78 Notist talks (title/event/date/location/abstract/resources/
+   video link + cover images).
 3. Slides via **option B** (per-talk PDF) to stay lean and fully owned.
-4. Keep a lightweight profile on Notist purely as a discovery pointer if the
+4. Add a **daily scheduled rebuild** (GitHub Actions cron / Cloudflare scheduled
+   deploy) so date-scheduled talk announcements publish themselves.
+5. Keep a lightweight profile on Notist purely as a discovery pointer if the
    directory reach still matters - or drop it entirely for full sovereignty.
 
-Effort: roughly one build phase (section + templates) + one migration pass
-(78 talks), comparable to Phases 2-3.
+Effort: roughly one build phase (section + templates + SVG map + scheduled
+rebuild) + one migration pass (78 talks), comparable to Phases 2-3. Everything
+Notist Pro does here has a privacy-clean first-party equivalent **except** the
+speaker-discovery directory - that's the one thing you'd trade away.
