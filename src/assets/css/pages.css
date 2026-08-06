@@ -351,6 +351,17 @@
   gap: var(--space-3);
 }
 
+/* Content images (article bodies + prose pages). */
+.article__body img,
+.prose-page img {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.article__body :where(h2, h3),
+.prose-page :where(h2, h3) {
+  text-wrap: pretty;
+}
+
 /* Responsive collapses for the two-column page layouts. */
 @media (max-width: 820px) {
   .about,

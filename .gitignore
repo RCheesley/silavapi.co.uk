@@ -21,6 +21,11 @@ npm-debug.log*
 .dev.vars
 .wrangler/
 
+# Migration scratch dir — SQL dumps contain unpublished/personal data; the whole
+# folder is working-only. The reconciliation report is copied to docs/MIGRATION.md
+# and redirects into src/_redirects. Never commit any of it (repo is public).
+migration/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

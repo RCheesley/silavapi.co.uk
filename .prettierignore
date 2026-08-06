@@ -10,6 +10,13 @@ pagefind/
 # Design handoff — reference material, kept verbatim
 design-handoff/
 
+# Migrated content — prose, not code; don't reformat
+src/blog/*.md
+src/about/*.md
+
+# Migration scratch dir (gitignored anyway)
+migration/
+
 # Generated / binary
 src/assets/fonts/
 src/assets/css/fonts.css

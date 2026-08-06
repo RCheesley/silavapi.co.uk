@@ -37,6 +37,8 @@ const PURPOSE = {
   pagefind: 'Client-side site search index (build + runtime)',
   prettier: 'Code formatter (lint)',
   'start-server-and-test': 'Serves the build for a11y/link tests (test)',
+  turndown: 'HTML → Markdown for content migration (dev)',
+  'node-html-parser': 'HTML parsing for content migration (dev)',
   vitest: 'Unit-test runner (test)',
 };
 
