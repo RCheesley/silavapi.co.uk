@@ -168,7 +168,14 @@ function markerToShortcode(md) {
 }
 
 function prepHtml(rawHtml) {
-  const root = parseHtml(convertTweetme(rawHtml || ''), { comment: true });
+  // Move a trailing <br> that sits INSIDE an emphasis tag to after it, so
+  // Turndown doesn't strand the closing ** on its own line (which Markdown then
+  // renders literally). e.g. <strong><a>x</a><br></strong> → <strong><a>x</a></strong><br>
+  const cleaned = convertTweetme(rawHtml || '').replace(
+    /((?:<br\s*\/?>\s*)+)(<\/(?:strong|b|em|i)>)/gi,
+    '$2$1'
+  );
+  const root = parseHtml(cleaned, { comment: true });
   // Rewrite links.
   for (const a of root.querySelectorAll('a[href]')) {
     a.setAttribute('href', rewriteInternalHref(a.getAttribute('href')));

@@ -146,17 +146,27 @@ export default function (eleventyConfig) {
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
-    const pageUrl = 'https://silavapi.co.uk' + (this.page && this.page.url ? this.page.url : '/');
-    const params = new URLSearchParams();
-    params.set('text', quote || '');
-    params.set('url', pageUrl);
-    if (hashtags) params.set('hashtags', hashtags);
-    if (via) params.set('via', via);
-    const intent = 'https://twitter.com/intent/tweet?' + params.toString();
+    const url = 'https://silavapi.co.uk' + (this.page && this.page.url ? this.page.url : '/');
+    // Each share target is a plain outbound link (no scripts, no cookies).
+    const x = new URLSearchParams({ text: quote || '', url });
+    if (hashtags) x.set('hashtags', hashtags);
+    if (via) x.set('via', via);
+    const bsky = new URLSearchParams({ text: `${quote || ''} ${url}`.trim() });
+    const li = new URLSearchParams({ url });
+    const link = (href, label) =>
+      `<a class="tweetable__btn" href="${esc(href)}" aria-label="Share on ${label}" rel="noopener noreferrer" target="_blank">${label}</a>`;
     return (
       `<figure class="tweetable">` +
       `<blockquote class="tweetable__quote">${esc(quote)}</blockquote>` +
-      `<a class="tweetable__share" href="${esc(intent)}" rel="noopener noreferrer" target="_blank">Share on X</a>` +
+      `<div class="tweetable__share">` +
+      `<span class="tweetable__label">Share this</span>` +
+      link('https://twitter.com/intent/tweet?' + x.toString(), 'X') +
+      link('https://bsky.app/intent/compose?' + bsky.toString(), 'Bluesky') +
+      link('https://www.linkedin.com/sharing/share-offsite/?' + li.toString(), 'LinkedIn') +
+      // Mastodon has no universal share URL; a small script (share.js) reveals
+      // this and asks for the reader's instance. Hidden without JavaScript.
+      `<a class="tweetable__btn" href="https://joinmastodon.org/" data-mastodon-share data-text="${esc((quote || '') + ' ' + url)}" aria-label="Share on Mastodon" rel="noopener noreferrer" target="_blank" hidden>Mastodon</a>` +
+      `</div>` +
       `</figure>`
     );
   });

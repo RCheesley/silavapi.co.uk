@@ -117,8 +117,8 @@ If you haven't yet, consider what you can give. Not out of obligation, but becau
 
 Give what you can. Take what you need. Together we go further, faster.
 
-Support Mautic's fundraiser at: **[mautic.org/2026-fundraiser](https://mautic.org/2026-fundraiser)  
-**  
-Explore membership at: **[mautic.org/membership](https://mau.tc/membership)  
-**  
+Support Mautic's fundraiser at: **[mautic.org/2026-fundraiser](https://mautic.org/2026-fundraiser)**  
+  
+Explore membership at: **[mautic.org/membership](https://mau.tc/membership)**  
+  
 Questions or want to discuss larger organisational support? Email me at: [**ruth.cheesley@mautic.org**](mailto:ruth.cheesley@mautic.org)
