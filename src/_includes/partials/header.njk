@@ -1,5 +1,6 @@
-{#- Site header - flat nav, no dropdowns. Skip link lives in base.njk.
-    Phase 1 refines the visual treatment; the semantics here are final. -#}
+{#- Site header. On wide screens the nav is a flat inline row; on narrow screens
+    it collapses into a touch-friendly disclosure menu (native <details>, so it
+    works without JavaScript and stays keyboard/AT accessible). -#}
 <header class="site-header">
   <div class="site-header__inner container">
     <a class="site-header__brand" href="/">
@@ -7,20 +8,27 @@
       <span class="site-header__name">Sīlavāpi</span>
     </a>
     <div class="site-header__end">
-      <nav aria-label="Main" class="site-nav">
-        <ul class="site-nav__list">
-          {%- for item in nav.primary %}
-            <li>
-              <a
-                class="site-nav__link{{ ' is-active' if item.key == navActive }}"
-                href="{{ item.href }}"
-                {%- if item.key == navActive %} aria-current="page"{% endif %}
-                >{{ item.label }}</a
-              >
-            </li>
-          {%- endfor %}
-        </ul>
-      </nav>
+      <details class="site-nav">
+        <summary class="site-nav__toggle">
+          <span class="site-nav__toggle-icon site-nav__toggle-icon--open">{% icon "menu", 22 %}</span>
+          <span class="site-nav__toggle-icon site-nav__toggle-icon--close">{% icon "x", 22 %}</span>
+          <span class="site-nav__toggle-text">Menu</span>
+        </summary>
+        <nav aria-label="Main" class="site-nav__panel">
+          <ul class="site-nav__list">
+            {%- for item in nav.primary %}
+              <li>
+                <a
+                  class="site-nav__link{{ ' is-active' if item.key == navActive }}"
+                  href="{{ item.href }}"
+                  {%- if item.key == navActive %} aria-current="page"{% endif %}
+                  >{{ item.label }}</a
+                >
+              </li>
+            {%- endfor %}
+          </ul>
+        </nav>
+      </details>
       {#- Colour-theme control. Hidden until theme.js reveals it (it does nothing
           without JS; the site still follows the OS scheme via CSS). -#}
       <div class="theme-toggle" role="group" aria-label="Colour theme" hidden>

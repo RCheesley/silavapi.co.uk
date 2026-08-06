@@ -33,6 +33,8 @@ const NEEDED = [
   'sun',
   'moon',
   'monitor',
+  'menu',
+  'x',
 ];
 
 await mkdir(OUT, { recursive: true });
