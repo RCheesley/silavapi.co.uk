@@ -1,0 +1,42 @@
+name: Scheduled rebuild
+
+# A talk can carry an `announce` date: it stays hidden until that date passes
+# (see the talks collection in eleventy.config.js). Because the gate is evaluated
+# at build time, an announced talk only appears once the site is rebuilt. This
+# daily job triggers a fresh Cloudflare Pages deploy so date-scheduled talk
+# announcements publish themselves - no manual deploy needed.
+#
+# Setup (once, at go-live): add a repository secret CLOUDFLARE_DEPLOY_HOOK
+# containing the Pages project's Deploy Hook URL. Until it is set, this job is a
+# harmless no-op that logs a reminder.
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # 06:00 UTC daily
+  workflow_dispatch: # allow a manual "publish now"
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild:
+    name: Trigger Cloudflare Pages deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping the Cloudflare Pages deploy hook
+        env:
+          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "CLOUDFLARE_DEPLOY_HOOK is not set - skipping."
+            echo "Add it as a repository secret to enable scheduled announcements."
+            exit 0
+          fi
+          echo "Triggering a Cloudflare Pages rebuild..."
+          status=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$DEPLOY_HOOK")
+          echo "Deploy hook responded with HTTP $status"
+          case "$status" in
+            2*) echo "Rebuild triggered." ;;
+            *) echo "::error::Deploy hook failed (HTTP $status)"; exit 1 ;;
+          esac

@@ -8,6 +8,17 @@ export const PAGES = [
     name: 'Article',
     h1: /Introducing Sīlavāpi/,
   },
+  { path: '/speaking/', name: 'Speaking', h1: /Invite me to speak/ },
+  {
+    path: '/speaking/who-owns-your-data-open-source-digital-sovereignty-and-your-marketing-stack/',
+    name: 'Talk',
+    h1: /Who owns your data/,
+  },
+  {
+    path: '/speaking/podcasts/project-lead-office-hours-maintainer-month-how-mautic-is-maintained/',
+    name: 'Podcast',
+    h1: /Project Lead Office Hours/,
+  },
   { path: '/contact/', name: 'Contact', h1: /Fancy a coffee\? Drop me a line!/ },
   { path: '/privacy/', name: 'Privacy', h1: /How privacy works here/ },
   { path: '/accessibility/', name: 'Accessibility', h1: /Accessibility statement/ },

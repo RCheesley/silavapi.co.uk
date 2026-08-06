@@ -36,8 +36,15 @@ describe('primary navigation', () => {
     }
   });
 
-  it('exposes the expected flat structure: Home, About, Dharma, Blog, Contact', () => {
-    expect(nav.primary.map((i) => i.key)).toEqual(['home', 'about', 'dharma', 'blog', 'contact']);
+  it('exposes the expected flat structure: Home, About, Dharma, Speaking, Blog, Contact', () => {
+    expect(nav.primary.map((i) => i.key)).toEqual([
+      'home',
+      'about',
+      'dharma',
+      'speaking',
+      'blog',
+      'contact',
+    ]);
   });
 
   it('has unique keys', () => {

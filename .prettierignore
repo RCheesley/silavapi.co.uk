@@ -1,6 +1,7 @@
 # Build + tooling output
 _site/
 node_modules/
+.claude/
 coverage/
 .lighthouseci/
 playwright-report/

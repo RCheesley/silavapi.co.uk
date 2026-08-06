@@ -10,6 +10,15 @@ import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
+import { renderTalksMap } from './lib/world-map.js';
+import {
+  byCategories,
+  byTags,
+  byFormat,
+  groupByYear,
+  presentationsOf,
+  presentationCountries,
+} from './lib/talks.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
 const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -108,6 +117,11 @@ export default function (eleventyConfig) {
   });
   // Take the first n items.
   eleventyConfig.addFilter('limit', (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : arr));
+  // Posts whose category is in the given list (e.g. speaking-topic categories).
+  eleventyConfig.addFilter('byCategories', byCategories);
+  // Posts sharing at least one tag with the given list. Used to surface writing
+  // relevant to a specific talk (matched on the talk's tags).
+  eleventyConfig.addFilter('byTags', byTags);
 
   // --- Shortcodes ---------------------------------------------------------
   // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
@@ -171,6 +185,9 @@ export default function (eleventyConfig) {
     );
   });
 
+  // Self-hosted SVG world map highlighting the countries a set of talks were in.
+  eleventyConfig.addShortcode('talksMap', (countries) => renderTalksMap(countries || []));
+
   // Mid-article pull quote (usable from Markdown post bodies).
   eleventyConfig.addShortcode('pullquote', (text, attribution = '') => {
     const attr = attribution
@@ -183,6 +200,49 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('posts', (collectionApi) =>
     collectionApi.getFilteredByGlob('src/blog/**/*.md').sort((a, b) => b.date - a.date)
   );
+
+  // Talks. A talk may carry an `announce` date: until that date passes it is
+  // withheld from every listing (the "publish on a date" feature - a daily
+  // scheduled rebuild re-runs this so an announced talk appears on its date
+  // without a manual deploy). `date` is the primary (most recent) presentation.
+  const announcedTalks = (api) => {
+    const now = new Date();
+    return api.getFilteredByGlob('src/talks/*.md').filter((t) => {
+      const a = t.data.announce;
+      return !a || new Date(a) <= now;
+    });
+  };
+  eleventyConfig.addCollection('talks', (api) =>
+    announcedTalks(api).sort((a, b) => b.date - a.date)
+  );
+  eleventyConfig.addCollection('podcasts', (api) =>
+    api.getFilteredByGlob('src/podcasts/*.md').sort((a, b) => b.date - a.date)
+  );
+
+  // A talk given at several events is one page; the archive and map treat each
+  // event as its own "presentation" row (presentationsOf lives in lib/talks.js).
+  eleventyConfig.addCollection('talkPresentations', (api) =>
+    presentationsOf(announcedTalks(api)).sort((a, b) => b.date - a.date)
+  );
+  eleventyConfig.addCollection('upcomingPresentations', (api) => {
+    const now = new Date();
+    return presentationsOf(announcedTalks(api))
+      .filter((p) => p.date >= now)
+      .sort((a, b) => a.date - b.date); // soonest first
+  });
+  eleventyConfig.addCollection('pastPresentations', (api) => {
+    const now = new Date();
+    return presentationsOf(announcedTalks(api))
+      .filter((p) => p.date < now)
+      .sort((a, b) => b.date - a.date); // most recent first
+  });
+
+  // Presentation rows whose talk has a given format (e.g. Keynote), for stats.
+  eleventyConfig.addFilter('byFormat', byFormat);
+  // Group dated items by calendar year (newest first) for a scannable archive.
+  eleventyConfig.addFilter('groupByYear', groupByYear);
+  // Unique ISO alpha-2 country codes across a set of presentation rows (map).
+  eleventyConfig.addFilter('presentationCountries', presentationCountries);
 
   // --- Global build metadata ---------------------------------------------
   eleventyConfig.addGlobalData('buildTime', () => new Date());

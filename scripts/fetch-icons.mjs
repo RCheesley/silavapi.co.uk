@@ -18,7 +18,19 @@ const SRC = resolve(ROOT, 'node_modules/lucide-static/icons');
 const OUT = resolve(ROOT, 'src/assets/icons');
 
 // Icons the site uses. Keep this list tight; add as components need them.
-const NEEDED = ['users', 'accessibility', 'flower', 'activity', 'search', 'arrow-right'];
+const NEEDED = [
+  'users',
+  'accessibility',
+  'flower',
+  'activity',
+  'search',
+  'arrow-right',
+  'arrow-left',
+  'arrow-up-right',
+  'play',
+  'map-pin',
+  'calendar',
+];
 
 await mkdir(OUT, { recursive: true });
 for (const name of NEEDED) {

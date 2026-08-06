@@ -20,9 +20,8 @@ export default {
   social: {
     mastodon: { handle: '@rcheesley', url: 'https://mastodon.online/@rcheesley' },
     linkedin: { url: 'https://www.linkedin.com/in/ruthcheesley/' },
-    // Speaking currently lives on noti.st (speaking.ruthcheesley.co.uk). Ruth is
-    // considering bringing it in-house (see docs/SPEAKING_SCOPE.md); external for now.
-    speaking: { url: 'https://speaking.ruthcheesley.co.uk/', external: true },
+    // Speaking is now a first-party section (Phase 5), replacing the Notist site.
+    speaking: { url: '/speaking/', external: false },
     rss: { url: '/feed.xml' },
   },
   // The privacy pledge shown in the footer + used on the privacy page.
