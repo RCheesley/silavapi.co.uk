@@ -1,0 +1,74 @@
+# Scope: bringing "Speaking" in-house (replacing Notist)
+
+Ruth's speaking site (`speaking.ruthcheesley.co.uk`) runs on **Notist**. This
+scopes replacing it with a first-party `/speaking/` section on silavapi.co.uk.
+
+## What Notist gives today
+
+- Speaker profile (bio, photo, topics) + a **presentations** list.
+- **78 talks**, each a page with: title, event, date, abstract, **slides**
+  (slide images hosted on `on.notist.cloud`), **resources** (links), and
+  sometimes a **video** link.
+- Nice-to-haves: automatic per-talk share images, a private CFP/submission
+  tracker, frictionless slide upload, and a **speaker-discovery directory**
+  (event organisers browse Notist to find speakers).
+- Downsides today: the pages load **Google Tag Manager** and third-party assets
+  from `on.notist.cloud` - i.e. trackers + third-party requests, the exact
+  things this new site is built to avoid.
+
+## What we'd build (a new content type, mirroring the blog)
+
+- **`/speaking/`** - a speaker profile: bio, the rider, headshots, topics and
+  formats (talk / workshop / keynote / panel), and a contact CTA.
+- A **talks collection**: each talk a Markdown file with front matter
+  (`title, event, date, location, abstract, video, slides, resources[], tags`),
+  rendered with a talk template + an upcoming/past index. This is the same
+  pattern as the blog, so it's well-trodden here.
+- Privacy-respecting media (per the site's rules):
+  - **Video** → a click-to-load poster or a plain outbound link (no embeds).
+  - **Slides** → see the decision below.
+
+## The one real decision: slides
+
+Notist hosts each deck as ~20-40 slide images. Replicating that first-party for
+78 talks means **thousands of images / hundreds of MB** in the repo - heavy and
+high-maintenance. Three options:
+
+| Option                       | What it is                                      | Weight                                         | Recommendation                         |
+| ---------------------------- | ----------------------------------------------- | ---------------------------------------------- | -------------------------------------- |
+| A. Self-host slide images    | Download every slide image, show a viewer       | Heavy (100s MB, every new talk = many uploads) | Only if slide-level browsing matters   |
+| B. **Per-talk PDF download** | One self-hosted PDF per talk, "Download slides" | Lean, fully owned, privacy-clean               | **Recommended**                        |
+| C. Link out to slides        | Link to wherever the deck lives                 | Leanest                                        | If you don't want to host decks at all |
+
+## Trade-offs
+
+**For bringing it in-house**
+
+- **Digital sovereignty** - this is literally Ruth's topic; owning the talks and
+  dropping Google Tag Manager / third-party assets is walking the talk.
+- One site, one design, full control; no dependence on a third-party service.
+
+**Against / costs**
+
+- Loss of Notist's **speaker-discovery directory** (a genuine reach/marketing
+  channel for inbound speaking invites).
+- Loss of Notist conveniences (CFP tracker, one-click slide upload, auto share
+  images).
+- **Migration**: ~78 talks to pull across (scrape Notist → Markdown), plus
+  whichever slide approach.
+- Ongoing: adding a talk becomes "write Markdown + attach a PDF" rather than
+  Notist's polished flow.
+
+## Recommendation
+
+**Yes, it's a viable and very on-brand option** - best done as its own phase
+**after go-live** (call it Phase 5). Suggested shape:
+
+1. Build the `/speaking/` profile + talks section (talk content type + templates).
+2. Migrate the 78 Notist talks (title/event/date/abstract/resources/video link).
+3. Slides via **option B** (per-talk PDF) to stay lean and fully owned.
+4. Keep a lightweight profile on Notist purely as a discovery pointer if the
+   directory reach still matters - or drop it entirely for full sovereignty.
+
+Effort: roughly one build phase (section + templates) + one migration pass
+(78 talks), comparable to Phases 2-3.

@@ -15,14 +15,13 @@ export default {
   tagline: 'Open source is where I found a home for that drive to connect.',
   author: {
     name: 'Sīlavāpi (Ruth Cheesley)',
-    // TODO(ruth): confirm the real address before go-live.
     email: 'hello@silavapi.co.uk',
   },
   social: {
-    // TODO(ruth): confirm the real Mastodon handle before go-live.
-    mastodon: { handle: '@silavapi', url: 'https://mastodon.social/@silavapi' },
+    mastodon: { handle: '@rcheesley', url: 'https://mastodon.online/@rcheesley' },
     linkedin: { url: 'https://www.linkedin.com/in/ruthcheesley/' },
-    // TODO(ruth): confirm whether speaking.ruthcheesley.co.uk also migrates.
+    // Speaking currently lives on noti.st (speaking.ruthcheesley.co.uk). Ruth is
+    // considering bringing it in-house (see docs/SPEAKING_SCOPE.md); external for now.
     speaking: { url: 'https://speaking.ruthcheesley.co.uk/', external: true },
     rss: { url: '/feed.xml' },
   },
