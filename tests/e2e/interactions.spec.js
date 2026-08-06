@@ -9,9 +9,13 @@ test.describe('blog filter (progressive enhancement)', () => {
 
     await page.locator('.chip[data-category="Buddhism"]').click();
     await expect(page.locator('.chip[aria-pressed="true"]')).toHaveText('Buddhism');
-    // Only Buddhism-category cards remain visible.
+    // At least one card remains, and every visible card is in the category.
     const visible = page.locator('.article-card:visible');
-    await expect(visible).toHaveCount(1);
+    expect(await visible.count()).toBeGreaterThan(0);
+    const cats = await visible.evaluateAll((els) =>
+      els.map((el) => el.getAttribute('data-category'))
+    );
+    expect(cats.every((c) => c === 'Buddhism')).toBe(true);
     await expect(page.locator('[data-blog-count]')).toContainText('in Buddhism');
   });
 

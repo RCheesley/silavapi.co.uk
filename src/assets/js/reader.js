@@ -15,8 +15,18 @@
     );
   }
 
+  // localStorage access can throw when storage is blocked (some privacy modes).
+  // This runs pre-paint in <head>, so failures must be swallowed.
+  function readSaved() {
+    try {
+      return parseFloat(localStorage.getItem(KEY));
+    } catch (e) {
+      return NaN;
+    }
+  }
+
   // Pre-paint: apply any saved, valid size immediately.
-  var saved = parseFloat(localStorage.getItem(KEY));
+  var saved = readSaved();
   if (ALLOWED.indexOf(saved) !== -1) setSize(saved);
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -35,7 +45,7 @@
       if (persist) {
         try {
           localStorage.setItem(KEY, String(scale));
-        } catch {
+        } catch (e) {
           /* storage may be unavailable; the control still works for the session */
         }
       }

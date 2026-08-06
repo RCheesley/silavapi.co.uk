@@ -456,6 +456,10 @@ a.tag:hover {
   font-weight: var(--weight-bold);
   color: var(--action-accent-active); /* deeper pink clears AA (see deviations) */
 }
+/* Collapse the (always-present) live-region error when it has no message. */
+.field__error:empty {
+  display: none;
+}
 .input,
 .textarea {
   width: 100%;

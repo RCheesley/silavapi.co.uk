@@ -59,7 +59,7 @@
   <article
     class="article-card"
     data-category="{{ post.category }}"
-    data-search="{{ (post.title + ' ' + post.excerpt) | lower }}"
+    data-search="{{ (post.title + ' ' + (post.excerpt or '')) | lower }}"
   >
     {% if post.image %}
       <div class="article-card__media">

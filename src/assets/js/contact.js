@@ -42,14 +42,14 @@
   function setError(field, show) {
     var input = document.getElementById(field.id);
     var errEl = document.getElementById(field.err);
+    // errEl is a persistent aria-live region; changing its text announces it,
+    // and it collapses (CSS :empty) when cleared.
     if (show) {
       input.setAttribute('aria-invalid', 'true');
       errEl.textContent = field.msg;
-      errEl.hidden = false;
     } else {
       input.removeAttribute('aria-invalid');
       errEl.textContent = '';
-      errEl.hidden = true;
     }
   }
 
