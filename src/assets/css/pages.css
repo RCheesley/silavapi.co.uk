@@ -36,34 +36,6 @@
   max-width: 58ch;
 }
 
-/* Latest-from-the-blog headline row (home) -------------------------------- */
-.latest {
-  display: grid;
-  gap: var(--space-6);
-  padding-block: var(--space-8);
-}
-.latest__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-}
-.latest__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: var(--weight-medium);
-  font-size: var(--text-lg);
-  line-height: var(--leading-snug);
-}
-.latest__title a {
-  color: var(--text-heading);
-  text-decoration: none;
-}
-.latest__title a:hover {
-  color: var(--text-link-hover);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
 /* About band (home) ------------------------------------------------------- */
 .about {
   display: grid;
@@ -370,9 +342,6 @@
   .contact {
     grid-template-columns: 1fr;
     gap: var(--space-8);
-  }
-  .latest__grid {
-    grid-template-columns: 1fr;
   }
   .contact__row {
     grid-template-columns: 1fr;
