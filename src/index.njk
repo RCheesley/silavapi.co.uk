@@ -20,11 +20,17 @@ description: The personal site of Sīlavāpi (formerly Ruth Cheesley) - Buddhism
 </section>
 
 <section class="surface-subtle-band">
-  <div class="container section-y card-grid">
-    {{ topicCard("users", "Community & open source", "The central focus of my life has always been around bringing people together and building community. Open source is where I found a home for that drive to connect.", "Community blog", "/blog/") }}
-    {{ topicCard("accessibility", "Living with a disability", "Diagnosed at 23 with Ehlers-Danlos Syndrome, a genetic condition affecting the connective tissue in my body, I've spent most of my life working with chronic pain, joint instability and fatigue.", "Being bendy", "/blog/") }}
-    {{ topicCard("flower", "Buddhism and dharma life", "A practising Buddhist for over a decade, I was ordained into the Triratna Buddhist Order in 2026. The dharma sits at the centre of everything else on this site.", "Dharma", "/dharma/") }}
-    {{ topicCard("activity", "Fitness and health", "Learning how to train with a physical disability and exploring ways to push myself without injuries or flare-ups has been quite a challenge. I just completed my first ultramarathon.", "Health & fitness blog", "/blog/") }}
+  <div class="container section-y">
+    {# Hidden heading: the cards are a deliberately heading-less design, but the
+       document outline still needs an h2 here so the h3 cards don't jump from
+       the h1 hero (WCAG 1.3.1 / heading-order). #}
+    <h2 class="visually-hidden">What I do and care about</h2>
+    <div class="card-grid">
+      {{ topicCard("users", "Community & open source", "The central focus of my life has always been around bringing people together and building community. Open source is where I found a home for that drive to connect.", "Community blog", "/blog/") }}
+      {{ topicCard("accessibility", "Living with a disability", "Diagnosed at 23 with Ehlers-Danlos Syndrome, a genetic condition affecting the connective tissue in my body, I've spent most of my life working with chronic pain, joint instability and fatigue.", "Being bendy", "/blog/") }}
+      {{ topicCard("flower", "Buddhism and dharma life", "A practising Buddhist for over a decade, I was ordained into the Triratna Buddhist Order in 2026. The dharma sits at the centre of everything else on this site.", "Dharma", "/dharma/") }}
+      {{ topicCard("activity", "Fitness and health", "Learning how to train with a physical disability and exploring ways to push myself without injuries or flare-ups has been quite a challenge. I just completed my first ultramarathon.", "Health & fitness blog", "/blog/") }}
+    </div>
   </div>
 </section>
 

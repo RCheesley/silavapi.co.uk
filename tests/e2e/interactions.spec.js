@@ -54,6 +54,16 @@ test.describe('contact form (progressive enhancement)', () => {
   });
 
   test('valid submit announces success', async ({ page }) => {
+    // The real delivery endpoint is a Cloudflare Pages Function, absent from the
+    // static test server. Mock it so this exercises the client success path
+    // (the function's own logic is covered by the unit tests).
+    await page.route('**/api/contact', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ ok: true }),
+      })
+    );
     await page.goto('/contact/');
     await page.locator('#c-name').fill('Test Person');
     await page.locator('#c-email').fill('test@example.com');

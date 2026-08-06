@@ -37,8 +37,13 @@ describe('byTags', () => {
   it('returns [] when nothing shares a tag', () => {
     expect(byTags(posts, ['unused'])).toEqual([]);
   });
+  it('treats a post with no tags field as unmatched', () => {
+    expect(byTags([{ data: { category: 'z' } }], ['mautic'])).toEqual([]);
+  });
   it('is safe with null inputs', () => {
     expect(byTags(null, null)).toEqual([]);
+    // null posts with a real wanted-tag list still returns [] (reaches the filter).
+    expect(byTags(null, ['mautic'])).toEqual([]);
   });
 });
 

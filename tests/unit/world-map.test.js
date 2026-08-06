@@ -40,6 +40,10 @@ describe('renderTalksMap', () => {
     expect(renderTalksMap().startsWith('<svg')).toBe(true);
   });
 
+  it('treats a null highlight list as empty', () => {
+    expect(renderTalksMap(null)).toContain('the 0 countries where');
+  });
+
   it('does not reference any third-party origin (privacy-clean)', () => {
     const svg = renderTalksMap(['gb', 'fr', 'de']);
     expect(svg).not.toMatch(/https?:\/\//);

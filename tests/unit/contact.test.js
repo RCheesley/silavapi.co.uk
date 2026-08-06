@@ -31,10 +31,16 @@ describe('validateSubmission', () => {
     expect(r.errors.email).toBeTruthy();
   });
 
-  it('rejects over-long fields', () => {
-    const r = validateSubmission({ ...good, message: 'x'.repeat(LIMITS.message + 1) });
-    expect(r.ok).toBe(false);
-    expect(r.errors.message).toBeTruthy();
+  it('rejects each over-long field (name, email, message)', () => {
+    expect(
+      validateSubmission({ ...good, name: 'x'.repeat(LIMITS.name + 1) }).errors.name
+    ).toBeTruthy();
+    expect(
+      validateSubmission({ ...good, email: 'x'.repeat(LIMITS.email) + '@e.co' }).errors.email
+    ).toBeTruthy();
+    expect(
+      validateSubmission({ ...good, message: 'x'.repeat(LIMITS.message + 1) }).errors.message
+    ).toBeTruthy();
   });
 
   it('is safe with no argument', () => {
@@ -61,6 +67,21 @@ describe('validateSpeakerEnquiry', () => {
     expect(validateSpeakerEnquiry({ ...good, email: 'nope' }).ok).toBe(false);
   });
 
+  it('rejects over-long name, email, topic and message', () => {
+    const r = validateSpeakerEnquiry({
+      ...good,
+      name: 'x'.repeat(LIMITS.name + 1),
+      email: 'x'.repeat(LIMITS.email) + '@e.co',
+      topic: 'x'.repeat(LIMITS.message + 1),
+      message: 'x'.repeat(LIMITS.message + 1),
+    });
+    expect(r.ok).toBe(false);
+    expect(r.errors.name).toBeTruthy();
+    expect(r.errors.email).toBeTruthy();
+    expect(r.errors.topic).toBeTruthy();
+    expect(r.errors.message).toBeTruthy();
+  });
+
   it('is safe with no argument', () => {
     expect(validateSpeakerEnquiry().ok).toBe(false);
   });
@@ -84,6 +105,12 @@ describe('formatSpeakerMessage', () => {
     expect(text).toContain('Location: —');
     expect(text).toContain('Topic / what to speak about:');
     expect(text).toContain('OSS');
+  });
+
+  it('includes the free-text message when one is given', () => {
+    const text = formatSpeakerMessage({ event: 'FOSDEM', topic: 'OSS', message: 'Cannot wait!' });
+    expect(text).toContain('Anything else:');
+    expect(text).toContain('Cannot wait!');
   });
 });
 
