@@ -6,6 +6,10 @@
  * OS via CSS `prefers-color-scheme`, so it still themes correctly without JS.
  */
 (function () {
+  // Mark that JS is available (pre-paint, in <head>) so CSS can switch the nav
+  // to a collapsible menu without a flash of the no-JS (fully expanded) layout.
+  document.documentElement.classList.add('js');
+
   var KEY = 'theme';
   var ALLOWED = ['light', 'dark', 'system'];
 
