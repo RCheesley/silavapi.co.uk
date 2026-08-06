@@ -10,6 +10,7 @@ import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
+import { renderTalksMap } from './lib/world-map.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
 const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -108,6 +109,20 @@ export default function (eleventyConfig) {
   });
   // Take the first n items.
   eleventyConfig.addFilter('limit', (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : arr));
+  // Posts whose category is in the given list (e.g. speaking-topic categories).
+  eleventyConfig.addFilter('byCategories', (posts, cats) => {
+    const set = new Set(cats || []);
+    return (posts || []).filter((p) => set.has(p.data.category));
+  });
+  // Posts sharing at least one tag with the given list, most recent first. Used
+  // to surface writing relevant to a specific talk (matched on the talk's tags).
+  eleventyConfig.addFilter('byTags', (posts, tags) => {
+    const want = new Set((tags || []).map((t) => String(t).toLowerCase()));
+    if (!want.size) return [];
+    return (posts || []).filter((p) =>
+      (p.data.tags || []).some((t) => want.has(String(t).toLowerCase()))
+    );
+  });
 
   // --- Shortcodes ---------------------------------------------------------
   // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
@@ -171,6 +186,9 @@ export default function (eleventyConfig) {
     );
   });
 
+  // Self-hosted SVG world map highlighting the countries a set of talks were in.
+  eleventyConfig.addShortcode('talksMap', (countries) => renderTalksMap(countries || []));
+
   // Mid-article pull quote (usable from Markdown post bodies).
   eleventyConfig.addShortcode('pullquote', (text, attribution = '') => {
     const attr = attribution
@@ -183,6 +201,57 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('posts', (collectionApi) =>
     collectionApi.getFilteredByGlob('src/blog/**/*.md').sort((a, b) => b.date - a.date)
   );
+
+  // Talks. A talk may carry an `announce` date: until that date passes it is
+  // withheld from every listing (the "publish on a date" feature - a daily
+  // scheduled rebuild re-runs this so an announced talk appears on its date
+  // without a manual deploy). `date` is when the talk happens.
+  const announcedTalks = (api) => {
+    const now = new Date();
+    return api.getFilteredByGlob('src/talks/*.md').filter((t) => {
+      const a = t.data.announce;
+      return !a || new Date(a) <= now;
+    });
+  };
+  eleventyConfig.addCollection('talks', (api) =>
+    announcedTalks(api).sort((a, b) => b.date - a.date)
+  );
+  eleventyConfig.addCollection('upcomingTalks', (api) => {
+    const now = new Date();
+    return announcedTalks(api)
+      .filter((t) => t.date >= now)
+      .sort((a, b) => a.date - b.date); // soonest first
+  });
+  eleventyConfig.addCollection('pastTalks', (api) => {
+    const now = new Date();
+    return announcedTalks(api)
+      .filter((t) => t.date < now)
+      .sort((a, b) => b.date - a.date); // most recent first
+  });
+
+  // Group talks (or any dated items) by calendar year, newest year first, for
+  // a scannable archive. Returns [{ year, items }].
+  eleventyConfig.addFilter('groupByYear', (items) => {
+    const groups = new Map();
+    for (const it of items || []) {
+      const y = it.date.getFullYear();
+      if (!groups.has(y)) groups.set(y, []);
+      groups.get(y).push(it);
+    }
+    return [...groups.entries()]
+      .sort((a, b) => b[0] - a[0])
+      .map(([year, items]) => ({ year, items }));
+  });
+
+  // Unique ISO alpha-2 country codes across a set of talks (for the map).
+  eleventyConfig.addFilter('talkCountries', (talks) => {
+    const seen = new Set();
+    for (const t of talks || []) {
+      const iso = t.data && t.data.location && t.data.location.country;
+      if (iso) seen.add(String(iso).toLowerCase());
+    }
+    return [...seen];
+  });
 
   // --- Global build metadata ---------------------------------------------
   eleventyConfig.addGlobalData('buildTime', () => new Date());

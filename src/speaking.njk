@@ -1,0 +1,152 @@
+---
+layout: layouts/base.njk
+navActive: speaking
+title: Speaking
+permalink: /speaking/
+description: >
+  Sīlavāpi (Ruth Cheesley) speaks and runs workshops on open source, digital
+  sovereignty, community, marketing automation with Mautic, and living actively
+  with a disability. Invite me to speak, or browse past talks, slides and recordings.
+speakingTopics:
+  - Open source
+  - Digital sovereignty
+  - Community
+  - Mautic
+  - Accessibility
+  - Living with EDS
+speakingReadCategories:
+  - Digital Sovereignty
+  - Open source
+  - Community
+  - Mautic
+  - Marketing
+---
+{% from "macros/ui.njk" import sectionHeading, button, badge, tag, articleCard %}
+{%- set talks = collections.talks -%}
+{%- set upcoming = collections.upcomingTalks -%}
+{%- set past = collections.pastTalks -%}
+{%- set countries = talks | talkCountries -%}
+{%- set firstYear = (past | last).date.getFullYear() if past | length else buildTime().getFullYear() -%}
+{%- set speakingReads = collections.posts | byCategories(speakingReadCategories) | limit(3) -%}
+
+<section>
+  <div class="container speaking-hero">
+    <div class="speaking-hero__portrait">
+      <img src="/assets/img/photography/portrait-07.jpg" alt="Sīlavāpi speaking on stage" />
+    </div>
+    <div class="speaking-hero__col">
+      {{ sectionHeading("Speaking", "Invite me to speak", 1, "I speak and run workshops on open source, digital sovereignty, community, marketing automation with Mautic, and living an active life with a disability - warmly, practically, and with a few strong opinions.") }}
+      <div class="cluster">
+        {% for t in speakingTopics %}{{ tag(t) }}{% endfor %}
+      </div>
+      <div class="cluster">
+        {{ button("Book me to speak", "/contact/", "primary") }}
+        {{ button("Get in touch", "/contact/", "secondary") }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if talks | length %}
+  <section class="band">
+    <div class="container section-y-sm">
+      <dl class="stat-row">
+        <div><dd class="stat__num">{{ talks | length }}</dd><dt class="stat__label">Talks given</dt></div>
+        <div><dd class="stat__num">{{ countries | length }}</dd><dt class="stat__label">Countries</dt></div>
+        <div><dd class="stat__num">{{ firstYear }}</dd><dt class="stat__label">Speaking since</dt></div>
+      </dl>
+    </div>
+  </section>
+
+  {% if countries | length %}
+    <section class="surface-subtle-band">
+      <div class="container section-y-sm stack">
+        {{ sectionHeading("Where I've spoken", "On stages around the world", 2) }}
+        <div class="talks-map">
+          {% talksMap countries %}
+          <p class="talks-map__legend"><span class="talks-map__swatch"></span> Countries I've spoken in</p>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endif %}
+
+{% if upcoming | length %}
+  <section>
+    <div class="container section-y stack">
+      {{ sectionHeading("Coming up", "Upcoming talks", 2) }}
+      <div class="card-grid">
+        {% for t in upcoming %}
+          <article class="talk-card">
+            {% if t.data.cover %}
+              <div class="talk-card__media">
+                <img src="{{ t.data.cover }}" alt="" loading="lazy" />
+                <span class="talk-card__badge">{{ badge("Upcoming", "accent") }}</span>
+              </div>
+            {% endif %}
+            <div class="talk-card__body">
+              <span class="talk-card__meta">{{ t.date | readableDate }}{% if t.data.event %} · {{ t.data.event }}{% endif %}{% if t.data.location.city %} · {{ t.data.location.city }}{% endif %}</span>
+              <h3 class="talk-card__title"><a href="{{ t.url }}">{{ t.data.title }}</a></h3>
+              {% if t.data.excerpt or t.data.abstract %}
+                <p class="article-card__excerpt">{{ t.data.excerpt or t.data.abstract }}</p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% if past | length %}
+  <section class="surface-subtle-band">
+    <div class="container section-y stack">
+      {{ sectionHeading("The archive", "Past talks", 2) }}
+      {% for group in past | groupByYear %}
+        <div class="talk-year">
+          <h3 class="talk-year__label">{{ group.year }}</h3>
+          <ul class="talk-list">
+            {% for t in group.items %}
+              <li class="talk-list__item">
+                <span class="talk-list__date">{{ t.date | readableDate }}</span>
+                <span class="talk-list__title">
+                  <a href="{{ t.url }}">{{ t.data.title }}</a>
+                  {% if t.data.event %}<span class="talk-list__event">{{ t.data.event }}{% if t.data.location.city %} · {{ t.data.location.city }}{% endif %}</span>{% endif %}
+                </span>
+                <span class="talk-card__actions">
+                  {% if t.data.slides %}<a href="{{ t.data.slides }}">Slides (PDF)</a>{% endif %}
+                  {% if t.data.video %}<a href="{{ t.data.video }}" rel="noopener noreferrer" target="_blank">Watch</a>{% endif %}
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% if speakingReads | length %}
+  <section aria-label="Related writing">
+    <div class="container section-y stack">
+      <div class="recent-head">
+        {{ sectionHeading("Go deeper", "On these topics, from the blog", 2) }}
+        {{ button("All posts", "/blog/", "ghost") }}
+      </div>
+      <div class="card-grid">
+        {% for post in speakingReads %}
+          {{ articleCard({
+            title: post.data.title,
+            excerpt: post.data.excerpt,
+            image: post.data.image,
+            imageAlt: post.data.imageAlt,
+            date: post.date | readableDate,
+            category: post.data.category,
+            tone: categories.tones[post.data.category] or "neutral",
+            href: post.url
+          }) }}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
