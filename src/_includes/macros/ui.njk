@@ -56,7 +56,11 @@
 {# Article card - post = { title, excerpt, image, imageAlt, date, category,
    tone, href }. The title is the link (whole-card affordance via the title). #}
 {% macro articleCard(post) %}
-  <article class="article-card">
+  <article
+    class="article-card"
+    data-category="{{ post.category }}"
+    data-search="{{ (post.title + ' ' + (post.excerpt or '')) | lower }}"
+  >
     {% if post.image %}
       <div class="article-card__media">
         <img src="{{ post.image }}" alt="{{ post.imageAlt or '' }}" loading="lazy" />

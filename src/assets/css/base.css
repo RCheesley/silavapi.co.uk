@@ -14,6 +14,12 @@
   box-sizing: border-box;
 }
 
+/* The hidden attribute must win over component display rules (e.g. cards set
+   display:grid, which would otherwise override the UA [hidden] rule). */
+[hidden] {
+  display: none !important;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;

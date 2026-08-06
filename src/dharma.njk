@@ -2,8 +2,62 @@
 layout: layouts/base.njk
 navActive: dharma
 title: Dharma
+description: A practice, not a hobby - Sīlavāpi on ordination into the Triratna Buddhist Order, the meaning of the name, and being a trustee of Breathworks.
 ---
-<section class="container section">
-  <h1 class="page-title">Dharma</h1>
-  <p class="prose">A practice, not a hobby. This section is being built - the ordination story, the meaning of the name Sīlavāpi, and Breathworks will live here.</p>
+{% from "macros/ui.njk" import sectionHeading, button, quote, articleCard %}
+{%- set dharmaPosts = collections.posts | limit(3) -%}
+
+<section>
+  <div class="container dharma-hero">
+    <div class="dharma-hero__prose">
+      {{ sectionHeading("Dharma", "A practice, not a hobby", 1, "I was ordained into the Triratna Buddhist Order in 2026 after more than twelve years of practice. This page gathers everything on the site about that life.") }}
+      <p>
+        Sīlavāpi is the name I was given at ordination. It is rooted in
+        <em>sīla</em> - ethical practice - which feels right: for me the dharma
+        has never been separate from work, community, or how a piece of software
+        treats the people who use it.
+      </p>
+      <p>
+        Away from the cushion I'm a trustee of <strong>Breathworks</strong>, a
+        charity teaching mindfulness-based approaches to living with pain and
+        illness - work that sits very close to my own experience of living with
+        Ehlers-Danlos Syndrome.
+      </p>
+      <div class="cluster">
+        {{ button("The story of my name", "/blog/a-new-name-becoming-silavapi/", "primary") }}
+        {{ button("Buddhism on the blog", "/blog/", "secondary") }}
+      </div>
+    </div>
+    <div class="about__portrait">
+      <img src="/assets/img/photography/portrait-04.jpg" alt="Black-and-white portrait of Sīlavāpi, gaze lifted away from the camera" />
+    </div>
+  </div>
 </section>
+
+<section class="quote-band">
+  <div class="container section-y-sm">
+    {{ quote("A name is not a costume. It is a direction of travel.", "Sīlavāpi", "dark") }}
+  </div>
+</section>
+
+{% if dharmaPosts | length %}
+  <section class="surface-subtle-band" aria-label="Dharma on the blog">
+    <div class="container section-y-sm stack">
+      {{ sectionHeading("Writing", "Dharma on the blog", 2) }}
+      <div class="card-grid">
+        {% for post in dharmaPosts %}
+          {{ articleCard({
+            title: post.data.title,
+            excerpt: post.data.excerpt,
+            image: post.data.image,
+            imageAlt: post.data.imageAlt,
+            date: post.date | readableDate,
+            category: post.data.category,
+            tone: categories.tones[post.data.category] or "neutral",
+            href: post.url
+          }) }}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

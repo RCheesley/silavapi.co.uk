@@ -34,6 +34,9 @@
         "sameAs": ["https://ruthcheesley.co.uk/"]
       }
     </script>
+    {# Reader text-size control: loaded in <head> on article pages so a saved
+       size is applied before paint (no flash). #}
+    {% if readerControl %}<script src="/assets/js/reader.js"></script>{% endif %}
     {% block head %}{% endblock %}
   </head>
   <body>

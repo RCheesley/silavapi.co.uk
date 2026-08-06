@@ -1,9 +1,64 @@
 ---
 layout: layouts/base.njk
-navActive: 
 title: Accessibility statement
+updated: 2026-08-06
+description: The accessibility statement for silavapi.co.uk - conformance target, how it's tested, and how to report a problem.
 ---
-<section class="container section">
-  <h1 class="page-title">Accessibility statement</h1>
-  <p class="prose">This site targets WCAG 2.2 AA, and AAA where achievable. The full statement - including a contact route - is being written.</p>
-</section>
+{% from "macros/ui.njk" import sectionHeading %}
+
+<article class="prose-page">
+  <div class="stack">
+    {{ sectionHeading("Accessibility", "Accessibility statement", 1, "This site is built to be usable by as many people as possible. Last updated " + (updated | readableDate) + ".") }}
+  </div>
+
+  <section>
+    <h2>Conformance target</h2>
+    <p>
+      The aim is <strong>WCAG 2.2 Level AA</strong>, and Level AAA wherever it is
+      achievable without harming clarity - for example, generous colour contrast,
+      visible focus on everything, and text that reflows and resizes cleanly.
+    </p>
+  </section>
+
+  <section>
+    <h2>What's in place</h2>
+    <ul>
+      <li>A "skip to main content" link, semantic landmarks, and one clear heading order on every page.</li>
+      <li>Visible keyboard focus everywhere, and interactive targets at least 44×44 pixels.</li>
+      <li>Full support for dark mode and for the "reduce motion" setting.</li>
+      <li>A reader text-size control on articles, and layouts that reflow to 400% zoom.</li>
+      <li>Meaningful alternative text on informative images; decorative images are hidden from screen readers.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How it's tested</h2>
+    <p>
+      Every change is checked automatically before it ships: the axe-core and
+      HTML CodeSniffer engines run against every page in both light and dark
+      themes, and a Lighthouse accessibility score of 100 is required to merge.
+      Automated tools cannot catch everything, so pages are also checked by
+      keyboard and with a screen reader.
+    </p>
+  </section>
+
+  <section>
+    <h2>Known limitations</h2>
+    <p>
+      This is a living site and the content archive is still being migrated. If
+      you find a page that is hard to use, that is a bug I want to fix - please
+      tell me.
+    </p>
+  </section>
+
+  {# TODO(ruth): confirm the contact route / any commitment on response time. #}
+  <section>
+    <h2>Reporting a problem</h2>
+    <p>
+      If something on this site gets in your way, please
+      <a href="/contact/">drop me a line</a> and tell me what happened, what you
+      were using, and what you expected. I read everything and I'll do my best to
+      put it right.
+    </p>
+  </section>
+</article>

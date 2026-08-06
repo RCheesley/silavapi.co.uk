@@ -26,7 +26,8 @@ export default [
       globals: { ...globals.node },
     },
     rules: {
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      // Allow unused catch bindings so ES5-safe `catch (e)` passes lint.
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', caughtErrors: 'none' }],
       'no-console': 'off',
     },
   },
