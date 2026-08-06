@@ -131,6 +131,13 @@ const PODCAST_RE =
 const FORCE_TALK = new Set([]);
 const FORCE_PODCAST = new Set([]);
 
+// Talks that recur under one name but are a DIFFERENT talk each time (Ruth: "The
+// Mautic Update is different each year"). Notist reuses the slug, so these would
+// otherwise merge into one page; instead each presentation becomes its own page
+// with a year-disambiguated slug. Matched against the Notist slug.
+const NO_MERGE_RE = /^the-mautic-update/;
+const shortId = (source) => source.match(/\/\/[^/]+\/([^/]+)\//)?.[1] || '';
+
 // A talk is a keynote when the title says so, or it is a "Mautic Update"
 // (Ruth's recurring project-lead keynote). Keynotes are badged in the archive.
 const isKeynoteTalk = (slug, title) =>
@@ -417,6 +424,22 @@ const groups = new Map();
 for (const p of presentations) {
   if (!groups.has(p.slug)) groups.set(p.slug, []);
   groups.get(p.slug).push(p);
+}
+
+// Expand no-merge groups: a same-named-but-distinct talk (e.g. The Mautic
+// Update) is split back into one page per presentation, each with a unique
+// year-disambiguated slug (falling back to the Notist short-id on a clash).
+for (const [slug, items] of [...groups]) {
+  if (!NO_MERGE_RE.test(slug) || items.length < 2) continue;
+  groups.delete(slug);
+  const used = new Set();
+  for (const it of items) {
+    const year = String(it.date || '').slice(0, 4) || 'x';
+    let s = `${slug}-${year}`;
+    if (used.has(s)) s = `${slug}-${year}-${shortId(it.source)}`;
+    used.add(s);
+    groups.set(s, [{ ...it, slug: s }]);
+  }
 }
 
 const manifest = [];
