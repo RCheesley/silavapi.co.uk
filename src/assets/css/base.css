@@ -352,6 +352,35 @@ select {
   margin-top: var(--space-4);
 }
 
+/* Search trigger - an icon button that opens the search dialog. Sits in the nav
+   panel, so inline on desktop and inside the open menu on mobile. */
+.header-search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.header-search:hover {
+  color: var(--text-heading);
+  border-color: var(--border-strong);
+}
+/* On the stacked mobile menu it sits above the theme control with breathing room
+   and stretches to a comfortable full-width touch target. */
+@media (max-width: 820px) {
+  .site-nav__panel .header-search {
+    width: 100%;
+    margin-top: var(--space-4);
+    min-height: 44px;
+  }
+}
+
 /* Colour-theme control - a compact segmented icon group (light/system/dark). */
 .theme-toggle {
   display: inline-flex;

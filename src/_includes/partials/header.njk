@@ -36,6 +36,11 @@
             {%- endfor %}
           </ul>
         </nav>
+        {#- Search. Hidden until search.js reveals it (it needs JS + the Pagefind
+            index; there is no no-JS fallback yet, so it stays hidden without JS). -#}
+        <button class="header-search" type="button" data-search-open aria-label="Search" title="Search" hidden>
+          {% icon "search", 18 %}
+        </button>
         {#- Colour-theme control. Hidden until theme.js reveals it (it does
             nothing without JS; the site still follows the OS scheme via CSS). -#}
         <div class="theme-toggle" role="group" aria-label="Colour theme" hidden>
