@@ -67,24 +67,60 @@
       return;
     }
 
-    // TODO(phase 4): let the native submit reach the server handler. For now,
-    // confirm client-side so preview submissions don't hit a missing endpoint.
+    // Enhanced submit: POST via fetch and announce the result inline, so the
+    // reader stays on the page. Without JS the form submits natively and the
+    // server 303-redirects to /thank-you/.
     e.preventDefault();
-    if (status) {
+
+    function showAlert(tone, role, titleText, bodyText) {
+      if (!status) return;
       var alert = document.createElement('div');
-      alert.className = 'alert alert--success';
-      alert.setAttribute('role', 'status');
+      alert.className = 'alert alert--' + tone;
+      alert.setAttribute('role', role);
       var title = document.createElement('p');
       title.className = 'alert__title';
-      title.textContent = 'Message sent';
+      title.textContent = titleText;
       var body = document.createElement('p');
       body.className = 'alert__body';
-      body.textContent =
-        'Thank you - your message is on its way. I reply to everything, though sometimes slowly when I’m on retreat or running somewhere remote.';
+      body.textContent = bodyText;
       alert.appendChild(title);
       alert.appendChild(body);
       status.replaceChildren(alert);
     }
-    form.reset();
+    var failMsg =
+      'Something went wrong sending your message. Please email me directly at hello@silavapi.co.uk.';
+
+    var submitBtn = form.querySelector('[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: { accept: 'application/json' },
+      body: new FormData(form),
+    })
+      .then(function (res) {
+        return res.json().catch(function () {
+          return { ok: res.ok };
+        });
+      })
+      .then(function (data) {
+        if (data && data.ok) {
+          showAlert(
+            'success',
+            'status',
+            'Message sent',
+            'Thank you - your message is on its way. I reply to everything, though sometimes slowly when I’m on retreat or running somewhere remote.'
+          );
+          form.reset();
+        } else {
+          showAlert('info', 'alert', 'That didn’t send', failMsg);
+        }
+      })
+      .catch(function () {
+        showAlert('info', 'alert', 'That didn’t send', failMsg);
+      })
+      .finally(function () {
+        if (submitBtn) submitBtn.disabled = false;
+      });
   });
 })();

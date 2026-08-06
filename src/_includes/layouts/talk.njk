@@ -54,7 +54,7 @@ navActive: speaking
   <div class="cluster talk-detail__actions">
     {% if slides %}{{ button("Download slides (PDF)", slides, "primary") }}{% endif %}
     {% if video and not cover %}{{ button("Watch the recording", video, "secondary") }}{% endif %}
-    {{ button("Book me for your event", "/contact/", "ghost") }}
+    {{ button("Book me for your event", "/speaking/book/", "ghost") }}
   </div>
 
   {% if content and content | trim | length %}

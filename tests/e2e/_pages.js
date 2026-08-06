@@ -19,6 +19,8 @@ export const PAGES = [
     name: 'Podcast',
     h1: /Project Lead Office Hours/,
   },
+  { path: '/speaking/book/', name: 'Book', h1: /Book me to speak/ },
+  { path: '/speaking/rider/', name: 'Rider', h1: /Speaker rider/ },
   { path: '/contact/', name: 'Contact', h1: /Fancy a coffee\? Drop me a line!/ },
   { path: '/privacy/', name: 'Privacy', h1: /How privacy works here/ },
   { path: '/accessibility/', name: 'Accessibility', h1: /Accessibility statement/ },

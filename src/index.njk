@@ -19,19 +19,6 @@ description: The personal site of Sīlavāpi (formerly Ruth Cheesley) - Buddhism
   </div>
 </section>
 
-{% if recent | length %}
-  <section class="band" aria-label="Latest from the blog">
-    <div class="container latest">
-      <p class="eyebrow">Latest from the blog</p>
-      <div class="latest__grid">
-        {% for post in recent %}
-          <h2 class="latest__title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-{% endif %}
-
 <section class="surface-subtle-band">
   <div class="container section-y card-grid">
     {{ topicCard("users", "Community & open source", "The central focus of my life has always been around bringing people together and building community. Open source is where I found a home for that drive to connect.", "Community blog", "/blog/") }}
