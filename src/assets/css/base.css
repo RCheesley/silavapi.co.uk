@@ -264,9 +264,10 @@ select {
   font-size: var(--text-xl);
   color: var(--text-heading);
 }
-/* Navigation - mobile-first. Below 821px it is a touch-friendly disclosure
-   menu (native <details>); at 821px+ the desktop rules further down turn it back
-   into a flat inline row. */
+/* Navigation - mobile-first. The full nav is always in the DOM. Below 821px,
+   when JS is present (html.js), a menu button toggles it via `.site-nav.is-open`;
+   without JS the panel stays visible as a stacked list. At 821px+ the desktop
+   rules further down turn it back into a flat inline row. */
 .site-nav__list {
   margin: 0;
   padding: 0;

@@ -1,6 +1,7 @@
 {#- Site header. On wide screens the nav is a flat inline row; on narrow screens
-    it collapses into a touch-friendly disclosure menu (native <details>, so it
-    works without JavaScript and stays keyboard/AT accessible). -#}
+    a menu button toggles the nav panel (nav.js sets aria-expanded + an is-open
+    class). Without JavaScript the button is hidden and the full nav stays
+    visible, so it works either way and remains keyboard/AT accessible. -#}
 <header class="site-header">
   <div class="site-header__inner container">
     <a class="site-header__brand" href="/">

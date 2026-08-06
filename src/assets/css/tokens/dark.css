@@ -41,6 +41,7 @@
   --header-bg: rgba(22, 17, 34, 0.85); /* near-black, translucent */
   --nav-link-accent: var(--rc-pink-60); /* #F177AB ≈ 6.7:1 on dark */
   --focus-outline: var(--rc-orange-light); /* focus ring on dark */
+  --field-req-color: var(--rc-pink-60); /* lighter pink keeps AA on dark */
 }
 
 /* Explicit light choice: pin native UI to light even if the OS prefers dark. */
@@ -79,5 +80,6 @@
     --header-bg: rgba(22, 17, 34, 0.85);
     --nav-link-accent: var(--rc-pink-60);
     --focus-outline: var(--rc-orange-light);
+    --field-req-color: var(--rc-pink-60);
   }
 }

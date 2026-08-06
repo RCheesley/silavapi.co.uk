@@ -1,9 +1,9 @@
 /**
  * contact.js - progressive enhancement for the contact form.
- * Adds warm inline validation announced via aria-live and stamps the time-trap.
- * Without JS the form still submits natively to the server handler (Phase 4),
- * which performs the same checks. NOTE: until the Phase 4 handler exists, this
- * confirms client-side so the preview doesn't 404 on submit.
+ * Adds warm inline validation (announced via aria-live), stamps the time-trap,
+ * and submits via fetch so the result is announced inline. Without JS the form
+ * submits natively to /api/contact, which performs the same checks server-side
+ * and 303-redirects to /thank-you/.
  */
 (function () {
   var form = document.querySelector('[data-contact-form]');
@@ -87,8 +87,17 @@
       alert.appendChild(body);
       status.replaceChildren(alert);
     }
+    // Derive the fallback address from the page's own mailto link (the contact
+    // aside), so it never drifts from site.author.email.
+    var mailLink = document.querySelector('a[href^="mailto:"]');
+    var email = mailLink
+      ? mailLink
+          .getAttribute('href')
+          .replace(/^mailto:/, '')
+          .split('?')[0]
+      : 'hello@silavapi.co.uk';
     var failMsg =
-      'Something went wrong sending your message. Please email me directly at hello@silavapi.co.uk.';
+      'Something went wrong sending your message. Please email me directly at ' + email + '.';
 
     var submitBtn = form.querySelector('[type="submit"]');
     if (submitBtn) submitBtn.disabled = true;

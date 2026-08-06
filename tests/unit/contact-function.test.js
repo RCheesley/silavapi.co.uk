@@ -58,7 +58,7 @@ describe('POST /api/contact', () => {
     expect(res.headers.get('location')).toBe('/speaking/book/?error=1');
   });
 
-  it('accepts a complete speaker enquiry (503 only because delivery is unconfigured)', async () => {
+  it('accepts a complete speaker enquiry with a date range (503 only because delivery is unconfigured)', async () => {
     const res = await onRequestPost({
       request: formRequest(
         {
@@ -66,7 +66,8 @@ describe('POST /api/contact', () => {
           name: 'Ada',
           email: 'a@b.co',
           event: 'FOSDEM',
-          date: 'Feb',
+          date_start: '2027-02-06',
+          date_end: '2027-02-08',
           topic: 'OSS',
         },
         { json: true }

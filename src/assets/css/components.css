@@ -497,14 +497,9 @@ a.tag:hover {
   color: var(--text-heading);
 }
 .field__req {
-  color: var(--action-accent-active); /* deeper pink: AA on the light surface */
-}
-@media (prefers-color-scheme: dark) {
-  /* The deep pink is too dark on the dark surface; use the lighter pink (the
-     same one dark mode uses for accents) so the marker keeps AA contrast. */
-  .field__req {
-    color: var(--rc-pink-60);
-  }
+  /* AA on both surfaces: deep pink on light, lighter pink on dark. The token
+     follows the active theme (data-theme) as well as the OS, set in dark.css. */
+  color: var(--field-req-color);
 }
 .field__hint {
   font-size: var(--text-xs);
