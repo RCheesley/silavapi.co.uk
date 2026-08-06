@@ -244,8 +244,13 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-8);
+  gap: var(--space-4);
   padding-block: var(--space-4);
+}
+@media (min-width: 821px) {
+  .site-header__inner {
+    gap: var(--space-8);
+  }
 }
 .site-header__brand {
   display: inline-flex;
@@ -259,34 +264,185 @@ select {
   font-size: var(--text-xl);
   color: var(--text-heading);
 }
+/* Navigation - mobile-first. Below 821px it is a touch-friendly disclosure
+   menu (native <details>); at 821px+ the desktop rules further down turn it back
+   into a flat inline row. */
 .site-nav__list {
-  display: flex;
-  align-items: center;
-  gap: var(--space-7);
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.site-nav__list li {
-  margin: 0;
-}
 .site-nav__link {
-  display: inline-block;
-  padding: var(--space-2) 0;
-  font-size: var(--text-2xs);
-  font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
   text-decoration: none;
   color: var(--text-heading);
-  border-bottom: var(--border-width-strong) solid transparent;
 }
 .site-nav__link:hover {
   color: var(--nav-link-accent);
 }
-.site-nav__link.is-active {
+
+/* Menu button - hidden by default (without JS the full nav shows instead);
+   revealed on narrow screens when JS is present. A ≥44px touch target; the icon
+   swaps between "menu" and "x" with the open state. */
+.site-nav__toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-heading);
+  cursor: pointer;
+}
+.site-nav__toggle:hover {
   color: var(--nav-link-accent);
-  border-bottom-color: var(--rc-pink); /* bright underline: non-text, 3:1 ok */
+}
+/* Icon-only button (a hamburger is universally understood); the label stays for
+   assistive tech and gives the summary its accessible name. */
+.site-nav__toggle-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.site-nav__toggle-icon {
+  display: inline-flex;
+}
+.site-nav.is-open .site-nav__toggle-icon--open,
+.site-nav__toggle-icon--close {
+  display: none;
+}
+.site-nav.is-open .site-nav__toggle-icon--close {
+  display: inline-flex;
+}
+
+/* Narrow screens: the nav is a stacked list. This is the no-JS baseline (shown
+   in full, in flow); with JS the panel collapses behind the menu button below. */
+.site-nav__panel .site-nav__link {
+  display: block;
+  padding: var(--space-4) var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+.site-nav__panel li:last-child .site-nav__link {
+  border-bottom: 0;
+}
+.site-nav__panel .site-nav__link.is-active {
+  color: var(--nav-link-accent);
+  box-shadow: inset 3px 0 0 var(--rc-pink); /* left marker instead of underline */
+  padding-left: var(--space-3);
+}
+/* The theme control sits at the foot of the open menu on mobile. */
+.site-nav__panel .theme-toggle {
+  margin-top: var(--space-4);
+}
+
+/* Colour-theme control - a compact segmented icon group (light/system/dark). */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+.theme-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.theme-toggle__btn:hover {
+  color: var(--text-heading);
+}
+.theme-toggle__btn[aria-pressed='true'] {
+  background: var(--surface-card-alt);
+  color: var(--nav-link-accent);
+}
+
+/* JS present + narrow screens: collapse the nav behind the menu button, opened
+   as a full-width panel dropping below the sticky header. */
+@media (max-width: 820px) {
+  html.js .site-nav__toggle {
+    display: inline-flex;
+  }
+  html.js .site-nav__panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 45;
+    display: none;
+    background: var(--surface-page);
+    border-bottom: var(--border-width) solid var(--border-subtle);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2) var(--gutter-lg) var(--space-4);
+  }
+  html.js .site-nav.is-open .site-nav__panel {
+    display: block;
+  }
+}
+
+/* Desktop: flat inline nav row; the nav wrapper becomes transparent and the
+   menu button is hidden. */
+@media (min-width: 821px) {
+  .site-nav {
+    display: contents;
+  }
+  .site-nav__toggle {
+    display: none;
+  }
+  .site-nav__panel {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    z-index: auto;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-7);
+  }
+  .site-nav__panel .theme-toggle {
+    margin-top: 0;
+  }
+  .site-nav__panel .site-nav__link {
+    display: inline-block;
+    padding: var(--space-2) 0;
+    font-size: var(--text-2xs);
+    border-bottom: var(--border-width-strong) solid transparent;
+  }
+  .site-nav__panel .site-nav__link.is-active {
+    box-shadow: none;
+    padding-left: 0;
+    border-bottom-color: var(--rc-pink); /* bright underline: non-text, 3:1 ok */
+  }
 }
 
 .site-footer {
