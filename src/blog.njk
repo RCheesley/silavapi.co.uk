@@ -19,17 +19,13 @@ description: Writing on open source, dharma and life - from marketing automation
           </button>
         {% endfor %}
       </div>
-      <div class="search">
-        <label class="visually-hidden" for="blog-search">Search posts</label>
-        <input
-          class="search__input"
-          id="blog-search"
-          type="search"
-          placeholder="Search posts…"
-          autocomplete="off"
-          data-blog-search
-        />
-      </div>
+      {#- Full-text blog search. Hidden until search.js reveals it (needs JS + the
+          Pagefind index); the category chips above still work without JS. Opens
+          the shared search dialog scoped to the blog section. -#}
+      <button class="search-trigger" type="button" data-search-open="blog" hidden>
+        <span class="search-trigger__icon" aria-hidden="true">{% icon "search", 18 %}</span>
+        <span class="search-trigger__text">Search posts</span>
+      </button>
     </div>
   </div>
 </section>

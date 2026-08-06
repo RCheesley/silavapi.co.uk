@@ -1,0 +1,30 @@
+{#- Site search dialog. Opened by any [data-search-open] control (the header
+    icon searches everything; a control with data-search-open="blog" scopes to
+    the blog). Powered by the self-hosted Pagefind index (search.js loads it on
+    first open). Fully keyboard accessible via the native <dialog>. -#}
+<dialog class="search-dialog" aria-label="Search" data-search-dialog>
+  <div class="search-dialog__panel">
+    <form class="search-dialog__bar" role="search" data-search-form>
+      <span class="search-dialog__icon" aria-hidden="true">{% icon "search", 20 %}</span>
+      <input
+        class="search-dialog__input"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        data-search-input
+      />
+      {#- Results are live as you type; this submit button exists so the form is
+          valid (WCAG H32) and Enter runs the search. It is visually hidden. -#}
+      <button class="visually-hidden" type="submit">Search</button>
+      <button class="search-dialog__close" type="button" aria-label="Close search" data-search-close>
+        {% icon "x", 20 %}
+      </button>
+    </form>
+    <p class="search-dialog__status" data-search-status aria-live="polite"></p>
+    <ul class="search-dialog__results" data-search-results></ul>
+  </div>
+</dialog>

@@ -591,28 +591,156 @@ a.tag:hover {
   color: var(--text-on-accent);
 }
 
-/* Search input (blog) ----------------------------------------------------- */
-.search {
-  position: relative;
+/* Search trigger (blog) --------------------------------------------------- */
+/* Looks like a search field but opens the blog-scoped search dialog, so the blog
+   gets real full-text search (Pagefind) rather than a shallow title filter. */
+.search-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   width: 280px;
   max-width: 100%;
-}
-.search__input {
-  width: 100%;
   min-height: var(--control-height);
   padding: var(--space-2) var(--space-4);
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-md);
   background: var(--surface-card);
-  color: var(--text-body);
+  color: var(--text-muted);
   font-family: var(--font-text);
   font-size: var(--text-base);
+  text-align: left;
+  cursor: pointer;
 }
-.search__input:hover {
+.search-trigger:hover {
   border-color: var(--rc-purple-light);
+  color: var(--text-body);
+}
+.search-trigger__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.search-trigger__text {
+  flex: 1;
 }
 .result-count {
   margin: 0;
   font-size: var(--text-sm);
   color: var(--text-muted);
+}
+
+/* Search dialog ----------------------------------------------------------- */
+/* Native <dialog>, opened by the header search icon. Docks near the top so the
+   results grow downward without shifting the input. */
+.search-dialog {
+  width: min(620px, calc(100vw - 2 * var(--space-4)));
+  max-height: min(80vh, 720px);
+  margin: clamp(var(--space-8), 12vh, 160px) auto auto;
+  padding: 0;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  color: var(--text-body);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.search-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+  backdrop-filter: var(--blur-glass);
+}
+.search-dialog__panel {
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+}
+.search-dialog__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+.search-dialog__icon {
+  display: inline-flex;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.search-dialog__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: transparent;
+  color: var(--text-body);
+  font-family: var(--font-text);
+  font-size: var(--text-lg);
+}
+.search-dialog__input:focus {
+  outline: none;
+}
+.search-dialog__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.search-dialog__close:hover {
+  color: var(--text-heading);
+  background: var(--surface-card-alt);
+}
+.search-dialog__status {
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.search-dialog__status:empty {
+  display: none;
+}
+.search-dialog__results {
+  margin: 0;
+  padding: 0 var(--space-2) var(--space-2);
+  list-style: none;
+  overflow-y: auto;
+}
+.search-result {
+  margin: 0;
+}
+.search-result__link {
+  display: block;
+  padding: var(--space-3) var(--space-3);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+}
+.search-result__link:hover,
+.search-result__link:focus-visible {
+  background: var(--surface-card-alt);
+}
+.search-result__title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  color: var(--text-heading);
+}
+.search-result__excerpt {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+/* Pagefind wraps matched terms in <mark>. Recolour to a brand accent (AA in both
+   themes) rather than the browser's yellow, which would clash and fail contrast. */
+.search-dialog__results mark {
+  background: transparent;
+  color: var(--nav-link-accent);
+  font-weight: var(--weight-bold);
 }

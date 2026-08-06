@@ -49,9 +49,20 @@
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
     {% include "partials/header.njk" %}
-    <main id="main">
+    {#- Pagefind indexes only [data-pagefind-body] regions, so search covers the
+        main content and skips chrome. noindex pages (thank-you, dev, 404) are
+        left out. The section filter lets the blog scope search to itself. -#}
+    {%- set pagefindSection = "page" -%}
+    {%- if "/blog/" in page.url %}{% set pagefindSection = "blog" %}
+    {%- elif "/speaking/" in page.url %}{% set pagefindSection = "speaking" %}{% endif -%}
+    <main
+      id="main"
+      {%- if not noindex %} data-pagefind-body data-pagefind-filter="section:{{ pagefindSection }}"{% endif %}
+    >
       {% block content %}{{ content | safe }}{% endblock %}
     </main>
     {% include "partials/footer.njk" %}
+    {% include "partials/search-dialog.njk" %}
+    <script src="/assets/js/search.js" defer></script>
   </body>
 </html>
