@@ -38,8 +38,8 @@ I followed the tutorial [here](https://ubuntuhandbook.org/index.php/2022/04/pipe
 
 The tutorial saw me through basically everything that I needed with the exception that I needed to run these commands after step 3:
 
-`systemctl --user --now disable pulseaudio.service pulseaudio.socket` - this shuts down Pulseaudio  
-  
+`systemctl --user --now disable pulseaudio.service pulseaudio.socket` - this shuts down Pulseaudio
+
 `systemctl --user --now enable pipewire pipewire-pulse` - this starts Pipewire
 
 This got Pipewire up and running for me - you can use the command `pw-top` to check out the pipewire node and device statistics.

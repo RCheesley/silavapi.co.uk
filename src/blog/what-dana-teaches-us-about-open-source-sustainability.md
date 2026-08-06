@@ -84,15 +84,12 @@ If you use Mautic, or benefit from open source marketing automation existing as 
 
 **Give what you can:**
 
--   [**Individual contributions**](https://mautic.org/2026-fundraiser/) of any amount make a collective difference. Even $10 matters when multiplied across a community. [Contribute to the fundraiser.](https://mautic.org/2026-fundraiser/)  
-      
-    
--   [**Mautic membership**](https://mau.tc/membership) provides ongoing sustainable income beyond this immediate crisis. Individual membership starts at $100 (pro-rated by country), organizational membership at $1,200 (also pro-rated). Half our annual budget comes from memberships. It's genuinely the lifeblood of the project. [Explore membership](https://mau.tc/membership).  
-      
-    
--   **Larger contributions or partnerships** might be an option if you're part of a larger organization that uses or benefits from Mautic.  My inbox is open at [ruth.cheesley@mautic.org](mailto:ruth.cheesley@mautic.org). Let's have that conversation.  
-      
-    
+-   [**Individual contributions**](https://mautic.org/2026-fundraiser/) of any amount make a collective difference. Even $10 matters when multiplied across a community. [Contribute to the fundraiser.](https://mautic.org/2026-fundraiser/)
+
+-   [**Mautic membership**](https://mau.tc/membership) provides ongoing sustainable income beyond this immediate crisis. Individual membership starts at $100 (pro-rated by country), organizational membership at $1,200 (also pro-rated). Half our annual budget comes from memberships. It's genuinely the lifeblood of the project. [Explore membership](https://mau.tc/membership).
+
+-   **Larger contributions or partnerships** might be an option if you're part of a larger organization that uses or benefits from Mautic.  My inbox is open at [ruth.cheesley@mautic.org](mailto:ruth.cheesley@mautic.org). Let's have that conversation.
+
 -   **Non-financial support** is a great way to practice dāna if you can't contribute financially to open source projects right now. For Mautic, share the [fundraiser](https://mautic.org/2026-fundraiser/) with your networks and why it's important to you. Spend a bit of time helping to answer questions in the [community forums](https://forum.mautic.org). Write documentation or work on other low- and no-code tasks (check our [backlog of low and no code tasks](https://mau.tc/no-code)). Test [new features and bug fixes](https://mau.tc/tester). Advocate for Mautic in your professional circles. All of this is dāna. Check our [contribution guidelines](https://mau.tc/contribute) if you need a steer on getting started.
 
 **Take what you need:** 
@@ -117,8 +114,8 @@ If you haven't yet, consider what you can give. Not out of obligation, but becau
 
 Give what you can. Take what you need. Together we go further, faster.
 
-Support Mautic's fundraiser at: **[mautic.org/2026-fundraiser](https://mautic.org/2026-fundraiser)  
-**  
-Explore membership at: **[mautic.org/membership](https://mau.tc/membership)  
-**  
+Support Mautic's fundraiser at: **[mautic.org/2026-fundraiser](https://mautic.org/2026-fundraiser)**
+
+Explore membership at: **[mautic.org/membership](https://mau.tc/membership)**
+
 Questions or want to discuss larger organisational support? Email me at: [**ruth.cheesley@mautic.org**](mailto:ruth.cheesley@mautic.org)

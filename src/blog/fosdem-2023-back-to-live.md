@@ -34,8 +34,7 @@ Later in the day I also met up with a Mautic community member who lived not too 
 
 I was also impressed with their attention to attendee safety with air filtration systems and one-way entry/exit flows throughout the day.
 
-Here are my top three sessions from the day:  
-  
+Here are my top three sessions from the day:
 
 -   [What I learned about leading a healthy project from speaking to 50+ maintainers](https://fosdem.org/2023/schedule/event/learned_leading_healthy_project/)
 -   [If it’s public money, make it public code - How to effectively push for Free Software all over Europe](https://fosdem.org/2023/schedule/event/public_money_public_code/)

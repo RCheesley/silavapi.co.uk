@@ -42,8 +42,8 @@ With limited resources and endless possibilities, open source leaders must const
 
 How do we evaluate which initiatives will have the most meaningful impact? What's going to be more beneficial, clearing down technical debt or adding another shiny new feature? Should we invest our time in empowering and mentoring others, or just getting things done because it's quicker and easier?
 
-Often I find that there's more to be done than people who can do it (a common thing in open source!), and what benefits most of all can simply be helping people to get unblocked, sparking off and maintaining their inspiration and enthusiasm, getting out of the way, and helping them to get going with contributing in the areas that they are passionate about.  
-  
+Often I find that there's more to be done than people who can do it (a common thing in open source!), and what benefits most of all can simply be helping people to get unblocked, sparking off and maintaining their inspiration and enthusiasm, getting out of the way, and helping them to get going with contributing in the areas that they are passionate about.
+
 I do find prioritising challenging as it can be so subjective. What one person sees as the most beneficial activity for you to be working on as a a leader in open source, another might completely disagree with. People often come to the table with a vested interest in certain outcomes, and as leaders of open source projects we have to balance what the project needs against what third party stakeholders want or expect.
 
 When a shiny new thing comes on the scene (looking at you, AI 👀) do you immediately disregard all the work you've been doing on establishing a stable base and implementing features that are fundamental to longer term goals, in pursuit of 'keeping up with the Jones'', or focus on what's already on the table? It's a tough one!

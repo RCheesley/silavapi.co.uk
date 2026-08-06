@@ -96,7 +96,7 @@ Managing one site it's fairly easy to add a reminder to your calendar or keep an
 
 It is important to remember that as soon as a Joomla! update announcement is made, vulnerabilities which are fixed by that update are out 'in the wild' - and therefore the longer you leave your site unpatched, the higher risk you are at from being compromised.
 
-Both Admin Tools and Akeeba Backup have built-in notification systems which will alert you regularly if your website is out of date or if your backup fails, but this can be quite inefficient when you're managing multiple websites.  
+Both Admin Tools and Akeeba Backup have built-in notification systems which will alert you regularly if your website is out of date or if your backup fails, but this can be quite inefficient when you're managing multiple websites.
 Automating and remotely monitoring sites
 
 When I was at the Joomla! World Conference I got chatting to Victor Drover - the face behind the popular Joomla! extension provider [Anything Digital](http://www.anything-digital.com "Anything Digital") (JCal Pro, sh404, Josetta and more) - and we got chatting about their latest service, [Watchful.li,](http://www.watchful.li "Watchful.li - remote backup, update and security monitoring for Joomla from a single dashboard") which they were launching at the World Conference as a sponsor.

@@ -168,7 +168,14 @@ function markerToShortcode(md) {
 }
 
 function prepHtml(rawHtml) {
-  const root = parseHtml(convertTweetme(rawHtml || ''), { comment: true });
+  // Move a trailing <br> that sits INSIDE an emphasis tag to after it, so
+  // Turndown doesn't strand the closing ** on its own line (which Markdown then
+  // renders literally). e.g. <strong><a>x</a><br></strong> → <strong><a>x</a></strong><br>
+  const cleaned = convertTweetme(rawHtml || '').replace(
+    /((?:<br\s*\/?>\s*)+)(<\/(?:strong|b|em|i)>)/gi,
+    '$2$1'
+  );
+  const root = parseHtml(cleaned, { comment: true });
   // Rewrite links.
   for (const a of root.querySelectorAll('a[href]')) {
     a.setAttribute('href', rewriteInternalHref(a.getAttribute('href')));
@@ -277,6 +284,7 @@ for (const r of published) {
   const bodyHtml = prepHtml((r.introtext || '') + '\n' + (r.fulltext || ''));
   const md = markerToShortcode(escapeStrayAngles(td.turndown(bodyHtml)))
     .replace(/^#{1,6}[ \t]*$/gm, '') // drop empty headings that survived conversion
+    .replace(/[ \t]+$/gm, '') // strip trailing whitespace (redundant hard breaks)
     .replace(/\n{3,}/g, '\n\n')
     .trim();
   const date = (r.publish_up || r.created || '').slice(0, 10);

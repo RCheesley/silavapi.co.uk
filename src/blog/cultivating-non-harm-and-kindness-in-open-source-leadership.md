@@ -31,11 +31,10 @@ The most direct application lies in how we interact. Open source communities - o
 Adhering to the principle of non-harm at the surface level means consciously avoiding:
 
 -   Abusive, harassing, or demeaning language in code reviews, issue trackers, forums, or chat.
-    
+
 -   Public shaming or personal attacks.
-    
+
 -   Creating an atmosphere where people feel unsafe to speak up or make mistakes.
-    
 
 This should really be covered directly within your project's Code of Conduct of course, but the first precept encourages us to go deeper than mere compliance with the rules. This is especially the case for leaders who are setting the culture, and therefore need to be exemplifying these principles.
 
@@ -52,9 +51,9 @@ There's more times than I care to admit where I've written out a response to a f
 Harm in open source isn't limited to direct interpersonal conflict, however. It can also manifest as:
 
 -   **Contributor burnout:** Pushing volunteers too hard, setting unrealistic expectations, or failing to appreciate contributions can cause significant mental and emotional harm.
-    
+
 -   **Neglecting well-being:** Creating a culture where overwork (by yourself as a leader, those you lead, and/or your volunteers) is glorified, harms individuals and can put at risk the long-term health of the project. It's easy to slide into this territory if you rely on volunteers contributing in their 'spare time' who might already be working a full week with their day job.
-    
+
 -   **Technical Harm:** Releasing insecure code, creating systems with inherent biases, or choosing technologies with significant negative environmental impacts (like energy-hungry blockchains or inefficient use of resources like CI/CD pipelines where there are other, more efficient options available) can cause widespread harm, even if unintentional.
 
 ## Actively cultivating kindness (Mettā)
@@ -62,17 +61,16 @@ Harm in open source isn't limited to direct interpersonal conflict, however. It 
 The First Precept isn't just about _not_ harming; it's much more about actively cultivating kindness and care. In Mautic, this translates to:
 
 -   **Welcoming Newcomers:** We try to ensure that we create a genuinely friendly and supportive onboarding experiences.
-    
+
 -   **Mentorship:** We're working on investing the time in nurturing the skills and confidence of others through buddying up with new contributors, joining projects like Google Summer of Code, Season of Docs, and hopefully this year, Outreachy.
-    
+
 -   **Constructive Feedback:** We try to frame critique in ways that encourage growth, not discouragement - especially with newer contributors who are still finding their feet. (This links closely to _Priyavadita_, Kind Speech, from the [Samgrahavastus](/blog/four-ancient-principles-every-open-source-leader-can-benefit-from-implementing/)).
-    
+
 -   **Appreciation:** I regularly and publicly acknowledge contributions of all kinds, and send personal notecards and stickers to people when they first contribute to Mautic. (linking to _Dana_, or generosity, from the [Samgrahavastus](/blog/four-ancient-principles-every-open-source-leader-can-benefit-from-implementing/)).
-    
+
 -   **Psychological Safety:** We're trying to build an environment where diverse perspectives are valued and people feel safe to experiment and learn. This is only sustainable when you have a diverse range of people who are in positions of power and can help to establish and maintain the needed conditions. We're definitely on a journey with this, still having quite a white-male-heavy leadership.
-    
+
 -   **Considering Impact:** We are trying to make conscious choices about technology and features with an awareness of their potential impact on users and the wider world - for example trying to optimise our code, reduce unnecessary reliance on infrastructure, etc.
-    
 
 Building a culture of kindness means fostering an environment where everyone is encouraged to genuinely support the thriving of contributors, users, and the project. In Mautic, we've called this value 'helping everyone to succeed with Mautic'. This sees people supporting each other even if they might be at companies who are technically rivals, folks sharing how-to and tutorial guides to help others do something which they do as a company as best practice, and a willingness to jump in and help each other with problems.
 
@@ -97,11 +95,10 @@ Like the other principles I've explored, this integrates personal development wi
 As open source leaders, let's consider:
 
 -   Where does our community currently stand regarding non-harm and kindness?
-    
+
 -   What are the subtle (or not-so-subtle) ways harm might be occurring?
-    
+
 -   What specific, practical steps can we take, individually and collectively, to strengthen this Diamond Pillar in our projects?
-    
 
 I believe that by consciously embedding the principles of non-harm and loving-kindness into our leadership and community culture, we can build open source projects that are not only technically excellent but also deeply humane and truly sustainable.
 

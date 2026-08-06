@@ -178,7 +178,7 @@ If you think you’d like to start a Mautic Meetup group in your local area, ple
 
 During Mautic Conference Global, I launched the first Mautic Community Survey which we are planning to repeat on an annual basis to learn more about how people are using Mautic, what they think about Mautic, and where the community feels we should be focusing our attention.
 
-Please do take a moment to complete the survey, read more about it in the announcement here: [https://www.mautic.org/blog/community/announcing-first-mautic-user-survey](https://www.mautic.org/blog/community/announcing-first-mautic-user-survey).   
+Please do take a moment to complete the survey, read more about it in the announcement here: [https://www.mautic.org/blog/community/announcing-first-mautic-user-survey](https://www.mautic.org/blog/community/announcing-first-mautic-user-survey). 
  
 
 ## Let’s see the numbers!

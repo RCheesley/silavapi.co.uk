@@ -17,17 +17,17 @@ One thing that I have been totally impressed by is the way in which the Kenyan G
 The first message was broadcast on their Twitter account in the early hours of the morning alerting some of the main news agencies in the area:
 
 > A serious fire at JKIA kindly take caution [@k24](https://twitter.com/k24)[@CapitalFM\_kenya](https://twitter.com/CapitalFM_kenya)[@StandardKenya](https://twitter.com/StandardKenya)[@momanyibernard](https://twitter.com/momanyibernard)[@CyrusOmbati](https://twitter.com/CyrusOmbati)[@fmukinda](https://twitter.com/fmukinda)[@easy\_fm](https://twitter.com/easy_fm)
-> 
+>
 > — Interior Ministry (@InteriorKE) [August 7, 2013](https://twitter.com/InteriorKE/statuses/364940031879688192)
 
 Further updates have been using the hashtag #JKIAFire - providing people with a way of monitoring the situation and ensuring that people can find correct and up to date information.  Updates are coming regularly, but not in a panicked way - the communication has been calm, measured, and appropriate.  Many people are commenting on how professionally the Interior Ministry are using Twitter to keep people updated:
 
 > UPDATE: Jomo Kenyatta International Airport in Nairobi closed all flights diverted to Mombasa, Dar es Salaam, and Entebbe [#JKIAFire](https://twitter.com/search?q=%23JKIAFire&src=hash)
-> 
+>
 > — Interior Ministry (@InteriorKE) [August 7, 2013](https://twitter.com/InteriorKE/statuses/365021327289106432)
 
 > An information center for departing passengers is being set up at the Domestic Terminals. [#JKIAFire](https://twitter.com/search?q=%23JKIAFire&src=hash)
-> 
+>
 > — Interior Ministry (@InteriorKE) [August 7, 2013](https://twitter.com/InteriorKE/statuses/365030308157992960)
 
 And ever since, there have been constant updates from the Interior Ministry, keeping people advised and giving people information about where to go if they have been stranded, responding to questions, helping people find out if their flights have been cancelled and more.  They are also re-tweeting people who have posted useful information or praise for the teams who are fighting the fire.

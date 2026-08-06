@@ -20,7 +20,7 @@ Just as traditional colonialism involved the occupation of physical territories 
 
 As scholar Michael Kwet explains in his influential work on the subject, digital colonialism functions through the control of the digital ecosystem:
 
-> _"The domination of sectors like cloud computing, search engines, and social media by a handful of corporations based in one region creates a situation where they can exercise imperial control over the digital lives of billions"  
+> _"The domination of sectors like cloud computing, search engines, and social media by a handful of corporations based in one region creates a situation where they can exercise imperial control over the digital lives of billions"
 > _(Kwet, 2019)
 
 ## Understanding digital colonialism in marketing
@@ -66,8 +66,8 @@ The growing volume and customisation of data makes migration increasingly diffic
 
 #### Capability lock-in
 
-Staff expertise becomes tied to the specific platform rather than underlying marketing principles, they know how to do &lt;insert task> in &lt;insert vendor>'s tool and they know what that tool allows them to do, rather than thinking about what they should/want to be able to do as marketers.  
-  
+Staff expertise becomes tied to the specific platform rather than underlying marketing principles, they know how to do &lt;insert task> in &lt;insert vendor>'s tool and they know what that tool allows them to do, rather than thinking about what they should/want to be able to do as marketers.
+
 These can have some pretty impactful effects on a business. If you don't have full access to your data, migrating would mean losing your entire customer engagement history. The cost here is more than just the technical cost to migrate, it's also in the loss of insights that often drives your entire marketing strategy.
 
 ### Phase 3 - extraction and control

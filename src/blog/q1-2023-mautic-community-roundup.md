@@ -106,9 +106,9 @@ The [new website](https://mauticon.mautic.org/) has also launched - big thanks
 We are looking for volunteers in the following areas:
 
 -   **Designers** - to help us design everything from the backdrops on the stage to the forum badges for attendees and speakers to images for social media. Join us on [Slack](https://mau.tc/slack-invite) in #design and #mauticon and let us know if you want to be involved!
--   **Track leads** - to run a set of sessions as MC, introducing the speaker, managing the Q&A process and generally keeping the sessions flowing smoothly.  
+-   **Track leads** - to run a set of sessions as MC, introducing the speaker, managing the Q&A process and generally keeping the sessions flowing smoothly.
      
--   **Support team** - to help on the day with managing the chat, responding to any questions and escalating any problems to the team  
+-   **Support team** - to help on the day with managing the chat, responding to any questions and escalating any problems to the team
      
 -   **Video team** - to help with rendering the session videos after the event
 
@@ -158,7 +158,7 @@ Growth in contributions since 2020. Source: Savannah CRM
 
 ### Most active contributors
 
-Over the last 90 days the most active contributors (based on the number of conversations) have been:  
+Over the last 90 days the most active contributors (based on the number of conversations) have been:
  
 
 Mohammed Abu Musa575

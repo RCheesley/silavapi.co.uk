@@ -31,9 +31,10 @@ cookie must add a row here and explain the justification in its pull request.
 For completeness (these are not cookies, are not sent to any server, and do not
 track anyone), the following browser storage may be used:
 
-| Key                | Storage        | Purpose                                                                                   | Introduced       |
-| ------------------ | -------------- | ----------------------------------------------------------------------------------------- | ---------------- |
-| `reader-text-size` | `localStorage` | Remembers the reader's chosen article text size (17 / 19 / 21px) on their own device only | In use (Phase 2) |
+| Key                 | Storage        | Purpose                                                                                                                       | Introduced       |
+| ------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `reader-text-size`  | `localStorage` | Remembers the reader's chosen article text size (17 / 19 / 21px) on their own device only                                     | In use (Phase 2) |
+| `mastodon-instance` | `localStorage` | Remembers the reader's own Mastodon instance so the "Share on Mastodon" link works next time. Device-only, never transmitted. | In use (Phase 3) |
 
 `localStorage` values stay on the visitor's device, are never transmitted, and
 carry no identifier. They are noted here in the spirit of full transparency.

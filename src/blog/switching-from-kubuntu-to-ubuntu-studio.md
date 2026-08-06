@@ -22,7 +22,7 @@ The main thing for me is that the entire OS is focused around the needs of the c
 
 According to the website, Ubuntu Studio is:
 
-> **_... the most widely used multimedia-orientated operating system in the world. It comes preinstalled with a selection of the most common [free](http://en.wikipedia.org/wiki/FLOSS) multimedia applications available, and is configured for best performance for various purposes: [Audio](https://ubuntustudio.org/tour/audio/), Graphics, [Video](https://ubuntustudio.org/tour/video/), [Photography](https://ubuntustudio.org/tour/photography/) and Publishing._**  
+> **_... the most widely used multimedia-orientated operating system in the world. It comes preinstalled with a selection of the most common [free](http://en.wikipedia.org/wiki/FLOSS) multimedia applications available, and is configured for best performance for various purposes: [Audio](https://ubuntustudio.org/tour/audio/), Graphics, [Video](https://ubuntustudio.org/tour/video/), [Photography](https://ubuntustudio.org/tour/photography/) and Publishing._**
 > _~ ubuntustudio.org_
 
 In addition to my music, I do also get involved with a fair amount of work with videos and graphics for the voluntary organisations I am involved with, so it seemed like a great match.

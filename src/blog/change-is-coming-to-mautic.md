@@ -38,18 +38,14 @@ Now is the time for us to find our new way forward, and I am excited to share wh
 
 Moving forward as an independent open source project, the key things we need to ensure for Mautic in any future organisational structure and governance model are that:
 
--   Mautic becomes a truly autonomous, self-governing open source project. The project’s governance and operation is free from any kind of external majority control.  
-      
-    
--   Mautic owns and manages its trademarks and brand resources. These are currently owned and managed by Acquia, who acquired them during the 2019 acquisition of Mautic Inc.  
-      
-    
--   Mautic is free and able to make decisions within its governance model that are in the best interest of the project.  
-      
-    
--   Mautic provides full transparency of financial and operational management within the project.  
-      
-    
+-   Mautic becomes a truly autonomous, self-governing open source project. The project’s governance and operation is free from any kind of external majority control.
+
+-   Mautic owns and manages its trademarks and brand resources. These are currently owned and managed by Acquia, who acquired them during the 2019 acquisition of Mautic Inc.
+
+-   Mautic is free and able to make decisions within its governance model that are in the best interest of the project.
+
+-   Mautic provides full transparency of financial and operational management within the project.
+
 -   Mautic is empowered and resourced to continue on its trajectory of growth into the future.
 
 These are fundamental requirements for the long term health and security of any open source project, not just for Mautic. With that in mind, I set about researching some of the options that might be open to us.
@@ -134,64 +130,62 @@ I will be running several webinars and office hours over the coming weeks if you
 ### Office Hours
 
 -   **Wednesday, 19th April** at [7 am UK time](https://everytimezone.com/s/9ffc44c8) (my office hours are at this time every fortnight) 
-    
+
     Video call link: [https://us02web.zoom.us/j/87562856285?pwd=TEJSSFJUQkd1ODJXK1VGK3lDR0I0Zz09](https://us02web.zoom.us/j/87562856285?pwd=TEJSSFJUQkd1ODJXK1VGK3lDR0I0Zz09)
-    
+
     Meeting ID: 875 6285 6285
-    
+
     Passcode: 210498
-    
+
 -   **Thursday, 20th April** at [2 pm UK time](https://everytimezone.com/s/f83424ae)
-    
+
     Video call link: [https://us02web.zoom.us/j/87471995567?pwd=cXdNaXNjWFJWcGF5Tmg2R1BYdFp2Zz09](https://us02web.zoom.us/j/87471995567?pwd=cXdNaXNjWFJWcGF5Tmg2R1BYdFp2Zz09)
-    
+
     Meeting ID: 874 7199 5567
-    
+
     Passcode: 296492
-    
+
 -   **Friday, 21st April** at [10am UK time](https://everytimezone.com/s/aefd197c)
-    
+
     Video call link: [https://us02web.zoom.us/j/85052425009?pwd=OWIvTUNrUTBPYjIvT28xeUhOalFSQT09](https://us02web.zoom.us/j/85052425009?pwd=OWIvTUNrUTBPYjIvT28xeUhOalFSQT09)
-    
+
     Meeting ID: 850 5242 5009
-    
+
     Passcode: 148977
-    
+
 -   **Thursday, 27th April** at [2pm UK time](https://everytimezone.com/s/f9f8f500) (my office hours are at this time every fortnight) 
-    
+
     Video call link: [https://us02web.zoom.us/j/86824099822?pwd=eWk1Q0NnMXQwOEdBQ21wbDdaeGhyUT09](https://us02web.zoom.us/j/86824099822?pwd=eWk1Q0NnMXQwOEdBQ21wbDdaeGhyUT09)
-    
+
     Meeting ID: 868 2409 9822
-    
+
     Passcode: 535689
-    
 
 ### Webinars
 
 -   **English language : Thursday 20th April at** [**2pm UK time**](https://everytimezone.com/s/617d68ad)
-    
+
     [https://us02web.zoom.us/j/87644421946?pwd=blBxSnBxTllYZEZqOUNXU2pjdjE2Zz09](https://us02web.zoom.us/j/87644421946?pwd=blBxSnBxTllYZEZqOUNXU2pjdjE2Zz09)
-    
+
     Meeting ID: 876 4442 1946
-    
+
     Passcode: 263299
-    
+
 -   **Portuguese language: Tuesday 25th April at** [**10am Brasilia Standard Time**](https://everytimezone.com/s/cae2534f)
-    
+
     [https://us02web.zoom.us/j/87893312489?pwd=T0ZBUC9nWDl6alV1QlJIM1owM3JtUT09](https://us02web.zoom.us/j/87893312489?pwd=T0ZBUC9nWDl6alV1QlJIM1owM3JtUT09)
-    
+
     Meeting ID: 878 9331 2489
-    
+
     Passcode: 008835
-    
+
 -   **Spanish language: Thursday 27th April at** [**6pm Central European Time**](https://everytimezone.com/s/ca274a7d)
-    
+
     [https://us02web.zoom.us/j/83094600035?pwd=V2xmV2F6UmUrTjZ5V3hPb1NSV0x4dz09](https://us02web.zoom.us/j/83094600035?pwd=V2xmV2F6UmUrTjZ5V3hPb1NSV0x4dz09)
-    
+
     Meeting ID: 830 9460 0035
-    
+
     Passcode: 751190
-    
 
 ## Support Mautic financially
 
