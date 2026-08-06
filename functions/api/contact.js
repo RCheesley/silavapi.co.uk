@@ -16,13 +16,18 @@
  * preferred. Until CONTACT_* env vars are set, delivery is treated as
  * unconfigured and the handler reports a 503 (there is no traffic pre-go-live).
  */
-import { validateSubmission, isSpam } from '../../lib/contact.js';
+import {
+  validateSubmission,
+  validateSpeakerEnquiry,
+  formatSpeakerMessage,
+  isSpam,
+} from '../../lib/contact.js';
 
 const wantsJson = (request) => (request.headers.get('accept') || '').includes('application/json');
 
 const redirect = (url, status = 303) => new Response(null, { status, headers: { location: url } });
 
-async function deliverEmail(env, { name, email, message }) {
+async function deliverEmail(env, { email, subject, text }) {
   const to = env.CONTACT_TO;
   const from = env.CONTACT_FROM; // e.g. "silavapi.co.uk contact form <form@silavapi.co.uk>"
   const key = env.RESEND_API_KEY;
@@ -37,18 +42,38 @@ async function deliverEmail(env, { name, email, message }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      reply_to: email,
-      subject: `New message via silavapi.co.uk from ${name}`,
-      text: `From: ${name} <${email}>\n\n${message}`,
-    }),
+    body: JSON.stringify({ from, to: [to], reply_to: email, subject, text }),
   });
   if (!res.ok) {
     const detail = await res.text().catch(() => '');
     throw new Error(`Email provider responded ${res.status}: ${detail.slice(0, 200)}`);
   }
+}
+
+// Route each form kind to its validator + email shape.
+function prepare(fields) {
+  if (fields._form === 'speaking') {
+    const { ok, errors, values } = validateSpeakerEnquiry(fields);
+    return {
+      ok,
+      errors,
+      email: {
+        email: values.email,
+        subject: `Speaking enquiry via silavapi.co.uk from ${values.name}`,
+        text: `From: ${values.name} <${values.email}>\n\n${formatSpeakerMessage(values)}`,
+      },
+    };
+  }
+  const { ok, errors, values } = validateSubmission(fields);
+  return {
+    ok,
+    errors,
+    email: {
+      email: values.email,
+      subject: `New message via silavapi.co.uk from ${values.name}`,
+      text: `From: ${values.name} <${values.email}>\n\n${values.message}`,
+    },
+  };
 }
 
 export async function onRequestPost({ request, env }) {
@@ -63,18 +88,21 @@ export async function onRequestPost({ request, env }) {
       : redirect('/contact/?error=1');
   }
 
+  // Where a native (no-JS) submission returns to on failure.
+  const formPath = fields._form === 'speaking' ? '/speaking/book/' : '/contact/';
+
   // Silently accept spam (no signal to bots), but never send it on.
   if (isSpam(fields)) return json ? Response.json({ ok: true }) : redirect('/thank-you/');
 
-  const { ok, errors, values } = validateSubmission(fields);
+  const { ok, errors, email } = prepare(fields);
   if (!ok) {
     return json
       ? Response.json({ ok: false, errors }, { status: 422 })
-      : redirect('/contact/?error=1');
+      : redirect(`${formPath}?error=1`);
   }
 
   try {
-    await deliverEmail(env, values);
+    await deliverEmail(env, email);
   } catch (err) {
     const status = err.code === 'UNCONFIGURED' ? 503 : 502;
     return json
@@ -82,7 +110,7 @@ export async function onRequestPost({ request, env }) {
           { ok: false, error: 'Sorry, sending failed. Please email me directly.' },
           { status }
         )
-      : redirect('/contact/?error=send');
+      : redirect(`${formPath}?error=send`);
   }
 
   return json ? Response.json({ ok: true }) : redirect('/thank-you/');

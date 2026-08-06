@@ -48,4 +48,31 @@ describe('POST /api/contact', () => {
     const data = await res.json();
     expect(data.ok).toBe(false);
   });
+
+  it('routes a speaker enquiry: invalid one bounces back to /speaking/book/', async () => {
+    const res = await onRequestPost({
+      request: formRequest({ _form: 'speaking', name: 'Ada', email: 'a@b.co' }),
+      env: CONFIGURED,
+    });
+    expect(res.status).toBe(303);
+    expect(res.headers.get('location')).toBe('/speaking/book/?error=1');
+  });
+
+  it('accepts a complete speaker enquiry (503 only because delivery is unconfigured)', async () => {
+    const res = await onRequestPost({
+      request: formRequest(
+        {
+          _form: 'speaking',
+          name: 'Ada',
+          email: 'a@b.co',
+          event: 'FOSDEM',
+          date: 'Feb',
+          topic: 'OSS',
+        },
+        { json: true }
+      ),
+      env: {},
+    });
+    expect(res.status).toBe(503); // validation passed; only delivery is unconfigured
+  });
 });

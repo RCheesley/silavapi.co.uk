@@ -1,0 +1,125 @@
+---
+layout: layouts/base.njk
+navActive: speaking
+title: Book me to speak
+permalink: /speaking/book/
+description: >
+  Invite Sīlavāpi (Ruth Cheesley) to speak at your event. A few details up front -
+  event, date, topic and format - so I can get back to you quickly.
+---
+{% from "macros/ui.njk" import sectionHeading %}
+
+<section>
+  <div class="prose-page">
+    <div class="stack">
+      {{ sectionHeading("Speaking", "Book me to speak", 1, "Tell me a little about your event and I'll get back to you. A few details up front - date, topic, format - save us both some back-and-forth.") }}
+      <p class="lead">
+        Before you write, my <a href="/speaking/rider/">speaker rider</a> covers what to
+        expect on fees, travel and accessibility. For anything that isn't a speaking
+        request, the <a href="/contact/">general contact form</a> is the place.
+      </p>
+
+      <div data-form-error role="alert" hidden>
+        <div class="alert alert--info">
+          <p class="alert__title">That didn’t send</p>
+          <p class="alert__body">
+            Something went wrong. Please try again, or email me directly at
+            <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>.
+          </p>
+        </div>
+      </div>
+
+      <form class="contact__form" method="post" action="/api/contact" novalidate data-enquiry-form>
+        <input type="hidden" name="_form" value="speaking" />
+        {# Honeypot + time-trap: cheap spam defence, no CAPTCHA. #}
+        <div class="field--trap" aria-hidden="true">
+          <label for="b-website">Leave this field empty</label>
+          <input id="b-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="_started" data-time-trap value="" />
+
+        <div class="contact__row">
+          <div class="field">
+            <label class="field__label" for="b-name">Your name <span class="field__req" aria-hidden="true">*</span></label>
+            <input class="input" id="b-name" name="name" type="text" required aria-required="true" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="b-email">Email address <span class="field__req" aria-hidden="true">*</span></label>
+            <input class="input" id="b-email" name="email" type="email" required aria-required="true" autocomplete="email" aria-describedby="b-email-hint" />
+            <p class="field__hint" id="b-email-hint">Only used to reply to you - never stored anywhere else.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="b-event">Event or organisation <span class="field__req" aria-hidden="true">*</span></label>
+          <input class="input" id="b-event" name="event" type="text" required aria-required="true" />
+        </div>
+
+        <div class="contact__row">
+          <div class="field">
+            <label class="field__label" for="b-date-start">Start date</label>
+            <input class="input" id="b-date-start" name="date_start" type="date" aria-describedby="b-date-hint" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="b-date-end">End date</label>
+            <input class="input" id="b-date-end" name="date_end" type="date" aria-describedby="b-date-hint" />
+          </div>
+        </div>
+        <p class="field__hint" id="b-date-hint">
+          For a single-day event, just the start date. Leave both blank if dates aren’t fixed yet.
+        </p>
+
+        <div class="contact__row">
+          <div class="field">
+            <label class="field__label" for="b-location">Location</label>
+            <input class="input" id="b-location" name="location" type="text" aria-describedby="b-location-hint" />
+            <p class="field__hint" id="b-location-hint">City / country, or “online”.</p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="b-format">Format</label>
+            <select class="select" id="b-format" name="format">
+              <option value="">No preference / not sure</option>
+              <option>Talk</option>
+              <option>Keynote</option>
+              <option>Workshop</option>
+              <option>Panel</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="b-audience">Rough audience size</label>
+          <input class="input" id="b-audience" name="audience" type="text" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="b-topic">What would you like me to speak about? <span class="field__req" aria-hidden="true">*</span></label>
+          <textarea class="textarea" id="b-topic" name="topic" rows="4" required aria-required="true"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="b-budget">Budget &amp; travel</label>
+          <input class="input" id="b-budget" name="budget" type="text" aria-describedby="b-budget-hint" />
+          <p class="field__hint" id="b-budget-hint">
+            Anything you can share helps - fee, expenses, whether travel is covered. See my
+            <a href="/speaking/rider/" target="_blank" rel="noopener">speaker rider</a> for what to expect.
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="b-message">Anything else</label>
+          <textarea class="textarea" id="b-message" name="message" rows="4"></textarea>
+        </div>
+
+        <div class="stack">
+          <button class="btn btn--primary" type="submit">Send enquiry</button>
+          <p class="contact__note">
+            No CAPTCHA, no cookies. This goes straight to my inbox and nowhere else.
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/js/enquiry.js" defer></script>

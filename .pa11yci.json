@@ -22,6 +22,8 @@
     "http://localhost:8080/thank-you/",
     "http://localhost:8080/speaking/",
     "http://localhost:8080/speaking/who-owns-your-data-open-source-digital-sovereignty-and-your-marketing-stack/",
-    "http://localhost:8080/speaking/podcasts/project-lead-office-hours-maintainer-month-how-mautic-is-maintained/"
+    "http://localhost:8080/speaking/podcasts/project-lead-office-hours-maintainer-month-how-mautic-is-maintained/",
+    "http://localhost:8080/speaking/book/",
+    "http://localhost:8080/speaking/rider/"
   ]
 }

@@ -497,7 +497,14 @@ a.tag:hover {
   color: var(--text-heading);
 }
 .field__req {
-  color: var(--action-accent-active); /* deeper pink: AA for small text */
+  color: var(--action-accent-active); /* deeper pink: AA on the light surface */
+}
+@media (prefers-color-scheme: dark) {
+  /* The deep pink is too dark on the dark surface; use the lighter pink (the
+     same one dark mode uses for accents) so the marker keeps AA contrast. */
+  .field__req {
+    color: var(--rc-pink-60);
+  }
 }
 .field__hint {
   font-size: var(--text-xs);
@@ -513,7 +520,8 @@ a.tag:hover {
   display: none;
 }
 .input,
-.textarea {
+.textarea,
+.select {
   width: 100%;
   min-height: var(--control-height);
   padding: var(--space-2) var(--space-4);
@@ -525,13 +533,18 @@ a.tag:hover {
   font-size: var(--text-base);
   transition: var(--transition-colors);
 }
+.select {
+  appearance: none;
+  cursor: pointer;
+}
 .textarea {
   min-height: 140px;
   resize: vertical;
   line-height: var(--leading-relaxed);
 }
 .input:hover,
-.textarea:hover {
+.textarea:hover,
+.select:hover {
   border-color: var(--rc-purple-light);
 }
 .input[aria-invalid='true'],

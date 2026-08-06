@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { validateSubmission, isSpam, MIN_FILL_MS, LIMITS } from '../../lib/contact.js';
+import {
+  validateSubmission,
+  validateSpeakerEnquiry,
+  formatSpeakerMessage,
+  formatEventDate,
+  isSpam,
+  MIN_FILL_MS,
+  LIMITS,
+} from '../../lib/contact.js';
 
 describe('validateSubmission', () => {
   const good = { name: 'Sīlavāpi', email: 'hello@example.com', message: 'Hi there!' };
@@ -31,6 +39,51 @@ describe('validateSubmission', () => {
 
   it('is safe with no argument', () => {
     expect(validateSubmission().ok).toBe(false);
+  });
+});
+
+describe('validateSpeakerEnquiry', () => {
+  const good = { name: 'Ada', email: 'a@b.co', event: 'FOSDEM', topic: 'Digital sovereignty' };
+
+  it('accepts a complete enquiry (dates optional) and trims all fields', () => {
+    const r = validateSpeakerEnquiry({ ...good, location: '  Brussels ' });
+    expect(r.ok).toBe(true);
+    expect(r.values.location).toBe('Brussels');
+  });
+
+  it('requires name, email, event and topic (dates are optional)', () => {
+    const r = validateSpeakerEnquiry({});
+    expect(r.ok).toBe(false);
+    expect(Object.keys(r.errors).sort()).toEqual(['email', 'event', 'name', 'topic']);
+  });
+
+  it('rejects a bad email', () => {
+    expect(validateSpeakerEnquiry({ ...good, email: 'nope' }).ok).toBe(false);
+  });
+
+  it('is safe with no argument', () => {
+    expect(validateSpeakerEnquiry().ok).toBe(false);
+  });
+});
+
+describe('formatEventDate', () => {
+  it('renders a single day, a range, and a flexible fallback', () => {
+    expect(formatEventDate({ date_start: '2027-02-06' })).toBe('2027-02-06');
+    expect(formatEventDate({ date_start: '2027-02-06', date_end: '2027-02-08' })).toBe(
+      '2027-02-06 to 2027-02-08'
+    );
+    expect(formatEventDate({})).toBe('Not set / flexible');
+  });
+});
+
+describe('formatSpeakerMessage', () => {
+  it('renders every field, with a dash for the blanks', () => {
+    const text = formatSpeakerMessage({ event: 'FOSDEM', date_start: '2027-02-06', topic: 'OSS' });
+    expect(text).toContain('Event / organisation: FOSDEM');
+    expect(text).toContain('Date: 2027-02-06');
+    expect(text).toContain('Location: —');
+    expect(text).toContain('Topic / what to speak about:');
+    expect(text).toContain('OSS');
   });
 });
 
