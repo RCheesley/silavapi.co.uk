@@ -123,7 +123,7 @@ Begin by mapping your current marketing technology landscape and identifying whe
 
 ### Explore your options
 
-Once you understand your current state, research the alternatives available. These might include self-hosting open source marketing tools like [Mautic](https://www.mautic.org), working with sovereign cloud providers who respect digital autonomy, or identifying SaaS vendors who offer greater transparency and control than your current providers.  
+Once you understand your current state, research the alternatives available. These might include self-hosting open source marketing tools like [Mautic](https://www.mautic.org), working with sovereign cloud providers who respect digital autonomy, or identifying SaaS vendors who offer greater transparency and control than your current providers.
 
 -   Consider open source alternatives
     -   Self-hosted on your own in-house infrastructure

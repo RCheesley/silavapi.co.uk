@@ -44,15 +44,15 @@ Unsurprisingly, the relentless pressure I piled on myself led to something of a 
 I started to experience crippling exhaustion which made it almost impossible to function, hand-in-hand with an epic decline in my mental health.
 
 > Why couldn’t I fix this?
-> 
+>
 > Why can’t I just get off my arse and get myself to work?
-> 
+>
 > This is completely stupid!
-> 
+>
 > You’re better than this!
-> 
+>
 > Don’t be so weak and feeble!
-> 
+>
 > Pull yourself together!
 
 Owch. It’s painful to even write those thoughts down, let alone own the fact that they were so viciously directed toward myself for many, many years.
@@ -165,7 +165,7 @@ My friends were simply fantastic. We had so much fun, I learned so much, and imp
 
 ![](https://cdn-images-1.medium.com/max/800/1*6iBxLsp75qDrfl2QzbOBhg.jpeg)
 
-Almost all of the Community Leadership Team at the Leadership Team Summit, 2014  
+Almost all of the Community Leadership Team at the Leadership Team Summit, 2014
 (side note: check out the wheelchair heels! :D )
 
 ### ‘Coming out’ as needing a wheelchair takes a LOT of courage
@@ -212,7 +212,7 @@ It took nearly a year before I was in a place to take him up on it, but that’s
 
 Later, I found a local trainer who worked with people who had disabilities and had experience with training clients who had EDS. [Samantha Muncaster](https://www.linkedin.com/in/samantha-muncaster-496593103/) from [Dilly’s PT](https://dillys.co.uk/) was simply amazing.
 
-![A photo of gym mats laid out on the floor with a hula hoop and boxing mitts in the foreground](https://cdn-images-1.medium.com/max/600/1*N_CBGizDmhYBZEoS9ls09Q.jpeg)The torture chamber. Otherwise known as a random room at Adastral Park where we trained twice a week!  
+![A photo of gym mats laid out on the floor with a hula hoop and boxing mitts in the foreground](https://cdn-images-1.medium.com/max/600/1*N_CBGizDmhYBZEoS9ls09Q.jpeg)The torture chamber. Otherwise known as a random room at Adastral Park where we trained twice a week!
 Everything from basic bodyweight training to boxing.
 
 Sam met me where I was at, pushed me within my limits, respected my boundaries when things weren’t doing so good, and most importantly, had unwavering confidence in my capability to get stronger both physically and mentally through consistent exercise.

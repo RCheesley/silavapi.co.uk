@@ -22,11 +22,13 @@
       }
       var instance = window.prompt('Your Mastodon instance (e.g. mastodon.social):', saved);
       if (!instance) return;
+      // Keep only the host[:port]: strip protocol and anything from the first
+      // path/query/hash character, then validate it looks like a hostname.
       instance = instance
         .trim()
-        .replace(/^https?:\/\//, '')
-        .replace(/\/.*$/, '');
-      if (!instance) return;
+        .replace(/^https?:\/\//i, '')
+        .replace(/[/?#].*$/, '');
+      if (!/^[a-z0-9.-]+(:\d+)?$/i.test(instance)) return;
       try {
         localStorage.setItem(KEY, instance);
       } catch (err) {

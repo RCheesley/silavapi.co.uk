@@ -227,7 +227,6 @@ Image caption
 
 Source: Google Search Console
 
-  
 When we factor in the Documentation site:
 
 Image

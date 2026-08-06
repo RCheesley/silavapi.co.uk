@@ -36,10 +36,10 @@
     </script>
     {# Reader text-size control: loaded in <head> on article pages so a saved
        size is applied before paint (no flash). #}
-    {% if readerControl %}
-      <script src="/assets/js/reader.js"></script>
-      <script src="/assets/js/share.js" defer></script>
-    {% endif %}
+    {% if readerControl %}<script src="/assets/js/reader.js"></script>{% endif %}
+    {# share.js loads everywhere: tweetables can appear on any page and it exits
+       early when there are none. #}
+    <script src="/assets/js/share.js" defer></script>
     {% block head %}{% endblock %}
   </head>
   <body>

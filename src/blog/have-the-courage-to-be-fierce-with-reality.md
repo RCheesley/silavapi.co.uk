@@ -16,7 +16,7 @@ sourceUrl: '/blog/personal-development/have-the-courage-to-be-fierce-with-realit
 
 Today's quote from '[Meditations for women who do too much](http://www.amazon.co.uk/Meditations-Women-Who-Too-Much/dp/0060736240 "Meditations for women who do too much!")' is:
 
-**_"You need to claim the events of your life to make yourself yours.  When you truly possess all you have been and done, which may take some time, you are fierce with reality."_**  
+**_"You need to claim the events of your life to make yourself yours.  When you truly possess all you have been and done, which may take some time, you are fierce with reality."_**
 ~ Flonda Scott Maxwell
 
 We often find at some point in our lives the need to take stock, look back on our life and review who we are and what we have done with our lives.  The effect can be quite strong, and for me it has led to an ongoing reflective process, through which I'm working on really being in the moment and seeing that I am at this point in time as a result of the conditions that arose in the past, and that where I go in the future is dependant on conditions yet to arise.  

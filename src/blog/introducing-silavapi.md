@@ -25,19 +25,19 @@ It was around 16 years ago that I decided that Buddhism was the path I wanted to
 Here’s the explanation that my private preceptor, **Acalavajrī**, gave when she shared my name publicly for the first time at the public ordination:
 
 > _Ruth's new name is rich with meaning. It comes from the Pāli words sīla, meaning ethical conduct or virtue, and vāpi, meaning a reservoir, lake or pond. It gives me great joy to introduce Sīlavāpi - ‘ she who is a lake of virtuous conduct.’ \[It's pronounced see-lah-vah-pee\]._
-> 
+>
 > _A lake isn’t fixed or permanent but it is sustaining - something that gathers and holds what is essential, and quietly nourishes life around it. It does not fill itself. It depends on what flows into it, and what is allowed to drain away. Every act of attention, every moment of reflection, every choice to repair harm or extend kindness adds something back. No lake remains at its fullest forever. But neither is it ever beyond replenishment. Ethical behaviour is not a fixed achievement. It is a living thing which we are responsible for sustaining._
-> 
-> _And this feels like a perfect reflection of who Sīlavāpi is. She is someone who brings integrity, kindness, wholeheartedness and care into the world - not in a dramatic or showy way, but in the quiet, consistent way that truly sustains others. She truly is a ‘lake of virtuous conduct’ a source of nourishment, refreshment and an inspiration to all that know her._  
->   
->  _Sīlavāpi's journey has been shaped not only by dedication, but also by courage. She has lived with physical pain and real uncertainty and rather than turning away from difficulty, she has met these conditions with courage, determination, and care, rebuilding strength and continuing to live fully and actively. Her resilience is deeply inspiring._  
->   
-> _She brings this same spirit into every part of her life. Through her work leading the global Mautic community she brings people together across countries and cultures, creating spaces of collaboration, trust, and shared purpose. She publicly ‘blogs’ about her practice of taking the precepts into her work and into the world. She shows, through her actions, that ethical practice is not separate from everyday life - it can guide how we work, how we lead, how we care for one another and how we contribute to the world._  
->   
-> _Perhaps most importantly though, she has done the deep inner work of transformation. Through her practice, she has learned to open to experience, to grow in self-awareness, and to cultivate trust - in herself, in others, and in the Dharma. Her practice of ethics is not theoretical; it is lived, day by day, in how she relates to the world._  
->   
-> _Sīlavāpi is also a musician, an endurance athlete, a community builder, and a devoted member of the sangha - someone who brings energy, generosity, and sincerity wherever she goes. She gives herself wholeheartedly - to her friends, to her community, and to the path she has chosen. There is a sincerity and depth to her commitment that is both moving and inspiring._   
->   
+>
+> _And this feels like a perfect reflection of who Sīlavāpi is. She is someone who brings integrity, kindness, wholeheartedness and care into the world - not in a dramatic or showy way, but in the quiet, consistent way that truly sustains others. She truly is a ‘lake of virtuous conduct’ a source of nourishment, refreshment and an inspiration to all that know her._
+>
+>  _Sīlavāpi's journey has been shaped not only by dedication, but also by courage. She has lived with physical pain and real uncertainty and rather than turning away from difficulty, she has met these conditions with courage, determination, and care, rebuilding strength and continuing to live fully and actively. Her resilience is deeply inspiring._
+>
+> _She brings this same spirit into every part of her life. Through her work leading the global Mautic community she brings people together across countries and cultures, creating spaces of collaboration, trust, and shared purpose. She publicly ‘blogs’ about her practice of taking the precepts into her work and into the world. She shows, through her actions, that ethical practice is not separate from everyday life - it can guide how we work, how we lead, how we care for one another and how we contribute to the world._
+>
+> _Perhaps most importantly though, she has done the deep inner work of transformation. Through her practice, she has learned to open to experience, to grow in self-awareness, and to cultivate trust - in herself, in others, and in the Dharma. Her practice of ethics is not theoretical; it is lived, day by day, in how she relates to the world._
+>
+> _Sīlavāpi is also a musician, an endurance athlete, a community builder, and a devoted member of the sangha - someone who brings energy, generosity, and sincerity wherever she goes. She gives herself wholeheartedly - to her friends, to her community, and to the path she has chosen. There is a sincerity and depth to her commitment that is both moving and inspiring._ 
+>
 > _Her new name, Sīlavāpi, reflects both her aspiration and the qualities she already embodies - but we are not just celebrating her new name, but a deepening of a lifelong commitment - her commitment to live ethically and to grow in wisdom and compassion for the sake of all beings._
 
 Quite a name, eh!

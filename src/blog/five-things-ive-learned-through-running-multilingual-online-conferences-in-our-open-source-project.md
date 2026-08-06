@@ -77,8 +77,8 @@ This is the main dictator of how many tracks we run at an event - if we have to 
 
 ## 5 - Enlist the help of your community with marketing and communications
 
-Something we haven't really done as well as we'd like, is being able to communicate with our audience in their first languages. In recent years, we've tried to involve our track leads and volunteers in helping us to translate the website, our marketing materials and communications, into other languages.   
-  
+Something we haven't really done as well as we'd like, is being able to communicate with our audience in their first languages. In recent years, we've tried to involve our track leads and volunteers in helping us to translate the website, our marketing materials and communications, into other languages. 
+
 This is much easier to do when you're organised well ahead and have a lot of time, but in many cases we ended up doing things at short notice, and didn't have time to get them translated.  Enlisting the help of your community can really support this process. Likewise being able to use a tool like Mautic where you're able to send translated versions of content automatically based on the language selected makes life much easier as an organiser!
 
 ## Conclusion

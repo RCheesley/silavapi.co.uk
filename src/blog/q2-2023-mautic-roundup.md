@@ -64,75 +64,75 @@ We are continuing to see a steady growth in contributions this quarter following
 
 Over the last 90 days the most active contributors (based on the number of conversations) have been:
 
-John Linhart 663  
-Mohammed Abu Musa    552  
-Joey Keller    524  
-Mattias Michaux    383  
-Dirk Spannaus    160  
-Sven Döring    155  
-Zdeno Kuzmany    135  
-Norman Pracht    125  
-Lenon Leite    92  
+John Linhart 663
+Mohammed Abu Musa    552
+Joey Keller    524
+Mattias Michaux    383
+Dirk Spannaus    160
+Sven Döring    155
+Zdeno Kuzmany    135
+Norman Pracht    125
+Lenon Leite    92
 Daniel Lord    91
 
 ## Most engaged contributors
 
 Our most engaged contributors (based on the number of connections they have made with others in the community) have been:
 
-Joey Keller    150  
-Dirk Spannaus    99  
-Jan Linhart Acquia Staff    69  
-Ionuţ Ojică    64  
-Michael Wolman    55  
-Mohammed Abu Musa    50  
-Norman Pracht 49  
-Oluwatobi Owolabi    48  
-Daniel Lord    36  
+Joey Keller    150
+Dirk Spannaus    99
+Jan Linhart Acquia Staff    69
+Ionuţ Ojică    64
+Michael Wolman    55
+Mohammed Abu Musa    50
+Norman Pracht 49
+Oluwatobi Owolabi    48
+Daniel Lord    36
 Dwayne Taylor    36
 
 ## Top contributors
 
 Our top contributors this quarter (based on the number of contributions they have made) have been:
 
-John Linhart 209  
-Mohammed Abu Musa 145  
-Mattias Michaux 50  
-Zdeno Kuzmany 34  
-Volha Pivavarchyk 25  
-Artem Lopata 24  
-Miroslav Fedeleš 22  
-Lenon Leite 21  
-Joey Keller 20  
+John Linhart 209
+Mohammed Abu Musa 145
+Mattias Michaux 50
+Zdeno Kuzmany 34
+Volha Pivavarchyk 25
+Artem Lopata 24
+Miroslav Fedeleš 22
+Lenon Leite 21
+Joey Keller 20
 Oluwatobi Owolabi 17
 
 ## Most active companies
 
 The companies who were most active in the Mautic Community (based on the number of conversations) are:
 
-Acquia 776  
-Steer Campaign 552  
-Friendly  528  
-Dropsolid 470  
-Leuchtfeuer Digital Marketing 306  
-Webmecanik 270  
-TwentyZen 169  
-Moorwald | Sven Döring 155  
-Codefive 102  
+Acquia 776
+Steer Campaign 552
+Friendly  528
+Dropsolid 470
+Leuchtfeuer Digital Marketing 306
+Webmecanik 270
+TwentyZen 169
+Moorwald | Sven Döring 155
+Codefive 102
 Texthelp 97
 
 ## Top contributing companies
 
 The companies who are contributing the most to the Mautic Community (based on the number of contributions) are:
 
-Acquia 250  
-Steer Campaign 145  
-Leuchtfeuer Digital Marketing 69   
-Dropsolid 66  
-Webmecanik 40   
-Aivie 28  
-Codefive 21  
-Friendly 20  
-Bluespace 17  
+Acquia 250
+Steer Campaign 145
+Leuchtfeuer Digital Marketing 69 
+Dropsolid 66
+Webmecanik 40 
+Aivie 28
+Codefive 21
+Friendly 20
+Bluespace 17
 Moorwald | Sven Döring 13
 
 ## Conclusion

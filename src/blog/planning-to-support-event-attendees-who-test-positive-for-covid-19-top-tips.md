@@ -37,9 +37,8 @@ Some of the things you might need to consider having documented are:
     -   How do they get there and back 
         -   Consider that they might be feeling quite unwell and unable to walk long distances
         -   In some regions you cannot use public transport or taxis - check this!
-    -   Pre-advise the attendees that they must have the capacity to pay for at least one private covid-19 test, maybe two in some countries, in the event that they attend and test positive - one for confirming the diagnosis (not generally covered by insurance) and one for the safe to return home test (sometimes covered by insurance but not always required - some will accept an antigen test and some countries don’t need this test) - as they may need to be done promptly, before the insurance case is opened (which will most likely require a positive covid-19 result obtained from a private clinic).  
-          
-        
+    -   Pre-advise the attendees that they must have the capacity to pay for at least one private covid-19 test, maybe two in some countries, in the event that they attend and test positive - one for confirming the diagnosis (not generally covered by insurance) and one for the safe to return home test (sometimes covered by insurance but not always required - some will accept an antigen test and some countries don’t need this test) - as they may need to be done promptly, before the insurance case is opened (which will most likely require a positive covid-19 result obtained from a private clinic).
+
 -   Who do they need to notify (e.g. local health authorities, track and trace)
     -   Have the telephone numbers / website addresses that they need to use to report their positive test results
     -   If the country of your event has a track and trace system (notifying possible close contacts) ensure you know how to access it, and how it works. Help the delegate to note down interactions outside of the event that they may have had.
@@ -54,9 +53,8 @@ Some of the things you might need to consider having documented are:
     -   The people identified as close contacts should be privately informed of the positive case, and take an antigen test - they may want to take a PCR test (which is more sensitive). Ideally they should take a lateral flow (antigen) test daily before attending your event/leaving their accommodation for at least four days if the first test is negative.
     -   Strongly encourage (or mandate as you see appropriate) those who have been identified as close contacts, to take stronger precautions. Full FFP2/N95 mask wearing at all times, regular hand antibacterial application, and avoiding contact with others as much as is possible.
     -   If it is possible for those people to engage with the event virtually e.g. via a live stream, you may wish to encourage them to do so.
-    -   You may wish to announce (AFTER you have privately informed all the close contacts) to the attendees that there has been a positive case (without sharing who, unless they give you consent to do so), and share what actions you are taking to make sure people are safe, explaining that all known close contacts have already been advised. Word spreads fast, it's better if it comes from you as the event organiser, in a clear and positive way, than through the rumour mill.  
-          
-        
+    -   You may wish to announce (AFTER you have privately informed all the close contacts) to the attendees that there has been a positive case (without sharing who, unless they give you consent to do so), and share what actions you are taking to make sure people are safe, explaining that all known close contacts have already been advised. Word spreads fast, it's better if it comes from you as the event organiser, in a clear and positive way, than through the rumour mill.
+
 -   What will you do to ensure that they can quarantine for the full duration required?
     -   Ensure you can extend the room booking for their accommodation (if a speaker or sponsor) or have some rooms on standby in case it’s attendees staying elsewhere who need to extend their stay - their accommodation might not be available after their check-out date
     -   Ensure attendees are aware of any mandatory quarantine periods before they attend, and ensure that they (if you’re not paying for the accommodation) can cover the cost of that extension in case their insurance requires them to pay upfront

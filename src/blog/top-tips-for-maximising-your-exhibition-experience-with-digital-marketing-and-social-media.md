@@ -22,17 +22,14 @@ Digital marketing offers many opportunities for engaging with people and brands 
 
 ## Set objectives
 
-The decision to exhibit at an event should always be made with the wider picture of your corporate goals and strategy. You should have clear, measurable expectations for the event, such as:  
-  
+The decision to exhibit at an event should always be made with the wider picture of your corporate goals and strategy. You should have clear, measurable expectations for the event, such as:
 
 -   Increasing brand awareness
 -   Growing your following on social media
 -   Growing your mailing list
 -   Direct or indirect sales of goods, products or services
 -   Lead generation
--   Networking opportunities  
-      
-    
+-   Networking opportunities
 
 Whatever your objectives might be, make sure you set them before the event.  For example, you might want to come away with at least three warm leads to follow up and to grow your mailing list by 25%. Another company might want to have sold a certain number of products or set up a number of product demonstrations.
 

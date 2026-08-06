@@ -103,7 +103,7 @@ If you're looking for work, be upfront and confident about what you need to work
 
 I often approach the topic when I'm at the negotiation stage, explaining that I am pretty good at managing my own health and wellbeing, but it would be really helpful if certain things could be put in place at work to enable me to continue with this - for example getting a proper desk and chair, being able to have compressed hours so you can rest mid-week (or working less than full time hours if that suits you better), having the flexibility to work from home, and so forth. 
 
-Some people ask if I'm fearful about losing the job offer when I am so upfront about my needs before contracts are signed?  
+Some people ask if I'm fearful about losing the job offer when I am so upfront about my needs before contracts are signed?
 Maybe.
 
 But ask yourself this.
@@ -128,10 +128,10 @@ Even better, we had some 'shower room' meeting spaces at my previous office whi
 
 You have to learn to notice what is causing you a problem, and explore ways to do things differently that might help with the problem. 
 
-_Can't spend more than half an hour typing at a time?_  
+_Can't spend more than half an hour typing at a time?_
 Break up your day into 30 minute chunks, and plan to switch between typing tasks and other tasks that aren't so keyboard-heavy. 
 
-_Struggle to be on your feet all day at an event?_  
+_Struggle to be on your feet all day at an event?_
 See if you can source a perching stool, so you can still be standing at eye-height, while taking the weight off your feet. 
 
 Don't expect everybody else to fix these things for you - my experience has been that I've had to be willing to do a lot of the leg work and be creative with figuring out what might be useful. 

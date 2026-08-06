@@ -160,7 +160,7 @@ Image
 
 ![Screenshot showing a steady growth in new members over the last 90 days](https://www.mautic.org/sites/default/files/2021-10/q3-members-growth.png)
 
-Over the last 90 days, our most active contributors (based on the number of conversations) have been:  
+Over the last 90 days, our most active contributors (based on the number of conversations) have been:
  
 
 Ruth Cheesley (she/her) 1257
@@ -213,7 +213,7 @@ Image
 
 ![Screenshot showing active, new and returning members.](https://www.mautic.org/sites/default/files/2021-10/active-new-existing-members.png)
 
-We are continuing to see a fairly steady flow of contributions coming into Mautic across all of our channels. Our top contributors this quarter are:  
+We are continuing to see a fairly steady flow of contributions coming into Mautic across all of our channels. Our top contributors this quarter are:
  
 
 Ruth Cheesley (she/her) 34

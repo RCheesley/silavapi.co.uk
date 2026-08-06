@@ -284,6 +284,7 @@ for (const r of published) {
   const bodyHtml = prepHtml((r.introtext || '') + '\n' + (r.fulltext || ''));
   const md = markerToShortcode(escapeStrayAngles(td.turndown(bodyHtml)))
     .replace(/^#{1,6}[ \t]*$/gm, '') // drop empty headings that survived conversion
+    .replace(/[ \t]+$/gm, '') // strip trailing whitespace (redundant hard breaks)
     .replace(/\n{3,}/g, '\n\n')
     .trim();
   const date = (r.publish_up || r.created || '').slice(0, 10);
