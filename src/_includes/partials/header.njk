@@ -6,19 +6,28 @@
       <img src="/assets/img/logo-symbol.png" alt="" width="40" height="40" />
       <span class="site-header__name">Sīlavāpi</span>
     </a>
-    <nav aria-label="Main" class="site-nav">
-      <ul class="site-nav__list">
-        {%- for item in nav.primary %}
-          <li>
-            <a
-              class="site-nav__link{{ ' is-active' if item.key == navActive }}"
-              href="{{ item.href }}"
-              {%- if item.key == navActive %} aria-current="page"{% endif %}
-              >{{ item.label }}</a
-            >
-          </li>
-        {%- endfor %}
-      </ul>
-    </nav>
+    <div class="site-header__end">
+      <nav aria-label="Main" class="site-nav">
+        <ul class="site-nav__list">
+          {%- for item in nav.primary %}
+            <li>
+              <a
+                class="site-nav__link{{ ' is-active' if item.key == navActive }}"
+                href="{{ item.href }}"
+                {%- if item.key == navActive %} aria-current="page"{% endif %}
+                >{{ item.label }}</a
+              >
+            </li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      {#- Colour-theme control. Hidden until theme.js reveals it (it does nothing
+          without JS; the site still follows the OS scheme via CSS). -#}
+      <div class="theme-toggle" role="group" aria-label="Colour theme" hidden>
+        <button class="theme-toggle__btn" type="button" data-theme-choice="light" aria-pressed="false" aria-label="Light theme" title="Light">{% icon "sun", 18 %}</button>
+        <button class="theme-toggle__btn" type="button" data-theme-choice="system" aria-pressed="false" aria-label="Match system theme" title="System">{% icon "monitor", 18 %}</button>
+        <button class="theme-toggle__btn" type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark theme" title="Dark">{% icon "moon", 18 %}</button>
+      </div>
+    </div>
   </div>
 </header>

@@ -30,6 +30,9 @@ const NEEDED = [
   'play',
   'map-pin',
   'calendar',
+  'sun',
+  'moon',
+  'monitor',
 ];
 
 await mkdir(OUT, { recursive: true });

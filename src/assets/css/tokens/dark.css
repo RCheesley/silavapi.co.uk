@@ -1,19 +1,67 @@
 /* Dark mode - overrides the *semantic* colour tokens only, so every component
    that uses semantic tokens themes automatically (BUILD_SPEC "Dark mode" spec).
    Brand hues are unchanged; photos stay un-filtered. Links use orange-light.
-   Body text keeps AAA contrast on the near-black aubergine-derived surface. */
+   Body text keeps AAA contrast on the near-black aubergine-derived surface.
+
+   The dark palette is applied in two situations so it works with AND without
+   JavaScript:
+     1. the reader explicitly chose Dark  -> :root[data-theme='dark']
+     2. no explicit choice + the OS prefers dark -> the @media block below
+        (theme.js otherwise resolves the choice by setting data-theme).
+   The two declaration blocks are identical; keep them in sync. `color-scheme`
+   is set alongside so native UI (scrollbars, form controls) matches the theme. */
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Surfaces - near-black derived from aubergine #120035 */
+  --surface-page: #161122;
+  --surface-subtle: #1e1730;
+  --surface-card: rgba(255, 255, 255, 0.04);
+  --surface-card-alt: rgba(255, 255, 255, 0.06);
+
+  /* Text - warm off-white, AAA on the dark surface */
+  --text-heading: #f6f2fb;
+  --text-body: #e9e3f2;
+  --text-muted: #b7afc7;
+  --text-eyebrow: var(--rc-purple-light-40);
+
+  /* Links - orange-light on dark, hover to a lighter tint */
+  --text-link: var(--rc-orange-light);
+  --text-link-hover: var(--rc-orange-light-40);
+
+  /* Lines */
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.24);
+
+  /* Focus ring on dark bands is orange-light */
+  --focus-ring: var(--rc-orange-light);
+
+  /* Chrome + accessible-alias overrides for dark mode. */
+  --header-bg: rgba(22, 17, 34, 0.85); /* near-black, translucent */
+  --nav-link-accent: var(--rc-pink-60); /* #F177AB ≈ 6.7:1 on dark */
+  --focus-outline: var(--rc-orange-light); /* focus ring on dark */
+}
+
+/* Explicit light choice: pin native UI to light even if the OS prefers dark. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    color-scheme: dark;
+
     /* Surfaces - near-black derived from aubergine #120035 */
     --surface-page: #161122;
-    --surface-subtle: #1E1730;
+    --surface-subtle: #1e1730;
     --surface-card: rgba(255, 255, 255, 0.04);
     --surface-card-alt: rgba(255, 255, 255, 0.06);
 
     /* Text - warm off-white, AAA on the dark surface */
-    --text-heading: #F6F2FB;
-    --text-body: #E9E3F2;
-    --text-muted: #B7AFC7;
+    --text-heading: #f6f2fb;
+    --text-body: #e9e3f2;
+    --text-muted: #b7afc7;
     --text-eyebrow: var(--rc-purple-light-40);
 
     /* Links - orange-light on dark, hover to a lighter tint */
@@ -27,10 +75,9 @@
     /* Focus ring on dark bands is orange-light */
     --focus-ring: var(--rc-orange-light);
 
-    /* Chrome + accessible-alias overrides for dark mode.
-       (--text-eyebrow is set once, in the Text section above.) */
-    --header-bg: rgba(22, 17, 34, 0.85); /* near-black, translucent */
-    --nav-link-accent: var(--rc-pink-60); /* #F177AB ≈ 6.7:1 on dark */
-    --focus-outline: var(--rc-orange-light); /* focus ring on dark */
+    /* Chrome + accessible-alias overrides for dark mode. */
+    --header-bg: rgba(22, 17, 34, 0.85);
+    --nav-link-accent: var(--rc-pink-60);
+    --focus-outline: var(--rc-orange-light);
   }
 }

@@ -12,7 +12,7 @@ Items are checked off as they land (with the PR that did it).
 ## UI / design
 
 - [x] Don't underline the name in the footer (brand lockup, not a text link). _(Phase 0)_
-- [ ] **Theme toggle:** add a light / dark / **system** control (today the site only follows `prefers-color-scheme`). Persist without cookies (localStorage), apply pre-paint to avoid a flash. _(Targeting Phase 1/2 with the reader controls.)_
+- [x] **Theme toggle:** a light / dark / **system** control in the header, persisted in `localStorage` (no cookies), applied pre-paint to avoid a flash; falls back to `prefers-color-scheme` without JS. _(Done on `theme-toggle`.)_
 
 ## Snags (bugs to fix)
 

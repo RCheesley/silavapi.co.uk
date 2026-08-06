@@ -259,6 +259,11 @@ select {
   font-size: var(--text-xl);
   color: var(--text-heading);
 }
+.site-header__end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
 .site-nav__list {
   display: flex;
   align-items: center;
@@ -266,6 +271,36 @@ select {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* Colour-theme control - a compact segmented icon group (light/system/dark). */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+.theme-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.theme-toggle__btn:hover {
+  color: var(--text-heading);
+}
+.theme-toggle__btn[aria-pressed='true'] {
+  background: var(--surface-card-alt);
+  color: var(--nav-link-accent);
 }
 .site-nav__list li {
   margin: 0;
@@ -297,8 +332,11 @@ select {
     flex-wrap: wrap;
     gap: var(--space-2) var(--space-5);
   }
-  .site-nav {
+  .site-header__end {
     width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-5);
   }
   .site-nav__list {
     flex-wrap: wrap;
