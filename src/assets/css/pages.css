@@ -462,6 +462,10 @@
   top: var(--space-3);
   left: var(--space-3);
 }
+/* Coverless upcoming cards show the badge in the body; keep it inline-sized. */
+.talk-card__flag {
+  justify-self: start;
+}
 .talk-card__body {
   display: grid;
   gap: var(--space-3);

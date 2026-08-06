@@ -23,12 +23,13 @@ speakingReadCategories:
 ---
 {% from "macros/ui.njk" import sectionHeading, button, badge, tag, articleCard %}
 {%- set talks = collections.talks -%}
-{%- set presentations = collections.talkPresentations -%}
 {%- set upcoming = collections.upcomingPresentations -%}
 {%- set past = collections.pastPresentations -%}
 {%- set podcasts = collections.podcasts -%}
-{%- set countries = presentations | presentationCountries -%}
-{%- set firstYear = (presentations | last).date.getFullYear() if presentations | length else buildTime().getFullYear() -%}
+{#- Stats describe talks already given, so they count past presentations only;
+    an upcoming talk appears in the "Coming up" section, not these totals. -#}
+{%- set countries = past | presentationCountries -%}
+{%- set firstYear = (past | last).date.getFullYear() if past | length else buildTime().getFullYear() -%}
 {%- set speakingReads = collections.posts | byCategories(speakingReadCategories) | limit(3) -%}
 
 <section>
@@ -49,12 +50,12 @@ speakingReadCategories:
   </div>
 </section>
 
-{% if presentations | length %}
-  {%- set keynoteCount = presentations | byFormat("Keynote") | length -%}
+{% if past | length %}
+  {%- set keynoteCount = past | byFormat("Keynote") | length -%}
   <section class="band">
     <div class="container section-y-sm">
       <dl class="stat-row">
-        <div><dd class="stat__num">{{ presentations | length }}</dd><dt class="stat__label">Talks given</dt></div>
+        <div><dd class="stat__num">{{ past | length }}</dd><dt class="stat__label">Talks given</dt></div>
         {% if keynoteCount %}<div><dd class="stat__num">{{ keynoteCount }}</dd><dt class="stat__label">Keynotes</dt></div>{% endif %}
         {% if podcasts | length %}<div><dd class="stat__num">{{ podcasts | length }}</dd><dt class="stat__label">Podcasts &amp; interviews</dt></div>{% endif %}
         <div><dd class="stat__num">{{ countries | length }}</dd><dt class="stat__label">Countries</dt></div>
@@ -90,6 +91,9 @@ speakingReadCategories:
               </div>
             {% endif %}
             <div class="talk-card__body">
+              {# Upcoming talks often have no cover/slides yet, so surface the badge
+                 here too; on the cover it sits over the image (above). #}
+              {% if not p.cover %}<span class="talk-card__flag">{{ badge("Upcoming", "accent") }}</span>{% endif %}
               <span class="talk-card__meta">{{ p.date | readableDate }}{% if p.event %} · {{ p.event }}{% endif %}{% if p.location.city %} · {{ p.location.city }}{% endif %}</span>
               <h3 class="talk-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
               {% if p.talk.data.excerpt %}<p class="article-card__excerpt">{{ p.talk.data.excerpt }}</p>{% endif %}
