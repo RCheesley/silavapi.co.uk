@@ -8,7 +8,7 @@ events:
     date: 2021-05-20
 abstract: >-
   Back in 2019, I started working as the Community Manager for Mautic - the world’s first Open Source Marketing Automation platform - after being a long term contributor, and in May 2020 I stepped up to lead the project. I used to think that it would be incredible to be paid to work full time for Open Source, and I still do! But - and there’s always a but! - when your passion becomes your profession there are also a lot of challenges and hurdles along the way. How do you keep that passion alive when it has become something you have to do, rather than something you choose to do when you want? How do you maintain separation between your working life and your personal life, if your passion was contributing to the project that you are now paid to work on? In this talk I will speak frankly and openly about some of the challenges I have faced, and share suggestions for how I am working with them on a daily basis.
-excerpt: 'Back in 2019, I started working as the Community Manager for Mautic - the world’s first Open Source Marketing Automation platform - after being a long term cont'
+excerpt: 'Back in 2019, I started working as the Community Manager for Mautic - the world’s first Open Source Marketing Automation platform - after being a long term…'
 tags:
   - 'Mautic'
   - 'Open source'

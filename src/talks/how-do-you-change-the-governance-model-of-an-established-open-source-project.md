@@ -24,7 +24,7 @@ events:
       country: be
 abstract: >-
   Picture the scene, you’re leading a popular open source project used by tens of thousands of businesses, and suddenly your founding company and primary funder steps back from the project. What will happen to the project? How do we move forward given that all of our governance model and decision making was tied up with the founding company? This session will explore some of the governance challenges that faced Mautic when this situation arose back in April 2023, and in particular we’ll dive into more detail on how we developed an entirely new governance model and decision making process. We will touch on issues including how we actually went about creating a new community-driven governance model in a collaborative way, allowing members of the community to have a say, through to the practicalities of how we implemented our new Community Portal for democratic decision making. This session is for you if you’re curious about all things governance and open source, if you’d like to know more about collaborative decision making and how this can be facilitated with open source software.
-excerpt: 'Picture the scene, you’re leading a popular open source project used by tens of thousands of businesses, and suddenly your founding company and primary funder s'
+excerpt: 'Picture the scene, you’re leading a popular open source project used by tens of thousands of businesses, and suddenly your founding company and primary funder…'
 cover: /assets/img/talks/how-do-you-change-the-governance-model-of-an-established-open-source-project.jpg
 slides: /assets/slides/how-do-you-change-the-governance-model-of-an-established-open-source-project.pdf
 tags:

@@ -162,6 +162,16 @@ const clean = (s) => (s || '').replace(/\s+/g, ' ').trim();
 const yamlStr = (s) => `'${String(s).replace(/'/g, "''")}'`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// A card excerpt: the abstract's first sentence, capped without cutting a word
+// mid-way (trims back to the last space and appends an ellipsis when shortened).
+function makeExcerpt(abstract, max = 160) {
+  if (!abstract) return '';
+  const first = abstract.split(/(?<=[.!?])\s/)[0].trim();
+  if (first.length <= max) return first;
+  const cut = first.slice(0, max).replace(/\s+\S*$/, ''); // drop the partial word
+  return `${(cut || first.slice(0, max)).replace(/[\s,;:–-]+$/, '')}…`;
+}
+
 function slugFromPath(p) {
   const seg = p.replace(/^\/+/, '').split('/');
   return (seg[1] || seg[0]).toLowerCase().replace(/[^a-z0-9-]/g, '');
@@ -333,7 +343,7 @@ function mergeGroup(items) {
     date: primary.date, // most recent = primary/sort date
     events,
     abstract,
-    excerpt: abstract ? abstract.split(/(?<=[.!?])\s/)[0].slice(0, 160) : '',
+    excerpt: makeExcerpt(abstract),
     video: items.map((i) => i.video).find(Boolean) || null,
     tags,
     resources,

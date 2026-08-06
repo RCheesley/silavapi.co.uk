@@ -6,7 +6,18 @@ describe('renderTalksMap', () => {
     const svg = renderTalksMap(['gb']);
     expect(svg.startsWith('<svg')).toBe(true);
     expect(svg).toContain('role="img"');
-    expect(svg).toContain('aria-label="World map highlighting the 1 countries');
+  });
+
+  it('pluralises the accessible label by count', () => {
+    expect(renderTalksMap(['gb'])).toContain('the 1 country where');
+    expect(renderTalksMap(['gb', 'us'])).toContain('the 2 countries where');
+    expect(renderTalksMap([])).toContain('the 0 countries where');
+  });
+
+  it('escapes XML-special characters in country <title> text', () => {
+    // No committed country name should leak a raw & into the markup.
+    const svg = renderTalksMap(['gb', 'us', 'fr', 'de']);
+    expect(svg).not.toMatch(/<title>[^<]*&(?!amp;|lt;|gt;)/);
   });
 
   it('marks highlighted countries active (case-insensitive) and adds a title', () => {

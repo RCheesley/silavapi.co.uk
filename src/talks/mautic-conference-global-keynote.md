@@ -8,7 +8,7 @@ events:
     date: 2021-06-17
 abstract: >-
   Join us for an update on the state of Mautic, what we’ve achieved over the past year since Mautic 3.0 was released, and some changes we are going to be making over the coming year.
-excerpt: 'Join us for an update on the state of Mautic, what we’ve achieved over the past year since Mautic 3.0 was released, and some changes we are going to be making o'
+excerpt: 'Join us for an update on the state of Mautic, what we’ve achieved over the past year since Mautic 3.0 was released, and some changes we are going to be making…'
 tags:
   - 'Mautic'
 resources:

@@ -12,7 +12,7 @@ events:
       country: be
 abstract: >-
   Join us to hear from Project Lead Ruth Cheesley on the state of Mautic, the outcomes from the recent Mautic Community Survey, and where we’re going to be focusing our attention over the coming years. We’ll cover how Mautic has developed since the formation of the governance model back in 2019, an overview of the progress that has been made over the past two years, and we will learn the strategic initiatives that are going to be focused on going into 2022 and beyond. We’ll also discuss the future roadmap for Mautic, and explore how contributors and organisations can play a part in defining Mautic’s future.
-excerpt: 'Join us to hear from Project Lead Ruth Cheesley on the state of Mautic, the outcomes from the recent Mautic Community Survey, and where we’re going to be focusi'
+excerpt: 'Join us to hear from Project Lead Ruth Cheesley on the state of Mautic, the outcomes from the recent Mautic Community Survey, and where we’re going to be…'
 cover: /assets/img/talks/the-mautic-update-2021.jpg
 slides: /assets/slides/the-mautic-update-2021.pdf
 tags:

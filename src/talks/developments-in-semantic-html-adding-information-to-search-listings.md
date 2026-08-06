@@ -30,7 +30,7 @@ events:
       country: nl
 abstract: >-
   There have been many developments in the world of semantic markup over the past few years, which are increasingly being given attention by search engines who are using data provided through adding contextual information to their search listings. As website developers, designers and implementers we need to be aware of these developments to ensure our websites are featured prominently in search result pages. This session will cover what semantic HTML is, how it can be used to provide contextual information along with examples, and how we can do this in Joomla! specifically. The session will also cover using Google+ to associate your authorship of material, creating template overrides with the relevant microdata, and how to go about troubleshooting microdata-related problems.
-excerpt: 'There have been many developments in the world of semantic markup over the past few years, which are increasingly being given attention by search engines who ar'
+excerpt: 'There have been many developments in the world of semantic markup over the past few years, which are increasingly being given attention by search engines who…'
 tags:
   - 'Joomla'
   - 'SEO'
