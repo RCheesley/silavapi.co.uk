@@ -8,8 +8,9 @@
  * baked into each page's <main data-pagefind-filter="section:...">.
  *
  * Pagefind (WASM + index) is loaded lazily on first open, so the homepage never
- * pays for it up front. The whole thing degrades to hidden if the index is
- * missing (e.g. `eleventy --serve`, which doesn't build the index).
+ * pays for it up front. The controls are revealed whenever JS runs; if the
+ * Pagefind index can't be loaded (e.g. `eleventy --serve`, which doesn't build
+ * it), the dialog opens and shows an "unavailable" message instead of results.
  */
 (function () {
   var dialog = document.querySelector('[data-search-dialog]');
@@ -58,8 +59,13 @@
       });
   }
 
-  function scopeLabel() {
-    return activeSection === 'blog' ? 'the blog' : 'the site';
+  // A readable noun for the current scope, used in labels and status messages.
+  // Only 'blog' and site-wide exist today; any other section falls back to a
+  // generic phrase so the announced label is never wrong for screen readers.
+  function scopeNoun() {
+    if (activeSection === 'blog') return 'the blog';
+    if (activeSection) return 'this section';
+    return 'the site';
   }
 
   function clearResults() {
@@ -69,7 +75,7 @@
   function renderResults(items, term) {
     clearResults();
     if (!items.length) {
-      setStatus('No results for “' + term + '” in ' + scopeLabel() + '.');
+      setStatus('No results for “' + term + '” in ' + scopeNoun() + '.');
       return;
     }
     setStatus(
@@ -148,11 +154,8 @@
     input.value = '';
     clearResults();
     setStatus('');
-    input.setAttribute(
-      'aria-label',
-      activeSection === 'blog' ? 'Search the blog' : 'Search the site'
-    );
-    input.placeholder = activeSection === 'blog' ? 'Search the blog' : 'Search';
+    input.setAttribute('aria-label', 'Search ' + scopeNoun());
+    input.placeholder = activeSection ? 'Search ' + scopeNoun() : 'Search';
     dialog.showModal();
     input.focus();
     loadPagefind();

@@ -19,13 +19,8 @@ test.describe('blog filter (progressive enhancement)', () => {
     await expect(page.locator('[data-blog-count]')).toContainText('in Buddhism');
   });
 
-  test('search filters cards and shows the empty state when nothing matches', async ({ page }) => {
-    await page.goto('/blog/');
-    await page.locator('[data-blog-search]').fill('zzzzzzz-no-match');
-    await expect(page.locator('.article-card:visible')).toHaveCount(0);
-    await expect(page.locator('[data-blog-empty]')).toBeVisible();
-    await expect(page.locator('[data-blog-count]')).toContainText('0 posts');
-  });
+  // Full-text blog search moved from an inline card filter to the Pagefind-backed
+  // dialog (data-search-open="blog"); it is covered in search.spec.js.
 });
 
 test.describe('article reader text-size', () => {
