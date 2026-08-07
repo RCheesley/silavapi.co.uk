@@ -1,6 +1,12 @@
 /** The set of built pages exercised by the functional + a11y suites. */
 export const PAGES = [
   { path: '/', name: 'Home', h1: /Hello, I'm Sīlavāpi\./ },
+  { path: '/about/', name: 'About', h1: /The longer story/ },
+  {
+    path: '/about/getting-ordained/',
+    name: 'About sub-page',
+    h1: /Getting ordained/,
+  },
   { path: '/dharma/', name: 'Dharma', h1: /A practice, not a hobby/ },
   { path: '/blog/', name: 'Blog', h1: /Writing on open source, dharma and life/ },
   {

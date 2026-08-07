@@ -283,6 +283,47 @@
   color: var(--text-on-dark-muted);
 }
 
+/* About index - "life to date" ordered list (chronological chapters) ------- */
+.about-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-5);
+}
+.about-list__item {
+  display: grid;
+  gap: var(--space-1);
+  padding-bottom: var(--space-5);
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+.about-list__item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.about-list__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+}
+.about-list__title a {
+  color: var(--text-heading);
+  text-decoration: none;
+}
+.about-list__title a:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.about-list__desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+
 /* Blog controls (chips + search) ------------------------------------------ */
 .blog-controls {
   display: flex;
@@ -329,6 +370,21 @@
 .prose-page img {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+}
+/* Captioned figures inside prose pages (e.g. photos on the About sub-pages). */
+.prose-page figure {
+  margin: var(--space-8) 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.prose-page figure img {
+  width: 100%;
+}
+.prose-page figcaption {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+  text-align: center;
 }
 .article__body :where(h2, h3),
 .prose-page :where(h2, h3) {
