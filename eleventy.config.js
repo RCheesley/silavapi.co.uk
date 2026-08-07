@@ -11,6 +11,7 @@ import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
 import { renderTalksMap } from './lib/world-map.js';
+import { renderGallery } from './lib/gallery.js';
 import {
   byCategories,
   byTags,
@@ -188,6 +189,11 @@ export default function (eleventyConfig) {
 
   // Self-hosted SVG world map highlighting the countries a set of talks were in.
   eleventyConfig.addShortcode('talksMap', (countries) => renderTalksMap(countries || []));
+
+  // Photo gallery (usable from Markdown post bodies): {% gallery "slug" %} renders
+  // the accessible figure-grid for that article, from src/_data/galleries.json.
+  const GALLERIES = JSON.parse(readFileSync(resolve(ROOT_DIR, 'src/_data/galleries.json'), 'utf8'));
+  eleventyConfig.addShortcode('gallery', (slug) => renderGallery(GALLERIES[slug] || []));
 
   // Mid-article pull quote (usable from Markdown post bodies).
   eleventyConfig.addShortcode('pullquote', (text, attribution = '') => {

@@ -628,6 +628,107 @@ a.tag:hover {
   color: var(--text-muted);
 }
 
+/* Photo gallery (recovered JoomlArt galleries) ---------------------------- */
+/* A plain, JS-free responsive grid of captioned figures. Each image keeps its
+   migrated alt text; captions render only where one exists. */
+.gallery {
+  margin: var(--space-8) 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+.gallery__figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.gallery__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.gallery__caption {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
+/* The image links to its full size (lightbox with JS); hint that it's zoomable. */
+.gallery__link {
+  display: block;
+  border-radius: var(--radius-md);
+  cursor: zoom-in;
+}
+.gallery__link:hover .gallery__img {
+  filter: brightness(0.94);
+}
+.gallery__link:focus-visible {
+  outline: var(--border-width-strong) solid var(--focus-outline);
+  outline-offset: 3px;
+}
+
+/* Lightbox dialog (gallery-lightbox.js) ----------------------------------- */
+.lightbox {
+  max-width: 92vw;
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  overflow: visible;
+}
+.lightbox::backdrop {
+  background: rgb(0 0 0 / 80%);
+  backdrop-filter: var(--blur-glass);
+}
+.lightbox__figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+  justify-items: center;
+}
+.lightbox__img {
+  max-width: 92vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+.lightbox__caption {
+  margin: 0;
+  max-width: 70ch;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--rc-white);
+  text-align: center;
+}
+.lightbox__caption:empty {
+  display: none;
+}
+.lightbox__close {
+  position: absolute;
+  top: calc(-1 * var(--space-6));
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--rc-white);
+  color: var(--rc-ink);
+  font-size: var(--text-lg);
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__close:hover {
+  background: var(--rc-grey-200);
+}
+
 /* Search dialog ----------------------------------------------------------- */
 /* Native <dialog>, opened by the header search icon. Docks near the top so the
    results grow downward without shifting the input. */

@@ -83,4 +83,8 @@ Would I do it again?
 
 Absolutely! Training starts on Monday for the London Ultra 55km race which will be my first A-to-B non-stop ultramarathon, in October 2022 as my B race, and my A race will be Endure24 next year where I'm aiming for 60 miles!
 
+## Photos from Endure24
+
+{% gallery "my-first-long-distance-race-endure24-reading" %}
+
 \* Affiliate link
