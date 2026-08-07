@@ -59,6 +59,39 @@ different provider, swap the `deliverEmail` function in
 `functions/api/contact.js` - everything else is provider-agnostic. Keep the
 credential in Cloudflare only; never in the repo.
 
+## Blog comments
+
+Comments are file-based and moderated. A reader posts on a blog post →
+`functions/api/comment.js` validates + spam-checks it, then **commits a pending
+file** to the repo at `src/_data/comments/<post-slug>/<id>.json` (via the GitHub
+API) and emails you a **one-click approve link**. Clicking it
+(`functions/api/approve.js`) flips `approved: true` and commits, triggering a
+rebuild that publishes the comment. Replies are the same flow with a `parent`
+id; the build threads them. No cookies, no third party, and the commenter's
+email is **never stored** (it only rides along in the moderation email so you
+can reply personally).
+
+Like the contact form, this is inert until you set the Cloudflare env vars
+(the handler returns 503, and the form still validates client-side):
+
+| Variable         | Example                    | Notes                                                        |
+| ---------------- | -------------------------- | ------------------------------------------------------------ |
+| `GITHUB_TOKEN`   | _(secret)_                 | fine-grained PAT, **Contents: read/write** on this repo only |
+| `GITHUB_REPO`    | `RCheesley/silavapi.co.uk` | `owner/name`                                                 |
+| `GITHUB_BRANCH`  | `main`                     | optional, defaults to `main`                                 |
+| `COMMENT_SECRET` | _(secret)_                 | random string; signs the approve links (HMAC)                |
+| `SITE_URL`       | `https://silavapi.co.uk`   | used to build the approve link                               |
+
+Reuses `RESEND_API_KEY` / `CONTACT_TO` / `CONTACT_FROM` (above) for the
+notification email. Create the token at GitHub → Settings → Developer settings →
+**Fine-grained tokens**, scoped to this repo with **Contents: Read and write**,
+then add all of the above under Cloudflare Pages → Settings → Environment
+variables (mark the token + secret as **encrypted**).
+
+To moderate without the email you can also flip `approved` to `true` directly in
+the file on GitHub. Unapproved comment files are harmless (never rendered); prune
+any spam files at your leisure.
+
 ## The old domain
 
 `ruthcheesley.co.uk` is kept serving **301 redirects indefinitely** to the new

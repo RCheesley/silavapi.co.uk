@@ -11,6 +11,7 @@ import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import { readableDate, isoDate } from './lib/dates.js';
 import { renderTalksMap } from './lib/world-map.js';
+import { threadComments, countComments } from './lib/comments.js';
 import {
   byCategories,
   byTags,
@@ -244,6 +245,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('groupByYear', groupByYear);
   // Unique ISO alpha-2 country codes across a set of presentation rows (map).
   eleventyConfig.addFilter('presentationCountries', presentationCountries);
+  // Blog comments: thread a post's comment store into an approved, nested tree.
+  eleventyConfig.addFilter('threadComments', threadComments);
+  eleventyConfig.addFilter('countComments', countComments);
 
   // --- Global build metadata ---------------------------------------------
   eleventyConfig.addGlobalData('buildTime', () => new Date());

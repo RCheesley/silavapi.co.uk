@@ -47,6 +47,8 @@ readerControl: true
   </div>
 </article>
 
+{% if not noComments %}{% include "partials/comments.njk" %}{% endif %}
+
 {% if related | length %}
   <section class="surface-subtle-band" aria-label="Related posts">
     <div class="container section-y-sm stack">
