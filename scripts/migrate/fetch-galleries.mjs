@@ -9,12 +9,13 @@
  * Usage: node scripts/migrate/fetch-galleries.mjs
  */
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { resolve, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseHtml } from 'node-html-parser';
 import sharp from 'sharp';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const IMG_DIR = resolve(ROOT, 'src/assets/img');
 const OLD_ORIGIN = 'https://www.ruthcheesley.co.uk';
 const UA = 'Mozilla/5.0 (gallery recovery; silavapi.co.uk)';
 const MAX_W = 1400;
@@ -32,17 +33,23 @@ const ARTICLES = {
 };
 
 // Mirror migrate.mjs: decode segments; sanitise for the local filename but
-// re-encode for the fetch URL so it still resolves on the old site.
+// re-encode for the fetch URL so it still resolves on the old site. Returns null
+// on anything malformed - the src comes from a scraped page, so it is untrusted.
 function mapImage(srcRaw) {
-  const clean = decodeURIComponent(String(srcRaw).split('#')[0].split('?')[0]).replace(/^\/+/, '');
+  let decoded;
+  try {
+    decoded = decodeURIComponent(String(srcRaw).split('#')[0].split('?')[0]);
+  } catch {
+    return null; // invalid percent-encoding
+  }
+  const clean = decoded.replace(/^\/+/, '');
   if (!/^images\//i.test(clean)) return null;
   const segs = clean.split('/');
+  const localSegs = segs.slice(1).map((s) => s.replace(/[^\w.-]+/g, '-').replace(/-+/g, '-'));
+  // Reject empty or dot segments so a crafted path can't escape src/assets/img/.
+  if (localSegs.some((s) => s === '' || s === '.' || s === '..')) return null;
   const fetchUrl = OLD_ORIGIN + '/' + segs.map((s) => encodeURIComponent(s)).join('/');
-  const localRel = segs
-    .slice(1)
-    .map((s) => s.replace(/[^\w.-]+/g, '-').replace(/-+/g, '-'))
-    .join('/');
-  return { fetchUrl, local: '/assets/img/' + localRel };
+  return { fetchUrl, local: '/assets/img/' + localSegs.join('/') };
 }
 
 // Alt text for gallery images that had none on the old site (keyed by the local
@@ -81,6 +88,11 @@ async function download(fetchUrl, local) {
   if (existsSync(resolve(ROOT, 'src' + local))) return { local, skipped: true };
   const finalLocal = local.replace(/\.png$/i, '.jpg');
   const dest = resolve(ROOT, 'src' + finalLocal);
+  // Defence in depth: never write outside src/assets/img/ (mapImage already
+  // rejects dot segments, but the write path is the thing that must be safe).
+  if (dest !== IMG_DIR && !dest.startsWith(IMG_DIR + sep)) {
+    throw new Error(`refusing to write outside images dir: ${finalLocal}`);
+  }
   if (existsSync(dest)) return { local: finalLocal, skipped: true };
   const res = await fetch(fetchUrl, { headers: { 'User-Agent': UA } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
