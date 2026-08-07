@@ -48,6 +48,14 @@ describe('validateComment', () => {
     ).toBeTruthy();
   });
 
+  it('keeps a valid parent id but drops a forged/oversized one', () => {
+    expect(validateComment({ ...good, parent: 'a1b2-c3' }).values.parent).toBe('a1b2-c3');
+    expect(validateComment({ ...good, parent: '../../etc' }).values.parent).toBe('');
+    expect(validateComment({ ...good, parent: 'x'.repeat(65) }).values.parent).toBe('');
+    // a forged parent doesn't block an otherwise-valid comment
+    expect(validateComment({ ...good, parent: 'bad parent!' }).ok).toBe(true);
+  });
+
   it('is safe with no argument', () => {
     expect(validateComment().ok).toBe(false);
   });

@@ -1,15 +1,18 @@
 /**
- * POST /api/comment - receive a blog comment, store it as a pending file in the
- * repo (via the GitHub API), and email the moderator a one-click approve link.
- * Comments render at build time once approved. No cookies, no third-party JS.
+ * POST /api/comment - receive a blog comment, store it as a pending file on the
+ * holding branch (via the GitHub API), and email the moderator one-click
+ * approve + reject links. Nothing reaches main (so nothing rebuilds/publishes)
+ * until it is approved. No cookies, no third-party JS.
  *
- * Env: GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH?, COMMENT_SECRET, SITE_URL,
- * plus RESEND_API_KEY / CONTACT_TO / CONTACT_FROM for the notification.
+ * Env: GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH?, GITHUB_PENDING_BRANCH?,
+ * COMMENT_SECRET, SITE_URL, plus RESEND_API_KEY / CONTACT_TO / CONTACT_FROM.
  */
 import { validateComment, buildComment, signApproval } from '../../lib/comments.js';
 import { isSpam } from '../../lib/contact.js';
-import { putFile } from './_github.js';
+import { putFile, ensureBranch } from './_github.js';
 import { deliverEmail } from './_email.js';
+
+const PENDING = (env) => env.GITHUB_PENDING_BRANCH || 'comments-pending';
 
 function isConfigured(env) {
   return Boolean(env.GITHUB_TOKEN && env.GITHUB_REPO && env.COMMENT_SECRET);
@@ -36,17 +39,20 @@ function redirect(location) {
   return new Response(null, { status: 303, headers: { Location: location } });
 }
 
-function notifyText(v, approveUrl) {
+function notifyText(v, approveUrl, rejectUrl) {
   return [
     `New comment on: ${v.slug}${v.parent ? ` (reply to ${v.parent})` : ''}`,
     `From: ${v.name}${v.email ? ` <${v.email}>` : ' (no email given)'}`,
     '',
     v.comment,
     '',
-    '--- Approve it (one click):',
+    '--- Approve (publishes it):',
     approveUrl,
     '',
-    'It stays hidden until you approve. Ignore this email to leave it unpublished.',
+    '--- Reject (deletes it from the queue):',
+    rejectUrl,
+    '',
+    'It stays hidden until you approve. Ignoring this email leaves it queued.',
   ].join('\n');
 }
 
@@ -77,20 +83,32 @@ export async function onRequestPost({ request, env }) {
   const path = `src/_data/comments/${values.slug}/${id}.json`;
 
   try {
-    await putFile(env, path, record, `Comment on ${values.slug} (pending approval)`);
+    // Store on the holding branch (created from main if it doesn't exist yet),
+    // so nothing reaches main / the live build until approved.
+    await ensureBranch(env, PENDING(env));
+    await putFile(
+      env,
+      path,
+      record,
+      `Comment on ${values.slug} (pending)`,
+      undefined,
+      PENDING(env)
+    );
   } catch {
     return wantsJson ? json(502, { ok: false }) : redirect(`${back}?error=1#comment-form`);
   }
 
-  // Notify + approve link. Best-effort: the comment is already saved, so a mail
-  // hiccup shouldn't fail the request (it can still be approved via GitHub).
+  // Notify + approve/reject links. Best-effort: the comment is already saved, so
+  // a mail hiccup shouldn't fail the request (it can still be handled on GitHub).
   try {
-    const sig = await signApproval(env.COMMENT_SECRET, `${values.slug}:${id}`);
     const site = String(env.SITE_URL || '').replace(/\/$/, '');
-    const approveUrl = `${site}/api/approve?slug=${encodeURIComponent(values.slug)}&id=${id}&sig=${sig}`;
+    const link = async (action) => {
+      const sig = await signApproval(env.COMMENT_SECRET, `${action}:${values.slug}:${id}`);
+      return `${site}/api/moderate?action=${action}&slug=${encodeURIComponent(values.slug)}&id=${id}&sig=${sig}`;
+    };
     await deliverEmail(env, {
       subject: `New comment awaiting approval — ${values.slug}`,
-      text: notifyText(values, approveUrl),
+      text: notifyText(values, await link('approve'), await link('reject')),
       replyTo: values.email || undefined,
     });
   } catch {

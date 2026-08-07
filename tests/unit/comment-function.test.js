@@ -1,6 +1,9 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { onRequestPost } from '../../functions/api/comment.js';
-import { onRequestGet } from '../../functions/api/approve.js';
+import {
+  onRequestGet as moderateGet,
+  onRequestPost as moderatePost,
+} from '../../functions/api/moderate.js';
 import { signApproval } from '../../lib/comments.js';
 
 function formRequest(fields, { json = false } = {}) {
@@ -64,66 +67,140 @@ describe('POST /api/comment', () => {
     expect(loc.startsWith('/blog/')).toBe(true);
   });
 
-  it('commits a pending comment file and emails a signed approve link', async () => {
+  it('commits a pending comment to the holding branch and emails both links', async () => {
     const calls = [];
     vi.stubGlobal(
       'fetch',
       vi.fn(async (url, opts) => {
-        calls.push({ url: String(url), method: opts?.method, body: opts?.body });
-        return new Response('{}', { status: 200 });
+        calls.push({ url: String(url), method: opts?.method || 'GET', body: opts?.body });
+        return new Response('{}', { status: 200 }); // ref check "exists", puts ok
       })
     );
     const res = await onRequestPost({ request: formRequest(valid, { json: true }), env: ENV });
     expect(res.status).toBe(200);
     expect((await res.json()).pending).toBe(true);
 
-    const gh = calls.find((c) => c.url.includes('api.github.com'));
-    expect(gh.method).toBe('PUT');
-    expect(gh.url).toContain('/contents/src/_data/comments/introducing-silavapi/');
+    const put = calls.find((c) => c.method === 'PUT' && c.url.includes('/contents/'));
+    expect(put.url).toContain('/contents/src/_data/comments/introducing-silavapi/');
+    expect(JSON.parse(put.body).branch).toBe('comments-pending');
 
     const mail = calls.find((c) => c.url.includes('resend.com'));
-    expect(mail.body).toContain('/api/approve?slug=introducing-silavapi');
+    expect(mail.body).toContain('/api/moderate?action=approve&slug=introducing-silavapi');
+    expect(mail.body).toContain('/api/moderate?action=reject&slug=introducing-silavapi');
   });
 });
 
-describe('GET /api/approve', () => {
+function moderateGetReq(qs) {
+  return new Request(`https://x/api/moderate?${qs}`);
+}
+function moderatePostReq(fields) {
+  const body = new FormData();
+  for (const [k, v] of Object.entries(fields)) body.set(k, v);
+  return new Request('https://x/api/moderate', { method: 'POST', body });
+}
+function readFile() {
+  const content = btoa(JSON.stringify({ id: 'abc123', approved: false }));
+  return new Response(JSON.stringify({ sha: 'sha1', content }), { status: 200 });
+}
+
+describe('GET /api/moderate (confirmation only, no side effect)', () => {
   afterEach(() => vi.unstubAllGlobals());
 
-  it('rejects a tampered/invalid signature', async () => {
-    const req = new Request('https://x/api/approve?slug=post&id=abc123&sig=deadbeef');
-    const res = await onRequestGet({ request: req, env: ENV });
-    expect(res.status).toBe(403);
+  it('rejects a tampered signature', async () => {
+    const req = moderateGetReq('action=approve&slug=post&id=abc123&sig=deadbeef');
+    expect((await moderateGet({ request: req, env: ENV })).status).toBe(403);
   });
 
-  it('rejects a malformed id', async () => {
-    const req = new Request('https://x/api/approve?slug=post&id=../x&sig=y');
-    const res = await onRequestGet({ request: req, env: ENV });
-    expect(res.status).toBe(400);
+  it('rejects an unknown action', async () => {
+    const s = await signApproval(ENV.COMMENT_SECRET, 'delete:post:abc123');
+    const req = moderateGetReq(`action=delete&slug=post&id=abc123&sig=${s}`);
+    expect((await moderateGet({ request: req, env: ENV })).status).toBe(400);
   });
 
-  it('flips approved to true with a valid signature', async () => {
-    const sig = await signApproval(ENV.COMMENT_SECRET, 'post:abc123');
-    let put = null;
+  it('shows a confirm page and never mutates on GET (prevents link-prefetch)', async () => {
+    const sig = await signApproval(ENV.COMMENT_SECRET, 'approve:post:abc123');
+    const seen = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url, opts) => {
+        seen.push({ method: opts?.method || 'GET' });
+        return readFile();
+      })
+    );
+    const res = await moderateGet({
+      request: moderateGetReq(`action=approve&slug=post&id=abc123&sig=${sig}`),
+      env: ENV,
+    });
+    expect(res.status).toBe(200);
+    const body = await res.text();
+    expect(body).toContain('Approve this comment?');
+    expect(body).toContain('<form method="post"');
+    expect(seen.every((c) => c.method === 'GET')).toBe(true); // no PUT/DELETE
+  });
+});
+
+describe('POST /api/moderate (performs the action)', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('approve: publishes to main (approved:true) and deletes from the queue', async () => {
+    const sig = await signApproval(ENV.COMMENT_SECRET, 'approve:post:abc123');
+    const seen = [];
     vi.stubGlobal(
       'fetch',
       vi.fn(async (url, opts) => {
         const method = opts?.method || 'GET';
-        if (method === 'GET') {
-          const content = btoa(JSON.stringify({ id: 'abc123', approved: false }));
-          return new Response(JSON.stringify({ sha: 'sha1', content }), { status: 200 });
-        }
-        put = JSON.parse(opts.body);
-        return new Response('{}', { status: 200 });
+        seen.push({ method, body: opts?.body });
+        return method === 'GET' ? readFile() : new Response('{}', { status: 200 });
       })
     );
-    const req = new Request(`https://x/api/approve?slug=post&id=abc123&sig=${sig}`);
-    const res = await onRequestGet({ request: req, env: ENV });
+    const res = await moderatePost({
+      request: moderatePostReq({ action: 'approve', slug: 'post', id: 'abc123', sig }),
+      env: ENV,
+    });
     expect(res.status).toBe(200);
     expect(await res.text()).toContain('approved');
-    // the committed file now has approved: true
+
+    const put = seen.find((c) => c.method === 'PUT');
+    expect(JSON.parse(put.body).branch).toBe('main');
     const written = JSON.parse(
-      new TextDecoder().decode(Uint8Array.from(atob(put.content), (c) => c.charCodeAt(0)))
+      new TextDecoder().decode(
+        Uint8Array.from(atob(JSON.parse(put.body).content), (c) => c.charCodeAt(0))
+      )
     );
     expect(written.approved).toBe(true);
+    expect(JSON.parse(seen.find((c) => c.method === 'DELETE').body).branch).toBe(
+      'comments-pending'
+    );
+  });
+
+  it('reject: deletes from the queue, never touches main', async () => {
+    const sig = await signApproval(ENV.COMMENT_SECRET, 'reject:post:abc123');
+    const seen = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url, opts) => {
+        const method = opts?.method || 'GET';
+        seen.push({ method, body: opts?.body });
+        return method === 'GET' ? readFile() : new Response('{}', { status: 200 });
+      })
+    );
+    const res = await moderatePost({
+      request: moderatePostReq({ action: 'reject', slug: 'post', id: 'abc123', sig }),
+      env: ENV,
+    });
+    expect(res.status).toBe(200);
+    expect(await res.text()).toContain('rejected');
+    expect(seen.some((c) => c.method === 'PUT')).toBe(false);
+    expect(JSON.parse(seen.find((c) => c.method === 'DELETE').body).branch).toBe(
+      'comments-pending'
+    );
+  });
+
+  it('rejects a tampered signature on POST too', async () => {
+    const res = await moderatePost({
+      request: moderatePostReq({ action: 'approve', slug: 'post', id: 'abc123', sig: 'nope' }),
+      env: ENV,
+    });
+    expect(res.status).toBe(403);
   });
 });
