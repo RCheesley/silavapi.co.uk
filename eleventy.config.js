@@ -21,6 +21,7 @@ import {
   presentationsOf,
   presentationCountries,
 } from './lib/talks.js';
+import { relatedPosts } from './lib/related.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
 const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -125,6 +126,8 @@ export default function (eleventyConfig) {
   // Posts sharing at least one tag with the given list. Used to surface writing
   // relevant to a specific talk (matched on the talk's tags).
   eleventyConfig.addFilter('byTags', byTags);
+  // Related blog posts: shared category (weighted) + shared tags, topped up to n.
+  eleventyConfig.addFilter('relatedPosts', relatedPosts);
 
   // --- Shortcodes ---------------------------------------------------------
   // Inline a vendored Lucide SVG (currentColor, 1.5px stroke, decorative).
