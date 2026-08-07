@@ -40,3 +40,7 @@ At the end, I really appreciated the closing activity where we all shared three 
 It was a really great way to end an engaging and inspiring time together, and to hear everyone else's input also gave us a lot of food for thought.
 
 A huge thanks to Kerry for such an inspiring and engaging day, and to the Breathworks team for all the wonderful work you're doing every single day that makes a real difference to the lives of many folk suffering with pain, illness and disability.
+
+## Photos from the day
+
+{% gallery "first-breathworks-in-person-board-meeting" %}

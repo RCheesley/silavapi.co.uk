@@ -74,6 +74,10 @@ I’ll make some updates to the website, domain and brand fairly soon, but for t
 
 I start back at work on Monday 13 July, so until then I’m fairly 'out of the loop'. My good friend **Chiara Aliotta‑Baras** at **[Until Sunday](https://untilsunday.it)** is cooking up some ideas for my branding, so watch this space for updates.
 
+## Photos from the retreat
+
+{% gallery "introducing-silavapi" %}
+
 ## Questions?
 
 If you've got any questions or you would like to leave any comments please do so below. I'll respond as I'm able!

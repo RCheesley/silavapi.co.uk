@@ -64,3 +64,7 @@ I then repeated the challenge in 2024, making 50 miles and running throughout th
 I decided to explore multi-sport after being sidelined from running for 18 months with a frozen shoulder and then a very badly broken wrist which needed surgery which meant all my training had to shift to bike-based workouts.
 
 In December 2024 I did my first Duathlon event at Dorney Lakes (standard distance - 10k run, 40k bike, 5k run) which was hard, and then I joined the local triathlon club and worked towards the Culford Sprint Triathlon (400m pool swim, 20k bike ride, 4k run) which I absolutely loved. My focus currently is on triathlon as I have found something I really enjoy, even more than long distance running!
+
+## A few race-day photos
+
+{% gallery "runner" %}
