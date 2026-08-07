@@ -67,8 +67,9 @@
         </div>
         <div class="field">
           <label class="field__label" for="cm-email">Email <span class="field__hint-inline">(optional)</span></label>
-          <input class="input" id="cm-email" name="email" type="email" autocomplete="email" aria-describedby="cm-email-hint" />
+          <input class="input" id="cm-email" name="email" type="email" autocomplete="email" aria-describedby="cm-email-hint cm-email-error" />
           <p class="field__hint" id="cm-email-hint">Only used if I need to reply - never shown or stored.</p>
+          <p class="field__error" id="cm-email-error" role="alert" aria-live="assertive"></p>
         </div>
       </div>
       <div class="field">

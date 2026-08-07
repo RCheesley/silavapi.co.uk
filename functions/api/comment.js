@@ -15,11 +15,14 @@ function isConfigured(env) {
   return Boolean(env.GITHUB_TOKEN && env.GITHUB_REPO && env.COMMENT_SECRET);
 }
 
-// Only same-site absolute paths may be used as the post return URL.
+// Only same-site absolute paths may be used as the post return URL. Strip any
+// CR/LF first (header-injection defence) and sanitise the fallback slug, since
+// both feed into the redirect Location.
 function safeReturn(returnField, slug) {
-  const r = String(returnField || '');
+  const r = String(returnField || '').replace(/[\r\n]/g, '');
   if (/^\/(?!\/)/.test(r)) return r.split(/[?#]/)[0];
-  return `/blog/${slug}/`;
+  const safeSlug = String(slug || '').replace(/[^a-z0-9-]/g, '');
+  return `/blog/${safeSlug}/`;
 }
 
 function json(status, data) {

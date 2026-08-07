@@ -110,9 +110,9 @@
       ok = false;
     } else fieldError('cm-comment', '');
     if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-      email.setAttribute('aria-invalid', 'true');
+      fieldError('cm-email', 'That email address doesn’t look quite right.');
       ok = false;
-    } else email.removeAttribute('aria-invalid');
+    } else fieldError('cm-email', '');
     return ok;
   }
 

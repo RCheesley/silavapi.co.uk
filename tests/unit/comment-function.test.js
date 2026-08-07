@@ -49,6 +49,21 @@ describe('POST /api/comment', () => {
     expect(res.status).toBe(503);
   });
 
+  it('sanitises the redirect Location (strips CR/LF, no header injection)', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => new Response('{}', { status: 200 }))
+    );
+    const res = await onRequestPost({
+      request: formRequest({ ...valid, return: '/blog/x/\r\nSet-Cookie: evil=1' }),
+      env: ENV,
+    });
+    expect(res.status).toBe(303);
+    const loc = res.headers.get('location');
+    expect(loc).not.toMatch(/[\r\n]/);
+    expect(loc.startsWith('/blog/')).toBe(true);
+  });
+
   it('commits a pending comment file and emails a signed approve link', async () => {
     const calls = [];
     vi.stubGlobal(
