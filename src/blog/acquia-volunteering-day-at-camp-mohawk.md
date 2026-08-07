@@ -22,3 +22,7 @@ On the day we rocked up, this involved stripping back some old safety matting ar
 Sounds like an easy job, right .... trust me, we were absolutely exhausted by the end of the day!
 
 It was a really great way to get to know other Acquians, some of whom I know in passing from Slack and others who I would never have otherwise encountered. Bonding over pickaxes and wheelbarrows full of heavy, clay-filled soil was certainly an experience we won't forget in a hurry, and it was a delight to see the families enjoying using the roundabout a few weeks after we finished!
+
+## Photos from the day
+
+{% gallery "acquia-volunteering-day-at-camp-mohawk" %}
