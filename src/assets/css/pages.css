@@ -104,20 +104,20 @@
   flex-wrap: wrap;
 }
 
-/* Dharma hero ------------------------------------------------------------- */
-.dharma-hero {
+/* Page hero (shared: dharma + about) - prose beside a portrait ------------- */
+.page-hero {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: var(--space-11);
   align-items: start;
   padding-block: var(--section-y);
 }
-.dharma-hero__prose {
+.page-hero__prose {
   display: grid;
   gap: var(--space-6);
   justify-items: start;
 }
-.dharma-hero__prose p {
+.page-hero__prose p {
   margin: 0;
   font-size: var(--text-md);
   line-height: var(--leading-loose);
@@ -394,7 +394,7 @@
 /* Responsive collapses for the two-column page layouts. */
 @media (max-width: 820px) {
   .about,
-  .dharma-hero,
+  .page-hero,
   .contact {
     grid-template-columns: 1fr;
     gap: var(--space-8);
