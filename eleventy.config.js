@@ -193,7 +193,11 @@ export default function (eleventyConfig) {
   // Photo gallery (usable from Markdown post bodies): {% gallery "slug" %} renders
   // the accessible figure-grid for that article, from src/_data/galleries.json.
   const GALLERIES = JSON.parse(readFileSync(resolve(ROOT_DIR, 'src/_data/galleries.json'), 'utf8'));
-  eleventyConfig.addShortcode('gallery', (slug) => renderGallery(GALLERIES[slug] || []));
+  eleventyConfig.addShortcode('gallery', (slug) =>
+    // Own-property check so a slug like "__proto__" can't resolve to a
+    // prototype value (renderGallery also coerces, but be explicit here).
+    renderGallery(Object.hasOwn(GALLERIES, slug) ? GALLERIES[slug] : [])
+  );
 
   // Mid-article pull quote (usable from Markdown post bodies).
   eleventyConfig.addShortcode('pullquote', (text, attribution = '') => {

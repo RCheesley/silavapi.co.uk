@@ -9,6 +9,11 @@ describe('renderGallery', () => {
     expect(renderGallery([{ alt: 'no src' }, null])).toBe('');
   });
 
+  it('coerces a non-array input to empty (e.g. a bad slug via the shortcode)', () => {
+    expect(renderGallery('not-an-array')).toBe('');
+    expect(renderGallery({})).toBe('');
+  });
+
   it('renders an empty alt when an item has no alt text', () => {
     expect(renderGallery([{ src: '/a.jpg' }])).toContain('alt=""');
   });

@@ -46,6 +46,10 @@
 
   links.forEach(function (link) {
     link.addEventListener('click', function (e) {
+      // Let modified / non-primary clicks fall through to the plain link, so
+      // Ctrl/Cmd/middle-click still opens the full image in a new tab.
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+        return;
       e.preventDefault();
       var inner = link.querySelector('img');
       open(link.getAttribute('href'), inner ? inner.getAttribute('alt') : '');

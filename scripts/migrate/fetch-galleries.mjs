@@ -104,6 +104,10 @@ const failures = [];
 
 for (const [slug, path] of Object.entries(ARTICLES)) {
   const res = await fetch(OLD_ORIGIN + path, { headers: { 'User-Agent': UA } });
+  if (!res.ok) {
+    failures.push(`${slug}: page fetch HTTP ${res.status}`);
+    continue;
+  }
   const root = parseHtml(await res.text());
   const article = root.querySelector('.item-page') || root;
   const wrap = article.querySelector('.ja-gallery-list-wrap');
