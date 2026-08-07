@@ -11,6 +11,8 @@
   },
   "urls": [
     "http://localhost:8080/",
+    "http://localhost:8080/about/",
+    "http://localhost:8080/about/getting-ordained/",
     "http://localhost:8080/dharma/",
     "http://localhost:8080/blog/",
     "http://localhost:8080/contact/",
