@@ -5,7 +5,7 @@ readerControl: true
 ---
 {% from "macros/ui.njk" import badge, tag, articleCard, sectionHeading %}
 {%- set tone = categories.tones[category] or "neutral" -%}
-{%- set related = collections.posts | rejectattr("url", "equalto", page.url) | limit(3) -%}
+{%- set related = collections.posts | relatedPosts(page.url, category, tags, 3) -%}
 
 <article>
   <div class="article__head">
@@ -52,7 +52,7 @@ readerControl: true
 {% if related | length %}
   <section class="surface-subtle-band" aria-label="Related posts">
     <div class="container section-y-sm stack">
-      {{ sectionHeading("Keep reading", "More writing", 2) }}
+      {{ sectionHeading("Keep reading", "Related posts", 2) }}
       <div class="card-grid">
         {% for post in related %}
           {{ articleCard({
