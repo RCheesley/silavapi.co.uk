@@ -10,6 +10,11 @@ In June 2026 I was ordained into the Triratna Buddhist Order on an 11 week ordin
 
 For many people outside Buddhist circles, ordination can sound mysterious, or like a step that takes you out of ordinary life. In [Triratna](https://thebuddhistcentre.com/triratna), it has a very particular meaning which is both radical and very down to earth. This page is my attempt to explain what ordination is, why I chose it, and how it sits alongside my work and life in the world.
 
+<figure>
+  <img src="/assets/img/blog/2026/ordination/acalavajri-silavapi-subhadramati-resized.png" alt="Sīlavāpi in ordination robes, standing between two members of the Triratna Buddhist Order, all smiling." loading="lazy" />
+  <figcaption>With Acalavajrī and Subhadramati, just after my ordination in the mountains of Aragón.</figcaption>
+</figure>
+
 ## What ordination means in Triratna
 
 In Triratna, the central act of being a Buddhist is Going for Refuge to the Three Jewels:
