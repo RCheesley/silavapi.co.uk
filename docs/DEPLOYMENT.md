@@ -59,6 +59,80 @@ different provider, swap the `deliverEmail` function in
 `functions/api/contact.js` - everything else is provider-agnostic. Keep the
 credential in Cloudflare only; never in the repo.
 
+## Blog comments
+
+Comments are file-based and moderated, and **unapproved comments never reach
+`main`** (so they never rebuild or appear on the live site).
+
+**Flow.** A reader posts → `functions/api/comment.js` validates + spam-checks it,
+then commits the comment as `src/_data/comments/<post-slug>/<id>.json` to a
+**holding branch** (`comments-pending`, created from `main` automatically if it
+doesn't exist), and emails you **one-click Approve and Reject links**:
+
+- **Approve** (`functions/api/moderate.js`) writes the file to `main` with
+  `approved: true` (which rebuilds and publishes it) and removes it from the
+  queue.
+- **Reject** deletes the pending file — it never touches `main`.
+
+Replies are the same flow with a `parent` id; the build threads them. The
+commenter's email is **never stored** (it only rides along in the moderation
+email so you can reply personally). HMAC-signed links; honeypot + time-trap
+spam defence (obvious bot spam is dropped without being stored at all).
+
+**Spam that slips past the bot checks** simply sits unapproved on
+`comments-pending` (never on `main`, never shown). Reject it from the email, or
+delete the file on the pending branch — either way it costs no production build.
+
+**Keeping the queue current.** `.github/workflows/sync-comments-pending.yml`
+merges `main` into `comments-pending` nightly (and creates the branch if
+missing), so the queue doesn't drift from the live content. It uses the built-in
+Actions token — no setup needed.
+
+Like the contact form, this is inert until you set the Cloudflare env vars
+(the handler returns 503, and the form still validates client-side):
+
+| Variable                | Example                    | Notes                                                        |
+| ----------------------- | -------------------------- | ------------------------------------------------------------ |
+| `GITHUB_TOKEN`          | _(secret)_                 | fine-grained PAT, **Contents: read/write** on this repo only |
+| `GITHUB_REPO`           | `RCheesley/silavapi.co.uk` | `owner/name`                                                 |
+| `GITHUB_BRANCH`         | `main`                     | optional, defaults to `main` (the published branch)          |
+| `GITHUB_PENDING_BRANCH` | `comments-pending`         | optional, defaults to `comments-pending` (the queue)         |
+| `COMMENT_SECRET`        | _(secret)_                 | random string; signs the approve/reject links (HMAC)         |
+| `SITE_URL`              | `https://silavapi.co.uk`   | used to build the moderation links                           |
+
+Reuses `RESEND_API_KEY` / `CONTACT_TO` / `CONTACT_FROM` (above) for the
+notification email. Create the token at GitHub → Settings → Developer settings →
+**Fine-grained tokens**, scoped to this repo with **Contents: Read and write**,
+then add all of the above under Cloudflare Pages → Settings → Environment
+variables (mark the token + secret as **encrypted**).
+
+### Abuse hardening
+
+Comment endpoints attract spam, so the system is defended in layers:
+
+- **Nothing publishes without a click** (approve-first) and unapproved comments
+  never reach `main`, so spam can't appear on the live site.
+- **Honeypot + time-trap** drop obvious bots without storing anything.
+- **Moderation is POST-behind-a-confirmation** (`/api/moderate` GET only shows a
+  confirm page) so email/link scanners that issue GET requests can't auto-approve
+  or auto-reject. Links are **HMAC-signed** (unforgeable without `COMMENT_SECRET`).
+- **Stored content is escaped** at render (no HTML from commenters), the
+  commenter email is never stored, paths are validated (no traversal), and the
+  redirect `Location` is CR/LF-sanitised.
+
+**Required at go-live — a Cloudflare rate-limit rule on `/api/comment`.** The one
+thing the code can't do statelessly is stop a flood (each accepted POST is a
+GitHub commit + an email). Add a WAF **Rate limiting rule**: path equals
+`/api/comment`, method `POST`, e.g. **5 requests / minute per IP**, action
+_Block_. This is cookie-free, needs no JS, and stops flood abuse at the edge.
+
+**Optional escalation if spam persists — Cloudflare Turnstile.** A privacy-
+respecting, no-tracking bot challenge (largely invisible). It is the strongest
+content-level defence, but it loads a script from `challenges.cloudflare.com`
+(a CSP `script-src`/`frame-src` addition and a departure from the strict
+own-origin CSP), so it is a deliberate trade-off — enable it only if the
+rate-limit rule and moderation prove insufficient.
+
 ## The old domain
 
 `ruthcheesley.co.uk` is kept serving **301 redirects indefinitely** to the new

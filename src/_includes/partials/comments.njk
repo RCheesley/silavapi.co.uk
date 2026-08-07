@@ -1,0 +1,90 @@
+{#- Blog comments. Comments are stored as files under src/_data/comments/<slug>/
+    and rendered at build time; posting hits /api/comment (stores a pending file
+    + emails an approve link). The form doubles as the reply form - comments.js
+    relocates it under a comment and sets `parent`. Without JS, top-level
+    commenting still works and reply buttons stay hidden. -#}
+{%- macro commentNode(c) -%}
+  <li class="comment" id="comment-{{ c.id }}">
+    <article class="comment__card">
+      <header class="comment__meta">
+        <span class="comment__author">{{ c.name }}</span>
+        <time class="comment__date" datetime="{{ c.date }}">{{ c.date | readableDate }}</time>
+      </header>
+      <div class="comment__text">{{ c.body }}</div>
+      <button class="comment__reply" type="button" data-reply-to="{{ c.id }}" data-reply-name="{{ c.name }}" hidden>
+        Reply
+      </button>
+    </article>
+    {%- if c.replies | length -%}
+      <ol class="comment-list comment-list--nested">
+        {%- for r in c.replies -%}{{ commentNode(r) }}{%- endfor -%}
+      </ol>
+    {%- endif -%}
+  </li>
+{%- endmacro -%}
+
+{%- set store = comments[page.fileSlug] -%}
+{%- set threaded = store | threadComments -%}
+{%- set total = store | countComments -%}
+
+<section class="comments" id="comments" aria-labelledby="comments-title">
+  <div class="container comments__inner stack">
+    <h2 class="comments__title" id="comments-title">
+      {{ total }} {{ "comment" if total == 1 else "comments" }}
+    </h2>
+
+    <div class="comments__status" data-comment-status role="status" aria-live="polite"></div>
+
+    {%- if threaded | length -%}
+      <ol class="comment-list">
+        {%- for c in threaded -%}{{ commentNode(c) }}{%- endfor -%}
+      </ol>
+    {%- else -%}
+      <p class="comments__empty">No comments yet - be the first.</p>
+    {%- endif -%}
+
+    <form class="comment-form" id="comment-form" method="post" action="/api/comment" data-comment-form>
+      <h3 class="comment-form__title" data-comment-form-title>Leave a comment</h3>
+      <p class="comment-form__replying" data-comment-replying hidden></p>
+
+      <input type="hidden" name="slug" value="{{ page.fileSlug }}" />
+      <input type="hidden" name="title" value="{{ title }}" />
+      <input type="hidden" name="return" value="{{ page.url }}" />
+      <input type="hidden" name="parent" value="" data-comment-parent />
+
+      {# Honeypot + time-trap: cheap spam defence, no CAPTCHA. #}
+      <div class="field--trap" aria-hidden="true">
+        <label for="cm-website">Leave this field empty</label>
+        <input id="cm-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <input type="hidden" name="_started" data-time-trap value="" />
+
+      <div class="contact__row">
+        <div class="field">
+          <label class="field__label" for="cm-name">Your name <span class="field__req" aria-hidden="true">*</span></label>
+          <input class="input" id="cm-name" name="name" type="text" required aria-required="true" autocomplete="name" />
+          <p class="field__error" id="cm-name-error" role="alert" aria-live="assertive"></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cm-email">Email <span class="field__hint-inline">(optional)</span></label>
+          <input class="input" id="cm-email" name="email" type="email" autocomplete="email" aria-describedby="cm-email-hint cm-email-error" />
+          <p class="field__hint" id="cm-email-hint">Only used if I need to reply - never shown or stored.</p>
+          <p class="field__error" id="cm-email-error" role="alert" aria-live="assertive"></p>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="cm-comment">Comment <span class="field__req" aria-hidden="true">*</span></label>
+        <textarea class="textarea" id="cm-comment" name="comment" rows="4" required aria-required="true"></textarea>
+        <p class="field__error" id="cm-comment-error" role="alert" aria-live="assertive"></p>
+      </div>
+      <div class="cluster">
+        <button class="btn btn--primary" type="submit">Post comment</button>
+        <button class="btn btn--ghost" type="button" data-comment-cancel hidden>Cancel reply</button>
+      </div>
+      <p class="comment-form__note">
+        Comments are moderated before they appear. No account and no cookies - your name and comment
+        are all that's kept.
+      </p>
+    </form>
+  </div>
+</section>

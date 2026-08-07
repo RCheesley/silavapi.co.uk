@@ -1,0 +1,41 @@
+name: Sync comments-pending
+
+# Unapproved comments are held on the `comments-pending` branch so they never
+# reach main (or the live build) until approved. Over time that branch would
+# drift from main, so this job merges main into it nightly - bringing forward
+# content/site changes while preserving any queued comment files - and creates
+# the branch from main if it doesn't exist yet. Uses the built-in Actions token
+# (no PAT needed); a clean merge only, so a genuine conflict fails loudly.
+
+on:
+  schedule:
+    - cron: '30 5 * * *' # daily, just before the 06:00 scheduled rebuild
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-comments-pending
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Merge main into comments-pending
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Merge (create the branch if missing)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin comments-pending >/dev/null 2>&1; then
+            git checkout comments-pending
+            git merge --no-edit origin/main
+          else
+            git checkout -b comments-pending origin/main
+          fi
+          git push origin comments-pending
