@@ -18,17 +18,21 @@ launch plumbing ships in the repo:
   (`src/_redirects`, 115 entries).
 - Contact + comment Pages Functions that **fail safe** (return 503) until their
   env vars exist, so nothing breaks before you configure them.
-- Daily `scheduled-rebuild` (publishes date-gated talks) and nightly
-  `sync-comments-pending` workflows.
+- CI deploys by **direct upload** (`wrangler pages deploy` from `ci.yml`): pushes
+  to `main` and a daily schedule build and publish once the gauntlet is green, so
+  approved comments and date-gated talk announcements go live on their own.
+  Nightly `sync-comments-pending` keeps the moderation queue in step with `main`.
 
 ## 1. Cloudflare Pages project 🧑
 
-- [ ] Create a Pages project connected to the `RCheesley/silavapi.co.uk` repo,
-      production branch `main`.
-- [ ] Build command `npm run build`; output directory `_site`; set
-      `NODE_VERSION` to match `.nvmrc` if the default is older.
-- [ ] Confirm the first build succeeds (it will build without any secrets — the
-      Functions just stay inert).
+- [ ] Create the Pages project by **direct upload** with Wrangler (no Git
+      connection, so Cloudflare needs no access to GitHub):
+      `npx wrangler pages project create silavapi --production-branch main`.
+- [ ] Build and deploy the first time by hand: `npm run build && npx wrangler
+    pages deploy _site --project-name silavapi --branch main`. After this, CI
+      handles every deploy (step 4).
+- [ ] Confirm it loads at `https://silavapi.pages.dev` (it builds without any
+      secrets — the Functions just stay inert, returning 503).
 
 ## 2. Email delivery — Resend 🧑
 
@@ -50,11 +54,15 @@ launch plumbing ships in the repo:
       one thing the stateless code can't do; it stops comment-spam floods at the
       edge. (Turnstile is documented as an optional escalation if needed.)
 
-## 4. Scheduled rebuild hook 🧑
+## 4. CI deploy secrets 🧑
 
-- [ ] Create a Pages **Deploy Hook** and add its URL as the repo secret
-      `CLOUDFLARE_DEPLOY_HOOK`. Until set, the daily rebuild job is a harmless
-      no-op; with it, date-scheduled talk announcements publish themselves.
+- [ ] Create a scoped **Cloudflare API token** (My Profile → API Tokens → Create
+      Token → **Account · Cloudflare Pages · Edit**) and add it as the GitHub repo
+      secret `CLOUDFLARE_API_TOKEN`.
+- [ ] Add `CLOUDFLARE_ACCOUNT_ID` (Workers & Pages overview, or `wrangler
+    whoami`) as a repo secret too. With both set, every push to `main` and the
+      daily schedule build and deploy automatically (`ci.yml`), so approved
+      comments and date-gated talk announcements publish themselves.
 
 ## 5. Custom domain + DNS 🧑
 
