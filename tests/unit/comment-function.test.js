@@ -139,10 +139,12 @@ describe('GET /api/moderate (confirmation only, no side effect)', () => {
     expect((await moderateGet({ request: req, env: ENV })).status).toBe(403);
   });
 
-  it('rejects a link with no timestamp as malformed (400)', async () => {
+  it('rejects a missing, zero or malformed timestamp as a bad request (400)', async () => {
     const sig = await signFor('approve', 'post', 'abc123');
-    const req = moderateGetReq(`action=approve&slug=post&id=abc123&sig=${sig}`);
-    expect((await moderateGet({ request: req, env: ENV })).status).toBe(400);
+    for (const ts of ['', '0', '00']) {
+      const q = `action=approve&slug=post&id=abc123${ts ? `&ts=${ts}` : ''}&sig=${sig}`;
+      expect((await moderateGet({ request: moderateGetReq(q), env: ENV })).status).toBe(400);
+    }
   });
 
   it('rejects an expired link (410)', async () => {

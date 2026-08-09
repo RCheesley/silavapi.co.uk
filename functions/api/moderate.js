@@ -1,6 +1,7 @@
 /**
  * /api/moderate - one-click comment moderation from the notification email,
- * signed with an HMAC over `action:slug:id` (action is approve|reject).
+ * signed with an HMAC over `action:slug:id:ts` (action is approve|reject; ts is
+ * the issued-at time in ms), and honoured only for 30 days after `ts`.
  *
  * GET shows a confirmation page ONLY (no side effect) - important because email
  * clients and link/security scanners issue GET requests, which must never
@@ -53,7 +54,14 @@ async function guard(env, p) {
   if (!env.COMMENT_SECRET || !env.GITHUB_TOKEN || !env.GITHUB_REPO) {
     return page(503, 'Not configured', '<p>Comment moderation is not set up on this site yet.</p>');
   }
-  if (!ACTIONS.has(p.action) || !ID_RE.test(p.slug) || !ID_RE.test(p.id) || !/^\d+$/.test(p.ts)) {
+  // ts must be a positive integer (no zero / leading zeros): a malformed
+  // timestamp is a bad request, distinct from a well-formed but expired link.
+  if (
+    !ACTIONS.has(p.action) ||
+    !ID_RE.test(p.slug) ||
+    !ID_RE.test(p.id) ||
+    !/^[1-9]\d*$/.test(p.ts)
+  ) {
     return page(400, 'Bad request', '<p>That moderation link is malformed.</p>');
   }
   if (

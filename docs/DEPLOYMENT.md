@@ -118,7 +118,7 @@ Comment endpoints attract spam, so the system is defended in layers:
   emailed.
 - **Bounded requests** - an oversized POST body is rejected before it is parsed
   (a `Content-Length` cap), and a non-form body returns `400` rather than an
-  uncaught 500.
+  uncaught `500`.
 - **Moderation is POST-behind-a-confirmation** (`/api/moderate` GET only shows a
   confirm page) so email/link scanners that issue GET requests can't auto-approve
   or auto-reject. Links are **HMAC-signed** (unforgeable without `COMMENT_SECRET`)
