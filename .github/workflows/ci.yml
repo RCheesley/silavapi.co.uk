@@ -77,7 +77,11 @@ jobs:
   deploy:
     name: Deploy to Cloudflare Pages
     needs: verify
-    if: ${{ github.event_name != 'pull_request' }}
+    # Only ever deploy main: push-to-main, the schedule (runs on the default
+    # branch), or a manual dispatch from main. This stops a workflow_dispatch on
+    # a feature branch from publishing that branch to production (the deploy step
+    # forces --branch=main).
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     # Serialise production deploys; never cancel one that is already uploading.

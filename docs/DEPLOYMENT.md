@@ -128,7 +128,7 @@ keyed on `COMMENT_SECRET`**, and `/api/moderate` refuses to act (on both GET and
 POST) unless `sig` verifies — a signature-mismatch returns `403`. `COMMENT_SECRET`
 lives only in Cloudflare's encrypted env; it is never in the repo, the built
 site, the client JS, or the comment files, so an attacker cannot compute a valid
-`sig`, and the check is constant-time. Nor can the key be attacked offline: a
+`sig`, and the signature is verified with a length guard plus a constant-time compare. Nor can the key be attacked offline: a
 valid signature only ever appears in the moderation email to you, never in
 public, so there is no `(payload, signature)` pair to brute-force against. Use a
 high-entropy random secret (e.g. `openssl rand -base64 32`) so that recovering it
