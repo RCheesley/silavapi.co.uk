@@ -33,25 +33,26 @@ npx wrangler pages project create silavapi --production-branch main
 npm run build && npx wrangler pages deploy _site --project-name silavapi --branch main
 ```
 
-- [ ] Run the two commands above. After this, CI handles every deploy (step 4).
-- [ ] Confirm it loads at `https://silavapi.pages.dev` — it builds without any
+- [x] Run the two commands above. After this, CI handles every deploy (step 4).
+- [x] Confirm it loads at `https://silavapi.pages.dev` — it builds without any
       secrets, so the Functions just stay inert (returning 503).
 
 ## 2. Email delivery — Resend 🧑
 
-- [ ] Create a Resend account and **verify the sending domain** (add the DKIM/SPF
+- [x] Create a Resend account and **verify the sending domain** (add the DKIM/SPF
       records to DNS). Pick the EU region and accept the DPA (data-processor note
       on the privacy page).
-- [ ] Add Cloudflare Pages env vars: `RESEND_API_KEY`, `CONTACT_TO`
+- [x] Add Cloudflare Pages env vars: `RESEND_API_KEY`, `CONTACT_TO`
       (`hello@silavapi.co.uk`), `CONTACT_FROM` (a verified sender on the domain).
 
 ## 3. Comments 🧑
 
-- [ ] Create a **fine-grained GitHub token** scoped to this repo, **Contents:
+- [x] Create a **fine-grained GitHub token** scoped to this repo, **Contents:
       read/write** only. Add as `GITHUB_TOKEN`.
-- [ ] Add `GITHUB_REPO` (`RCheesley/silavapi.co.uk`), `COMMENT_SECRET` (a random
-      string), `SITE_URL` (`https://silavapi.co.uk`). (`GITHUB_BRANCH` /
-      `GITHUB_PENDING_BRANCH` default sensibly.)
+- [x] Add `GITHUB_REPO` (`RCheesley/silavapi.co.uk`), `COMMENT_SECRET`, and
+      `SITE_URL`. (`GITHUB_BRANCH` / `GITHUB_PENDING_BRANCH` default sensibly.)
+      Note: `SITE_URL` is currently the `.pages.dev` URL for testing — switch it
+      to the live domain at step 5, and rotate `COMMENT_SECRET` before launch.
 - [ ] **Required — abuse rule:** add a Cloudflare WAF **Rate limiting rule** on
       `POST /api/comment`, e.g. **5 requests/minute per IP → Block**. This is the
       one thing the stateless code can't do; it stops comment-spam floods at the
@@ -72,6 +73,9 @@ npm run build && npx wrangler pages deploy _site --project-name silavapi --branc
 - [ ] Add `silavapi.co.uk` (and `www`, redirecting to the apex) as a custom
       domain on the Pages project; let Cloudflare provision the certificate.
 - [ ] Point the domain's DNS at Pages (proxied / orange-cloud).
+- [ ] Update the `SITE_URL` env var to `https://silavapi.co.uk` (it was the
+      `.pages.dev` URL during testing) so moderation links point at the live
+      domain, then redeploy.
 
 ## 6. Old-domain redirects 🧑
 
