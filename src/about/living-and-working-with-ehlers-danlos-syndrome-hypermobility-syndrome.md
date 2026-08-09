@@ -39,15 +39,15 @@ My physio would not allow me to be discharged until I was better than when I had
 
 ### Learning to love exercise
 
-## ![Ruth in her Vegan Runners top, crossing a race timing mat and smiling making a V symbol with both hands](/assets/img/blog/66217084_10161815336190697_7020323503593226240_n.jpg)
+## ![Sīlavāpi in her Vegan Runners top, crossing a race timing mat and smiling making a V symbol with both hands](/assets/img/blog/66217084_10161815336190697_7020323503593226240_n.jpg)
 
 When I started out, I was barely able to fast-walk the length of a tennis court. Gradually this built up to gentle bursts of jogging, and simple bodyweight exercises like assisted squats, sit-to-stand from a chair, and assisted lunges. Over the years, I've developed in confidence, fitness, strength and stamina like I never thought possible.
 
-I've found a love for weightlifting, which I attribute to being the single most positive thing I have done in my training when it comes to providing joint stability. (I **strongly** advise finding a knowledgeable trainer rather than jumping into weightlifting without any guidance! I currently train with [Chris Cooper](https://www.puregym.com/gyms/ipswich-ravenswood/personal-trainers/chris-cooper/) at PureGym Ipswich.
+I've found a love for weightlifting, which I attribute to being the single most positive thing I have done in my training when it comes to providing joint stability. (I **strongly** advise finding a knowledgeable trainer rather than jumping into weightlifting without any guidance! I currently train with [Sam Morris](https://coachingwithsamuk.com).)
 
 I also found a love for running as part of [Vegan Runners](https://www.veganrunners.org.uk/) at Parkrun and other local events, and have completed Endure24 twice, managing 40 miles in my first attempt and 50 miles in the second, over 24 hours.
 
-![](/assets/img/ruth-culford-triathlon.jpg)More recently I have switched from ultramarathon training to the less intense but slightly more complicated Triathlon event, learning to cycle on the road and combining my lifelong love of swimming with my passion for running. 
+![Sīlavāpi racing the Culford Sprint Triathlon](/assets/img/ruth-culford-triathlon.jpg)More recently I have switched from ultramarathon training to the less intense but slightly more complicated Triathlon event, learning to cycle on the road and combining my lifelong love of swimming with my passion for running. 
 
 Thanks to the excellent support from the [Ipswich Triathlon Club](https://www.ipswich-tri.org/), I did my first Standard Duathlon (10k run / 40k bike / 5k run) in December 2024, and my first Sprint Triathlon in 2025. 
 

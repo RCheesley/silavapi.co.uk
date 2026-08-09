@@ -2,7 +2,7 @@
 layout: 'layouts/page.njk'
 title: 'Open source consulting'
 date: 2026-08-07
-excerpt: 'A decade of leading Mautic - through acquisition, spin-out, governance and financial recovery - brought to other open source projects and foundations facing the challenges of maturity.'
+excerpt: 'Leading Mautic since 2020 - through acquisition, spin-out, governance and financial recovery - brought to other open source projects and foundations facing the challenges of maturity.'
 sourceUrl: '/about/what-i-do/open-source-consulting'
 ---
 
@@ -10,7 +10,7 @@ I help established open source projects and foundations navigate the complex cha
 
 ## What I do
 
-Over the past decade I have led Mautic through corporate acquisition, a spin-out to independence, governance restructuring and financial recovery. I have built funding models, resolved community conflicts, grown contributor bases, and made the difficult decisions that keep an open source project viable long term. Now I have the chance to bring that experience to other projects facing similar challenges.
+Since 2020 I have led Mautic through corporate acquisition, a spin-out to independence, governance restructuring and financial recovery. I have built funding models, resolved community conflicts, grown contributor bases, and made the difficult decisions that keep an open source project viable long term. Now I have the chance to bring that experience to other projects facing similar challenges.
 
 I work with established open source projects and foundations on the problems that come with maturity. How do you scale community governance when informal structures stop working? How do you build sustainable revenue without compromising your values? How do you navigate corporate relationships while staying independent? How do you grow your contributor base when you are competing with well-funded alternatives?
 

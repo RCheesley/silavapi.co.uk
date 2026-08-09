@@ -27,7 +27,7 @@ In Triratna, the central act of being a Buddhist is Going for Refuge to the Thre
 
 A few important things to say:
 
--   Ordination in Triratna is **not in itself monastic**. We do not have a sharp divide between monks and nuns on one side and lay people on the other. Many Order members live and work in ordinary contexts – in my case, within the open source tech world, living with my partner and cats.
+-   Ordination in Triratna is **not in itself monastic**. We do not have a sharp divide between monks and nuns on one side and lay people on the other. Many Order members live and work in ordinary contexts - in my case, within the open source tech world, living with my partner and cats.
 -   Ordination is a **recognition of your effectively placing the three jewels at the heart of your life**, not about status. It is saying, for the rest of this life, and perhaps beyond, that you are committing yourself to the path of transforming greed, hatred and delusion into generosity, loving kindness and wisdom.
 -   Ordination is also about **relationship and lineage**. You are ordained by a preceptor, in the context of a community, into a living lineage that goes back to the Buddha.
 
@@ -78,7 +78,7 @@ In Triratna there are several shapes of ordination retreat:
 -   There is also a 2 week ordination retreat option in the UK for those where the longer, off grid retreats abroad are not possible due to health, caring commitments or other significant conditions.
 -   In some cases, people are ordained in their local context if none of these retreat options are practicable.
 
-My own ordination took place on the 11 week retreat at Akashavana, a women's retreat centre high in the mountains. It was an intense and beautiful experience, but it made sense only because of all the conditions that had led up to it over the previous 16 years. I'm incredibly grateful to every single person who helped make it possible - from the folks who took up my work so I could take a sabbatical to my partner for holding the fort while I was away, friends and family who contributed in financial or practical ways and of course our amazing team and support community who made it all possible.
+My own ordination took place on the 11 week retreat at Akashavana, a women's retreat centre high in the mountains. It was an intense and beautiful experience, but it made sense only because of all the conditions that had led up to it over the previous sixteen years. I'm incredibly grateful to every single person who helped make it possible - from the folks who took up my work so I could take a sabbatical to my partner for holding the fort while I was away, friends and family who contributed in financial or practical ways and of course our amazing team and support community who made it all possible.
 
 ## What changes after ordination and what does not
 
@@ -92,7 +92,7 @@ What has not changed is that:
 
 -   I still work in the tech world, leading the global Mautic community.
 -   I still live with my partner (and our two cats) and pay a mortgage.
--   I still run, swim, cycle, drink (decaf) coffee, and get over‑excited about good documentation.
+-   I still run, swim, cycle, drink (decaf) coffee, and get over-excited about good documentation.
 
 Ordination does not take me out of the world. It changes the basis on which I live in it. It is an inner shift that, I hope, gradually expresses itself in how I relate, lead, speak and act.
 
