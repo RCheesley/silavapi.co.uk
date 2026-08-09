@@ -2,7 +2,7 @@
 layout: 'layouts/page.njk'
 title: 'Breathworks trustee'
 date: 2026-08-07
-excerpt: 'In 2021 I was invited to become a trustee of Breathworks, a charity teaching mindfulness-based approaches to living with pain and illness - work that sits very close to my own experience.'
+excerpt: 'Why I became a trustee of Breathworks, and why a charity teaching mindfulness for living well with pain and illness sits so close to my own experience.'
 sourceUrl: '/about/what-i-do/board-member'
 ---
 
@@ -13,5 +13,3 @@ As someone who lives with chronic pain and a life-altering disability, the princ
 The pandemic brought immense challenges to Breathworks, whose in-person courses around the world had long been one of the mainstays of its work. It also brought an opportunity to digitalise a lot of what the charity does, making the teachings and the courses more accessible to a much wider audience. I have loved being part of that shift.
 
 I am genuinely excited by the future plans for Breathworks, and can't wait to see it grow around the world, taking these important teachings out to the people who need to hear them.
-
-A small note: for now I am not able to take on any other board positions, thanks to time constraints and this wonderful thing called pacing myself - a lifelong teaching in itself.

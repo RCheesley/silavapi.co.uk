@@ -2,7 +2,7 @@
 layout: 'layouts/page.njk'
 title: 'Open source consulting'
 date: 2026-08-07
-excerpt: 'I help established open source projects and foundations navigate the challenges that come with maturity - growth, governance, sustainability and the difficult decisions that keep a project viable long term.'
+excerpt: 'A decade of leading Mautic - through acquisition, spin-out, governance and financial recovery - brought to other open source projects and foundations facing the challenges of maturity.'
 sourceUrl: '/about/what-i-do/open-source-consulting'
 ---
 
