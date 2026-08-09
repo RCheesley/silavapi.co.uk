@@ -177,6 +177,9 @@ a.tag:hover {
   font-weight: var(--weight-medium);
   font-size: var(--text-lg);
   color: var(--text-heading);
+  /* Reserve two lines so one- and two-line titles align the card bodies below
+     (older browsers without the lh unit just fall back to natural height). */
+  min-height: 2lh;
 }
 .topic-card__body {
   margin: 0;
