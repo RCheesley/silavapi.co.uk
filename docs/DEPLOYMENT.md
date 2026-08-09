@@ -127,10 +127,13 @@ harmless: the link also carries `sig`, an **HMAC-SHA256 of `action:slug:id`
 keyed on `COMMENT_SECRET`**, and `/api/moderate` refuses to act (on both GET and
 POST) unless `sig` verifies — a signature-mismatch returns `403`. `COMMENT_SECRET`
 lives only in Cloudflare's encrypted env; it is never in the repo, the built
-site, the client JS, or the comment files. So without it an attacker cannot
-compute a valid `sig` (a 256-bit key, one HTTP request per guess — infeasible),
-and the comparison is constant-time (no timing side-channel). Security rests on
-the secret alone, not on the URL structure being hidden — the standard signed-URL
+site, the client JS, or the comment files, so an attacker cannot compute a valid
+`sig`, and the check is constant-time. Nor can the key be attacked offline: a
+valid signature only ever appears in the moderation email to you, never in
+public, so there is no `(payload, signature)` pair to brute-force against. Use a
+high-entropy random secret (e.g. `openssl rand -base64 32`) so that recovering it
+is infeasible even in the worst case. Security rests on the secret alone, not on
+the URL structure being hidden - the standard signed-URL
 pattern (password-reset links, webhook signatures). If the secret ever leaked,
 rotate it in Cloudflare and every outstanding link is instantly void.
 
@@ -162,11 +165,10 @@ once the in-house Speaking section is live.
 The site deploys to Cloudflare Pages by **direct upload from CI** (Wrangler),
 not by connecting Cloudflare to the Git repo — so Cloudflare never needs write
 access to GitHub. `.github/workflows/ci.yml` runs the full gauntlet (lint, unit
-
-- coverage, build, HTML validation, e2e, pa11y, Lighthouse) on every push and
-  PR; on a **push to `main`**, the daily **schedule**, or a manual dispatch, a
-  `deploy` job then builds and runs `wrangler pages deploy _site` once `verify` is
-  green. Pull requests are verified but never deployed.
+tests with coverage, build, HTML validation, e2e, pa11y and Lighthouse) on every
+push and PR. On a **push to `main`**, the daily **schedule**, or a manual
+dispatch, a `deploy` job then builds and runs `wrangler pages deploy _site` once
+`verify` is green. Pull requests are verified but never deployed.
 
 This is what makes an approved comment (a commit to `main`) and a date-gated talk
 announcement (the daily schedule) publish themselves — no manual step. It needs
