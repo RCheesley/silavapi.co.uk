@@ -5,6 +5,9 @@ An ordered launch checklist for **silavapi.co.uk**. Details for each item live i
 
 Legend: 🧑 = your action (account/DNS/secrets) · ✅ = already done in the code.
 
+> **Launched on 2026-08-09** 🚀 — every step below is complete and verified in
+> production. Kept as a record of what the launch involved.
+
 ## 0. Pre-flight (code) ✅
 
 The build is certified by the CI gauntlet (`npm run test`): unit + **100%
@@ -53,10 +56,11 @@ npm run build && npx wrangler pages deploy _site --project-name silavapi --branc
       `SITE_URL`. (`GITHUB_BRANCH` / `GITHUB_PENDING_BRANCH` default sensibly.)
       `SITE_URL` now points at `https://silavapi.co.uk`, and `COMMENT_SECRET` has
       been rotated to a fresh value.
-- [ ] **Required — abuse rule:** add a Cloudflare WAF **Rate limiting rule** on
-      `POST /api/comment`, e.g. **5 requests/minute per IP → Block**. This is the
-      one thing the stateless code can't do; it stops comment-spam floods at the
-      edge. (Turnstile is documented as an optional escalation if needed.)
+- [x] **Required — abuse rule:** add a Cloudflare WAF **Rate limiting rule** on
+      `POST /api/comment`, **5 requests / 10 seconds per IP → Block** (the free
+      plan fixes the window at 10s). This is the one thing the stateless code
+      can't do; it stops comment-spam floods at the edge. (Turnstile is
+      documented as an optional escalation if needed.)
 
 ## 4. CI deploy secrets 🧑
 
@@ -79,32 +83,34 @@ npm run build && npx wrangler pages deploy _site --project-name silavapi --branc
 
 ## 6. Old-domain redirects 🧑
 
-- [ ] Cloudflare **Bulk Redirect** (or redirect rule):
-      `https://ruthcheesley.co.uk/*` → `https://silavapi.co.uk/$1` (301). The
-      per-URL Joomla path map already lives in `src/_redirects` on the new zone.
-- [ ] Redirect the Notist subdomain `speaking.ruthcheesley.co.uk` →
-      `https://silavapi.co.uk/speaking/` (301).
+- [x] Cloudflare **Redirect Rule** on the `ruthcheesley.co.uk` zone (apex + www)
+      → `https://silavapi.co.uk` preserving the path (301). The per-URL Joomla
+      path map then finishes the job from `src/_redirects` on the new zone.
+- [x] Notist subdomain `speaking.ruthcheesley.co.uk`: a wildcard rule
+      `/*/*` → `https://silavapi.co.uk/speaking/${2}/` (keeps each talk's slug),
+      plus a catch-all → `https://silavapi.co.uk/speaking/` (301).
 
 ## 7. Analytics 🧑
 
-- [ ] Enable **Cloudflare Web Analytics** in the zone's server-side/edge mode
-      (no client script, no cookies, no third-party request). Nothing is added
-      to the pages.
+- [x] Use Cloudflare's **server-side/edge traffic analytics** (zone → Analytics →
+      Traffic). The RUM/Web Analytics **JS beacon is disabled** — the strict CSP
+      would block it anyway, and it would break the no-cookies / no-third-party
+      promise. Verified live: no cookies, no beacon, no third-party requests.
 
 ## 8. Launch ✅🧑
 
-- [ ] With the above in place, a push/merge to `main` builds and deploys. Confirm
+- [x] With the above in place, a push/merge to `main` builds and deploys. Confirm
       the deploy is green and the site loads on `https://silavapi.co.uk`.
 
 ## 9. Post-launch smoke test 🧑
 
-- [ ] Home, About, Dharma, Speaking, Blog, Contact all load; dark/light toggle
+- [x] Home, About, Dharma, Speaking, Blog, Contact all load; dark/light toggle
       persists; header collapses to the menu on mobile with no overflow.
-- [ ] **Contact form** sends (you receive the email) and shows the inline success.
-- [ ] **Comment** on a post: you get the moderation email, the **Approve** link
+- [x] **Contact form** sends (you receive the email) and shows the inline success.
+- [x] **Comment** on a post: you get the moderation email, the **Approve** link
       shows the confirm page, and after confirming the comment appears on rebuild.
-- [ ] **Search** (header icon + blog) returns results.
-- [ ] Spot-check a few **old URLs** 301 to the right new pages; check `/feed.xml`,
+- [x] **Search** (header icon + blog) returns results.
+- [x] Spot-check a few **old URLs** 301 to the right new pages; check `/feed.xml`,
       `/sitemap.xml`, `/robots.txt`, and a 404.
 
 ## Rollback
