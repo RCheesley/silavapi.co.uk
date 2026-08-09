@@ -23,7 +23,7 @@ Two things came together. I took a new name at my ordination, so the site needed
 
 Just to be clear, I still love Joomla both as a tool for building websites, and as an open source project and community. Using Joomla has meant I've always owned my own data, rather than have it live in a proprietary tool I can't easily leave. This decision was purely about *maintenance*. 
 
-Joomla is a full content management system - a database, PHP, an admin panel which can do really amazing things. It does, however, come with steady drumbeat of updates and security patches to stay on top of thanks to all the amazing volunteers who keep it running and secure (not to mention all the third party plugins, templates, etc) - and for a personal site that's a lot of moving parts to look after just to publish the odd post. It felt like a lot of unnecessary effort, and definitely something I could simplify. 
+Joomla is a full content management system - a database, PHP, an admin panel which can do really amazing things. It does, however, come with a steady drumbeat of updates and security patches to stay on top of thanks to all the amazing volunteers who keep it running and secure (not to mention all the third party plugins, templates, etc) - and for a personal site that's a lot of moving parts to look after just to publish the odd post. It felt like a lot of unnecessary effort, and definitely something I could simplify. 
 
 What I wanted was something I could run with a simple, Git-based workflow and the least possible technical overhead: my content as plain Markdown files, no database, and no server-side application to keep patched. Keeping my readers' data to themselves - no cookies, no trackers - mattered to me too, and a static site made that fairly easy.
 
@@ -131,7 +131,7 @@ The system works pretty nicely for me at the moment - we'll see how it goes. I d
 ```text {.prompt}
 Context: Accessibility is a hard requirement for this site - WCAG 2.2 AA - and I want it enforced automatically so a regression can never merge. The site builds in CI and supports light and dark themes.
 
-Role: You are an accessibility specialist who is skilled at writing automated tests which test the code for a website that is being built to ensure ongoing accessiblity.
+Role: You are an accessibility specialist who is skilled at writing automated tests which test the code for a website that is being built to ensure ongoing accessibility.
 
 Interview: Ask me 3-5 questions, one at a time, about my build and tooling before you set anything up.
 
