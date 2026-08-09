@@ -52,7 +52,7 @@ This allowed me to set the scene with Claude Design, and meant that when I hande
 
 I didn't want to just reach for whatever was fashionable and came at the top of search engines, so I asked the AI to reason through the options with me. Here's a technique worth borrowing.
 
-My most useful prompts nearly all shared a shape which I use in almost every AI query with varying levels of refinement. This comes from the [AI Driven Leader](https://link.amazon/B02b0at33) (affiliate link, also available in your book store!), a great book it's well worth reading, and is reinforced by Anthropic's own training: 
+My most useful prompts nearly all shared a shape which I use in almost every AI query with varying levels of refinement. This comes from the [AI Driven Leader](https://link.amazon/B02b0at33) (affiliate link, also available in your book store!), a great book that's well worth reading, and is reinforced by Anthropic's own training: 
 
 Four parts 
 - **Context** - the situation, goals and constraints 
