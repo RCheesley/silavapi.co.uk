@@ -7,6 +7,13 @@ import {
   signApproval,
   verifyApproval,
   COMMENT_LIMITS,
+  looksSpammy,
+  exceedsMaxBody,
+  approvalPayload,
+  isApprovalExpired,
+  MAX_LINKS,
+  MAX_BODY_BYTES,
+  APPROVAL_TTL_MS,
 } from '../../lib/comments.js';
 
 describe('validateComment', () => {
@@ -137,5 +144,77 @@ describe('signApproval / verifyApproval', () => {
     expect(await verifyApproval('other', 'p', sig)).toBe(false);
     expect(await verifyApproval('secret', 'p', 'short')).toBe(false);
     expect(await verifyApproval('secret', 'p', '')).toBe(false);
+  });
+});
+
+describe('looksSpammy', () => {
+  const base = { name: 'Ada', comment: 'A normal, thoughtful comment.' };
+
+  it('passes a clean comment (and an empty one)', () => {
+    expect(looksSpammy(base)).toBe(false);
+    expect(looksSpammy()).toBe(false);
+  });
+
+  it('flags a URL in the name field', () => {
+    expect(looksSpammy({ ...base, name: 'buy http://spam.example' })).toBe(true);
+    expect(looksSpammy({ ...base, name: 'visit www.spam.example' })).toBe(true);
+  });
+
+  it('allows up to MAX_LINKS links but flags more', () => {
+    expect(MAX_LINKS).toBe(2);
+    const twoLinks = 'see https://a.example and https://b.example';
+    expect(looksSpammy({ ...base, comment: twoLinks })).toBe(false);
+    expect(looksSpammy({ ...base, comment: `${twoLinks} and www.c.example` })).toBe(true);
+  });
+});
+
+describe('exceedsMaxBody', () => {
+  it('is true only above the max', () => {
+    expect(exceedsMaxBody(MAX_BODY_BYTES + 1)).toBe(true);
+    expect(exceedsMaxBody(String(MAX_BODY_BYTES + 1))).toBe(true);
+    expect(exceedsMaxBody(MAX_BODY_BYTES)).toBe(false);
+    expect(exceedsMaxBody('100')).toBe(false);
+  });
+
+  it('is false for a missing or non-numeric length', () => {
+    expect(exceedsMaxBody(null)).toBe(false);
+    expect(exceedsMaxBody('')).toBe(false);
+    expect(exceedsMaxBody(undefined)).toBe(false);
+    expect(exceedsMaxBody('not-a-number')).toBe(false);
+  });
+
+  it('honours a custom max', () => {
+    expect(exceedsMaxBody(11, 10)).toBe(true);
+    expect(exceedsMaxBody(9, 10)).toBe(false);
+  });
+});
+
+describe('approvalPayload', () => {
+  it('joins action:slug:id:ts', () => {
+    expect(approvalPayload('approve', 'my-post', 'abc', 123)).toBe('approve:my-post:abc:123');
+  });
+});
+
+describe('isApprovalExpired', () => {
+  const now = 1_000_000_000_000;
+
+  it('is fresh within the TTL and expired beyond it', () => {
+    expect(isApprovalExpired(now, now)).toBe(false); // just issued
+    expect(isApprovalExpired(now - 1000, now)).toBe(false);
+    expect(isApprovalExpired(now - APPROVAL_TTL_MS - 1, now)).toBe(true);
+  });
+
+  it('treats a missing or malformed timestamp as expired', () => {
+    expect(isApprovalExpired('', now)).toBe(true);
+    expect(isApprovalExpired(undefined, now)).toBe(true);
+    expect(isApprovalExpired('not-a-number', now)).toBe(true);
+    expect(isApprovalExpired(0, now)).toBe(true);
+    expect(isApprovalExpired(-5, now)).toBe(true);
+  });
+
+  it('honours a custom now/ttl and defaults now to Date.now()', () => {
+    expect(isApprovalExpired(100, 200, 50)).toBe(true);
+    expect(isApprovalExpired(180, 200, 50)).toBe(false);
+    expect(isApprovalExpired(Date.now() + 60_000)).toBe(false);
   });
 });
