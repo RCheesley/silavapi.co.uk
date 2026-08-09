@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+title: Built with open source
+permalink: /built-with/
+description: >
+  The open source projects this site is built on, what each one does, and where
+  you can support the people who maintain them.
+---
+{% from "macros/ui.njk" import sectionHeading %}
+
+<article class="prose-page">
+  <div class="stack">
+    {{ sectionHeading("Built with open source", "The projects this site stands on", 1, "Almost none of this site is my own code. It is built on the freely given work of open source projects and the people who maintain them - here is who they are, what they do, and where you can support them.") }}
+  </div>
+
+  <section>
+    <p>
+      Moving off Joomla to a static site has made this site far cheaper to run,
+      so I am putting what I save on hosting - plus a little extra - back into the
+      projects below. Several of them take donations, and the
+      <strong>Support</strong> links go straight to where their maintainers ask
+      for help. If you build on other people's freely given work and you can spare
+      it, I hope you will consider joining me.
+    </p>
+    {% if builtWith.total %}
+      <p>
+        All told, this site depends on around <strong>{{ builtWith.total }}</strong>
+        open source packages. These are the ones doing the visible work.
+      </p>
+    {% endif %}
+  </section>
+
+  {% for group in builtWith.groups %}
+    <section>
+      <h2>{{ group.group }}</h2>
+      <ul>
+        {% for item in group.items %}
+          <li>
+            <a href="{{ item.url }}"><strong>{{ item.name }}</strong></a> -
+            {{ item.desc }}
+            {% if item.funding %}
+              <a href="{{ item.funding }}" aria-label="Support {{ item.name }}">Support</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+
+  <section>
+    <h2>Where it runs</h2>
+    <p>
+      Beyond the open source above, the site is hosted on
+      <a href="https://pages.cloudflare.com/">Cloudflare Pages</a>, sends its email
+      through <a href="https://resend.com/">Resend</a>, and lives in a
+      <a href="https://github.com/RCheesley/silavapi.co.uk">public repository on
+        GitHub</a>, with every build and check run by GitHub Actions.
+    </p>
+  </section>
+
+  <section>
+    <p>
+      Curious how it all fits together? The whole site is open source too - you
+      are welcome to read it, learn from it, and borrow anything useful.
+    </p>
+  </section>
+</article>
