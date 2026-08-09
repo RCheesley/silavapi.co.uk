@@ -69,3 +69,35 @@ test.describe('contact form (progressive enhancement)', () => {
     await expect(status).toHaveAttribute('role', 'status');
   });
 });
+
+test.describe('prompt copy button (progressive enhancement)', () => {
+  // The blog post that introduces prompt callouts (fenced blocks tagged
+  // {.prompt}) is where prompt-copy.js has something to enhance.
+  const POST = '/blog/rebuilding-this-site-in-the-open/';
+
+  test('injects an accessible, unobtrusive copy button that copies the prompt', async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto(POST);
+
+    // The script tags each prompt <pre> so positioning + reveal never depend
+    // on :has(); this is what makes the button reliably shown/positioned.
+    const pre = page.locator('pre.has-prompt-copy').first();
+    await expect(pre).toBeVisible();
+
+    const btn = pre.locator('button.prompt-copy');
+    await expect(btn).toHaveCount(1);
+    await expect(btn).toHaveAttribute('aria-label', /copy prompt/i);
+    // Unobtrusive: hidden until the callout is hovered or focused.
+    await expect(btn).toHaveCSS('opacity', '0');
+
+    // Clicking copies the prompt's text and confirms in the label.
+    const expected = ((await pre.locator('code.prompt').textContent()) ?? '').trim();
+    await btn.click();
+    await expect(btn).toHaveText('Copied');
+    const copied = await page.evaluate(() => navigator.clipboard.readText());
+    expect(copied.trim()).toBe(expected);
+  });
+});
