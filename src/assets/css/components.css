@@ -848,3 +848,79 @@ a.tag:hover {
   color: var(--nav-link-accent);
   font-weight: var(--weight-bold);
 }
+
+/* ------------------------------------------------------------------ *
+ * Prompt callouts
+ * The Context / Role / Interview / Task example prompts in blog posts.
+ * Authored as fenced blocks tagged { .prompt } and styled as soft,
+ * quote-like cards (surface panel + pink accent rail) rather than the
+ * utilitarian default code block. Theme-aware via the surface token.
+ * ------------------------------------------------------------------ */
+pre:has(> code.prompt) {
+  position: relative;
+  margin-block: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface-subtle);
+  background: color-mix(in srgb, var(--border-accent) 6%, var(--surface-subtle));
+  border: 1px solid var(--border-subtle);
+  border: 1px solid color-mix(in srgb, var(--border-accent) 18%, transparent);
+  border-inline-start: var(--border-width-rule) solid var(--border-accent);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+pre > code.prompt {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  font-size: var(--text-xs);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* Copy-to-clipboard button on prompt callouts (injected by prompt-copy.js).
+   Revealed on hover/focus; always shown on touch devices that can't hover. */
+.prompt-copy {
+  position: absolute;
+  top: var(--space-3);
+  inset-inline-end: var(--space-3);
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-text);
+  font-size: var(--text-2xs);
+  line-height: 1.5;
+  color: var(--text-body);
+  background: var(--surface-page);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transition:
+    opacity 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+pre:has(> code.prompt):hover .prompt-copy,
+pre:has(> code.prompt):focus-within .prompt-copy,
+.prompt-copy.is-copied {
+  opacity: 1;
+}
+
+.prompt-copy:hover,
+.prompt-copy.is-copied {
+  background: var(--action-accent-active);
+  border-color: var(--action-accent-active);
+  color: var(--text-on-accent);
+}
+
+@media (hover: none) {
+  .prompt-copy {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prompt-copy {
+    transition: none;
+  }
+}
