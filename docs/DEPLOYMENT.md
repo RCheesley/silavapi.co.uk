@@ -120,6 +120,20 @@ Comment endpoints attract spam, so the system is defended in layers:
   commenter email is never stored, paths are validated (no traversal), and the
   redirect `Location` is CR/LF-sanitised.
 
+**Why the approve/reject links can't be forged.** The repo is public, so anyone
+can see a pending comment's `slug` and `id` and work out the moderation URL
+shape (`/api/moderate?action=approve&slug=…&id=…&sig=…`). That is deliberately
+harmless: the link also carries `sig`, an **HMAC-SHA256 of `action:slug:id`
+keyed on `COMMENT_SECRET`**, and `/api/moderate` refuses to act (on both GET and
+POST) unless `sig` verifies — a signature-mismatch returns `403`. `COMMENT_SECRET`
+lives only in Cloudflare's encrypted env; it is never in the repo, the built
+site, the client JS, or the comment files. So without it an attacker cannot
+compute a valid `sig` (a 256-bit key, one HTTP request per guess — infeasible),
+and the comparison is constant-time (no timing side-channel). Security rests on
+the secret alone, not on the URL structure being hidden — the standard signed-URL
+pattern (password-reset links, webhook signatures). If the secret ever leaked,
+rotate it in Cloudflare and every outstanding link is instantly void.
+
 **Required at go-live — a Cloudflare rate-limit rule on `/api/comment`.** The one
 thing the code can't do statelessly is stop a flood (each accepted POST is a
 GitHub commit + an email). Add a WAF **Rate limiting rule**: path equals
@@ -145,5 +159,25 @@ once the in-house Speaking section is live.
 
 ## CI → deploy
 
-CI (`.github/workflows/ci.yml`) must be green before merge. Cloudflare Pages
-builds and deploys from `main` on merge (and gives every PR a preview URL).
+The site deploys to Cloudflare Pages by **direct upload from CI** (Wrangler),
+not by connecting Cloudflare to the Git repo — so Cloudflare never needs write
+access to GitHub. `.github/workflows/ci.yml` runs the full gauntlet (lint, unit
+
+- coverage, build, HTML validation, e2e, pa11y, Lighthouse) on every push and
+  PR; on a **push to `main`**, the daily **schedule**, or a manual dispatch, a
+  `deploy` job then builds and runs `wrangler pages deploy _site` once `verify` is
+  green. Pull requests are verified but never deployed.
+
+This is what makes an approved comment (a commit to `main`) and a date-gated talk
+announcement (the daily schedule) publish themselves — no manual step. It needs
+two repository secrets:
+
+| Secret                  | Where to get it                                                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Cloudflare → My Profile → API Tokens → Create Token → **Account · Cloudflare Pages · Edit** (scoped to your account) |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard (Workers & Pages overview), or `wrangler whoami`                                                |
+
+The first project + deploy were created with `wrangler pages project create
+silavapi` and `wrangler pages deploy _site`; CI simply repeats the deploy step.
+To deploy by hand in a pinch: `npm run build && npx wrangler pages deploy _site
+--project-name silavapi --branch main`.
