@@ -1,6 +1,6 @@
 # Go-live runbook
 
-An ordered launch checklist for **silavapi.co.uk**. Detail for each item lives in
+An ordered launch checklist for **silavapi.co.uk**. Details for each item live in
 [`DEPLOYMENT.md`](DEPLOYMENT.md); this is the sequence to follow on the day.
 
 Legend: 🧑 = your action (account/DNS/secrets) · ✅ = already done in the code.
