@@ -47,7 +47,9 @@ I've found a love for weightlifting, which I attribute to being the single most
 
 I also found a love for running as part of [Vegan Runners](https://www.veganrunners.org.uk/) at Parkrun and other local events, and have completed Endure24 twice, managing 40 miles in my first attempt and 50 miles in the second, over 24 hours.
 
-![Sīlavāpi racing the Culford Sprint Triathlon](/assets/img/ruth-culford-triathlon.jpg)More recently I have switched from ultramarathon training to the less intense but slightly more complicated Triathlon event, learning to cycle on the road and combining my lifelong love of swimming with my passion for running. 
+![Sīlavāpi racing the Culford Sprint Triathlon](/assets/img/ruth-culford-triathlon.jpg)
+
+More recently I have switched from ultramarathon training to the less intense but slightly more complicated Triathlon event, learning to cycle on the road and combining my lifelong love of swimming with my passion for running. 
 
 Thanks to the excellent support from the [Ipswich Triathlon Club](https://www.ipswich-tri.org/), I did my first Standard Duathlon (10k run / 40k bike / 5k run) in December 2024, and my first Sprint Triathlon in 2025. 
 

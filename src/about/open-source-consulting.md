@@ -2,7 +2,7 @@
 layout: 'layouts/page.njk'
 title: 'Open source consulting'
 date: 2026-08-07
-excerpt: 'Leading Mautic since 2020 - through acquisition, spin-out, governance and financial recovery - brought to other open source projects and foundations facing the challenges of maturity.'
+excerpt: 'Years of leading Mautic - through acquisition, spin-out, governance and financial recovery - brought to other open source projects and foundations facing the challenges of maturity.'
 sourceUrl: '/about/what-i-do/open-source-consulting'
 ---
 
