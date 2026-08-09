@@ -112,10 +112,19 @@ Comment endpoints attract spam, so the system is defended in layers:
 
 - **Nothing publishes without a click** (approve-first) and unapproved comments
   never reach `main`, so spam can't appear on the live site.
-- **Honeypot + time-trap** drop obvious bots without storing anything.
+- **Honeypot + time-trap** drop obvious bots without storing anything, and
+  **content heuristics** catch the rest of the usual comment spam - a URL in the
+  name field, or more than two links in the body - before it is stored or
+  emailed.
+- **Bounded requests** - an oversized POST body is rejected before it is parsed
+  (a `Content-Length` cap), and a non-form body returns `400` rather than an
+  uncaught 500.
 - **Moderation is POST-behind-a-confirmation** (`/api/moderate` GET only shows a
   confirm page) so email/link scanners that issue GET requests can't auto-approve
-  or auto-reject. Links are **HMAC-signed** (unforgeable without `COMMENT_SECRET`).
+  or auto-reject. Links are **HMAC-signed** (unforgeable without `COMMENT_SECRET`)
+  and **expire 30 days after they are issued** (the timestamp is part of the
+  signed payload), so a link left in a stale or compromised inbox goes dead on
+  its own; rotating `COMMENT_SECRET` voids every outstanding link at once.
 - **Stored content is escaped** at render (no HTML from commenters), the
   commenter email is never stored, paths are validated (no traversal), and the
   redirect `Location` is CR/LF-sanitised.

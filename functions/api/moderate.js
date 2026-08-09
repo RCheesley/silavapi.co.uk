@@ -11,7 +11,7 @@
  * Env: COMMENT_SECRET, GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH?,
  * GITHUB_PENDING_BRANCH?.
  */
-import { verifyApproval } from '../../lib/comments.js';
+import { verifyApproval, approvalPayload, isApprovalExpired } from '../../lib/comments.js';
 import { getFile, putFile, deleteFile } from './_github.js';
 
 const ID_RE = /^[a-z0-9-]+$/;
@@ -41,23 +41,40 @@ function params(source) {
     action: source.get('action') || '',
     slug: source.get('slug') || '',
     id: source.get('id') || '',
+    ts: source.get('ts') || '',
     sig: source.get('sig') || '',
   };
 }
 
-// Shared validation: env present, params well-formed, signature valid.
+// Shared validation: env present, params well-formed, signature valid, not
+// expired. The signature covers the timestamp, so `ts` can't be tampered to
+// dodge expiry without failing verification.
 async function guard(env, p) {
   if (!env.COMMENT_SECRET || !env.GITHUB_TOKEN || !env.GITHUB_REPO) {
     return page(503, 'Not configured', '<p>Comment moderation is not set up on this site yet.</p>');
   }
-  if (!ACTIONS.has(p.action) || !ID_RE.test(p.slug) || !ID_RE.test(p.id)) {
+  if (!ACTIONS.has(p.action) || !ID_RE.test(p.slug) || !ID_RE.test(p.id) || !/^\d+$/.test(p.ts)) {
     return page(400, 'Bad request', '<p>That moderation link is malformed.</p>');
   }
-  if (!(await verifyApproval(env.COMMENT_SECRET, `${p.action}:${p.slug}:${p.id}`, p.sig))) {
+  if (
+    !(await verifyApproval(
+      env.COMMENT_SECRET,
+      approvalPayload(p.action, p.slug, p.id, p.ts),
+      p.sig
+    ))
+  ) {
     return page(
       403,
       'Invalid link',
       '<p>That moderation link is invalid or has been tampered with.</p>'
+    );
+  }
+  if (isApprovalExpired(p.ts)) {
+    return page(
+      410,
+      'Link expired',
+      '<p>This moderation link has expired. The pending comment is still on the ' +
+        '<code>comments-pending</code> branch — approve or reject it there.</p>'
     );
   }
   return null;
@@ -99,6 +116,7 @@ export async function onRequestGet({ request, env }) {
       `<input type="hidden" name="action" value="${esc(p.action)}">` +
       `<input type="hidden" name="slug" value="${esc(p.slug)}">` +
       `<input type="hidden" name="id" value="${esc(p.id)}">` +
+      `<input type="hidden" name="ts" value="${esc(p.ts)}">` +
       `<input type="hidden" name="sig" value="${esc(p.sig)}">` +
       `<button type="submit">${verb} comment</button></form>`
   );
