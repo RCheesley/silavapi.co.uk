@@ -25,14 +25,17 @@ launch plumbing ships in the repo:
 
 ## 1. Cloudflare Pages project 🧑
 
-- [ ] Create the Pages project by **direct upload** with Wrangler (no Git
-      connection, so Cloudflare needs no access to GitHub):
-      `npx wrangler pages project create silavapi --production-branch main`.
-- [ ] Build and deploy the first time by hand: `npm run build && npx wrangler
-    pages deploy _site --project-name silavapi --branch main`. After this, CI
-      handles every deploy (step 4).
-- [ ] Confirm it loads at `https://silavapi.pages.dev` (it builds without any
-      secrets — the Functions just stay inert, returning 503).
+Create the project by **direct upload** with Wrangler (no Git connection, so
+Cloudflare never needs access to GitHub), then build and deploy once by hand:
+
+```bash
+npx wrangler pages project create silavapi --production-branch main
+npm run build && npx wrangler pages deploy _site --project-name silavapi --branch main
+```
+
+- [ ] Run the two commands above. After this, CI handles every deploy (step 4).
+- [ ] Confirm it loads at `https://silavapi.pages.dev` — it builds without any
+      secrets, so the Functions just stay inert (returning 503).
 
 ## 2. Email delivery — Resend 🧑
 
@@ -59,10 +62,10 @@ launch plumbing ships in the repo:
 - [ ] Create a scoped **Cloudflare API token** (My Profile → API Tokens → Create
       Token → **Account · Cloudflare Pages · Edit**) and add it as the GitHub repo
       secret `CLOUDFLARE_API_TOKEN`.
-- [ ] Add `CLOUDFLARE_ACCOUNT_ID` (Workers & Pages overview, or `wrangler
-    whoami`) as a repo secret too. With both set, every push to `main` and the
-      daily schedule build and deploy automatically (`ci.yml`), so approved
-      comments and date-gated talk announcements publish themselves.
+- [ ] Add `CLOUDFLARE_ACCOUNT_ID` too (find it on the Workers & Pages overview).
+      With both set, every push to `main` and the daily schedule build and deploy
+      automatically (`ci.yml`), so approved comments and date-gated talk
+      announcements publish themselves.
 
 ## 5. Custom domain + DNS 🧑
 
