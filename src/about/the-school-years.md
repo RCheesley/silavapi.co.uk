@@ -27,6 +27,6 @@ I later went on to spend four months out in Nepal during a Gap Year before Unive
 
 I owe a lot to my family and my school teachers for giving me these precious opportunities - it was not something that everybody was able to experience and without it I would not have experienced so many things I now hold to be central to my life.
 
-![Photo of Ruth in front of a roughly built brick wall. She is wearing a purple paisly print salwaar kameez with a purple scarf and has two plaits at the front of long blonde hair which is tied back in a ponytail. She is smiling at the camera.](/assets/img/joomlart/article/e0a70f72bdae9885bfc32d7cd19a26a1.jpg)
+![Photo of Sīlavāpi in front of a roughly built brick wall. She is wearing a purple paisley print salwaar kameez with a purple scarf and has two plaits at the front of long blonde hair which is tied back in a ponytail. She is smiling at the camera.](/assets/img/joomlart/article/e0a70f72bdae9885bfc32d7cd19a26a1.jpg)
 
 At Oasis Vidya Mandir school, Besi Shahar, 2000.
