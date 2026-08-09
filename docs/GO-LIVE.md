@@ -51,8 +51,8 @@ npm run build && npx wrangler pages deploy _site --project-name silavapi --branc
       read/write** only. Add as `GITHUB_TOKEN`.
 - [x] Add `GITHUB_REPO` (`RCheesley/silavapi.co.uk`), `COMMENT_SECRET`, and
       `SITE_URL`. (`GITHUB_BRANCH` / `GITHUB_PENDING_BRANCH` default sensibly.)
-      Note: `SITE_URL` is currently the `.pages.dev` URL for testing — switch it
-      to the live domain at step 5, and rotate `COMMENT_SECRET` before launch.
+      `SITE_URL` now points at `https://silavapi.co.uk`, and `COMMENT_SECRET` has
+      been rotated to a fresh value.
 - [ ] **Required — abuse rule:** add a Cloudflare WAF **Rate limiting rule** on
       `POST /api/comment`, e.g. **5 requests/minute per IP → Block**. This is the
       one thing the stateless code can't do; it stops comment-spam floods at the
@@ -60,20 +60,20 @@ npm run build && npx wrangler pages deploy _site --project-name silavapi --branc
 
 ## 4. CI deploy secrets 🧑
 
-- [ ] Create a scoped **Cloudflare API token** (My Profile → API Tokens → Create
+- [x] Create a scoped **Cloudflare API token** (My Profile → API Tokens → Create
       Token → **Account · Cloudflare Pages · Edit**) and add it as the GitHub repo
       secret `CLOUDFLARE_API_TOKEN`.
-- [ ] Add `CLOUDFLARE_ACCOUNT_ID` too (find it on the Workers & Pages overview).
+- [x] Add `CLOUDFLARE_ACCOUNT_ID` too (find it on the Workers & Pages overview).
       With both set, every push to `main` and the daily schedule build and deploy
       automatically (`ci.yml`), so approved comments and date-gated talk
       announcements publish themselves.
 
 ## 5. Custom domain + DNS 🧑
 
-- [ ] Add `silavapi.co.uk` (and `www`, redirecting to the apex) as a custom
+- [x] Add `silavapi.co.uk` (and `www`, redirecting to the apex) as a custom
       domain on the Pages project; let Cloudflare provision the certificate.
-- [ ] Point the domain's DNS at Pages (proxied / orange-cloud).
-- [ ] Update the `SITE_URL` env var to `https://silavapi.co.uk` (it was the
+- [x] Point the domain's DNS at Pages (proxied / orange-cloud).
+- [x] Update the `SITE_URL` env var to `https://silavapi.co.uk` (it was the
       `.pages.dev` URL during testing) so moderation links point at the live
       domain, then redeploy.
 
