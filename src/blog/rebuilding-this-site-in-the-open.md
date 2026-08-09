@@ -60,7 +60,7 @@ Four parts
 - **Interview** - a step where I get it to ask me three to five questions, one at a time, before it does anything, to validate that it understands what I'm asking
 - **Task** - what I actually want it to produce as an output
 
-The Interview step often surfaces details I've forgotten to mention and headed off a lot of confident wrong turns. The Task, you'll notice in the prompts below, describes what I wanted to end up with, not how to build it - I'm not a developer and had no idea what tools to reach for, so working that out is (in most cases, but not always - sometimes I have a sense of what I want and I'm more explict here) exactly the expert's job, not mine. Here's the prompt that started the stack decision:
+The Interview step often surfaces details I've forgotten to mention and headed off a lot of confident wrong turns. The Task, you'll notice in the prompts below, describes what I wanted to end up with, not how to build it - I'm not a developer and had no idea what tools to reach for, so working that out is (in most cases, but not always - sometimes I have a sense of what I want and I'm more explicit here) exactly the expert's job, not mine. Here's the prompt that started the stack decision:
 
 ```text {.prompt}
 Context: I'm moving my personal blog off Joomla after fifteen years. I'm the only person who maintains it. My priorities, in order: run it with a simple Git-based workflow (content as plain files); the least possible technical overhead, ideally no database or server-side app to patch; no cookies or third-party trackers for my readers; fast and cheap to host; accessible to WCAG 2.2 AA; open source. I'm not a developer, but I'm a highly technical user, comfortable with the command line and Git.
@@ -92,7 +92,7 @@ I started from a database dump of the old Joomla site. Rather than reach for a h
 
 The output was one Markdown file per article, with proper front matter, plus two things I'd have hated to do by hand: a complete map of old-URL-to-new-URL redirects, and a reconciliation report proving that every one of the 125 published articles had been accounted for - nothing silently dropped.
 
-My talks were a separate migration. I had around 78 of them on the proprietary platform Notist, which has done an excellent job but which I felt was a bit superfluous nowdays if I could build it into my own site, so those were pulled and turned into structured data for the new speaking section. Some old photo galleries that had been trapped inside a Joomla extension were recovered too, with proper alt text added to every image.
+My talks were a separate migration. I had around 78 of them on the proprietary platform Notist, which has done an excellent job but which I felt was a bit superfluous nowadays if I could build it into my own site, so those were pulled and turned into structured data for the new speaking section. Some old photo galleries that had been trapped inside a Joomla extension were recovered too, with proper alt text added to every image.
 
 Here's the migration prompt, in the same four-part shape. 
 
@@ -166,7 +166,7 @@ Task: Read the hand-written pages and flag anything stale, wrong, or in the wron
 
 That produced a tidy list of things to decide, rather than a pile of changes I'd have to unpick. It's a good pattern generally: ask for **proposals you approve**, not silent edits. I then went through and reviewed which ones did need updating, which ones were good to stay as they are, and which were no longer appropriate and needed removing. I think I caught them all, but if not, let me know via the contact form, please!
 
-**I made it prove its work.** 'Is it deployed?' isn't good enough. Throughout, I had it verify things against the real, running site - following an old link through the redirects to check it landed on the right page, confirming there were genuinely no third-party requests, checking the feed and sitemap actually served. Trust that it says it did what is claims, but also verify - have it show you evidence with screenshots, for example.
+**I made it prove its work.** 'Is it deployed?' isn't good enough. Throughout, I had it verify things against the real, running site - following an old link through the redirects to check it landed on the right page, confirming there were genuinely no third-party requests, checking the feed and sitemap actually served. Trust that it says it did what it claims, but also verify - have it show you evidence with screenshots, for example.
 
 **I had GitHub Copilot review all the PRs.** This gave me a secondary check to ensure that what was being proposed was sensible. It did pick up some bugs, suggested some improvements, even picked up a typo I'd made in some alt text 10 years ago!
 

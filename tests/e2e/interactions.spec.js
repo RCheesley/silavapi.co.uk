@@ -90,8 +90,12 @@ test.describe('prompt copy button (progressive enhancement)', () => {
     const btn = pre.locator('button.prompt-copy');
     await expect(btn).toHaveCount(1);
     await expect(btn).toHaveAttribute('aria-label', /copy prompt/i);
-    // Unobtrusive: hidden until the callout is hovered or focused.
+
+    // Unobtrusive but reachable: hidden until the callout is hovered...
     await expect(btn).toHaveCSS('opacity', '0');
+    // ...and genuinely revealed on hover, so the control is not unreachable.
+    await pre.hover();
+    await expect(btn).toHaveCSS('opacity', '1');
 
     // Clicking copies the prompt's text and confirms in the label.
     const expected = ((await pre.locator('code.prompt').textContent()) ?? '').trim();
