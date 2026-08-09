@@ -32,10 +32,16 @@
         },
         function () {
           btn.textContent = 'Copy failed';
+          btn.classList.remove('is-copied');
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            btn.textContent = 'Copy';
+          }, 2000);
         }
       );
     });
 
+    pre.classList.add('has-prompt-copy');
     pre.appendChild(btn);
   });
 })();

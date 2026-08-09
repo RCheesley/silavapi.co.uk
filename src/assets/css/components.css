@@ -878,7 +878,15 @@ pre > code.prompt {
 }
 
 /* Copy-to-clipboard button on prompt callouts (injected by prompt-copy.js).
-   Revealed on hover/focus; always shown on touch devices that can't hover. */
+   Revealed on hover/focus; always shown on touch devices that can't hover.
+   The reveal keys off the .has-prompt-copy class the script adds to the <pre>,
+   not :has(), so the button is never a hidden-but-focusable control in
+   browsers without :has() support - and the button only exists when the
+   script (and the class) are present. */
+.has-prompt-copy {
+  position: relative;
+}
+
 .prompt-copy {
   position: absolute;
   top: var(--space-3);
@@ -900,8 +908,9 @@ pre > code.prompt {
     color 120ms ease;
 }
 
-pre:has(> code.prompt):hover .prompt-copy,
-pre:has(> code.prompt):focus-within .prompt-copy,
+.has-prompt-copy:hover .prompt-copy,
+.has-prompt-copy:focus-within .prompt-copy,
+.prompt-copy:focus-visible,
 .prompt-copy.is-copied {
   opacity: 1;
 }
