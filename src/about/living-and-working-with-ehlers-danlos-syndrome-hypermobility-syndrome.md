@@ -4,6 +4,7 @@ title: 'Living and working with Ehlers Danlos Syndrome/Hypermobility Syndrome'
 date: 2012-12-16
 image: '/assets/img/joomlart/article/f4b6dca0e2911082f0eb6e1df1a0e11d.jpg'
 excerpt: 'Living and working well with Ehlers-Danlos Syndrome - a variable, largely invisible condition - through pacing, strength training, and being unafraid to ask for what I need.'
+description: 'Living and working well with Ehlers-Danlos Syndrome - a variable, largely invisible condition - through pacing, strength training, and being unafraid to ask for what I need.'
 sourceUrl: '/life/living-and-working-with-ehlers-danlos-syndrome-hypermobility-syndrome'
 ---
 

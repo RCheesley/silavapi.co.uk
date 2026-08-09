@@ -3,6 +3,7 @@ layout: 'layouts/page.njk'
 title: 'Getting ordained'
 date: 2026-07-06
 excerpt: 'What ordination in the Triratna Buddhist Order actually means, why I asked for it, and how a new name - Sīlavāpi - sits alongside a life and career in open source.'
+description: 'What ordination in the Triratna Buddhist Order actually means, why I asked for it, and how a new name - Sīlavāpi - sits alongside a life and career in open source.'
 sourceUrl: '/about/life-to-date/getting-ordained'
 ---
 
