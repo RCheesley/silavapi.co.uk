@@ -4,7 +4,13 @@ import {
   onRequestGet as moderateGet,
   onRequestPost as moderatePost,
 } from '../../functions/api/moderate.js';
-import { signApproval } from '../../lib/comments.js';
+import { signApproval, approvalPayload, APPROVAL_TTL_MS } from '../../lib/comments.js';
+
+// A fresh issued-at timestamp for signed moderation links, plus a helper that
+// signs the timestamped payload the handlers now expect.
+const FRESH_TS = Date.now();
+const signFor = (action, slug, id, ts = FRESH_TS) =>
+  signApproval(ENV.COMMENT_SECRET, approvalPayload(action, slug, id, ts));
 
 function formRequest(fields, { json = false } = {}) {
   const body = new FormData();
@@ -36,6 +42,28 @@ describe('POST /api/comment', () => {
     const res = await onRequestPost({ request: formRequest({ ...valid, website: 'x' }), env: ENV });
     expect(res.status).toBe(303);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('silently accepts content spam (URL in the name) and stores nothing', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+    const res = await onRequestPost({
+      request: formRequest({ ...valid, name: 'http://spam.example' }, { json: true }),
+      env: ENV,
+    });
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 for a non-form body rather than an uncaught 500', async () => {
+    const req = new Request('https://silavapi.co.uk/api/comment', {
+      method: 'POST',
+      headers: { accept: 'application/json', 'content-type': 'application/json' },
+      body: '{"not":"a form"}',
+    });
+    const res = await onRequestPost({ request: req, env: ENV });
+    expect(res.status).toBe(400);
   });
 
   it('returns 422 for an invalid comment', async () => {
@@ -107,8 +135,23 @@ describe('GET /api/moderate (confirmation only, no side effect)', () => {
   afterEach(() => vi.unstubAllGlobals());
 
   it('rejects a tampered signature', async () => {
-    const req = moderateGetReq('action=approve&slug=post&id=abc123&sig=deadbeef');
+    const req = moderateGetReq(`action=approve&slug=post&id=abc123&ts=${FRESH_TS}&sig=deadbeef`);
     expect((await moderateGet({ request: req, env: ENV })).status).toBe(403);
+  });
+
+  it('rejects a missing, zero or malformed timestamp as a bad request (400)', async () => {
+    const sig = await signFor('approve', 'post', 'abc123');
+    for (const ts of ['', '0', '00']) {
+      const q = `action=approve&slug=post&id=abc123${ts ? `&ts=${ts}` : ''}&sig=${sig}`;
+      expect((await moderateGet({ request: moderateGetReq(q), env: ENV })).status).toBe(400);
+    }
+  });
+
+  it('rejects an expired link (410)', async () => {
+    const oldTs = FRESH_TS - APPROVAL_TTL_MS - 1000;
+    const sig = await signFor('approve', 'post', 'abc123', oldTs);
+    const req = moderateGetReq(`action=approve&slug=post&id=abc123&ts=${oldTs}&sig=${sig}`);
+    expect((await moderateGet({ request: req, env: ENV })).status).toBe(410);
   });
 
   it('rejects an unknown action', async () => {
@@ -118,7 +161,7 @@ describe('GET /api/moderate (confirmation only, no side effect)', () => {
   });
 
   it('shows a confirm page and never mutates on GET (prevents link-prefetch)', async () => {
-    const sig = await signApproval(ENV.COMMENT_SECRET, 'approve:post:abc123');
+    const sig = await signFor('approve', 'post', 'abc123');
     const seen = [];
     vi.stubGlobal(
       'fetch',
@@ -128,7 +171,7 @@ describe('GET /api/moderate (confirmation only, no side effect)', () => {
       })
     );
     const res = await moderateGet({
-      request: moderateGetReq(`action=approve&slug=post&id=abc123&sig=${sig}`),
+      request: moderateGetReq(`action=approve&slug=post&id=abc123&ts=${FRESH_TS}&sig=${sig}`),
       env: ENV,
     });
     expect(res.status).toBe(200);
@@ -143,7 +186,7 @@ describe('POST /api/moderate (performs the action)', () => {
   afterEach(() => vi.unstubAllGlobals());
 
   it('approve: publishes to main (approved:true) and deletes from the queue', async () => {
-    const sig = await signApproval(ENV.COMMENT_SECRET, 'approve:post:abc123');
+    const sig = await signFor('approve', 'post', 'abc123');
     const seen = [];
     vi.stubGlobal(
       'fetch',
@@ -154,7 +197,13 @@ describe('POST /api/moderate (performs the action)', () => {
       })
     );
     const res = await moderatePost({
-      request: moderatePostReq({ action: 'approve', slug: 'post', id: 'abc123', sig }),
+      request: moderatePostReq({
+        action: 'approve',
+        slug: 'post',
+        id: 'abc123',
+        ts: String(FRESH_TS),
+        sig,
+      }),
       env: ENV,
     });
     expect(res.status).toBe(200);
@@ -174,7 +223,7 @@ describe('POST /api/moderate (performs the action)', () => {
   });
 
   it('reject: deletes from the queue, never touches main', async () => {
-    const sig = await signApproval(ENV.COMMENT_SECRET, 'reject:post:abc123');
+    const sig = await signFor('reject', 'post', 'abc123');
     const seen = [];
     vi.stubGlobal(
       'fetch',
@@ -185,7 +234,13 @@ describe('POST /api/moderate (performs the action)', () => {
       })
     );
     const res = await moderatePost({
-      request: moderatePostReq({ action: 'reject', slug: 'post', id: 'abc123', sig }),
+      request: moderatePostReq({
+        action: 'reject',
+        slug: 'post',
+        id: 'abc123',
+        ts: String(FRESH_TS),
+        sig,
+      }),
       env: ENV,
     });
     expect(res.status).toBe(200);
@@ -198,7 +253,13 @@ describe('POST /api/moderate (performs the action)', () => {
 
   it('rejects a tampered signature on POST too', async () => {
     const res = await moderatePost({
-      request: moderatePostReq({ action: 'approve', slug: 'post', id: 'abc123', sig: 'nope' }),
+      request: moderatePostReq({
+        action: 'approve',
+        slug: 'post',
+        id: 'abc123',
+        ts: String(FRESH_TS),
+        sig: 'nope',
+      }),
       env: ENV,
     });
     expect(res.status).toBe(403);

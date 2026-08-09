@@ -7,7 +7,14 @@
  * Env: GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH?, GITHUB_PENDING_BRANCH?,
  * COMMENT_SECRET, SITE_URL, plus RESEND_API_KEY / CONTACT_TO / CONTACT_FROM.
  */
-import { validateComment, buildComment, signApproval } from '../../lib/comments.js';
+import {
+  validateComment,
+  buildComment,
+  signApproval,
+  approvalPayload,
+  looksSpammy,
+  exceedsMaxBody,
+} from '../../lib/comments.js';
 import { isSpam } from '../../lib/contact.js';
 import { putFile, ensureBranch } from './_github.js';
 import { deliverEmail } from './_email.js';
@@ -57,14 +64,27 @@ function notifyText(v, approveUrl, rejectUrl) {
 }
 
 export async function onRequestPost({ request, env }) {
-  const form = await request.formData();
+  const wantsJson = (request.headers.get('accept') || '').includes('application/json');
+
+  // Bound the work per request: reject an oversized body before parsing it.
+  if (exceedsMaxBody(request.headers.get('content-length')))
+    return wantsJson ? json(413, { ok: false, error: 'too_large' }) : redirect('/?error=1');
+
+  // Parse the form. A non-form body (e.g. a bot POSTing JSON) is a clean 400,
+  // not an uncaught 500.
+  let form;
+  try {
+    form = await request.formData();
+  } catch {
+    return wantsJson ? json(400, { ok: false, error: 'bad_request' }) : redirect('/?error=1');
+  }
   const fields = {};
   for (const [k, val] of form.entries()) fields[k] = typeof val === 'string' ? val : '';
-  const wantsJson = (request.headers.get('accept') || '').includes('application/json');
   const back = safeReturn(fields.return, fields.slug);
 
-  // Spam (honeypot / time-trap): silently accept, storing nothing.
-  if (isSpam(fields))
+  // Spam: honeypot / time-trap, plus content heuristics (links in the body or a
+  // URL in the name). Silently accept, storing nothing, so bots get no signal.
+  if (isSpam(fields) || looksSpammy(fields))
     return wantsJson ? json(200, { ok: true }) : redirect(`${back}?posted=1#comments`);
 
   const { ok, errors, values } = validateComment(fields);
@@ -103,8 +123,12 @@ export async function onRequestPost({ request, env }) {
   try {
     const site = String(env.SITE_URL || '').replace(/\/$/, '');
     const link = async (action) => {
-      const sig = await signApproval(env.COMMENT_SECRET, `${action}:${values.slug}:${id}`);
-      return `${site}/api/moderate?action=${action}&slug=${encodeURIComponent(values.slug)}&id=${id}&sig=${sig}`;
+      const ts = Date.now();
+      const sig = await signApproval(
+        env.COMMENT_SECRET,
+        approvalPayload(action, values.slug, id, ts)
+      );
+      return `${site}/api/moderate?action=${action}&slug=${encodeURIComponent(values.slug)}&id=${id}&ts=${ts}&sig=${sig}`;
     };
     await deliverEmail(env, {
       subject: `New comment awaiting approval — ${values.slug}`,
