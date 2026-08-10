@@ -35,12 +35,16 @@ describe('readableDate', () => {
 });
 
 describe('isoDate', () => {
-  it('renders an ISO-8601 string', () => {
-    expect(isoDate(new Date('2025-03-03T09:30:00Z'))).toBe('2025-03-03T09:30:00.000Z');
+  it('renders an ISO-8601 string with second precision (no milliseconds)', () => {
+    expect(isoDate(new Date('2025-03-03T09:30:00Z'))).toBe('2025-03-03T09:30:00Z');
   });
 
   it('accepts a string input', () => {
-    expect(isoDate('2025-03-03T00:00:00Z')).toBe('2025-03-03T00:00:00.000Z');
+    expect(isoDate('2025-03-03T00:00:00Z')).toBe('2025-03-03T00:00:00Z');
+  });
+
+  it('strips sub-second precision from the input', () => {
+    expect(isoDate('2025-03-03T09:30:00.512Z')).toBe('2025-03-03T09:30:00Z');
   });
 
   it('throws a TypeError on an invalid date', () => {
