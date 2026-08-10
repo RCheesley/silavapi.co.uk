@@ -8,7 +8,7 @@ messages and comments, so I would much rather hear about a problem than not.
 **Please do not open a public issue for security problems.**
 
 Instead, report privately using GitHub's
-[private vulnerability reporting](https://github.com/RCheesley/silavapi.co.uk/security/advisories/new),
+[private vulnerability reporting](/security/advisories/new),
 or email **hello@silavapi.co.uk** with enough detail to reproduce the issue.
 
 Please give me a reasonable chance to fix it before disclosing it publicly. I
