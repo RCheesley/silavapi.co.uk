@@ -4,12 +4,14 @@ on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    - cron: '0 6 * * *' # 06:00 UTC daily — publishes date-gated talk announcements
   workflow_dispatch:
 
-# Cancel superseded runs for the same ref.
+# Cancel superseded PR runs; never cancel a main/schedule run (it may be deploying).
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -65,3 +67,46 @@ jobs:
             .lighthouseci/
           if-no-files-found: ignore
           retention-days: 7
+
+  # Deploy to Cloudflare Pages (direct upload) once the full gauntlet is green.
+  # Runs on pushes to main, the daily schedule (publishes date-gated talks), and
+  # manual dispatch — never on pull requests (they only get verified). Needs two
+  # repository secrets: CLOUDFLARE_API_TOKEN (scoped to Pages: Edit) and
+  # CLOUDFLARE_ACCOUNT_ID. Without them the step fails loudly rather than
+  # deploying a half-configured site.
+  deploy:
+    name: Deploy to Cloudflare Pages
+    needs: verify
+    # Only ever deploy main: push-to-main, the schedule (runs on the default
+    # branch), or a manual dispatch from main. This stops a workflow_dispatch on
+    # a feature branch from publishing that branch to production (the deploy step
+    # forces --branch=main).
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Serialise production deploys; never cancel one that is already uploading.
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Eleventy + Pagefind)
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy _site --project-name=silavapi --branch=main

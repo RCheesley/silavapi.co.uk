@@ -21,9 +21,6 @@ description: How privacy works on silavapi.co.uk - written in plain English, in 
       </ul>
     </section>
 
-    {# TODO(ruth): confirm this Analytics wording. It describes the chosen setup
-       (Cloudflare edge analytics), which differs from the mock's "self-hosted on
-       my own server". #}
     <section>
       <h2>Analytics</h2>
       <p>
@@ -47,14 +44,13 @@ description: How privacy works on silavapi.co.uk - written in plain English, in 
       </p>
     </section>
 
-    {# TODO(ruth): confirm server-log retention with the host (Cloudflare). #}
     <section>
       <h2>Server logs</h2>
       <p>
         Like every web host, mine keeps short-lived technical logs to detect
         abuse and keep the site running. These are handled by the hosting
-        provider; IP addresses are not retained long-term, and the logs are not
-        used to track or profile visitors.
+        provider (Cloudflare); IP addresses are not retained long-term, and the
+        logs are not used to track or profile visitors.
       </p>
     </section>
 
