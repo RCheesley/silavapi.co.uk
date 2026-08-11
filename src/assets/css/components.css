@@ -127,6 +127,18 @@
 .badge--neutral {
   background: var(--rc-grey-200);
 }
+/* A badge that links to its category page. Keeps the pill look; the hover/focus
+   affordance signals it is clickable. */
+a.badge {
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+a.badge:hover,
+a.badge:focus-visible {
+  color: var(--text-on-accent);
+  background: var(--action-primary);
+}
 
 /* Tag (article tags) ------------------------------------------------------ */
 .tag {
@@ -451,6 +463,7 @@ a.tag:hover {
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   transition: var(--transition-colors);
 }
@@ -458,7 +471,9 @@ a.tag:hover {
   border-color: var(--rc-purple-light);
   color: var(--rc-purple-light);
 }
-.chip[aria-pressed='true'] {
+/* Active category. aria-current is set server-side on the category pages and by
+   blog-filter.js when filtering the index in place. */
+.chip[aria-current] {
   background: var(--action-primary);
   border-color: var(--action-primary);
   color: var(--text-on-accent);

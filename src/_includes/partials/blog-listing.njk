@@ -1,0 +1,70 @@
+{#- Shared blog listing: heading, category chips, result count, card grid.
+    Used by the blog index (all posts, filterable in-place by JS) and by each
+    static /blog/category/<slug>/ page (one category, chips act as plain links).
+    Caller sets: listingEyebrow, listingTitle, listingStandfirst, listingHeading,
+    listingPosts, listingActive ("All" or a category name), listingFilterable. -#}
+{% from "macros/ui.njk" import sectionHeading, articleCard, alert %}
+
+<section class="band">
+  <div class="container section-y-sm stack">
+    {{ sectionHeading(listingEyebrow, listingTitle, 1, listingStandfirst) }}
+    <div class="blog-controls">
+      <div class="cluster" role="group" aria-label="Filter posts by category" data-blog-chips>
+        <a
+          class="chip"
+          href="/blog/"
+          data-category="All"
+          {%- if listingActive == "All" %} aria-current="page"{% endif %}
+          >All</a
+        >
+        {% for c in collections.blogCategories %}
+          <a
+            class="chip"
+            href="/blog/category/{{ c.slug }}/"
+            data-category="{{ c.name }}"
+            {%- if listingActive == c.name %} aria-current="page"{% endif %}
+            >{{ c.name }}</a
+          >
+        {% endfor %}
+      </div>
+      {#- Full-text blog search. Hidden until search.js reveals it (needs JS + the
+          Pagefind index); the category chips above still work without JS. -#}
+      <button class="search-trigger" type="button" data-search-open="blog" hidden>
+        <span class="search-trigger__icon" aria-hidden="true">{% icon "search", 18 %}</span>
+        <span class="search-trigger__text">Search posts</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="surface-subtle-band">
+  <div class="container section-y-sm stack">
+    <h2 class="visually-hidden">{{ listingHeading or "All posts" }}</h2>
+    <p class="result-count" aria-live="polite" data-blog-count>
+      {{ listingPosts | length }} {{ "post" if listingPosts | length == 1 else "posts"
+      }}{% if listingActive != "All" %} in {{ listingActive }}{% endif %}
+    </p>
+    <div
+      class="card-grid"
+      data-blog-grid
+      {%- if listingFilterable %} data-blog-filterable{% endif %}
+    >
+      {% for post in listingPosts %}
+        {{ articleCard({
+          title: post.data.title,
+          excerpt: post.data.excerpt,
+          image: post.data.image,
+          imageAlt: post.data.imageAlt,
+          date: post.date | readableDate,
+          category: post.data.category,
+          tone: categories.tones[post.data.category] or "neutral",
+          href: post.url,
+          categoryHref: "/blog/category/" + (post.data.category | categorySlug) + "/"
+        }) }}
+      {% endfor %}
+    </div>
+    <div data-blog-empty hidden>
+      {{ alert("info", "Nothing found", "No posts match that search - try a different word, or clear the category filter.") }}
+    </div>
+  </div>
+</section>

@@ -22,6 +22,8 @@ import {
   presentationCountries,
 } from './lib/talks.js';
 import { relatedPosts } from './lib/related.js';
+import { categorySlug } from './lib/slug.js';
+import categoriesData from './src/_data/categories.js';
 
 const CSS_TARGETS = browserslistToTargets(browserslist('>= 0.5%, last 2 versions, not dead'));
 const ROOT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -109,6 +111,9 @@ export default function (eleventyConfig) {
   // British date rendering ("03 March, 2025") + ISO for <time>/sitemap.
   eleventyConfig.addFilter('readableDate', readableDate);
   eleventyConfig.addFilter('isoDate', isoDate);
+  // Category name -> URL slug, shared with the blogCategories collection so the
+  // category page permalinks and the links pointing at them always match.
+  eleventyConfig.addFilter('categorySlug', categorySlug);
 
   // Estimated reading time from rendered content (~200 wpm, min 1).
   eleventyConfig.addFilter('readingTime', (content) => {
@@ -215,6 +220,28 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection('posts', (collectionApi) =>
     collectionApi.getFilteredByGlob('src/blog/**/*.md').sort((a, b) => b.date - a.date)
   );
+
+  // Blog categories that actually have posts, in the configured chip order.
+  // Drives both the static /blog/category/<slug>/ pages and the category
+  // chip/badge links. Categories with no posts are omitted so no link 404s.
+  eleventyConfig.addCollection('blogCategories', (collectionApi) => {
+    const posts = collectionApi.getFilteredByGlob('src/blog/**/*.md');
+    const byName = new Map();
+    for (const post of posts) {
+      const name = post.data.category;
+      if (!name) continue;
+      if (!byName.has(name)) byName.set(name, []);
+      byName.get(name).push(post);
+    }
+    return categoriesData.order
+      .filter((name) => byName.has(name))
+      .map((name) => ({
+        name,
+        slug: categorySlug(name),
+        tone: categoriesData.tones[name] || 'neutral',
+        posts: byName.get(name).sort((a, b) => b.date - a.date),
+      }));
+  });
 
   // Talks. A talk may carry an `announce` date: until that date passes it is
   // withheld from every listing (the "publish on a date" feature - a daily

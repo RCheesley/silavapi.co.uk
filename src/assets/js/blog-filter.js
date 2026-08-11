@@ -1,44 +1,76 @@
 /**
  * blog-filter.js - progressive enhancement for the blog index.
- * Filters the already-rendered post cards by category chip and announces the
- * result count politely. Full-text search is handled separately by the search
- * dialog (search.js), scoped to the blog. Without JS, every post is shown.
+ *
+ * The category chips are real links to the static /blog/category/<slug>/ pages,
+ * so they work (and are shareable) with no JavaScript. Where JS is available and
+ * the full set of posts is on the page (the index carries data-blog-filterable),
+ * this intercepts chip clicks to filter the already-rendered cards in place and
+ * syncs the address bar to the same shareable category URL - so you get the
+ * instant filter AND a link you can copy. Back/forward is handled via popstate.
+ *
+ * On a single-category page the grid has no data-blog-filterable flag, so this
+ * exits early and the chips simply navigate. Full-text search is separate
+ * (search.js). Without JS, every post is shown on the index.
  */
 (function () {
   var grid = document.querySelector('[data-blog-grid]');
   var chipGroup = document.querySelector('[data-blog-chips]');
   var count = document.querySelector('[data-blog-count]');
   var empty = document.querySelector('[data-blog-empty]');
-  if (!grid || !chipGroup) return;
+  if (!grid || !chipGroup || !grid.hasAttribute('data-blog-filterable')) return;
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.article-card'));
   var chips = Array.prototype.slice.call(chipGroup.querySelectorAll('.chip'));
-  var state = { category: 'All' };
 
-  function apply() {
+  function apply(category) {
     var shown = 0;
     cards.forEach(function (card) {
-      var visible =
-        state.category === 'All' || card.getAttribute('data-category') === state.category;
+      var visible = category === 'All' || card.getAttribute('data-category') === category;
       card.hidden = !visible;
       if (visible) shown += 1;
     });
 
+    chips.forEach(function (chip) {
+      if (chip.getAttribute('data-category') === category) {
+        chip.setAttribute('aria-current', 'page');
+      } else {
+        chip.removeAttribute('aria-current');
+      }
+    });
+
     if (count) {
       var label = shown + (shown === 1 ? ' post' : ' posts');
-      if (state.category !== 'All') label += ' in ' + state.category;
+      if (category !== 'All') label += ' in ' + category;
       count.textContent = label;
     }
     if (empty) empty.hidden = shown !== 0;
   }
 
+  // Which category does the current path represent? Match a chip's own href so
+  // the mapping stays in one place (the markup), then fall back to "All".
+  function categoryForPath(path) {
+    for (var i = 0; i < chips.length; i += 1) {
+      if (new URL(chips[i].href, window.location.origin).pathname === path) {
+        return chips[i].getAttribute('data-category');
+      }
+    }
+    return 'All';
+  }
+
   chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      state.category = chip.getAttribute('data-category');
-      chips.forEach(function (c) {
-        c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
-      });
-      apply();
+    chip.addEventListener('click', function (e) {
+      // Leave modified clicks (open-in-new-tab, middle click, etc.) alone.
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      var category = chip.getAttribute('data-category');
+      apply(category);
+      if (window.history && window.history.pushState) {
+        window.history.pushState({ category: category }, '', chip.href);
+      }
     });
+  });
+
+  window.addEventListener('popstate', function () {
+    apply(categoryForPath(window.location.pathname));
   });
 })();
