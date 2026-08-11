@@ -60,6 +60,19 @@ test.describe('blog category (progressive enhancement + shareable URLs)', () => 
     await expect(badge).toHaveAttribute('href', /^\/blog\/category\/.+\/$/);
   });
 
+  test('re-clicking the active chip does not stack duplicate history entries', async ({ page }) => {
+    await page.goto('/blog/');
+    const buddhism = page.locator('.chip[data-category="Buddhism"]');
+    await buddhism.click();
+    await expect(page).toHaveURL(/\/blog\/category\/buddhism\/$/);
+
+    const before = await page.evaluate(() => history.length);
+    await buddhism.click(); // already active - should be a no-op
+    const after = await page.evaluate(() => history.length);
+    expect(after).toBe(before);
+    await expect(page).toHaveURL(/\/blog\/category\/buddhism\/$/);
+  });
+
   // Full-text blog search moved from an inline card filter to the Pagefind-backed
   // dialog (data-search-open="blog"); it is covered in search.spec.js.
 });

@@ -8,8 +8,10 @@
  * syncs the address bar to the same shareable category URL - so you get the
  * instant filter AND a link you can copy. Back/forward is handled via popstate.
  *
- * On a single-category page the grid has no data-blog-filterable flag, so this
- * exits early and the chips simply navigate. Full-text search is separate
+ * Only the index (blog.njk) loads this script; the static category pages do not,
+ * so their chips are plain links that navigate. The data-blog-filterable guard
+ * below is belt-and-braces - it keeps the script inert if it is ever included on
+ * a page that is not the full, filterable post list. Full-text search is separate
  * (search.js). Without JS, every post is shown on the index.
  */
 (function () {
@@ -62,6 +64,9 @@
       // Leave modified clicks (open-in-new-tab, middle click, etc.) alone.
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
+      // Re-clicking the active chip is a no-op: don't refilter or push a
+      // duplicate history entry for the URL we're already on.
+      if (chip.getAttribute('aria-current') === 'page') return;
       var category = chip.getAttribute('data-category');
       apply(category);
       if (window.history && window.history.pushState) {
