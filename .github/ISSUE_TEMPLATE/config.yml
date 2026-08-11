@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Get in touch
+    url: https://silavapi.co.uk/contact/
+    about: For anything that is a personal message rather than an issue with the site, please use the contact form.
+  - name: Report a security issue
+    url: https://github.com/RCheesley/silavapi.co.uk/security/advisories/new
+    about: Please report vulnerabilities privately, not as a public issue. See SECURITY.md.
