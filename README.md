@@ -8,8 +8,8 @@ static site, migrated from the old Joomla site at ruthcheesley.co.uk.
 
 ## Status
 
-🚧 **In active migration.** This repository is private for now and will be made **public**
-later - transparency is the default. Nothing secret is ever committed here.
+✅ **Live and open source.** The site runs at [silavapi.co.uk](https://silavapi.co.uk), and this
+repository is public - transparency is the default. Nothing secret is ever committed here.
 
 ## Tech stack
 
@@ -43,7 +43,8 @@ npm run build    # production build to _site/
 npm test         # unit + functional + accessibility checks
 ```
 
-Full contributor and deployment docs will land in [`docs/`](docs/) as the build progresses.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full workflow and the test
+gauntlet, and [`docs/`](docs/) for deployment, migration, and open-source notes.
 
 ## Design source of truth
 
@@ -51,7 +52,21 @@ The design handoff (spec + high-fidelity mockups + design tokens) lives in
 [`design-handoff/`](design-handoff/) - see `design-handoff/BUILD_SPEC.md` and
 `design-handoff/README.md`.
 
+## Contributing
+
+Contributions are welcome - especially content corrections (a typo, a broken
+link, an out-of-date fact). See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to
+run the site locally and open a pull request, and please be kind: this project
+follows a [Code of Conduct](CODE_OF_CONDUCT.md). To report a security issue, see
+[`SECURITY.md`](SECURITY.md) - privately, please, not as a public issue.
+
 ## Licence
 
-To be confirmed. (Code and written content will likely carry separate licences -
-a permissive licence for the site code, and a Creative Commons licence for the writing.)
+The **source code** is under the [MIT Licence](LICENSE) - borrow from it freely.
+
+The **written content and original images** (blog posts, page copy, talk
+write-ups and photographs) are under
+[Creative Commons Attribution-NonCommercial 4.0](LICENSE-CONTENT).
+
+Third-party dependencies, stock images, and the `design-handoff/` assets remain
+under their own licences.
