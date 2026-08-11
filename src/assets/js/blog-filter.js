@@ -59,8 +59,14 @@
     return 'All';
   }
 
+  var canPushState = !!(window.history && window.history.pushState);
+
   chips.forEach(function (chip) {
     chip.addEventListener('click', function (e) {
+      // Without the History API we can't sync a shareable URL, so leave the chip
+      // as the plain link it is and let the browser navigate to the static
+      // category page (which works fully on its own).
+      if (!canPushState) return;
       // Leave modified clicks (open-in-new-tab, middle click, etc.) alone.
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
@@ -69,9 +75,7 @@
       if (chip.getAttribute('aria-current') === 'page') return;
       var category = chip.getAttribute('data-category');
       apply(category);
-      if (window.history && window.history.pushState) {
-        window.history.pushState({ category: category }, '', chip.href);
-      }
+      window.history.pushState({ category: category }, '', chip.href);
     });
   });
 
