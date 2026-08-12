@@ -76,6 +76,15 @@ describe('checkHttpblSpam', () => {
     ).toBe(true);
   });
 
+  it('floors a fractional HTTPBL_MIN_THREAT', async () => {
+    // 25.5 floors to 25, so a suspicious IP scoring exactly 25 is spam. Without
+    // flooring, 25 >= 25.5 would be false.
+    const env = { HTTPBL_ACCESS_KEY: KEY, HTTPBL_MIN_THREAT: '25.5' };
+    expect(
+      await checkHttpblSpam(req('9.9.9.9'), env, { fetchImpl: dohReturning('127.1.25.1') })
+    ).toBe(true);
+  });
+
   it('fails open when the lookup errors', async () => {
     const fetchImpl = vi.fn(async () => {
       throw new Error('network down');

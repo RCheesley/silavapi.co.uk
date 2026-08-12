@@ -50,9 +50,10 @@ export async function checkHttpblSpam(request, env, { fetchImpl = fetch, timeout
     // IP as spam), so fall back to the default threshold.
     const raw = String(env.HTTPBL_MIN_THREAT ?? '').trim();
     const parsed = raw === '' ? NaN : Number(raw);
-    // Clamp into the documented 0-255 range so a stray value can't make the
-    // filter overly aggressive (e.g. -1) or inert (e.g. 9999).
-    const minThreat = Number.isFinite(parsed) ? Math.min(255, Math.max(0, parsed)) : 25;
+    // Threat scores are 0-255 integers, so floor and clamp into range: a stray
+    // value can't make the filter overly aggressive (e.g. -1) or inert (9999),
+    // and a fractional threshold (25.5) can't creep in.
+    const minThreat = Number.isFinite(parsed) ? Math.floor(Math.min(255, Math.max(0, parsed))) : 25;
     return httpblIsSpam(interpretHttpbl(record), { minThreat });
   } catch {
     return false; // fail open
