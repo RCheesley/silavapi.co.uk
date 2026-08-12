@@ -27,9 +27,14 @@
   </div>
 {% endmacro %}
 
-{# Category badge - tone: brand | accent | warm | neutral. #}
-{% macro badge(label, tone="neutral") %}
-  <span class="badge badge--{{ tone }}">{{ label }}</span>
+{# Category badge - tone: brand | accent | warm | neutral. Renders a link to the
+   category page when href is given, else a plain span. #}
+{% macro badge(label, tone="neutral", href="") %}
+  {%- if href -%}
+    <a class="badge badge--{{ tone }}" href="{{ href }}">{{ label }}</a>
+  {%- else -%}
+    <span class="badge badge--{{ tone }}">{{ label }}</span>
+  {%- endif -%}
 {% endmacro %}
 
 {# Tag - a small pill; a link when href is given. #}
@@ -54,7 +59,9 @@
 {% endmacro %}
 
 {# Article card - post = { title, excerpt, image, imageAlt, date, category,
-   tone, href }. The title is the link (whole-card affordance via the title). #}
+   tone, href, categoryHref }. The title is the link (whole-card affordance via
+   the title); the category badge links to its category page when categoryHref
+   is given. #}
 {% macro articleCard(post) %}
   <article
     class="article-card"
@@ -69,7 +76,7 @@
     <div class="article-card__body">
       <div class="article-card__meta">
         <span class="article-card__date">{{ post.date }}</span>
-        {% if post.category %}{{ badge(post.category, post.tone or "neutral") }}{% endif %}
+        {% if post.category %}{{ badge(post.category, post.tone or "neutral", post.categoryHref or "") }}{% endif %}
       </div>
       <h3 class="article-card__title"><a href="{{ post.href }}">{{ post.title }}</a></h3>
       <p class="article-card__excerpt">{{ post.excerpt }}</p>
