@@ -7,7 +7,7 @@ import {
   isSpam,
   looksLikeSpamContent,
   MIN_FILL_MS,
-  MAX_MESSAGE_LINKS,
+  SPAM_LINK_THRESHOLD,
   LIMITS,
 } from '../../lib/contact.js';
 
@@ -160,7 +160,7 @@ describe('looksLikeSpamContent', () => {
   });
 
   it('flags a message with a pile of links', () => {
-    const many = Array.from({ length: MAX_MESSAGE_LINKS }, (_, i) => `http://x${i}.example`).join(
+    const many = Array.from({ length: SPAM_LINK_THRESHOLD }, (_, i) => `http://x${i}.example`).join(
       ' '
     );
     expect(looksLikeSpamContent({ message: many })).toBe(true);
