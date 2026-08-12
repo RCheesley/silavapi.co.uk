@@ -1,15 +1,19 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('blog filter (progressive enhancement)', () => {
-  test('category chip filters cards, updates count + aria-pressed', async ({ page }) => {
+test.describe('blog category (progressive enhancement + shareable URLs)', () => {
+  test('chip is a real link that filters in place and syncs a shareable URL', async ({ page }) => {
     await page.goto('/blog/');
     const cards = page.locator('.article-card');
     const total = await cards.count();
     expect(total).toBeGreaterThan(0);
 
-    await page.locator('.chip[data-category="Buddhism"]').click();
-    await expect(page.locator('.chip[aria-pressed="true"]')).toHaveText('Buddhism');
-    // At least one card remains, and every visible card is in the category.
+    // The chip is a genuine link to the static category page (works without JS).
+    const buddhism = page.locator('.chip[data-category="Buddhism"]');
+    await expect(buddhism).toHaveAttribute('href', '/blog/category/buddhism/');
+
+    await buddhism.click();
+    // Filtered in place: active chip marked with aria-current, cards Buddhism-only.
+    await expect(buddhism).toHaveAttribute('aria-current', 'page');
     const visible = page.locator('.article-card:visible');
     expect(await visible.count()).toBeGreaterThan(0);
     const cats = await visible.evaluateAll((els) =>
@@ -17,6 +21,56 @@ test.describe('blog filter (progressive enhancement)', () => {
     );
     expect(cats.every((c) => c === 'Buddhism')).toBe(true);
     await expect(page.locator('[data-blog-count]')).toContainText('in Buddhism');
+    // The address bar now holds the shareable category URL (pushState, no reload).
+    await expect(page).toHaveURL(/\/blog\/category\/buddhism\/$/);
+
+    // Back restores the full, unfiltered list.
+    await page.goBack();
+    await expect(page).toHaveURL(/\/blog\/$/);
+    await expect(page.locator('.chip[data-category="All"]')).toHaveAttribute(
+      'aria-current',
+      'page'
+    );
+    expect(await page.locator('.article-card:visible').count()).toBe(total);
+  });
+
+  test('the static category page stands alone (shareable, no JS needed)', async ({ page }) => {
+    await page.goto('/blog/category/buddhism/');
+    const cards = page.locator('.article-card');
+    expect(await cards.count()).toBeGreaterThan(0);
+    const cats = await cards.evaluateAll((els) =>
+      els.map((el) => el.getAttribute('data-category'))
+    );
+    expect(cats.every((c) => c === 'Buddhism')).toBe(true);
+
+    // Active category reflected server-side; other chips are plain links onward.
+    await expect(page.locator('.chip[data-category="Buddhism"]')).toHaveAttribute(
+      'aria-current',
+      'page'
+    );
+    await expect(page.locator('.chip[data-category="Mautic"]')).toHaveAttribute(
+      'href',
+      '/blog/category/mautic/'
+    );
+  });
+
+  test('a card category badge links to its category page', async ({ page }) => {
+    await page.goto('/blog/');
+    const badge = page.locator('.article-card a.badge').first();
+    await expect(badge).toHaveAttribute('href', /^\/blog\/category\/.+\/$/);
+  });
+
+  test('re-clicking the active chip does not stack duplicate history entries', async ({ page }) => {
+    await page.goto('/blog/');
+    const buddhism = page.locator('.chip[data-category="Buddhism"]');
+    await buddhism.click();
+    await expect(page).toHaveURL(/\/blog\/category\/buddhism\/$/);
+
+    const before = await page.evaluate(() => history.length);
+    await buddhism.click(); // already active - should be a no-op
+    const after = await page.evaluate(() => history.length);
+    expect(after).toBe(before);
+    await expect(page).toHaveURL(/\/blog\/category\/buddhism\/$/);
   });
 
   // Full-text blog search moved from an inline card filter to the Pagefind-backed

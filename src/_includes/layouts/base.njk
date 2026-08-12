@@ -63,7 +63,7 @@
     {%- elif "/speaking/" in page.url %}{% set pagefindSection = "speaking" %}{% endif -%}
     <main
       id="main"
-      {%- if not noindex %} data-pagefind-body data-pagefind-filter="section:{{ pagefindSection }}"{% endif %}
+      {%- if not noindex and not pagefindExclude %} data-pagefind-body data-pagefind-filter="section:{{ pagefindSection }}"{% endif %}
     >
       {% block content %}{{ content | safe }}{% endblock %}
     </main>

@@ -14,6 +14,11 @@ export const PAGES = [
     name: 'Article',
     h1: /Introducing Sīlavāpi/,
   },
+  {
+    path: '/blog/category/buddhism/',
+    name: 'Blog category',
+    h1: /Buddhism/,
+  },
   { path: '/speaking/', name: 'Speaking', h1: /Invite me to speak/ },
   {
     path: '/speaking/who-owns-your-data-open-source-digital-sovereignty-and-your-marketing-stack/',

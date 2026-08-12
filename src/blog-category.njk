@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+navActive: blog
+pagination:
+  data: collections.blogCategories
+  size: 1
+  alias: cat
+  # Without this, only the first paginated page joins collections.all, so the
+  # other category pages would be missing from the sitemap.
+  addAllPagesToCollections: true
+permalink: '/blog/category/{{ cat.slug }}/'
+pagefindExclude: true
+eleventyComputed:
+  title: '{{ cat.name }}'
+  description: 'Blog posts filed under {{ cat.name }}, by Sīlavāpi.'
+---
+
+{%- set listingEyebrow = "Category" -%}
+{%- set listingTitle = cat.name -%}
+{%- set listingStandfirst = "Posts filed under " + cat.name + "." -%}
+{%- set listingHeading = cat.name + " posts" -%}
+{%- set listingPosts = cat.posts -%}
+{%- set listingActive = cat.name -%}
+{%- set listingFilterable = false -%}
+{% include "partials/blog-listing.njk" %}

@@ -10,7 +10,7 @@ readerControl: true
 <article>
   <div class="article__head">
     <div class="article__meta">
-      {{ badge(category, tone) }}
+      {% if category %}{{ badge(category, tone, "/blog/category/" + (category | categorySlug) + "/") }}{% endif %}
       <span class="article__metatext"
         >{{ date | readableDate }} · {{ content | readingTime }}</span
       >
