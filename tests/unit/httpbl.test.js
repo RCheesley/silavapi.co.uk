@@ -74,6 +74,12 @@ describe('httpblIsSpam', () => {
     expect(httpblIsSpam(interpretHttpbl('127.1.30.1'), { minThreat: 40 })).toBe(false);
   });
 
+  it('does not apply the threat threshold to a non-suspicious listing', () => {
+    // An unrecognised type bit (not search engine / suspicious / harvester /
+    // comment spammer) is treated conservatively - not spam - even at high score.
+    expect(httpblIsSpam(interpretHttpbl('127.1.200.8'))).toBe(false);
+  });
+
   it('returns false for a null/unlisted result', () => {
     expect(httpblIsSpam(null)).toBe(false);
   });

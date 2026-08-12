@@ -67,6 +67,15 @@ describe('checkHttpblSpam', () => {
     ).toBe(false);
   });
 
+  it('clamps HTTPBL_MIN_THREAT above 255 down to 255', async () => {
+    // 9999 clamps to 255, so a suspicious IP at the max score (255) is still spam.
+    // Without clamping, minThreat would be 9999 and 255 >= 9999 would be false.
+    const env = { HTTPBL_ACCESS_KEY: KEY, HTTPBL_MIN_THREAT: '9999' };
+    expect(
+      await checkHttpblSpam(req('9.9.9.9'), env, { fetchImpl: dohReturning('127.1.255.1') })
+    ).toBe(true);
+  });
+
   it('fails open when the lookup errors', async () => {
     const fetchImpl = vi.fn(async () => {
       throw new Error('network down');

@@ -175,6 +175,16 @@ describe('looksLikeSpamContent', () => {
     ).toBe(false);
   });
 
+  it('counts a scheme+www URL once, not twice', () => {
+    // Four full URLs (each http://www...) is below the threshold; a naive regex
+    // would double-count them to eight and wrongly flag this.
+    expect(
+      looksLikeSpamContent({
+        message: 'http://www.a.com http://www.b.com http://www.c.com http://www.d.com',
+      })
+    ).toBe(false);
+  });
+
   it('is safe with no argument', () => {
     expect(looksLikeSpamContent()).toBe(false);
   });
