@@ -5,7 +5,9 @@ import {
   formatSpeakerMessage,
   formatEventDate,
   isSpam,
+  looksLikeSpamContent,
   MIN_FILL_MS,
+  MAX_MESSAGE_LINKS,
   LIMITS,
 } from '../../lib/contact.js';
 
@@ -135,7 +137,44 @@ describe('isSpam', () => {
     expect(isSpam({ _started: 'nope' })).toBe(false);
   });
 
+  it('flags link-heavy content (delegates to looksLikeSpamContent)', () => {
+    expect(isSpam({ name: 'Visit http://x.example' })).toBe(true);
+  });
+
   it('is safe with no argument', () => {
     expect(isSpam()).toBe(false);
+  });
+});
+
+describe('looksLikeSpamContent', () => {
+  it('flags a URL in the name field', () => {
+    expect(looksLikeSpamContent({ name: 'Best SEO https://spam.example' })).toBe(true);
+    expect(looksLikeSpamContent({ name: 'cheap deals www.spam.co' })).toBe(true);
+  });
+
+  it('flags BBCode or HTML link markup in the message or topic', () => {
+    expect(looksLikeSpamContent({ message: 'hi [url=http://x]click[/url]' })).toBe(true);
+    expect(looksLikeSpamContent({ message: 'see <a href="http://x">here</a>' })).toBe(true);
+    expect(looksLikeSpamContent({ topic: 'talk [link=http://x]' })).toBe(true);
+  });
+
+  it('flags a message with a pile of links', () => {
+    const many = Array.from({ length: MAX_MESSAGE_LINKS }, (_, i) => `http://x${i}.example`).join(
+      ' '
+    );
+    expect(looksLikeSpamContent({ message: many })).toBe(true);
+  });
+
+  it('allows an ordinary message with a link or two', () => {
+    expect(
+      looksLikeSpamContent({
+        name: 'Ada Lovelace',
+        message: 'Loved your talk - my site is https://ada.example and https://notes.example',
+      })
+    ).toBe(false);
+  });
+
+  it('is safe with no argument', () => {
+    expect(looksLikeSpamContent()).toBe(false);
   });
 });
