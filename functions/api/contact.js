@@ -95,19 +95,23 @@ export async function onRequestPost({ request, env }) {
   // Where a native (no-JS) submission returns to on failure.
   const formPath = fields._form === 'speaking' ? '/speaking/book/' : '/contact/';
 
-  // Silently accept spam (no signal to bots), but never send it on. First the
-  // cheap local heuristics, then the optional http:BL IP-reputation check
-  // (network, fail-open) only if the message would otherwise be delivered.
+  // Silently accept spam (no signal to bots), but never send it on. Start with
+  // the cheap local heuristics (honeypot / time-trap / content).
   const silentAccept = () => (json ? Response.json({ ok: true }) : redirect('/thank-you/'));
   if (isSpam(fields)) return silentAccept();
-  if (await checkHttpblSpam(request, env)) return silentAccept();
 
+  // Validate before the network http:BL lookup, so a genuine user still gets
+  // their validation errors and the lookup only runs for submissions that would
+  // otherwise be delivered.
   const { ok, errors, email } = prepare(fields);
   if (!ok) {
     return json
       ? Response.json({ ok: false, errors }, { status: 422 })
       : redirect(`${formPath}?error=1`);
   }
+
+  // Optional Project Honeypot http:BL IP-reputation check (fail-open).
+  if (await checkHttpblSpam(request, env)) return silentAccept();
 
   try {
     await deliverEmail(env, email);

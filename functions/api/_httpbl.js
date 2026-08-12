@@ -46,7 +46,10 @@ export async function checkHttpblSpam(request, env, { fetchImpl = fetch, timeout
     }
     if (!record) return false;
 
-    const parsed = Number(env.HTTPBL_MIN_THREAT);
+    // Blank/whitespace is "unset" (Number('') === 0 would flag every suspicious
+    // IP as spam), so fall back to the default threshold.
+    const raw = String(env.HTTPBL_MIN_THREAT ?? '').trim();
+    const parsed = raw === '' ? NaN : Number(raw);
     const minThreat = Number.isFinite(parsed) ? parsed : 25;
     return httpblIsSpam(interpretHttpbl(record), { minThreat });
   } catch {

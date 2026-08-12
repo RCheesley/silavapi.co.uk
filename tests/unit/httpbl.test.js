@@ -51,6 +51,11 @@ describe('interpretHttpbl', () => {
     expect(interpretHttpbl('nope')).toBeNull();
     expect(interpretHttpbl('')).toBeNull();
   });
+
+  it('returns null when an octet is out of the 0-255 range', () => {
+    expect(interpretHttpbl('127.1.999.4')).toBeNull();
+    expect(interpretHttpbl('127.300.0.0')).toBeNull();
+  });
 });
 
 describe('httpblIsSpam', () => {

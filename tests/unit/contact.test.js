@@ -155,6 +155,7 @@ describe('looksLikeSpamContent', () => {
   it('flags BBCode or HTML link markup in the message or topic', () => {
     expect(looksLikeSpamContent({ message: 'hi [url=http://x]click[/url]' })).toBe(true);
     expect(looksLikeSpamContent({ message: 'see <a href="http://x">here</a>' })).toBe(true);
+    expect(looksLikeSpamContent({ message: 'see &lt;a href="http://x"&gt;here' })).toBe(true);
     expect(looksLikeSpamContent({ topic: 'talk [link=http://x]' })).toBe(true);
   });
 

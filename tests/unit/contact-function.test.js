@@ -106,6 +106,33 @@ describe('POST /api/contact', () => {
     expect(fetchImpl).toHaveBeenCalledTimes(1);
     expect(fetchImpl.mock.calls[0][0]).toContain('dnsbl.httpbl.org');
   });
+
+  it('validates before http:BL: an invalid submission still gets errors, no lookup', async () => {
+    const fetchImpl = vi.fn(async () =>
+      Response.json({ Status: 0, Answer: [{ type: 1, data: '127.2.40.4' }] })
+    );
+    vi.stubGlobal('fetch', fetchImpl);
+
+    const request = new Request('https://silavapi.co.uk/api/contact', {
+      method: 'POST',
+      headers: { accept: 'application/json', 'CF-Connecting-IP': '9.9.9.9' },
+      body: (() => {
+        const b = new FormData();
+        b.set('name', '');
+        b.set('email', 'no');
+        b.set('message', '');
+        return b;
+      })(),
+    });
+
+    const res = await onRequestPost({
+      request,
+      env: { ...CONFIGURED, HTTPBL_ACCESS_KEY: 'abcdefghijkl' },
+    });
+
+    expect(res.status).toBe(422); // validation errors, not a silent accept
+    expect(fetchImpl).not.toHaveBeenCalled(); // no http:BL lookup for an invalid submission
+  });
 });
 
 afterEach(() => vi.unstubAllGlobals());

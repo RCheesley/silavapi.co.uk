@@ -58,6 +58,15 @@ describe('checkHttpblSpam', () => {
     ).toBe(false);
   });
 
+  it('treats a blank HTTPBL_MIN_THREAT as unset (falls back to the default)', async () => {
+    const env = { HTTPBL_ACCESS_KEY: KEY, HTTPBL_MIN_THREAT: '' };
+    // Suspicious (type 1), threat 20 -> below the default 25 -> not spam. If ''
+    // were parsed as 0 this would wrongly flag it.
+    expect(
+      await checkHttpblSpam(req('9.9.9.9'), env, { fetchImpl: dohReturning('127.1.20.1') })
+    ).toBe(false);
+  });
+
   it('fails open when the lookup errors', async () => {
     const fetchImpl = vi.fn(async () => {
       throw new Error('network down');

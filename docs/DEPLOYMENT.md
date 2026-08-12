@@ -66,10 +66,10 @@ in the name, link markup, many links) with no configuration. Two optional
 variables enable an extra **Project Honeypot [http:BL](https://www.projecthoneypot.org/httpbl_api.php)**
 IP-reputation check on submit:
 
-| Variable            | Example      | Notes                                                                 |
-| ------------------- | ------------ | --------------------------------------------------------------------- |
-| `HTTPBL_ACCESS_KEY` | _(secret)_   | free 12-letter key from projecthoneypot.org; absent = check disabled  |
-| `HTTPBL_MIN_THREAT` | `25`         | optional; threat score (0-255) at/above which a suspicious IP is spam |
+| Variable            | Example    | Notes                                                                 |
+| ------------------- | ---------- | --------------------------------------------------------------------- |
+| `HTTPBL_ACCESS_KEY` | _(secret)_ | free 12-letter key from projecthoneypot.org; absent = check disabled  |
+| `HTTPBL_MIN_THREAT` | `25`       | optional; threat score (0-255) at/above which a suspicious IP is spam |
 
 The lookup is **server-side only** (DNS-over-HTTPS from the function - no browser
 request, no cookie) and **fails open**: a missing key, an IPv6 client (http:BL is
