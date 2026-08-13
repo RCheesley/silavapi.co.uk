@@ -1,8 +1,11 @@
 /**
  * POST /api/contact - the contact-form handler (Cloudflare Pages Function).
  *
- * - Anti-spam: honeypot + time-trap (isSpam), no CAPTCHA. Spam is silently
- *   accepted (redirected like a success) so bots get no signal.
+ * - Anti-spam: honeypot + time-trap + content heuristics (isSpam), plus an
+ *   optional Project Honeypot http:BL IP-reputation check (checkHttpblSpam,
+ *   server-side via DNS-over-HTTPS, fail-open, enabled by HTTPBL_ACCESS_KEY).
+ *   No CAPTCHA. Spam is silently accepted (redirected like a success) so bots
+ *   get no signal.
  * - Validation: server-side mirror of the client checks (validateSubmission).
  * - Works without JavaScript: a normal form POST is answered with a 303 redirect
  *   to /thank-you/ (or back to /contact/ with an error). When the browser asks
@@ -22,6 +25,7 @@ import {
   formatSpeakerMessage,
   isSpam,
 } from '../../lib/contact.js';
+import { checkHttpblSpam } from './_httpbl.js';
 
 const wantsJson = (request) => (request.headers.get('accept') || '').includes('application/json');
 
@@ -91,15 +95,23 @@ export async function onRequestPost({ request, env }) {
   // Where a native (no-JS) submission returns to on failure.
   const formPath = fields._form === 'speaking' ? '/speaking/book/' : '/contact/';
 
-  // Silently accept spam (no signal to bots), but never send it on.
-  if (isSpam(fields)) return json ? Response.json({ ok: true }) : redirect('/thank-you/');
+  // Silently accept spam (no signal to bots), but never send it on. Start with
+  // the cheap local heuristics (honeypot / time-trap / content).
+  const silentAccept = () => (json ? Response.json({ ok: true }) : redirect('/thank-you/'));
+  if (isSpam(fields)) return silentAccept();
 
+  // Validate before the network http:BL lookup, so a genuine user still gets
+  // their validation errors and the lookup only runs for submissions that would
+  // otherwise be delivered.
   const { ok, errors, email } = prepare(fields);
   if (!ok) {
     return json
       ? Response.json({ ok: false, errors }, { status: 422 })
       : redirect(`${formPath}?error=1`);
   }
+
+  // Optional Project Honeypot http:BL IP-reputation check (fail-open).
+  if (await checkHttpblSpam(request, env)) return silentAccept();
 
   try {
     await deliverEmail(env, email);
