@@ -19,6 +19,12 @@ describe('isCyrillicHeavy', () => {
     expect(isCyrillicHeavy('nice ж')).toBe(false);
   });
 
+  it('counts accented Latin as Latin (no false positive on diacritics)', () => {
+    // Accented Latin outweighs the Cyrillic here; ASCII-only Latin counting
+    // would have miscounted and wrongly flagged this.
+    expect(isCyrillicHeavy('Café résumé naïve Привет мир друг')).toBe(false);
+  });
+
   it('is safe on empty/undefined input', () => {
     expect(isCyrillicHeavy('')).toBe(false);
     expect(isCyrillicHeavy()).toBe(false);
