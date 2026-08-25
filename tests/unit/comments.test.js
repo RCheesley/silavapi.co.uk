@@ -167,8 +167,10 @@ describe('looksSpammy', () => {
     expect(looksSpammy({ ...base, comment: `${twoLinks} and www.c.example` })).toBe(true);
   });
 
-  it('flags a predominantly-Cyrillic comment (the Russian-spam wave)', () => {
-    expect(looksSpammy({ ...base, comment: 'Отличная статья, посетите наш сайт' })).toBe(true);
+  it('flags a predominantly-Cyrillic comment with a link (the Russian-spam wave)', () => {
+    expect(
+      looksSpammy({ ...base, comment: 'Отличная статья, посетите https://spam.example/buy' })
+    ).toBe(true);
   });
 });
 

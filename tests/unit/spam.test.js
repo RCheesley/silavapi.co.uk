@@ -19,6 +19,12 @@ describe('isCyrillicHeavy', () => {
     expect(isCyrillicHeavy('nice ж')).toBe(false);
   });
 
+  it('still flags Cyrillic text plus a long URL (URL letters do not dilute it)', () => {
+    expect(
+      isCyrillicHeavy('Отличная статья, посетите https://cheap-deals.example.com/buy-now-today')
+    ).toBe(true);
+  });
+
   it('counts accented Latin as Latin (no false positive on diacritics)', () => {
     // Accented Latin outweighs the Cyrillic here; ASCII-only Latin counting
     // would have miscounted and wrongly flagged this.
