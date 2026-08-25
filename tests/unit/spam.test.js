@@ -55,6 +55,12 @@ describe('looksLikeListSpam', () => {
   it('does not flag generic "put me on" / "add me" phrases without list context', () => {
     expect(looksLikeListSpam('Could you put me on the spot at the next event?')).toBe(false);
     expect(looksLikeListSpam('Feel free to add me on LinkedIn')).toBe(false);
+    expect(looksLikeListSpam('Please add me to the guest list for the talk')).toBe(false);
+  });
+
+  it('does not flag negated / opt-out phrasing', () => {
+    expect(looksLikeListSpam('Please do not subscribe me to anything')).toBe(false);
+    expect(looksLikeListSpam("don't add my email to your mailing list")).toBe(false);
   });
 
   it('is safe on empty/undefined input', () => {
