@@ -64,9 +64,13 @@ describe('looksLikeListSpam', () => {
     expect(looksLikeListSpam('Please add me to the guest list for the talk')).toBe(false);
   });
 
-  it('does not flag negated / opt-out phrasing', () => {
+  it('does not flag a directly-negated / opt-out phrasing', () => {
     expect(looksLikeListSpam('Please do not subscribe me to anything')).toBe(false);
     expect(looksLikeListSpam("don't add my email to your mailing list")).toBe(false);
+  });
+
+  it('still flags spam when a negation appears elsewhere (not negating the verb)', () => {
+    expect(looksLikeListSpam("Add me to your mailing list, don't wait!")).toBe(true);
   });
 
   it('is safe on empty/undefined input', () => {
