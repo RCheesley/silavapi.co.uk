@@ -52,7 +52,7 @@
     "pagefind": "^1.5.2",
     "pdf-lib": "^1.17.1",
     "prettier": "^3.9.6",
-    "start-server-and-test": "^2.0.0",
+    "start-server-and-test": "^3.0.12",
     "turndown": "^7.2.4",
     "vitest": "^4.1.10"
   },
