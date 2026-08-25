@@ -25,6 +25,12 @@ describe('isCyrillicHeavy', () => {
     ).toBe(true);
   });
 
+  it('measures Cyrillic against all letters, not just Latin', () => {
+    // Mostly Greek with a little Cyrillic and no Latin: Cyrillic is not the
+    // majority of all letters, so it is not "Cyrillic-heavy".
+    expect(isCyrillicHeavy('Καλημέρα κόσμε φίλε мир друг')).toBe(false);
+  });
+
   it('counts accented Latin as Latin (no false positive on diacritics)', () => {
     // Accented Latin outweighs the Cyrillic here; ASCII-only Latin counting
     // would have miscounted and wrongly flagged this.
