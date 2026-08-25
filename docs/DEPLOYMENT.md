@@ -62,7 +62,8 @@ credential in Cloudflare only; never in the repo.
 ### Anti-spam
 
 The form always runs a honeypot, a JS time-trap, and content heuristics (links
-in the name, link markup, many links) with no configuration. Two optional
+in the name, link markup, many links, predominantly-Cyrillic text, and
+"add me to your list / newsletter" requests) with no configuration. Two optional
 variables enable an extra **Project Honeypot [http:BL](https://www.projecthoneypot.org/httpbl_api.php)**
 IP-reputation check on submit:
 
@@ -76,9 +77,11 @@ request, no cookie) and **fails open**: a missing key, an IPv6 client (http:BL i
 IPv4-only), or any lookup error simply skips the check so a genuine message is
 never dropped. A confirmed spam IP is silently accepted (like the honeypot) and
 never emailed. Because the visitor's IP is shared with Project Honeypot's DNS on
-submit, note the check on the privacy page. Recommended alongside it (dashboard,
-no code): Cloudflare **Bot Fight Mode** and a **rate-limit rule** on
-`POST /api/contact`.
+submit, note the check on the privacy page. The **blog comment endpoint uses the
+same `HTTPBL_ACCESS_KEY`** (its "comment spammer" listing type is exactly that
+traffic) plus the Cyrillic heuristic. Recommended alongside them (dashboard, no
+code): Cloudflare **Bot Fight Mode** and a **rate-limit rule** on
+`POST /api/contact` and `POST /api/comment`.
 
 ## Blog comments
 

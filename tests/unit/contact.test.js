@@ -175,6 +175,22 @@ describe('looksLikeSpamContent', () => {
     ).toBe(false);
   });
 
+  it('flags a predominantly-Cyrillic message', () => {
+    expect(
+      looksLikeSpamContent({ message: 'Здравствуйте, посетите наш магазин со скидками' })
+    ).toBe(true);
+  });
+
+  it('flags an imperative "add me to your list" request', () => {
+    expect(looksLikeSpamContent({ message: 'Please add me to your mailing list.' })).toBe(true);
+  });
+
+  it('allows a genuine question about a newsletter', () => {
+    expect(
+      looksLikeSpamContent({ message: 'Do you have a newsletter I could subscribe to?' })
+    ).toBe(false);
+  });
+
   it('counts a scheme+www URL once, not twice', () => {
     // Four full URLs (each http://www...) is below the threshold; a naive regex
     // would double-count them to eight and wrongly flag this.
