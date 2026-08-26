@@ -9,3 +9,9 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'weekly'
+  # GitHub Actions are SHA-pinned in .github/workflows; this keeps the pins
+  # updated (Dependabot bumps the SHA and the `# vX.Y.Z` comment).
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
