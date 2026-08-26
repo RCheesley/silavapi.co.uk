@@ -134,10 +134,12 @@ describe('POST /api/comment', () => {
     expect((await res.json()).pending).toBe(true);
 
     const put = calls.find((c) => c.method === 'PUT' && c.url.includes('/contents/'));
+    expect(put).toBeDefined();
     expect(put.url).toContain('/contents/src/_data/comments/introducing-silavapi/');
     expect(JSON.parse(put.body).branch).toBe('comments-pending');
 
     const mail = calls.find((c) => c.url.startsWith('https://api.resend.com/'));
+    expect(mail).toBeDefined();
     expect(mail.body).toContain('/api/moderate?action=approve&slug=introducing-silavapi');
     expect(mail.body).toContain('/api/moderate?action=reject&slug=introducing-silavapi');
   });
