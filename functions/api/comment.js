@@ -6,6 +6,8 @@
  *
  * Env: GITHUB_TOKEN, GITHUB_REPO, GITHUB_BRANCH?, GITHUB_PENDING_BRANCH?,
  * COMMENT_SECRET, SITE_URL, plus RESEND_API_KEY / CONTACT_TO / CONTACT_FROM.
+ * Optional HTTPBL_ACCESS_KEY enables the same Project Honeypot IP-reputation
+ * check used by the contact form.
  */
 import {
   validateComment,
@@ -18,6 +20,7 @@ import {
 import { isSpam } from '../../lib/contact.js';
 import { putFile, ensureBranch } from './_github.js';
 import { deliverEmail } from './_email.js';
+import { checkHttpblSpam } from './_httpbl.js';
 
 const PENDING = (env) => env.GITHUB_PENDING_BRANCH || 'comments-pending';
 
@@ -82,10 +85,12 @@ export async function onRequestPost({ request, env }) {
   for (const [k, val] of form.entries()) fields[k] = typeof val === 'string' ? val : '';
   const back = safeReturn(fields.return, fields.slug);
 
-  // Spam: honeypot / time-trap, plus content heuristics (links in the body or a
-  // URL in the name). Silently accept, storing nothing, so bots get no signal.
-  if (isSpam(fields) || looksSpammy(fields))
-    return wantsJson ? json(200, { ok: true }) : redirect(`${back}?posted=1#comments`);
+  // Spam: honeypot / time-trap, plus content heuristics (links, a URL in the
+  // name, predominantly-Cyrillic text). Silently accept, storing nothing, so
+  // bots get no signal.
+  const silentAccept = () =>
+    wantsJson ? json(200, { ok: true }) : redirect(`${back}?posted=1#comments`);
+  if (isSpam(fields) || looksSpammy(fields)) return silentAccept();
 
   const { ok, errors, values } = validateComment(fields);
   if (!ok) {
@@ -97,6 +102,11 @@ export async function onRequestPost({ request, env }) {
       ? json(503, { ok: false, error: 'unconfigured' })
       : redirect(`${back}?error=1#comment-form`);
   }
+
+  // Optional Project Honeypot http:BL IP-reputation check (fail-open), only for
+  // an otherwise-valid, storable comment. The "comment spammer" listing type is
+  // exactly this traffic.
+  if (await checkHttpblSpam(request, env)) return silentAccept();
 
   const id = crypto.randomUUID();
   const record = buildComment(values, { id, date: new Date().toISOString() });
