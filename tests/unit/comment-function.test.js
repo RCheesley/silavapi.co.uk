@@ -56,6 +56,31 @@ describe('POST /api/comment', () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
+  it('silently drops an otherwise-valid comment from an http:BL-listed IP', async () => {
+    const fetchMock = vi.fn(async () =>
+      Response.json({ Status: 0, Answer: [{ type: 1, data: '127.2.40.4' }] })
+    );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const body = new FormData();
+    for (const [k, v] of Object.entries(valid)) body.set(k, v);
+    const request = new Request('https://silavapi.co.uk/api/comment', {
+      method: 'POST',
+      headers: { accept: 'application/json', 'CF-Connecting-IP': '9.9.9.9' },
+      body,
+    });
+
+    const res = await onRequestPost({
+      request,
+      env: { ...ENV, HTTPBL_ACCESS_KEY: 'abcdefghijkl' },
+    });
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+    // Only the http:BL DoH lookup ran - nothing was stored (no GitHub API call).
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0][0]).toContain('dnsbl.httpbl.org');
+  });
+
   it('returns 400 for a non-form body rather than an uncaught 500', async () => {
     const req = new Request('https://silavapi.co.uk/api/comment', {
       method: 'POST',
