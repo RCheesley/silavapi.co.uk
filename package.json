@@ -39,7 +39,7 @@
     "@vitest/coverage-v8": "^4.1.11",
     "browserslist": "^4.28.8",
     "eslint": "^10.9.0",
-    "globals": "^17.9.0",
+    "globals": "^17.11.0",
     "html-validate": "^11.6.2",
     "lightningcss": "^1.33.0",
     "linkinator": "^8.0.3",
