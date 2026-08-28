@@ -16,7 +16,7 @@ imageFocus: 'lower'
 
 There is a moment in the Sāmaññaphala Sutta where King Ajātasattu walks into Jīvaka's mango grove and stops dead. The Buddha is there with over a thousand monks, and the King cannot hear a thing. Not a cough, not a sneeze, not a single shuffle. He turns to Jīvaka, hair standing on end, and asks whether he is being led into a trap. No gathering of that size could possibly be that quiet unless something was very wrong (Walshe, 1995).
 
-I thought about that story a lot at Wymondham, sitting in the main shrine room with more than 620 other Order members in complete stillness. It wasn't the polite shuffling of people waiting for something to start or fidgeting about in their seats. Actual stillness, held by a room full of people who have each spent, in some cases, longer than I've been on this earth, deepening their practice of meditation. Such a precious opportunity, and so rare nowadays.
+I thought about that story a lot at Wymondham, sitting in the main shrine room with more than 620 other Order members in complete stillness. It wasn't the polite shuffling of people waiting for something to start or fidgeting about in their seats. Actual stillness, held by a room full of people who have each spent, in some cases longer than I've been on this earth, deepening their practice of meditation. Such a precious opportunity, and so rare nowadays.
 
 I was ordained this year, after sixteen years of training. This was my first Order convention.
 
@@ -42,7 +42,7 @@ Quite a lot of people on the convention get assigned a job - everything from hel
 
 Vilasamuni, our team lead, ran an onboarding session on the first day, and for the first few shifts I was paired with other people who thankfully had a bit more experience. By the third day I was flying solo for the morning meditation. Nerve-wracking, but it all went fine.
 
-I would encourage anyone going to their first convention to offer yourself for a job if you've got the energy and capacity to do so. Sitting behind that desk gave me a completely different view of the shrine room. I watched the space being built up each day, the flowers being refreshed, the candles going out one by one at the end of the night. I got to know a small team quite well, which is a kind of connection that is hard to manufacture at a gathering that size. There's something quite special about being responsible for the conditions in which several hundred people meditate, listen to talks and panels, and come together for ritual and devotion practice.
+I would encourage anyone going to their first convention to offer yourself for a job if you've got the energy and capacity to do so. Sitting behind that desk gave me a completely different view of the shrine room. I watched the space being built up each day, the flowers being refreshed, the candles being blown out by one at the end of the night. I got to know a small team quite well, people I might never have met a gathering that size. There's something quite special about being responsible for the conditions in which several hundred people meditate, listen to talks and panels, and come together for ritual and devotion practice.
 
 ## Sleep is part of the practice
 

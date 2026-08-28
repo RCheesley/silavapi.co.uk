@@ -21,8 +21,9 @@
   img.className = 'lightbox__img';
   var figure = document.createElement('figure');
   figure.className = 'lightbox__figure';
-  // The caption repeats the image's alt for sighted users; the img already
-  // carries the alt for assistive tech, so hide the duplicate from it.
+  // The visible caption mirrors the gallery's figcaption for sighted users;
+  // the img already carries the alt for assistive tech, so it stays hidden
+  // from it (aria-hidden) to avoid a duplicate announcement.
   var caption = document.createElement('figcaption');
   caption.className = 'lightbox__caption';
   caption.setAttribute('aria-hidden', 'true');
@@ -34,12 +35,14 @@
 
   var lastFocus = null;
 
-  function open(href, alt) {
+  function open(href, alt, text) {
     lastFocus = document.activeElement;
     img.src = href;
     img.alt = alt || '';
-    caption.textContent = alt || '';
-    caption.hidden = !alt;
+    // Show the gallery's own caption; fall back to the alt when there is none.
+    var shown = text || alt || '';
+    caption.textContent = shown;
+    caption.hidden = !shown;
     dialog.showModal();
     closeBtn.focus();
   }
@@ -52,7 +55,13 @@
         return;
       e.preventDefault();
       var inner = link.querySelector('img');
-      open(link.getAttribute('href'), inner ? inner.getAttribute('alt') : '');
+      var fig = link.closest('.gallery__figure');
+      var cap = fig ? fig.querySelector('.gallery__caption') : null;
+      open(
+        link.getAttribute('href'),
+        inner ? inner.getAttribute('alt') : '',
+        cap ? cap.textContent.trim() : ''
+      );
     });
   });
 
