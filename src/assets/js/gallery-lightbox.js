@@ -21,9 +21,10 @@
   img.className = 'lightbox__img';
   var figure = document.createElement('figure');
   figure.className = 'lightbox__figure';
-  // The visible caption mirrors the gallery's figcaption for sighted users;
-  // the img already carries the alt for assistive tech, so it stays hidden
-  // from it (aria-hidden) to avoid a duplicate announcement.
+  // The visible caption mirrors the gallery's figcaption. open() decides
+  // whether assistive tech should hear it: a real caption (which may add
+  // context like a photo credit that isn't in the alt) is exposed; a caption
+  // that only echoes the alt stays aria-hidden to avoid a double announcement.
   var caption = document.createElement('figcaption');
   caption.className = 'lightbox__caption';
   caption.setAttribute('aria-hidden', 'true');
@@ -40,9 +41,13 @@
     img.src = href;
     img.alt = alt || '';
     // Show the gallery's own caption; fall back to the alt when there is none.
+    // A real caption may carry a photo credit the alt doesn't, so expose it to
+    // assistive tech; a caption that only echoes the alt stays hidden from it.
     var shown = text || alt || '';
     caption.textContent = shown;
     caption.hidden = !shown;
+    if (text) caption.removeAttribute('aria-hidden');
+    else caption.setAttribute('aria-hidden', 'true');
     dialog.showModal();
     closeBtn.focus();
   }
