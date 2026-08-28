@@ -74,7 +74,7 @@ I had expected to feel like the new girl, but I did not, other than in the first
 
 Book the people. Leave the rest open until you have the programme in your hands, then draw the week out on paper and highlight only the things you really don't want to miss. Sleep when you need to sleep, and put movement in the diary before the diary fills up.
 
-And when the shrine room falls silent, just take a moment to really experience that moment. Six hundred and twenty people sitting in stillness is not an ordinary thing, however normal it comes to feel by the end. Ajātasattu was right to be astonished. He was just wrong about what it meant.
+And when the shrine room falls silent, just take a moment to really experience it. Six hundred and twenty people sitting in stillness is not an ordinary thing, however normal it comes to feel by the end. Ajātasattu was right to be astonished. He was just wrong about what it meant.
 
 I would love to hear from others about their first convention. What did you wish you had known before you arrived?
 
