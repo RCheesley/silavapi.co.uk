@@ -672,6 +672,12 @@ a.tag:hover {
   line-height: var(--leading-relaxed);
   color: var(--text-muted);
 }
+/* Photo credit ("Photo by …"): quieter than the caption, sits after it. */
+.gallery__credit {
+  font-size: var(--text-2xs);
+  font-style: italic;
+  color: var(--text-eyebrow);
+}
 /* The image links to its full size (lightbox with JS); hint that it's zoomable. */
 .gallery__link {
   display: block;

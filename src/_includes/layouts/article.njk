@@ -27,7 +27,7 @@ readerControl: true
   </div>
 
   {% if image %}
-    <div class="article__figure">
+    <div class="article__figure{% if imageFocus %} article__figure--focus-{{ imageFocus }}{% endif %}">
       <figure>
         <img src="{{ image }}" alt="{{ imageAlt or '' }}" />
         {% if imageCaption %}<figcaption>{{ imageCaption }}</figcaption>{% endif %}

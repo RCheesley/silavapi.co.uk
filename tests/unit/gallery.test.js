@@ -37,14 +37,39 @@ describe('renderGallery', () => {
     expect(renderGallery([{ src: '/a.jpg', alt: 'A' }])).not.toContain('figcaption');
   });
 
-  it('escapes HTML in src, alt and caption', () => {
+  it('renders a photo credit, alone or alongside a caption', () => {
+    // Credit only -> a figcaption with just the credit span.
+    const creditOnly = renderGallery([{ src: '/a.jpg', alt: 'A', credit: 'Photo by Jo' }]);
+    expect(creditOnly).toContain('<figcaption class="gallery__caption">');
+    expect(creditOnly).toContain('<span class="gallery__credit">Photo by Jo</span>');
+
+    // Caption + credit -> both, caption first.
+    const both = renderGallery([
+      { src: '/a.jpg', alt: 'A', caption: 'At the shrine', credit: 'Photo by Jo' },
+    ]);
+    expect(both).toContain(
+      '<figcaption class="gallery__caption">At the shrine <span class="gallery__credit">Photo by Jo</span></figcaption>'
+    );
+
+    // A blank credit is ignored.
+    expect(renderGallery([{ src: '/a.jpg', alt: 'A', credit: '  ' }])).not.toContain('figcaption');
+  });
+
+  it('escapes HTML in src, alt, caption and credit', () => {
     const html = renderGallery([
-      { src: '/x.jpg?a=1&b=2', alt: 'Quote "&" <tag>', caption: '<b>bold</b> & "x"' },
+      {
+        src: '/x.jpg?a=1&b=2',
+        alt: 'Quote "&" <tag>',
+        caption: '<b>bold</b> & "x"',
+        credit: 'By <script>x</script>',
+      },
     ]);
     expect(html).toContain('src="/x.jpg?a=1&amp;b=2"');
     expect(html).toContain('alt="Quote &quot;&amp;&quot; &lt;tag&gt;"');
     expect(html).toContain('&lt;b&gt;bold&lt;/b&gt; &amp; &quot;x&quot;');
+    expect(html).toContain('By &lt;script&gt;x&lt;/script&gt;');
     expect(html).not.toContain('<b>bold</b>');
+    expect(html).not.toContain('<script>');
   });
 
   it('renders one item per valid entry, in order', () => {
