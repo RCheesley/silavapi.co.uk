@@ -60,6 +60,8 @@ I prioritised meeting people, and I do not regret that at all. But between the s
 
 Next time I will put a couple of runs into the hand-drawn diary the same way I put in the meals, as something already booked rather than something I might get to.
 
+Also, I'll take some cash with me - sadly funds were quite depleted after getting back from Spain and I didn't think to take cash - quite a few of the sellers in the incredible marketplace were cash only.
+
 ## Being welcomed into the Order
 
 One of my favourite moments was the evening puja where everyone ordained since the last big gathering came to the front to introduce themselves. Each of us said our name, what it meant, and where we were from.
@@ -68,7 +70,9 @@ There were six of us from Ipswich. A bumper crop!
 
 Standing up there, saying my name out loud to a room of people who understood exactly what it had taken to get there, was something I will carry for a long time. Sixteen years of training, and along the way so many people met and known and loved. Order members, mitras who have since been ordained themselves. Many of them were in that room.
 
-I had expected to feel like the new girl, but I did not, other than in the first few days when I could not find my way around a sprawling campus. What I felt instead was welcomed, and then quite quickly, ordinary. Just one more person in a very large sangha, finding their way through this world.
+I had expected to feel like the new girl, but I did not, other than in the first few days when I could not find my way around a sprawling campus. What I felt instead was welcomed, and then quite quickly, ordinary. Just one more person in a very large sangha, finding their way through this world together.
+
+It was also lovely to hear from some people that they'd read my Shabda contribution last month about my decision to wear my robes and kesa all the time - lots of support and encouragement which was much appreciated!
 
 ## What I would say to someone going for the first time
 
