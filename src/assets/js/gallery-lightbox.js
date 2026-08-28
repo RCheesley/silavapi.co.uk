@@ -41,12 +41,13 @@
     img.src = href;
     img.alt = alt || '';
     // Show the gallery's own caption; fall back to the alt when there is none.
-    // A real caption may carry a photo credit the alt doesn't, so expose it to
-    // assistive tech; a caption that only echoes the alt stays hidden from it.
+    // Expose it to assistive tech only when it adds information beyond the alt
+    // (e.g. a photo credit); if it just repeats the alt, keep it aria-hidden so
+    // the same text isn't announced twice.
     var shown = text || alt || '';
     caption.textContent = shown;
     caption.hidden = !shown;
-    if (text) caption.removeAttribute('aria-hidden');
+    if (shown && shown !== (alt || '')) caption.removeAttribute('aria-hidden');
     else caption.setAttribute('aria-hidden', 'true');
     dialog.showModal();
     closeBtn.focus();
