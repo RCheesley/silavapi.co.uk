@@ -73,7 +73,7 @@ describe('looksLikeListSpam', () => {
   it('flags the "subscribe / join" phrasings and the confirmation chaser', () => {
     expect(looksLikeListSpam("I'd like to subscribe to your newsletter")).toBe(true);
     expect(looksLikeListSpam('please subscribe me to your mailing list')).toBe(true);
-    expect(looksLikeListSpam('I want to sign up')).toBe(true);
+    expect(looksLikeListSpam("I'd like to be added to your mailing list")).toBe(true);
     expect(looksLikeListSpam('happy to join your newsletter')).toBe(true);
     expect(looksLikeListSpam('let me know when I am subscribed')).toBe(true);
     expect(looksLikeListSpam("let me know once I'm subscribed")).toBe(true);
@@ -85,10 +85,12 @@ describe('looksLikeListSpam', () => {
     expect(looksLikeListSpam("please don't subscribe me to your newsletter")).toBe(false);
   });
 
-  it('does not flag genuine subscribe-adjacent phrasing', () => {
-    // "unsubscribe" and "subscribe to <non-list>" must not trip it.
+  it('does not flag a genuine "subscribe to <non-list>" message', () => {
+    // A list keyword is required after the verb, so a real non-list target
+    // (RSS feed, blog, YouTube channel) and "unsubscribe" must not trip it.
+    expect(looksLikeListSpam("I'd like to subscribe to your RSS feed")).toBe(false);
+    expect(looksLikeListSpam('I already subscribe to your blog')).toBe(false);
     expect(looksLikeListSpam('How do I unsubscribe?')).toBe(false);
-    expect(looksLikeListSpam('I already subscribe to your RSS feed')).toBe(false);
   });
 
   it('still flags spam when a negation appears elsewhere (not negating the verb)', () => {
