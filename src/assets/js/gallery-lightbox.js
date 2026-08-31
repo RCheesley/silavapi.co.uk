@@ -21,8 +21,10 @@
   img.className = 'lightbox__img';
   var figure = document.createElement('figure');
   figure.className = 'lightbox__figure';
-  // The caption repeats the image's alt for sighted users; the img already
-  // carries the alt for assistive tech, so hide the duplicate from it.
+  // The visible caption mirrors the gallery's figcaption. open() decides
+  // whether assistive tech should hear it: a real caption (which may add
+  // context like a photo credit that isn't in the alt) is exposed; a caption
+  // that only echoes the alt stays aria-hidden to avoid a double announcement.
   var caption = document.createElement('figcaption');
   caption.className = 'lightbox__caption';
   caption.setAttribute('aria-hidden', 'true');
@@ -34,12 +36,19 @@
 
   var lastFocus = null;
 
-  function open(href, alt) {
+  function open(href, alt, text) {
     lastFocus = document.activeElement;
     img.src = href;
     img.alt = alt || '';
-    caption.textContent = alt || '';
-    caption.hidden = !alt;
+    // Show the gallery's own caption; fall back to the alt when there is none.
+    // Expose it to assistive tech only when it adds information beyond the alt
+    // (e.g. a photo credit); if it just repeats the alt, keep it aria-hidden so
+    // the same text isn't announced twice.
+    var shown = text || alt || '';
+    caption.textContent = shown;
+    caption.hidden = !shown;
+    if (shown && shown !== (alt || '')) caption.removeAttribute('aria-hidden');
+    else caption.setAttribute('aria-hidden', 'true');
     dialog.showModal();
     closeBtn.focus();
   }
@@ -52,7 +61,13 @@
         return;
       e.preventDefault();
       var inner = link.querySelector('img');
-      open(link.getAttribute('href'), inner ? inner.getAttribute('alt') : '');
+      var fig = link.closest('.gallery__figure');
+      var cap = fig ? fig.querySelector('.gallery__caption') : null;
+      open(
+        link.getAttribute('href'),
+        inner ? inner.getAttribute('alt') : '',
+        cap ? cap.textContent.trim() : ''
+      );
     });
   });
 

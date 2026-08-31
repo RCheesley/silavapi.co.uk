@@ -40,11 +40,16 @@ const NEEDED = [
 await mkdir(OUT, { recursive: true });
 for (const name of NEEDED) {
   let svg = await readFile(resolve(SRC, `${name}.svg`), 'utf8');
-  // Strip the license comment and the library class; keep the geometry.
-  svg = svg
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/\s*class="[^"]*"/, '')
-    .trim();
+  // Strip HTML comments - including an unterminated trailing one (matched via
+  // `-->|$`), and repeating until stable so removing one comment can't re-form
+  // a "<!--" - so no "<!--" can survive. Then drop the library class; keep the
+  // geometry.
+  let prev;
+  do {
+    prev = svg;
+    svg = svg.replace(/<!--[\s\S]*?(?:-->|$)/g, '');
+  } while (svg !== prev);
+  svg = svg.replace(/\s*class="[^"]*"/, '').trim();
   await writeFile(resolve(OUT, `${name}.svg`), `${svg}\n`);
   console.log(`  vendored ${name}.svg`);
 }
