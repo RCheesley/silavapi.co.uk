@@ -89,15 +89,15 @@ I've been reading some interesting books this month, mostly fuelled by mentions 
 
 ### Dharma books
 
-[No Time To Lose](https://www.shambhala.com/no-time-to-lose.html) by Pema Chödrön is a firm favourite, and something I come back to time and again. I find it a really accessible commentary on the Bodhicaryavatara, a key Mayahana Buddhist text. It's been on my reading list this month, as I often open it to a page which almost always contains something relevant to whatever I'm working with at that moment.
+- [No Time To Lose](https://www.shambhala.com/no-time-to-lose.html) by Pema Chödrön is a firm favourite, and something I come back to time and again. I find it a really accessible commentary on the Bodhicaryavatara, a key Mayahana Buddhist text. It's been on my reading list this month, as I often open it to a page which almost always contains something relevant to whatever I'm working with at that moment.
 
-[The Radical Embrace](https://www.radicalembrace.org/books) by Singhasri came out this month, it's a must-read - I'm just getting started so it's early days, but I've been on retreat with Singasri a few times before and always found their teachings to be incredibly helpful.
+- [The Radical Embrace](https://www.radicalembrace.org/books) by Singhasri came out this month, it's a must-read - I'm just getting started so it's early days, but I've been on retreat with Singasri a few times before and always found their teachings to be incredibly helpful.
 
 ### Fiction books
 
-A new book that came across my radar on the Order convention this month is [Closer Than You Think](https://www.amazon.co.uk/Closer-Than-Think-Srivati-Skelton/dp/B0H7CP6WZF/) by Srivati Skelton - I've not got very far with it yet, but the excerpts I heard at the book launch sounded really great!
+- A new book that came across my radar on the Order convention this month is [Closer Than You Think](https://www.amazon.co.uk/Closer-Than-Think-Srivati-Skelton/dp/B0H7CP6WZF/) by Srivati Skelton - I've not got very far with it yet, but the excerpts I heard at the book launch sounded really great!
 
-I also confess to a love of all things Bridgerton, so just recently I've been listening to the audiobooks of Queen Charlotte again, and the Bridgerton books will likely follow. Great for a bit of light relief while cooking in the kitchen or driving!
+- I confess to a love of all things Bridgerton, so just recently I've been listening to the audiobooks of Queen Charlotte again, and the Bridgerton books will likely follow. Great for a bit of light relief while cooking in the kitchen or driving!
 
 ## Over to you
 
