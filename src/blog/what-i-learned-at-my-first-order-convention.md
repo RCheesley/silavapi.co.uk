@@ -28,7 +28,7 @@ The most useful advice came from my local chapter, and that was to expect a lot 
 
 Partly due to busy-ness, and partly because I didn't want to get into full on plan-every-second-of-the-day mode, I barely looked at the programme in advance. The only 'dates' I booked were a few meals - with my preceptor and the Dharmacharinis from my ordination retreat, and with my potential kalyāṇa mitra, that was it. Everything else I deliberately left open.
 
-I now think this was the single best decision I made. Booking the people rather than the sessions meant that the precious person-to-person time was protected, and the rest of the week could arrange itself around them. It was such a delight to get to spend time with so many friends from across the country, and also lovely have many impromptu and serendipidous meetings with people throughout the week in the lunch queue or walking between sessions.
+I now think this was the single best decision I made. Booking the people rather than the sessions meant that the precious person-to-person time was protected, and the rest of the week could arrange itself around them. It was such a delight to get to spend time with so many friends from across the country, and also lovely to have many impromptu and serendipitous meetings with people throughout the week in the lunch queue or walking between sessions.
 
 ## Drawing out the week by hand
 
