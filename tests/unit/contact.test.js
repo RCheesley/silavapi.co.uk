@@ -191,6 +191,16 @@ describe('looksLikeSpamContent', () => {
     ).toBe(false);
   });
 
+  it('flags a random junk token, a promo link, or a foreign-language message', () => {
+    expect(looksLikeSpamContent({ message: 'METRYTRE2404060MAMYJRTH' })).toBe(true);
+    expect(
+      looksLikeSpamContent({
+        message: 'Get the latest breaking news, stay updated 24/7 - ukbreakingnews24x7.com',
+      })
+    ).toBe(true);
+    expect(looksLikeSpamContent({ message: 'Sveiki, aš norėjau sužinoti jūsų kainą.' })).toBe(true);
+  });
+
   it('counts a scheme+www URL once, not twice', () => {
     // Four full URLs (each http://www...) is below the threshold; a naive regex
     // would double-count them to eight and wrongly flag this.
