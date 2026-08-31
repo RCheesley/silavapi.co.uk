@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { isCyrillicHeavy, looksLikeListSpam } from '../../lib/spam.js';
+import {
+  isCyrillicHeavy,
+  looksLikeListSpam,
+  looksLikeGibberish,
+  looksLikePromoLink,
+  hasForeignDiacritics,
+} from '../../lib/spam.js';
 
 describe('isCyrillicHeavy', () => {
   it('flags a predominantly Cyrillic message', () => {
@@ -64,9 +70,25 @@ describe('looksLikeListSpam', () => {
     expect(looksLikeListSpam('Please add me to the guest list for the talk')).toBe(false);
   });
 
+  it('flags the "subscribe / join" phrasings and the confirmation chaser', () => {
+    expect(looksLikeListSpam("I'd like to subscribe to your newsletter")).toBe(true);
+    expect(looksLikeListSpam('please subscribe me to your mailing list')).toBe(true);
+    expect(looksLikeListSpam('I want to sign up')).toBe(true);
+    expect(looksLikeListSpam('happy to join your newsletter')).toBe(true);
+    expect(looksLikeListSpam('let me know when I am subscribed')).toBe(true);
+    expect(looksLikeListSpam("let me know once I'm subscribed")).toBe(true);
+  });
+
   it('does not flag a directly-negated / opt-out phrasing', () => {
     expect(looksLikeListSpam('Please do not subscribe me to anything')).toBe(false);
     expect(looksLikeListSpam("don't add my email to your mailing list")).toBe(false);
+    expect(looksLikeListSpam("please don't subscribe me to your newsletter")).toBe(false);
+  });
+
+  it('does not flag genuine subscribe-adjacent phrasing', () => {
+    // "unsubscribe" and "subscribe to <non-list>" must not trip it.
+    expect(looksLikeListSpam('How do I unsubscribe?')).toBe(false);
+    expect(looksLikeListSpam('I already subscribe to your RSS feed')).toBe(false);
   });
 
   it('still flags spam when a negation appears elsewhere (not negating the verb)', () => {
@@ -76,5 +98,63 @@ describe('looksLikeListSpam', () => {
   it('is safe on empty/undefined input', () => {
     expect(looksLikeListSpam('')).toBe(false);
     expect(looksLikeListSpam()).toBe(false);
+  });
+});
+
+describe('looksLikeGibberish', () => {
+  it('flags a long random letters+digits token', () => {
+    expect(looksLikeGibberish('METRYTRE2404060MAMYJRTH')).toBe(true);
+    // Exactly 12 chars, mixing letters and digits, embedded in a sentence.
+    expect(looksLikeGibberish('order code AB12CD34EF56 confirmed')).toBe(true);
+  });
+
+  it('leaves ordinary shouted words and long numbers alone', () => {
+    expect(looksLikeGibberish('THANK YOU SO MUCH FOR THIS')).toBe(false);
+    expect(looksLikeGibberish('1234567890123456')).toBe(false); // digits only, no letter
+    expect(looksLikeGibberish('COVID19 update')).toBe(false); // too short
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(looksLikeGibberish('')).toBe(false);
+    expect(looksLikeGibberish()).toBe(false);
+  });
+});
+
+describe('looksLikePromoLink', () => {
+  it('flags a bare domain (or URL) together with advertising phrasing', () => {
+    expect(
+      looksLikePromoLink('Latest breaking news, stay updated 24/7 - ukbreakingnews24x7.com')
+    ).toBe(true);
+    expect(looksLikePromoLink('Best price! visit our website http://deals.example')).toBe(true);
+  });
+
+  it('allows a plain link with no promotional phrasing', () => {
+    expect(looksLikePromoLink('My site is www.example.com if that helps')).toBe(false);
+  });
+
+  it('allows promotional-ish words with no link', () => {
+    expect(looksLikePromoLink('I saw the latest news about your talk')).toBe(false);
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(looksLikePromoLink('')).toBe(false);
+    expect(looksLikePromoLink()).toBe(false);
+  });
+});
+
+describe('hasForeignDiacritics', () => {
+  it('flags a message heavy in Baltic/Slavic diacritics', () => {
+    expect(hasForeignDiacritics('Sveiki, aš norėjau sužinoti jūsų kainą.')).toBe(true);
+  });
+
+  it('does not flag Pali/Sanskrit, or English with a stray accent below the threshold', () => {
+    expect(hasForeignDiacritics('I met Bodhipakṣiṇī and Mokṣagandhi with Sīlavāpi')).toBe(false);
+    // "František Dvořák" carries two such diacritics (š, ř) - under the minimum.
+    expect(hasForeignDiacritics('My name is František Dvořák and I loved this')).toBe(false);
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(hasForeignDiacritics('')).toBe(false);
+    expect(hasForeignDiacritics()).toBe(false);
   });
 });
