@@ -46,7 +46,7 @@ Vilasamuni, our team lead, ran an onboarding session on the first day, and for t
 
 I would encourage anyone going to their first convention to offer yourself for a job if you've got the energy and capacity to do so. Sitting behind that desk gave me a completely different view of the shrine room. I watched the space being built up each day, the flowers being refreshed, the candles being blown out by one at the end of the night. It was also quite intense being in direct line of sight to the Buddha rupa .... the stare felt quite piercing at times! 
 
-I got to know a small team quite well, people I might never have met a gathering that size.
+I got to know a small team quite well, people I might never have met at a gathering that size.
 
 There's something quite special about being responsible for the conditions in which several hundred people meditate, listen to talks and panels, and come together for ritual and devotion practice. 
 
