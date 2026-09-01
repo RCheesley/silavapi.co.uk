@@ -179,6 +179,14 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }
+/* Per-post hero focal point (front matter `imageFocus`), for portrait or
+   awkwardly-framed heroes where the default upper crop misses the subject. */
+.article__figure--focus-lower img {
+  object-position: 50% 70%;
+}
+.article__figure--focus-center img {
+  object-position: 50% 50%;
+}
 .article__figure figcaption {
   font-size: var(--text-xs);
   color: var(--text-muted);

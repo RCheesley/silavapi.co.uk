@@ -172,6 +172,17 @@ describe('looksSpammy', () => {
       looksSpammy({ ...base, comment: 'Отличная статья, посетите https://spam.example/buy' })
     ).toBe(true);
   });
+
+  it('flags the newsletter / gibberish / promo / foreign-language waves in a comment', () => {
+    expect(looksSpammy({ ...base, comment: "I'd like to subscribe to your newsletter" })).toBe(
+      true
+    );
+    expect(looksSpammy({ ...base, comment: 'METRYTRE2404060MAMYJRTH' })).toBe(true);
+    expect(
+      looksSpammy({ ...base, comment: 'Latest breaking news, stay updated 24/7 - foo24x7.com' })
+    ).toBe(true);
+    expect(looksSpammy({ ...base, comment: 'Sveiki, aš norėjau sužinoti jūsų kainą.' })).toBe(true);
+  });
 });
 
 describe('exceedsMaxBody', () => {
