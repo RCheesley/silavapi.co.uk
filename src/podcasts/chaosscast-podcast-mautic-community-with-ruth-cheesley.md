@@ -15,4 +15,5 @@ resources:
   - label: 'Listen to the podcast'
     url: https://podcast.chaoss.community/8
 source: https://speaking.ruthcheesley.co.uk/xuAXwY/chaosscast-podcast-mautic-community-with-ruth-cheesley
+listen: https://podcast.chaoss.community/8
 ---
