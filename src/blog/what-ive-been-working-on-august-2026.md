@@ -9,6 +9,9 @@ tags:
   - 'Women of Open Source'
   - 'AI'
 excerpt: 'A look back over the month across my work leading Mautic, from a community led AI initiative and our first paid certifications to rebooting Women of Open Source and rebuilding this site.'
+image: '/assets/img/blog/2026/what-ive-been-working-on-august-2026.png'
+imageAlt: 'The Sīlavāpi lotus mark beside the words August 2026, on a deep aubergine monthly round-up banner.'
+imageCaption: 'Monthly round-up - August 2026'
 ---
 
 If you'd glanced over my shoulder this month, you might have caught me reconciling membership records, scheduling award deadline reminders, drafting a kickoff for a community AI initiative, or being sternly reminded to stand up by an app of my own making. Here's what I've been working on and building (some with AI) this month.
