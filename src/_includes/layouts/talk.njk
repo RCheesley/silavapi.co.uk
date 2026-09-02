@@ -54,7 +54,7 @@ navActive: speaking
   <div class="cluster talk-detail__actions">
     {% if listen %}
       <a class="btn btn--primary" href="{{ listen }}" rel="noopener noreferrer" target="_blank"
-         aria-label="Listen to “{{ title }}” on the podcast (opens in a new tab)">Listen to the episode</a>
+         aria-label="Listen to “{{ title }}” (opens in a new tab)">Listen to the episode</a>
     {% endif %}
     {% if slides %}{{ button("Download slides (PDF)", slides, "primary") }}{% endif %}
     {% if video and not cover %}{{ button("Watch the recording", video, "secondary") }}{% endif %}
