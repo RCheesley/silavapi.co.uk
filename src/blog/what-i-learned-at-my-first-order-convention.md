@@ -28,7 +28,7 @@ The most useful advice came from my local chapter, and that was to expect a lot 
 
 Partly due to busy-ness, and partly because I didn't want to get into full on plan-every-second-of-the-day mode, I barely looked at the programme in advance. The only 'dates' I booked were a few meals - with my preceptor and the Dharmacharinis from my ordination retreat, and with my potential kalyāṇa mitra, that was it. Everything else I deliberately left open.
 
-I now think this was the single best decision I made. Booking the people rather than the sessions meant that the precious person-to-person time was protected, and the rest of the week could arrange itself around them. It was such a delight to get to spend time with so many friends from across the country, and also for the many impromptu and serendipidous meetings with people throughout the week.
+I now think this was the single best decision I made. Booking the people rather than the sessions meant that the precious person-to-person time was protected, and the rest of the week could arrange itself around them. It was such a delight to get to spend time with so many friends from across the country, and also lovely to have many impromptu and serendipitous meetings with people throughout the week in the lunch queue or walking between sessions.
 
 ## Drawing out the week by hand
 
@@ -46,7 +46,7 @@ Vilasamuni, our team lead, ran an onboarding session on the first day, and for t
 
 I would encourage anyone going to their first convention to offer yourself for a job if you've got the energy and capacity to do so. Sitting behind that desk gave me a completely different view of the shrine room. I watched the space being built up each day, the flowers being refreshed, the candles being blown out by one at the end of the night. It was also quite intense being in direct line of sight to the Buddha rupa .... the stare felt quite piercing at times! 
 
-I got to know a small team quite well, people I might never have met a gathering that size
+I got to know a small team quite well, people I might never have met at a gathering that size.
 
 There's something quite special about being responsible for the conditions in which several hundred people meditate, listen to talks and panels, and come together for ritual and devotion practice. 
 
@@ -74,7 +74,7 @@ One of my favourite moments was the evening puja where everyone ordained since t
 
 There were six of us from Ipswich. A bumper crop!
 
-Standing up there, saying my name out loud to a room of people who understood exactly what it had taken to get there, was something I will carry for a long time. Sixteen years of training, and along the way so many people met and known and loved. Order members, mitras who have since been ordained themselves. Many of them were in that room.
+Standing up there, saying my name out loud to a room of people who understood exactly what it had taken to get there, was a memory that I will carry for a long time. Sixteen years of training, and along the way so many people met and known and loved - Order members, mitras who have since been ordained themselves - many of them were in that room.
 
 It was also lovely to hear from some people that they'd read my Shabda contribution last month about my decision to wear my robes and kesa all the time - lots of support and encouragement which was much appreciated!
 
