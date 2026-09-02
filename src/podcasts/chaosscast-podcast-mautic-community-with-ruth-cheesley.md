@@ -11,8 +11,6 @@ excerpt: 'A podcast episode focusing on the Mautic Community and our use of metr
 tags:
   - 'Mautic'
   - 'Community'
-resources:
-  - label: 'Listen to the podcast'
-    url: https://podcast.chaoss.community/8
 source: https://speaking.ruthcheesley.co.uk/xuAXwY/chaosscast-podcast-mautic-community-with-ruth-cheesley
+listen: https://podcast.chaoss.community/8
 ---
