@@ -5,7 +5,11 @@ category: 'Buddhism'
 tags:
   - 'Ordination'
   - 'Triratna'
+  - 'Being bendy'
 excerpt: 'Preparing to thrive on the three-month ordination retreat at Akashavana - fitness, medical planning, kit and coping with the mountain weather - from someone who once was not sure her body could manage it.'
+image: '/assets/img/blog/2026/akashavana.jpg'
+imageAlt: 'The white limestone cliff of the Akashavana massif rising above pine forest under a clear blue sky, with a hammock strung between trees in the foreground.'
+imageCaption: 'Akashavana, in the mountains of Aragón'
 ---
 
 For a long time, I thought it wasn't going to be possible for me to manage the three-month retreat in the mountains in Spain. My health hasn't always been as good as it is now, and for several years I was using a wheelchair and walking aids.
@@ -59,7 +63,7 @@ Here's some strategies I found helpful:
 - Warm hat (especially if you plan to shave your head!), scarf, gloves - all well worth finding space for!
 ### Warmer weather
 - Electrolyte tablets - if you struggle with dehydration or even if you don't, it's well worth taking some electrolyte tablets with you. These are easily obtained from the supermarket and in sports shops. It's also worth taking a few sachets of oral rehydration salts just in case you have an upset stomach, although you can get them in the tienda.
-- A cooling towel, wrapped around the head after being made wet, or draped around the shoulders when out for a walk in a vest top, works wonders to regular temperatures! I had [this one](https://link.amazon/B0i4Hbmr5) from Amazon, quite a few people on the retreat had similar ones. You can even get ones which fold down into a small keyring.
+- A cooling towel, wrapped around the head after being made wet, or draped around the shoulders when out for a walk in a vest top, works wonders to regulate temperatures! I had [this one](https://link.amazon/B0i4Hbmr5) from Amazon, quite a few people on the retreat had similar ones. You can even get ones which fold down into a small keyring.
 - Take a manual fan with you - the old fashioned style. They're almost silent to use and invaluable on hot days.
 - Get a decent hat that gives good coverage to avoid sunburn. I was very fortunate to find a Tilley hat on Vinted, which I absolutely loved - but any kind of broad brimmed hat would do. You might want a peaked cap as well if you like to lie down and watch the sky - it's a bit more practical!
 - Have a decent pair of sunglasses - and if you're a glasses wearer, try to make them prescription so you can read out in the sunshine.
