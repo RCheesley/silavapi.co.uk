@@ -13,8 +13,6 @@ tags:
   - 'Open source'
   - 'Community'
 resources:
-  - label: 'Listen to the podcast'
-    url: https://spoti.fi/3zDuKPR
   - label: 'Big Mac Index'
     url: https://www.economist.com/big-mac-index
   - label: 'Mautic website'
@@ -24,4 +22,5 @@ resources:
   - label: 'Mautic on Slack'
     url: https://mautic.org/slack
 source: https://speaking.ruthcheesley.co.uk/RXbbVu/scaling-developer-success-with-ruth-cheesley
+listen: https://spoti.fi/3zDuKPR
 ---

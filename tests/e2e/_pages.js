@@ -26,9 +26,9 @@ export const PAGES = [
     h1: /Who owns your data/,
   },
   {
-    path: '/speaking/podcasts/project-lead-office-hours-maintainer-month-how-mautic-is-maintained/',
+    path: '/speaking/podcasts/the-developers-bakery-podcast-82/',
     name: 'Podcast',
-    h1: /Project Lead Office Hours/,
+    h1: /Bakery/,
   },
   { path: '/speaking/book/', name: 'Book', h1: /Book me to speak/ },
   { path: '/speaking/rider/', name: 'Rider', h1: /Speaker rider/ },

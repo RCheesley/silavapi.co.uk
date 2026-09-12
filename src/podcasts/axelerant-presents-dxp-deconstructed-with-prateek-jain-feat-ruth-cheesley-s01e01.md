@@ -13,4 +13,5 @@ tags:
   - 'Open source'
   - 'Marketing'
 source: https://speaking.ruthcheesley.co.uk/Lz94ln/axelerant-presents-dxp-deconstructed-with-prateek-jain-feat-ruth-cheesley-s01e01
+listen: https://www.youtube.com/watch?v=bUeuc7s2l9s
 ---

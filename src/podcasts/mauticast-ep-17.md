@@ -11,8 +11,6 @@ excerpt: 'A return visit to the MautiCast to discuss the first world conference 
 tags:
   - 'Mautic'
   - 'Community'
-resources:
-  - label: 'MautiCast Ep 17'
-    url: https://www.leuchtfeuer.com/en/mauticast/17/
 source: https://speaking.ruthcheesley.co.uk/XCMpO1/mauticast-ep-17
+listen: https://leuchtfeuer.com/en/mauticast/17/
 ---

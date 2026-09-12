@@ -14,4 +14,5 @@ tags:
   - 'Marketing'
   - 'Community'
 source: https://speaking.ruthcheesley.co.uk/KMPsoG/the-developers-bakery-podcast-82
+listen: https://thebakery.dev/82/
 ---

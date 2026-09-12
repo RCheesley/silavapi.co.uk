@@ -12,4 +12,5 @@ tags:
   - 'Mautic'
   - 'Community'
 source: https://speaking.ruthcheesley.co.uk/IeIxEy/sustainoss-podcast-episode-188
+listen: https://podcast.sustainoss.org/188
 ---
