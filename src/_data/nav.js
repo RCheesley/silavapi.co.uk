@@ -10,6 +10,7 @@ export default {
     { key: 'about', label: 'About', href: '/about/' },
     { key: 'dharma', label: 'Dharma', href: '/dharma/' },
     { key: 'speaking', label: 'Speaking', href: '/speaking/' },
+    { key: 'work', label: 'Work with me', href: '/work-with-me/' },
     { key: 'blog', label: 'Blog', href: '/blog/' },
     { key: 'contact', label: 'Contact', href: '/contact/' },
   ],
