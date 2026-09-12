@@ -6,7 +6,7 @@ excerpt: 'Years of leading Mautic - through acquisition, spin-out, governance an
 sourceUrl: '/about/what-i-do/open-source-consulting'
 ---
 
-I help established open source projects and foundations navigate the complex challenges of growth, governance and sustainability.
+Open source is the specialism at the heart of my [fractional leadership](/work-with-me/) work. I help established open source projects and foundations navigate the complex challenges of growth, governance and sustainability - the particular puzzles of community-built software, foundation governance, and sustaining a project that belongs to everyone and no one.
 
 ## What I do
 
@@ -14,7 +14,7 @@ Since 2020 I have led Mautic through corporate acquisition, a spin-out to indepe
 
 I work with established open source projects and foundations on the problems that come with maturity. How do you scale community governance when informal structures stop working? How do you build sustainable revenue without compromising your values? How do you navigate corporate relationships while staying independent? How do you grow your contributor base when you are competing with well-funded alternatives?
 
-These are not theoretical questions for me. I have worked through all of them, sometimes successfully and sometimes through hard lessons, and that experience shapes how I approach consulting work.
+These are not theoretical questions for me. I have worked through all of them, sometimes successfully and sometimes through hard lessons, and that experience shapes how I approach open source work.
 
 ## Areas where I can help
 
@@ -33,18 +33,16 @@ I don't believe in one-size-fits-all frameworks. What works for a project with f
 
 ## Experience and background
 
-I have led Mautic since 2020, through some of the most challenging periods in the project's history. Before that I served on the Joomla Community Leadership Team, and I have worked in open source community building for over eighteen years. Along the way I have navigated corporate acquisition, managed a spin-out to independence, created governance structures from scratch, built funding models, led through financial crisis, and handled the operational realities of keeping a global open source project running.
+I have led Mautic since 2020, through some of the most challenging periods in the project's history, and I am currently the fractional Director of Operations at Mercury Consortium. Before Mautic I served on the Joomla Community Leadership Team, and I have worked in open source community building for over eighteen years. Along the way I have navigated corporate acquisition, managed a spin-out to independence, created governance structures from scratch, built funding models, led through financial crisis, and handled the operational realities of keeping a global open source project running.
 
-I bring that hands-on experience to consulting work. When we talk about governance, sustainability or community conflict, I am speaking from direct experience rather than case studies.
+I bring that hands-on experience to open source work. When we talk about governance, sustainability or community conflict, I am speaking from direct experience rather than case studies.
 
 ## Working together
 
-I work on a consulting basis at rates starting at £1,500 per day. Engagements usually start with some discovery work to understand your situation, then move into the specific areas where you need support. Some projects need ongoing strategic guidance; others need intensive help with a particular challenge like governance restructuring or financial planning; some need facilitation for a difficult conversation or decision.
+This runs on the same footing as the rest of my [fractional work](/work-with-me/) - a set number of days a month, minimum term six months - though a focused piece such as a governance review or a funding model can sometimes stand on its own. Engagements usually start with some discovery to understand your situation, then move into the specific areas where you need support.
 
 I am particularly interested in working with projects that share values around privacy, digital sovereignty, and building alternatives to proprietary tools. If your project is trying to prove that open source can compete with well-funded proprietary alternatives while holding on to its ethical principles, we will probably work well together.
 
 ## Get in touch
 
 If you are facing challenges with governance, sustainability, community growth or strategic direction, [drop me a line](/contact/) with some context about your project and what you are working on, and I will let you know whether I think I am a good fit for what you need.
-
-A note on availability: I stepped back from consulting work around my ordination in 2026. If you would like to work together, do get in touch and we can talk about timing.
