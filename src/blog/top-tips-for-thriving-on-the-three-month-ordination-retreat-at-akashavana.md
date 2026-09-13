@@ -16,7 +16,7 @@ For a long time, I thought it wasn't going to be possible for me to manage the t
 
 Despite being well at the time I left, there was a lot that I did in the years running up to the retreat, and things I took with me during the retreat, which really helped me to thrive while I was away.
 
-Here's a few, shared in the hope it might help others!
+I'm sharing these for anyone approaching the retreat with a chronic health condition, as I was - it actually grew out of a conversation with a friend facing many of the same worries I'd had. So this isn't a general kit list. Akashavana send everyone a thorough, well-tested list, and that's the one to follow; what I've added here is the extra, health-specific stuff that helped me thrive with EDS. If you're fit and well you'll likely need far less, so please don't let any of it add to your nerves.
 ## General fitness and health
 Akashavana is high up in the mountains. It's a good 30 minute, bumpy, 4x4 ride to the nearest civilisation. Therefore, pretty much everywhere you walk is along, up or down a mountain on what are sometimes fairly small, narrow paths. It's rocky, there's places where it's a bit scrambly.
 
