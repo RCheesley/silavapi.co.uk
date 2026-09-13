@@ -36,12 +36,13 @@ describe('primary navigation', () => {
     }
   });
 
-  it('exposes the expected flat structure: Home, About, Dharma, Speaking, Blog, Contact', () => {
+  it('exposes the expected flat structure: Home, About, Dharma, Speaking, Work with me, Blog, Contact', () => {
     expect(nav.primary.map((i) => i.key)).toEqual([
       'home',
       'about',
       'dharma',
       'speaking',
+      'work',
       'blog',
       'contact',
     ]);

@@ -4,7 +4,7 @@ layout: layouts/base.njk
 {% from "macros/ui.njk" import sectionHeading %}
 <article class="prose-page">
   <div class="stack">
-    {{ sectionHeading("About me", title, 1, excerpt) }}
+    {{ sectionHeading(eyebrow or "About me", title, 1, excerpt) }}
   </div>
   {% if image %}
     <p><img class="prose-page__lead" src="{{ image }}" alt="{{ imageAlt or '' }}" /></p>
