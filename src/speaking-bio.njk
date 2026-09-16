@@ -1,0 +1,107 @@
+---
+layout: layouts/base.njk
+navActive: speaking
+title: Bio and photos
+permalink: /speaking/bio/
+description: >
+  A ready-to-use biography of Sīlavāpi (Ruth Cheesley) and a set of approved
+  speaker photos for organisers to use in event listings and promotion.
+---
+{% from "macros/ui.njk" import sectionHeading, button %}
+
+{%- set photos = [
+  { file: "portrait-mautic-16", w: 1167, h: 1750, label: "Headshot (colour)",
+    download: "silavapi-ruth-cheesley-headshot.jpg", credit: "Simply C Photography",
+    alt: "Sīlavāpi smiling to camera in a grey Mautic T-shirt against a plain pale background." },
+  { file: "portrait-05", w: 1167, h: 1750, label: "Studio portrait (colour)",
+    download: "silavapi-ruth-cheesley-portrait-colour.jpg", credit: "Simply C Photography",
+    alt: "Sīlavāpi resting her chin on her hand and smiling, wearing a navy shirt with a green collar." },
+  { file: "portrait-04", w: 1167, h: 1750, label: "Studio portrait (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-bw.jpg", credit: "Simply C Photography",
+    alt: "Black and white portrait of Sīlavāpi looking to one side and smiling, in a dark shirt with a white collar." },
+  { file: "portrait-07", w: 1167, h: 1750, label: "Seated portrait (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-seated-bw.jpg", credit: "Simply C Photography",
+    alt: "Black and white photo of Sīlavāpi seated at a table with her hands folded, smiling to camera." },
+  { file: "portrait-mautic-13", w: 1167, h: 1750, label: "Mautic team photo (colour)",
+    download: "silavapi-ruth-cheesley-mautic.jpg", credit: "Simply C Photography",
+    alt: "Sīlavāpi outdoors against a green fence, wearing a grey Mautic T-shirt and smiling to camera." },
+  { file: "speaking-stage-01", w: 1400, h: 933, label: "On stage (colour)",
+    download: "silavapi-ruth-cheesley-on-stage.jpg",
+    credit: "“FOSS Backstage 2025” by Plain Schwarz", licence: "CC BY-SA 2.0",
+    licenceUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+    alt: "Sīlavāpi presenting on stage at FOSS Backstage, holding a microphone and a presenter remote." },
+  { file: "speaking-mic-01", w: 1400, h: 1050, label: "Speaking with a microphone (colour)",
+    download: "silavapi-ruth-cheesley-speaking.jpg", credit: "Ekke Gümbel",
+    alt: "Sīlavāpi speaking into a handheld microphone, wearing a blue Mautic shirt." }
+] -%}
+
+<section>
+  <div class="prose-page">
+    <div class="stack">
+      {{ sectionHeading("Speaking", "Bio and photos", 1, "Help yourself - a bio you can copy and photos you’re welcome to use.") }}
+      <p class="lead">
+        I'm Sīlavāpi - you may have known me in the past as Ruth Cheesley. Below is a
+        ready-to-use biography and a set of approved photos. Please use these rather than
+        pulling images from elsewhere, and do get in touch if you need something in a
+        different format or length.
+      </p>
+    </div>
+
+    <section aria-labelledby="short-bio">
+      <h2 id="short-bio">Short bio</h2>
+      <blockquote class="bio-copy">
+        <p>
+          Sīlavāpi (formerly Ruth Cheesley) is a fractional operations and community leader
+          with over 20 years of experience in open source. She helps mission-driven
+          organisations build the operational foundations and communities they need to thrive,
+          and is currently fractional Director of Operations at Mercury Consortium.
+        </p>
+        <p>
+          She is also Project Lead for Mautic, supporting the community who build and maintain
+          the world's first open source marketing automation platform. Earlier in her career
+          she served on the Community Leadership Team of the Joomla! project and built a
+          full-service digital agency, giving her a rare view of open source as a maintainer, a
+          contributor and a business owner.
+        </p>
+        <p>
+          Sīlavāpi is a lover of cats, a keen triathlete and flautist (but not at the same
+          time!) and is based in the East of England.
+        </p>
+      </blockquote>
+    </section>
+
+    <section aria-labelledby="approved-photos">
+      <h2 id="approved-photos">Approved photos</h2>
+      <p>
+        These are cleared for use in event listings and promotion. Please keep the credit shown
+        with each photo. Right-click to save, or use the download link under each one.
+      </p>
+      <ul class="press-photos">
+        {% for p in photos %}
+          <li class="press-photo">
+            <img
+              src="/assets/img/photography/{{ p.file }}.jpg"
+              alt="{{ p.alt }}"
+              width="{{ p.w }}" height="{{ p.h }}"
+              loading="lazy" decoding="async" />
+            <div class="press-photo__meta">
+              <span class="press-photo__label">{{ p.label }}</span>
+              <a class="press-photo__download"
+                 href="/assets/img/photography/{{ p.file }}.jpg"
+                 download="{{ p.download }}">Download {% icon "arrow-right", 14 %}</a>
+            </div>
+            {% if p.credit %}
+              <p class="press-photo__credit">Photo: {{ p.credit }}{% if p.licence %}, {% if p.licenceUrl %}<a href="{{ p.licenceUrl }}" rel="noopener noreferrer" target="_blank">{{ p.licence }}</a>{% else %}{{ p.licence }}{% endif %}{% endif %}</p>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <div class="cluster">
+      {{ button("Book me to speak", "/speaking/book/", "primary") }}
+      {{ button("Speaker rider", "/speaking/rider/", "secondary") }}
+      {{ button("Back to speaking", "/speaking/", "ghost") }}
+    </div>
+  </div>
+</section>
