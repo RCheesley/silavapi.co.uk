@@ -552,6 +552,17 @@
   height: 100%;
   object-fit: cover;
 }
+.speaking-hero__figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+.speaking-hero__credit {
+  font-size: var(--text-2xs);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
 .speaking-hero__col {
   display: grid;
   gap: var(--space-6);
