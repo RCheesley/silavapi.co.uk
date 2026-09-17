@@ -9,22 +9,64 @@ description: >
 ---
 {% from "macros/ui.njk" import sectionHeading, button %}
 
-{%- set photos = [
-  { file: "portrait-mautic-16", w: 1167, h: 1750, label: "Headshot (colour)",
-    download: "silavapi-ruth-cheesley-headshot.jpg", credit: "Simply C Photography",
-    alt: "Sīlavāpi smiling to camera in a grey Mautic T-shirt against a plain pale background." },
-  { file: "portrait-05", w: 1167, h: 1750, label: "Studio portrait (colour)",
-    download: "silavapi-ruth-cheesley-portrait-colour.jpg", credit: "Simply C Photography",
-    alt: "Sīlavāpi resting her chin on her hand and smiling, wearing a navy shirt with a green collar." },
-  { file: "portrait-04", w: 1167, h: 1750, label: "Studio portrait (black and white)",
-    download: "silavapi-ruth-cheesley-portrait-bw.jpg", credit: "Simply C Photography",
+{%- set portraits = [
+  { file: "press-portrait-01", w: 1167, h: 1750, label: "In profile (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-01.jpg",
+    alt: "Black and white portrait of Sīlavāpi in profile, smiling, wearing a dark shirt with a white collar." },
+  { file: "press-portrait-02", w: 1167, h: 1750, label: "Looking aside (colour)",
+    download: "silavapi-ruth-cheesley-portrait-02.jpg",
+    alt: "Sīlavāpi looking to one side and smiling, wearing a navy shirt with a green collar." },
+  { file: "press-portrait-03", w: 1167, h: 1750, label: "To camera (colour)",
+    download: "silavapi-ruth-cheesley-portrait-03.jpg",
+    alt: "Sīlavāpi smiling to camera, wearing a navy shirt with a green collar." },
+  { file: "press-portrait-04", w: 1167, h: 1750, label: "Looking aside (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-04.jpg",
     alt: "Black and white portrait of Sīlavāpi looking to one side and smiling, in a dark shirt with a white collar." },
-  { file: "portrait-07", w: 1167, h: 1750, label: "Seated portrait (black and white)",
-    download: "silavapi-ruth-cheesley-portrait-seated-bw.jpg", credit: "Simply C Photography",
+  { file: "press-portrait-05", w: 1167, h: 1750, label: "Chin on hand (colour)",
+    download: "silavapi-ruth-cheesley-portrait-05.jpg",
+    alt: "Sīlavāpi resting her chin on her hand and smiling, wearing a navy shirt with a green collar." },
+  { file: "press-portrait-06", w: 1167, h: 1750, label: "To camera (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-06.jpg",
+    alt: "Black and white portrait of Sīlavāpi smiling to camera, in a dark shirt with a white collar." },
+  { file: "press-portrait-07", w: 1167, h: 1750, label: "Seated (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-07.jpg",
     alt: "Black and white photo of Sīlavāpi seated at a table with her hands folded, smiling to camera." },
-  { file: "portrait-mautic-13", w: 1167, h: 1750, label: "Mautic team photo (colour)",
-    download: "silavapi-ruth-cheesley-mautic.jpg", credit: "Simply C Photography",
-    alt: "Sīlavāpi outdoors against a green fence, wearing a grey Mautic T-shirt and smiling to camera." },
+  { file: "press-portrait-08", w: 1167, h: 1750, label: "Seated (colour)",
+    download: "silavapi-ruth-cheesley-portrait-08.jpg",
+    alt: "Sīlavāpi seated at a table with her hands folded, smiling to camera, wearing a navy shirt." },
+  { file: "press-portrait-09", w: 1167, h: 1750, label: "Seated, looking aside (colour)",
+    download: "silavapi-ruth-cheesley-portrait-09.jpg",
+    alt: "Sīlavāpi seated and looking to one side, smiling, wearing a navy shirt with a green collar." },
+  { file: "press-portrait-10", w: 1167, h: 1750, label: "Looking aside (black and white)",
+    download: "silavapi-ruth-cheesley-portrait-10.jpg",
+    alt: "Black and white portrait of Sīlavāpi looking to one side and smiling, in a dark shirt with a white collar." }
+] -%}
+
+{%- set mauticShots = [
+  { file: "press-mautic-01", w: 1167, h: 1750, label: "Mautic T-shirt (black and white)",
+    download: "silavapi-ruth-cheesley-mautic-01.jpg",
+    alt: "Black and white photo of Sīlavāpi in a Mautic T-shirt, looking upward and smiling." },
+  { file: "press-mautic-02", w: 1167, h: 1750, label: "Mautic T-shirt, outdoors (black and white)",
+    download: "silavapi-ruth-cheesley-mautic-02.jpg",
+    alt: "Black and white photo of Sīlavāpi outdoors in a Mautic T-shirt, looking to one side." },
+  { file: "press-mautic-03", w: 1167, h: 1750, label: "Mautic T-shirt, outdoors (colour)",
+    download: "silavapi-ruth-cheesley-mautic-03.jpg",
+    alt: "Sīlavāpi outdoors against a green fence, wearing a Mautic T-shirt and smiling to camera." },
+  { file: "press-mautic-04", w: 1167, h: 1750, label: "Mautic T-shirt, outdoors (black and white)",
+    download: "silavapi-ruth-cheesley-mautic-04.jpg",
+    alt: "Black and white photo of Sīlavāpi outdoors in a Mautic T-shirt, smiling to camera." },
+  { file: "press-mautic-05", w: 1167, h: 1750, label: "Mautic T-shirt, by a tree (colour)",
+    download: "silavapi-ruth-cheesley-mautic-05.jpg",
+    alt: "Sīlavāpi outdoors beside a tree, wearing a Mautic T-shirt and looking to one side." },
+  { file: "press-mautic-06", w: 1167, h: 1750, label: "Mautic T-shirt (colour)",
+    download: "silavapi-ruth-cheesley-mautic-06.jpg",
+    alt: "Sīlavāpi smiling to camera in a Mautic T-shirt against a plain pale background." },
+  { file: "press-mautic-07", w: 1167, h: 1750, label: "Mautic T-shirt (black and white)",
+    download: "silavapi-ruth-cheesley-mautic-07.jpg",
+    alt: "Black and white photo of Sīlavāpi in a Mautic T-shirt, looking to one side and smiling." }
+] -%}
+
+{%- set speakingShots = [
   { file: "speaking-stage-01", w: 1400, h: 933, label: "On stage (colour)",
     download: "silavapi-ruth-cheesley-on-stage.jpg",
     credit: "“FOSS Backstage 2025” by Plain Schwarz", licence: "CC BY-SA 2.0",
@@ -33,6 +75,12 @@ description: >
   { file: "speaking-mic-01", w: 1400, h: 1050, label: "Speaking with a microphone (colour)",
     download: "silavapi-ruth-cheesley-speaking.jpg", credit: "Ekke Gümbel",
     alt: "Sīlavāpi speaking into a handheld microphone, wearing a blue Mautic shirt." }
+] -%}
+
+{%- set photoGroups = [
+  { heading: "Portraits", credit: "Simply C Photography", photos: portraits },
+  { heading: "With Mautic branding", credit: "Simply C Photography", photos: mauticShots },
+  { heading: "Speaking", photos: speakingShots }
 ] -%}
 
 <section>
@@ -73,29 +121,37 @@ description: >
     <section aria-labelledby="approved-photos">
       <h2 id="approved-photos">Approved photos</h2>
       <p>
-        These are cleared for use in event listings and promotion. Please keep the credit shown
-        with each photo. Right-click to save, or use the download link under each one.
+        These are cleared for use in event listings and promotion. Please keep the credit
+        shown with each set. Right-click to save, or use the download link under each one.
       </p>
-      <ul class="press-photos">
-        {% for p in photos %}
-          <li class="press-photo">
-            <img
-              src="/assets/img/photography/{{ p.file }}.jpg"
-              alt="{{ p.alt }}"
-              width="{{ p.w }}" height="{{ p.h }}"
-              loading="lazy" decoding="async" />
-            <div class="press-photo__meta">
-              <span class="press-photo__label">{{ p.label }}</span>
-              <a class="press-photo__download"
-                 href="/assets/img/photography/{{ p.file }}.jpg"
-                 download="{{ p.download }}">Download {% icon "arrow-right", 14 %}</a>
-            </div>
-            {% if p.credit %}
-              <p class="press-photo__credit">Photo: {{ p.credit }}{% if p.licence %}, {% if p.licenceUrl %}<a href="{{ p.licenceUrl }}" rel="noopener noreferrer" target="_blank">{{ p.licence }}</a>{% else %}{{ p.licence }}{% endif %}{% endif %}</p>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+      {% for group in photoGroups %}
+        <div class="press-group">
+          <div class="press-group__head">
+            <h3 class="press-group__title">{{ group.heading }}</h3>
+            {% if group.credit %}<p class="press-group__credit">Photos by {{ group.credit }}</p>{% endif %}
+          </div>
+          <ul class="press-photos">
+            {% for p in group.photos %}
+              <li class="press-photo">
+                <img
+                  src="/assets/img/photography/{{ p.file }}.jpg"
+                  alt="{{ p.alt }}"
+                  width="{{ p.w }}" height="{{ p.h }}"
+                  loading="lazy" decoding="async" />
+                <div class="press-photo__meta">
+                  <span class="press-photo__label">{{ p.label }}</span>
+                  <a class="press-photo__download"
+                     href="/assets/img/photography/{{ p.file }}.jpg"
+                     download="{{ p.download }}">Download {% icon "arrow-right", 14 %}</a>
+                </div>
+                {% if p.credit %}
+                  <p class="press-photo__credit">Photo: {{ p.credit }}{% if p.licence %}, {% if p.licenceUrl %}<a href="{{ p.licenceUrl }}" rel="noopener noreferrer" target="_blank">{{ p.licence }}</a>{% else %}{{ p.licence }}{% endif %}{% endif %}</p>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
     </section>
 
     <div class="cluster">
