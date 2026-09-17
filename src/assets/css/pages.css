@@ -552,10 +552,76 @@
   height: 100%;
   object-fit: cover;
 }
+.speaking-hero__figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+.speaking-hero__credit {
+  font-size: var(--text-2xs);
+  line-height: var(--leading-relaxed);
+  color: var(--text-muted);
+}
 .speaking-hero__col {
   display: grid;
   gap: var(--space-6);
   justify-items: start;
+}
+
+/* Bio and photos (press page) -------------------------------------------- */
+.bio-copy {
+  margin: 0;
+  padding: var(--space-6) var(--space-7);
+  background: var(--surface-subtle);
+  border-left: 4px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: var(--space-4);
+}
+.bio-copy p {
+  margin: 0;
+}
+.prose-page .press-photos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-6);
+}
+.prose-page .press-photo {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+.prose-page .press-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface-card-alt);
+}
+.press-photo__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.press-photo__label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.press-photo__download {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+.prose-page .press-photo__credit {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
 }
 
 /* Stats (a description list: number = value, label = term). */
