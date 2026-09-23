@@ -79,10 +79,10 @@ A few things I would do again, or differently.
 - Make sure that the tooling you're using is set to **not** train on your data before sharing resources with it.
 - Treat every question as a documentation gap. If someone had to ask a human, write the answer down and feed it back in.
 - Keep the knowledge in plain text you own, like an Obsidian vault and ideally version controlled, so you're not locked into one proprietary provider and can export it and use it in whichever tool you use.
-- Your own AI chat history is a surprisingly rich source of context, but read what you're sharing first.
+- Your own AI chat history is a surprisingly rich source of context, but read what you're sharing first. Redact anything you don't want to be exposed!
 - Keep people's contact details (other than the basics) and anything sensitive in a private space for the people who need it, separate from what you publish.
 - Tell people plainly that it can be confidently wrong, and to check anything that involves money, access or decisions with a human.
-- Make sure there are named humans behind it. Ours was the Council, and they did a wonderful job.
+- Make sure there are named humans who are taking on the tasks when you are away. Ours was the Council, and they did a wonderful job.
 
 ## Over to you
 
