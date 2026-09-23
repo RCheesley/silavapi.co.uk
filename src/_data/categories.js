@@ -5,6 +5,7 @@
  */
 export default {
   order: [
+    'AI',
     'Buddhism',
     'Community',
     'Digital Sovereignty',
@@ -17,6 +18,7 @@ export default {
     'Volunteering',
   ],
   tones: {
+    AI: 'accent',
     Buddhism: 'brand',
     Community: 'warm',
     'Digital Sovereignty': 'accent',
