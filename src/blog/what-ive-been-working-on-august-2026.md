@@ -1,7 +1,7 @@
 ---
 title: 'What I''ve been up to in August 2026'
 date: 2026-08-28
-category: 'Open source'
+category: 'AI'
 tags:
   - 'Open source'
   - 'Mautic'

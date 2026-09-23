@@ -17,7 +17,7 @@ In November last year I sent a slightly nervous message to our Mautic leadership
 
 It was an idea I heard in passing in the [Exit Five podcast](https://exitfive.com/podcast/), to create an AI preset that knew everything about you to deputise in your absence. The concept was that this would be the first place for the leadership team and council to look, and to take some of the weight off the people who were generously covering my work while I was offline.
 
-Now I'm back and have had time to look through what happened while I was away, I want to share how I set it up, what worked, what didn't, and the lesson I didn't expect.
+Now I'm back and have had time to look through what happened while I was away, I want to share how I set it up, what worked, what didn't, and the lessons learned.
 
 ## Why I needed it
 
@@ -61,11 +61,11 @@ Some questions it simply couldn't answer because the knowledge was never written
 
 The pattern was consistent. Ruth AI was exactly as good as the documentation behind it, and the effort that was put into setting it up for success.
 
-## The lesson I didn't expect
+## Lessons learned
 
 Earlier this month I was at a board meeting for another charity I support, and we were talking about continuity planning. I found myself explaining that the AI was helpful, but the thing that really made the difference was the documenting.
 
-Preparing for three months away forced me to write down what I do weekly, monthly and annually, and how. It was a good audit. There were plenty of moments where I asked myself why on earth I was still doing a particular task. Some habits were clearly depleting, and I could let them go.
+Preparing for three months away forced me to write down what I do weekly, monthly and annually, and how. It was a good audit. There were plenty of moments where I asked myself why on earth I was still doing a particular task. Some habits were clearly depleting, and I could let them go. This work led me to realise how under-prepared many of us are for succession planning, and to create a side project at [beyondthebusfactor.org](https://beyondthebusfactor.org).
 
 That documentation is still there now I'm back. It lives in a vault our leadership team owns, as plain text we can read, improve and take anywhere, and several people have already added to it. The Gem is one way to query it, but the knowledge itself belongs to the team, not to a tool or to me.
 
