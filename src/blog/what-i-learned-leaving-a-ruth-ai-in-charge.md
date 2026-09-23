@@ -67,7 +67,7 @@ Earlier this month I was at a board meeting for another charity I support, and w
 
 Preparing for three months away forced me to write down what I do weekly, monthly and annually, and how. It was a good audit. There were plenty of moments where I asked myself why on earth I was still doing a particular task. Some habits were clearly depleting, and I could let them go. This work led me to realise how under-prepared many of us are for succession planning, and to create a side project at [beyondthebusfactor.org](https://beyondthebusfactor.org).
 
-That documentation is still there now I'm back. It lives in a vault our leadership team owns, as plain text we can read, improve and take anywhere, and several people have already added to it. The Gem is one way to query it, but the knowledge itself belongs to the team, not to a tool or to me.
+That documentation that I wrote as part of this exercise is still there now I'm back. It lives in a vault our leadership team owns, as plain text markdown files that we can read, improve and take anywhere, and several people have already added to it. The Gem is one way to query it, but the knowledge itself belongs to the team, not to a tool or to me - it's Mautic's guide to how Mautic runs.
 
 This connects to something I keep coming back to about AI. I think we get the most from it when we use it to help people find where knowledge lives, while the knowledge itself stays written down, owned by us and understood by humans. It's the same principle behind the digital sovereignty work at the heart of Mautic, applied to how we hold what we know together.
 
@@ -78,7 +78,7 @@ A few things I would do again, or differently.
 - Start early. I shared it about four months before I left, which gave people time to try it and tell me where it fell short.
 - Make sure that the tooling you're using is set to **not** train on your data before sharing resources with it.
 - Treat every question as a documentation gap. If someone had to ask a human, write the answer down and feed it back in.
-- Keep the knowledge in plain text you own, like an Obsidian vault, so you're not locked into one AI provider and can export it for whichever tool you use.
+- Keep the knowledge in plain text you own, like an Obsidian vault and ideally version controlled, so you're not locked into one proprietary provider and can export it and use it in whichever tool you use.
 - Your own AI chat history is a surprisingly rich source of context, but read what you're sharing first.
 - Keep people's contact details (other than the basics) and anything sensitive in a private space for the people who need it, separate from what you publish.
 - Tell people plainly that it can be confidently wrong, and to check anything that involves money, access or decisions with a human.
