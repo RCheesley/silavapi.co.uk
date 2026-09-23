@@ -1,7 +1,7 @@
 ---
 title: 'Rebuilding this site in the open - Joomla to a static site, with an AI assistant'
 date: 2026-08-09
-category: 'Open source'
+category: 'AI'
 tags:
   - 'Open source'
   - 'Eleventy'

@@ -1,7 +1,7 @@
 ---
 title: 'What I learned leaving a Ruth AI in charge'
 date: 2026-09-23
-category: 'Community'
+category: 'AI'
 tags:
   - 'Mautic'
   - 'AI'
