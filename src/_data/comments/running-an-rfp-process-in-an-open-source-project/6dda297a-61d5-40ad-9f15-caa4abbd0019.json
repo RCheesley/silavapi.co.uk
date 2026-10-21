@@ -1,0 +1,8 @@
+{
+  "id": "6dda297a-61d5-40ad-9f15-caa4abbd0019",
+  "parent": null,
+  "name": "NoraMula",
+  "body": "I need an ambient cue to repeat while a player explores a small room. The seam becomes distracting when I listen through several consecutive cycles. I am unsure whether the problem is the edit or a texture near the ending. I would first compare a longer crossfade with the current short transition. I would keep the level and all other edits identical between versions. There is no dramatic change in the room at the repeat point, so the music should not imply one. I would listen to several cycles in context, then inspect the boundary separately, keeping notes about exactly when the interruption becomes apparent. A page about [url=https://sunomusicfix.top]remove suno artifacts[/url] came up during my search for another possible check. I have not tried the approach and would not assume it solves a seam. For this scene, the repeat should feel consistent with the surrounding ambience. What diagnostic order would help separate editing choices from source texture?",
+  "date": "2026-10-21T05:07:01.280Z",
+  "approved": false
+}
