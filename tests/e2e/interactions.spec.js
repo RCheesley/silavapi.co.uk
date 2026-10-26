@@ -122,6 +122,36 @@ test.describe('contact form (progressive enhancement)', () => {
     await expect(status).toBeVisible();
     await expect(status).toHaveAttribute('role', 'status');
   });
+
+  test('blocks a message containing a link with a warning', async ({ page }) => {
+    let posted = false;
+    await page.route('**/api/contact', (route) => {
+      posted = true;
+      route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+    });
+    await page.goto('/contact/');
+    await page.locator('#c-name').fill('Test Person');
+    await page.locator('#c-email').fill('test@example.com');
+    await page.locator('#c-msg').fill('Loved your talk, more at my-site.io');
+    await page.locator('.contact__form button[type="submit"]').click();
+    await expect(page.locator('#c-msg-error')).toContainText("Links aren't allowed");
+    await expect(page.locator('#c-msg')).toHaveAttribute('aria-invalid', 'true');
+    expect(posted).toBe(false);
+  });
+});
+
+test.describe('speaker enquiry (progressive enhancement)', () => {
+  test('blocks a link in a free-text field with a warning', async ({ page }) => {
+    await page.goto('/speaking/book/');
+    await page.locator('#b-name').fill('Event Organiser');
+    await page.locator('#b-email').fill('org@conference.org');
+    await page.locator('#b-event').fill('A Conference');
+    await page.locator('#b-topic').fill('Please talk about example-deals.shop');
+    await page.locator('[data-enquiry-form] [type="submit"]').click();
+    const message = await page.locator('#b-topic').evaluate((el) => el.validationMessage);
+    expect(message).toContain("Links aren't allowed");
+    await expect(page).toHaveURL(/\/speaking\/book\/$/);
+  });
 });
 
 test.describe('prompt copy button (progressive enhancement)', () => {

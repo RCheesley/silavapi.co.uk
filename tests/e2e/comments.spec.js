@@ -33,6 +33,21 @@ test.describe('blog comments', () => {
     await expect(page.locator('[data-comment-status]')).toContainText('moderation');
   });
 
+  test('blocks a comment containing a link with a warning', async ({ page }) => {
+    let posted = false;
+    await page.route('**/api/comment', (route) => {
+      posted = true;
+      route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+    });
+    await page.goto(POST);
+    await page.locator('#cm-name').fill('Ada Lovelace');
+    await page.locator('#cm-comment').fill('Great post - see more at example.com');
+    await page.locator('[data-comment-form] [type="submit"]').click();
+    await expect(page.locator('#cm-comment-error')).toContainText("Links aren't allowed");
+    await expect(page.locator('#cm-comment')).toHaveAttribute('aria-invalid', 'true');
+    expect(posted).toBe(false);
+  });
+
   test('without JS the form still posts natively to /api/comment', async ({ browser }) => {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
     const page = await ctx.newPage();
