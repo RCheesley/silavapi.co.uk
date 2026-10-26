@@ -7,7 +7,6 @@ import {
   isSpam,
   looksLikeSpamContent,
   MIN_FILL_MS,
-  SPAM_LINK_THRESHOLD,
   LIMITS,
 } from '../../lib/contact.js';
 
@@ -159,18 +158,20 @@ describe('looksLikeSpamContent', () => {
     expect(looksLikeSpamContent({ topic: 'talk [link=http://x]' })).toBe(true);
   });
 
-  it('flags a message with a pile of links', () => {
-    const many = Array.from({ length: SPAM_LINK_THRESHOLD }, (_, i) => `http://x${i}.example`).join(
-      ' '
-    );
-    expect(looksLikeSpamContent({ message: many })).toBe(true);
+  it('flags any link in the message (URL or bare domain)', () => {
+    expect(
+      looksLikeSpamContent({ message: 'Loved your talk - my site is https://ada.example' })
+    ).toBe(true);
+    expect(looksLikeSpamContent({ message: 'see www.example.com' })).toBe(true);
+    expect(looksLikeSpamContent({ message: 'details at example-deals.shop' })).toBe(true);
+    expect(looksLikeSpamContent({ topic: 'a talk, more at my-site.io' })).toBe(true);
   });
 
-  it('allows an ordinary message with a link or two', () => {
+  it('allows an ordinary link-free message', () => {
     expect(
       looksLikeSpamContent({
         name: 'Ada Lovelace',
-        message: 'Loved your talk - my site is https://ada.example and https://notes.example',
+        message: 'Loved your talk at the conference - do get in touch about a workshop.',
       })
     ).toBe(false);
   });
@@ -191,24 +192,9 @@ describe('looksLikeSpamContent', () => {
     ).toBe(false);
   });
 
-  it('flags a random junk token, a promo link, or a foreign-language message', () => {
+  it('flags a random junk token or a foreign-language message', () => {
     expect(looksLikeSpamContent({ message: 'METRYTRE2404060MAMYJRTH' })).toBe(true);
-    expect(
-      looksLikeSpamContent({
-        message: 'Get the latest breaking news, stay updated 24/7 - ukbreakingnews24x7.com',
-      })
-    ).toBe(true);
     expect(looksLikeSpamContent({ message: 'Sveiki, aš norėjau sužinoti jūsų kainą.' })).toBe(true);
-  });
-
-  it('counts a scheme+www URL once, not twice', () => {
-    // Four full URLs (each http://www...) is below the threshold; a naive regex
-    // would double-count them to eight and wrongly flag this.
-    expect(
-      looksLikeSpamContent({
-        message: 'http://www.a.com http://www.b.com http://www.c.com http://www.d.com',
-      })
-    ).toBe(false);
   });
 
   it('is safe with no argument', () => {
