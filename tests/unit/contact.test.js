@@ -159,9 +159,9 @@ describe('looksLikeSpamContent', () => {
   });
 
   it('flags any link in the message (URL or bare domain)', () => {
-    expect(looksLikeSpamContent({ message: 'Loved your talk - my site is https://ada.example' })).toBe(
-      true
-    );
+    expect(
+      looksLikeSpamContent({ message: 'Loved your talk - my site is https://ada.example' })
+    ).toBe(true);
     expect(looksLikeSpamContent({ message: 'see www.example.com' })).toBe(true);
     expect(looksLikeSpamContent({ message: 'details at example-deals.shop' })).toBe(true);
     expect(looksLikeSpamContent({ topic: 'a talk, more at my-site.io' })).toBe(true);

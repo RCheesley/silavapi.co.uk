@@ -167,9 +167,9 @@ describe('looksSpammy', () => {
   });
 
   it('flags a predominantly-Cyrillic comment (the Russian-spam wave)', () => {
-    expect(
-      looksSpammy({ ...base, comment: 'Отличная статья, большое спасибо вам за это' })
-    ).toBe(true);
+    expect(looksSpammy({ ...base, comment: 'Отличная статья, большое спасибо вам за это' })).toBe(
+      true
+    );
   });
 
   it('flags the newsletter / gibberish / promo / foreign-language waves in a comment', () => {
