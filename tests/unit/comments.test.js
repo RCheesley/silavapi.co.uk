@@ -11,7 +11,6 @@ import {
   exceedsMaxBody,
   approvalPayload,
   isApprovalExpired,
-  MAX_LINKS,
   MAX_BODY_BYTES,
   APPROVAL_TTL_MS,
 } from '../../lib/comments.js';
@@ -160,16 +159,16 @@ describe('looksSpammy', () => {
     expect(looksSpammy({ ...base, name: 'visit www.spam.example' })).toBe(true);
   });
 
-  it('allows up to MAX_LINKS links but flags more', () => {
-    expect(MAX_LINKS).toBe(2);
-    const twoLinks = 'see https://a.example and https://b.example';
-    expect(looksSpammy({ ...base, comment: twoLinks })).toBe(false);
-    expect(looksSpammy({ ...base, comment: `${twoLinks} and www.c.example` })).toBe(true);
+  it('flags any link in the comment body (URL or bare domain)', () => {
+    expect(looksSpammy({ ...base, comment: 'see https://a.example' })).toBe(true);
+    expect(looksSpammy({ ...base, comment: 'have a look at www.example.com' })).toBe(true);
+    expect(looksSpammy({ ...base, comment: 'check out example-deals.shop' })).toBe(true);
+    expect(looksSpammy({ ...base, comment: 'Lovely post, thank you!' })).toBe(false);
   });
 
-  it('flags a predominantly-Cyrillic comment with a link (the Russian-spam wave)', () => {
+  it('flags a predominantly-Cyrillic comment (the Russian-spam wave)', () => {
     expect(
-      looksSpammy({ ...base, comment: 'Отличная статья, посетите https://spam.example/buy' })
+      looksSpammy({ ...base, comment: 'Отличная статья, большое спасибо вам за это' })
     ).toBe(true);
   });
 

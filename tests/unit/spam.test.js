@@ -3,7 +3,7 @@ import {
   isCyrillicHeavy,
   looksLikeListSpam,
   looksLikeGibberish,
-  looksLikePromoLink,
+  containsLink,
   hasForeignDiacritics,
 } from '../../lib/spam.js';
 
@@ -122,25 +122,24 @@ describe('looksLikeGibberish', () => {
   });
 });
 
-describe('looksLikePromoLink', () => {
-  it('flags a bare domain (or URL) together with advertising phrasing', () => {
-    expect(
-      looksLikePromoLink('Latest breaking news, stay updated 24/7 - ukbreakingnews24x7.com')
-    ).toBe(true);
-    expect(looksLikePromoLink('Best price! visit our website http://deals.example')).toBe(true);
+describe('containsLink', () => {
+  it('flags a URL (http, https or www)', () => {
+    expect(containsLink('see http://x.example for more')).toBe(true);
+    expect(containsLink('My site is www.example.com if that helps')).toBe(true);
   });
 
-  it('allows a plain link with no promotional phrasing', () => {
-    expect(looksLikePromoLink('My site is www.example.com if that helps')).toBe(false);
+  it('flags a bare domain on a common TLD', () => {
+    expect(containsLink('have a look at ukbreakingnews24x7.com')).toBe(true);
   });
 
-  it('allows promotional-ish words with no link', () => {
-    expect(looksLikePromoLink('I saw the latest news about your talk')).toBe(false);
+  it('leaves link-free text and code-ish tokens alone', () => {
+    expect(containsLink('Loved the talk, thank you so much!')).toBe(false);
+    expect(containsLink('I edited index.html and README.md and node.js')).toBe(false);
   });
 
   it('is safe on empty/undefined input', () => {
-    expect(looksLikePromoLink('')).toBe(false);
-    expect(looksLikePromoLink()).toBe(false);
+    expect(containsLink('')).toBe(false);
+    expect(containsLink()).toBe(false);
   });
 });
 
