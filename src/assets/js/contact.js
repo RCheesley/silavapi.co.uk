@@ -61,6 +61,22 @@
       if (!ok && !firstInvalid) firstInvalid = document.getElementById(field.id);
     });
 
+    // Links aren't allowed (the server drops them); warn so the visitor can
+    // remove it rather than lose their message silently. Runs after the required
+    // checks so a non-empty field's "required" error is cleared first.
+    [
+      { id: 'c-name', err: 'c-name-error' },
+      { id: 'c-msg', err: 'c-msg-error' },
+    ].forEach(function (lf) {
+      var el = document.getElementById(lf.id);
+      if (el && window.Silavapi && window.Silavapi.hasLink(el.value)) {
+        el.setAttribute('aria-invalid', 'true');
+        document.getElementById(lf.err).textContent =
+          "Links aren't allowed here, I'm afraid - please remove it.";
+        if (!firstInvalid) firstInvalid = el;
+      }
+    });
+
     if (firstInvalid) {
       e.preventDefault();
       firstInvalid.focus();
