@@ -151,6 +151,19 @@ describe('looksLikeSpamContent', () => {
     expect(looksLikeSpamContent({ name: 'cheap deals www.spam.co' })).toBe(true);
   });
 
+  it('flags a "Test User" placeholder name', () => {
+    expect(looksLikeSpamContent({ name: 'Test User', message: 'hi' })).toBe(true);
+    expect(looksLikeSpamContent({ name: 'testuser', message: 'hi' })).toBe(true);
+  });
+
+  it('flags the generic "more info, please email me" template', () => {
+    expect(
+      looksLikeSpamContent({
+        message: 'I would like more information. Please contact me by email.',
+      })
+    ).toBe(true);
+  });
+
   it('flags BBCode or HTML link markup in the message or topic', () => {
     expect(looksLikeSpamContent({ message: 'hi [url=http://x]click[/url]' })).toBe(true);
     expect(looksLikeSpamContent({ message: 'see <a href="http://x">here</a>' })).toBe(true);
