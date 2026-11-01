@@ -1,11 +1,11 @@
 ---
 title: 'The Mautic Update'
-date: 2025-11-04
+date: 2025-11-03
 kind: talk
 format: Keynote
 events:
   - event: 'Mautic World Conference 2025'
-    date: 2025-11-04
+    date: 2025-11-03
     location:
       city: 'London'
       region: 'England'
