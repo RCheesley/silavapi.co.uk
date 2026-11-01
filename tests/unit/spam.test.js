@@ -3,8 +3,10 @@ import {
   isCyrillicHeavy,
   looksLikeListSpam,
   looksLikeGibberish,
-  looksLikePromoLink,
+  containsLink,
   hasForeignDiacritics,
+  looksLikeTestName,
+  looksLikeGenericEnquiry,
 } from '../../lib/spam.js';
 
 describe('isCyrillicHeavy', () => {
@@ -122,25 +124,24 @@ describe('looksLikeGibberish', () => {
   });
 });
 
-describe('looksLikePromoLink', () => {
-  it('flags a bare domain (or URL) together with advertising phrasing', () => {
-    expect(
-      looksLikePromoLink('Latest breaking news, stay updated 24/7 - ukbreakingnews24x7.com')
-    ).toBe(true);
-    expect(looksLikePromoLink('Best price! visit our website http://deals.example')).toBe(true);
+describe('containsLink', () => {
+  it('flags a URL (http, https or www)', () => {
+    expect(containsLink('see http://x.example for more')).toBe(true);
+    expect(containsLink('My site is www.example.com if that helps')).toBe(true);
   });
 
-  it('allows a plain link with no promotional phrasing', () => {
-    expect(looksLikePromoLink('My site is www.example.com if that helps')).toBe(false);
+  it('flags a bare domain on a common TLD', () => {
+    expect(containsLink('have a look at ukbreakingnews24x7.com')).toBe(true);
   });
 
-  it('allows promotional-ish words with no link', () => {
-    expect(looksLikePromoLink('I saw the latest news about your talk')).toBe(false);
+  it('leaves link-free text and code-ish tokens alone', () => {
+    expect(containsLink('Loved the talk, thank you so much!')).toBe(false);
+    expect(containsLink('I edited index.html and README.md and node.js')).toBe(false);
   });
 
   it('is safe on empty/undefined input', () => {
-    expect(looksLikePromoLink('')).toBe(false);
-    expect(looksLikePromoLink()).toBe(false);
+    expect(containsLink('')).toBe(false);
+    expect(containsLink()).toBe(false);
   });
 });
 
@@ -158,5 +159,47 @@ describe('hasForeignDiacritics', () => {
   it('is safe on empty/undefined input', () => {
     expect(hasForeignDiacritics('')).toBe(false);
     expect(hasForeignDiacritics()).toBe(false);
+  });
+});
+
+describe('looksLikeTestName', () => {
+  it('flags "Test User" and its variants', () => {
+    expect(looksLikeTestName('Test User')).toBe(true);
+    expect(looksLikeTestName('TestUser')).toBe(true);
+    expect(looksLikeTestName('test-user 1')).toBe(true);
+    expect(looksLikeTestName('Testing User')).toBe(true);
+    expect(looksLikeTestName('tester')).toBe(true);
+    expect(looksLikeTestName('TEST')).toBe(true);
+  });
+
+  it('leaves real names alone', () => {
+    expect(looksLikeTestName('Ada Lovelace')).toBe(false);
+    expect(looksLikeTestName('Preston')).toBe(false);
+    expect(looksLikeTestName('Tess')).toBe(false);
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(looksLikeTestName('')).toBe(false);
+    expect(looksLikeTestName()).toBe(false);
+  });
+});
+
+describe('looksLikeGenericEnquiry', () => {
+  it('flags the "more info, please email me" template', () => {
+    expect(
+      looksLikeGenericEnquiry('I would like more information. Please contact me by email.')
+    ).toBe(true);
+    expect(looksLikeGenericEnquiry('Want more info - contact me via e-mail')).toBe(true);
+  });
+
+  it('allows a real enquiry that only mentions more information', () => {
+    expect(
+      looksLikeGenericEnquiry('Could you send me more information about booking a workshop?')
+    ).toBe(false);
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(looksLikeGenericEnquiry('')).toBe(false);
+    expect(looksLikeGenericEnquiry()).toBe(false);
   });
 });

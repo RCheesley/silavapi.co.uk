@@ -104,9 +104,15 @@
     if (!name.value.trim()) {
       fieldError('cm-name', 'Please add your name.');
       ok = false;
+    } else if (window.Silavapi && window.Silavapi.hasLink(name.value)) {
+      fieldError('cm-name', "Links aren't allowed here, I'm afraid - please remove it.");
+      ok = false;
     } else fieldError('cm-name', '');
     if (!comment.value.trim()) {
       fieldError('cm-comment', 'The comment is the important bit!');
+      ok = false;
+    } else if (window.Silavapi && window.Silavapi.hasLink(comment.value)) {
+      fieldError('cm-comment', "Links aren't allowed here, I'm afraid - please remove it.");
       ok = false;
     } else fieldError('cm-comment', '');
     if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {

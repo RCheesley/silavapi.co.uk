@@ -46,6 +46,9 @@
     <script src="/assets/js/nav.js" defer></script>
     {# Gallery lightbox: enhances gallery image links; exits early with no gallery. #}
     <script src="/assets/js/gallery-lightbox.js" defer></script>
+    {# Shared "contains a link" check for the contact, enquiry and comment forms;
+       loaded before them so window.Silavapi.hasLink is ready. #}
+    <script src="/assets/js/links.js" defer></script>
     {# Blog comments: reply handling + inline validation; exits early elsewhere. #}
     <script src="/assets/js/comments.js" defer></script>
     {# Prompt copy buttons: adds a copy button to prompt callouts; exits early elsewhere. #}
