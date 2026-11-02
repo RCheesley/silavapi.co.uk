@@ -5,6 +5,8 @@ import {
   looksLikeGibberish,
   containsLink,
   hasForeignDiacritics,
+  looksLikeTestName,
+  looksLikeGenericEnquiry,
 } from '../../lib/spam.js';
 
 describe('isCyrillicHeavy', () => {
@@ -157,5 +159,47 @@ describe('hasForeignDiacritics', () => {
   it('is safe on empty/undefined input', () => {
     expect(hasForeignDiacritics('')).toBe(false);
     expect(hasForeignDiacritics()).toBe(false);
+  });
+});
+
+describe('looksLikeTestName', () => {
+  it('flags "Test User" and its variants', () => {
+    expect(looksLikeTestName('Test User')).toBe(true);
+    expect(looksLikeTestName('TestUser')).toBe(true);
+    expect(looksLikeTestName('test-user 1')).toBe(true);
+    expect(looksLikeTestName('Testing User')).toBe(true);
+    expect(looksLikeTestName('tester')).toBe(true);
+    expect(looksLikeTestName('TEST')).toBe(true);
+  });
+
+  it('leaves real names alone', () => {
+    expect(looksLikeTestName('Ada Lovelace')).toBe(false);
+    expect(looksLikeTestName('Preston')).toBe(false);
+    expect(looksLikeTestName('Tess')).toBe(false);
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(looksLikeTestName('')).toBe(false);
+    expect(looksLikeTestName()).toBe(false);
+  });
+});
+
+describe('looksLikeGenericEnquiry', () => {
+  it('flags the "more info, please email me" template', () => {
+    expect(
+      looksLikeGenericEnquiry('I would like more information. Please contact me by email.')
+    ).toBe(true);
+    expect(looksLikeGenericEnquiry('Want more info - contact me via e-mail')).toBe(true);
+  });
+
+  it('allows a real enquiry that only mentions more information', () => {
+    expect(
+      looksLikeGenericEnquiry('Could you send me more information about booking a workshop?')
+    ).toBe(false);
+  });
+
+  it('is safe on empty/undefined input', () => {
+    expect(looksLikeGenericEnquiry('')).toBe(false);
+    expect(looksLikeGenericEnquiry()).toBe(false);
   });
 });

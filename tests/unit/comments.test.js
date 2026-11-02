@@ -159,6 +159,20 @@ describe('looksSpammy', () => {
     expect(looksSpammy({ ...base, name: 'visit www.spam.example' })).toBe(true);
   });
 
+  it('flags a "Test User" placeholder name', () => {
+    expect(looksSpammy({ ...base, name: 'Test User' })).toBe(true);
+    expect(looksSpammy({ ...base, name: 'testuser' })).toBe(true);
+  });
+
+  it('flags the generic "more info, please email me" template', () => {
+    expect(
+      looksSpammy({
+        ...base,
+        comment: 'I would like more information. Please contact me by email.',
+      })
+    ).toBe(true);
+  });
+
   it('flags any link in the comment body (URL or bare domain)', () => {
     expect(looksSpammy({ ...base, comment: 'see https://a.example' })).toBe(true);
     expect(looksSpammy({ ...base, comment: 'have a look at www.example.com' })).toBe(true);
