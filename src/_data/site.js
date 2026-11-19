@@ -13,6 +13,11 @@ export default {
   description:
     'The personal site of Sīlavāpi (formerly Ruth Cheesley) - Buddhism and dharma life, open source, digital sovereignty, and living actively with EDS.',
   tagline: 'Open source is where I found a home for that drive to connect.',
+  // Fallback social-share image for pages that set no hero of their own
+  // (home, contact, privacy and the like). Pages with an `image` use that.
+  shareImage: '/assets/img/og-default.png',
+  shareImageAlt:
+    'The Sīlavāpi lotus mark above the name Sīlavāpi, on a deep aubergine brand card, with the words open source, dharma, digital sovereignty.',
   author: {
     name: 'Sīlavāpi (Ruth Cheesley)',
     email: 'hello@silavapi.co.uk',

@@ -5,20 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {%- set fullTitle = (title + " · " + site.name) if (title and navActive != "home") else site.name -%}
+    {# Share metadata falls back page description -> post excerpt -> site default,
+       so a post's own excerpt is used when it is shared, not the generic blurb. #}
+    {%- set metaDescription = description or excerpt or site.description -%}
+    {# A page's hero image for the social share card, as an absolute URL, or the
+       site's default brand card when the page sets no hero of its own. #}
+    {%- set shareImage = (site.url + image) if image else (site.url + site.shareImage) -%}
+    {%- set shareImageAlt = (imageAlt if image else site.shareImageAlt) or fullTitle -%}
     <title>{{ fullTitle }}</title>
-    <meta name="description" content="{{ description or site.description }}" />
+    <meta name="description" content="{{ metaDescription }}" />
     <meta name="color-scheme" content="light dark" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
     {% if noindex %}<meta name="robots" content="noindex, follow" />{% endif %}
 
     <!-- Open Graph - keep the former name discoverable during the transition. -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="{{ ogType or 'website' }}" />
     <meta property="og:site_name" content="{{ site.name }}" />
     <meta property="og:title" content="{{ fullTitle }}" />
-    <meta property="og:description" content="{{ description or site.description }}" />
+    <meta property="og:description" content="{{ metaDescription }}" />
     <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
     <meta property="og:locale" content="{{ site.locale }}" />
     <meta property="og:see_also" content="https://ruthcheesley.co.uk/" />
+    {% if shareImage %}<meta property="og:image" content="{{ shareImage }}" />
+    <meta property="og:image:alt" content="{{ shareImageAlt }}" />{% endif %}
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="{% if shareImage %}summary_large_image{% else %}summary{% endif %}" />
+    <meta name="twitter:title" content="{{ fullTitle }}" />
+    <meta name="twitter:description" content="{{ metaDescription }}" />
+    {% if shareImage %}<meta name="twitter:image" content="{{ shareImage }}" />{% endif %}
 
     <link rel="stylesheet" href="/assets/css/app.css" />
     {# Colour-theme control: loaded in <head> so a saved light/dark choice is
